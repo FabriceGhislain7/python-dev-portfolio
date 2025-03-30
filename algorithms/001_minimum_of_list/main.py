@@ -1,3 +1,26 @@
+# Minimum Value Finder - Algorithm Implementation
+
+## Objective
+Implement a manual minimum value search algorithm with production-grade quality controls.
+
+## Technical Overview
+
+### Core Functionality
+- Finds minimum value and its index in O(n) time complexity
+- Handles both integers and floating-point numbers
+- Returns tuple of (value, index)
+
+### Key Features
+- Type hints using `typing` module
+- Comprehensive input validation:
+  - Empty list detection (raises ValueError)
+  - Type checking (raises TypeError)
+- Google-style docstring documentation
+
+## Implementation
+
+```python
+
 from typing import List, Tuple, Union
 
 def find_min_value(input_list: List[Union[int, float]]) -> Tuple[Union[int, float], int]:
@@ -14,7 +37,6 @@ def find_min_value(input_list: List[Union[int, float]]) -> Tuple[Union[int, floa
         ValueError: If input list is empty
         TypeError: If list contains non-numeric values
     """
-    
     # Check for empty list
     if len(input_list) == 0:
         raise ValueError("Input list cannot be empty")
@@ -36,8 +58,12 @@ def find_min_value(input_list: List[Union[int, float]]) -> Tuple[Union[int, floa
     
     return (min_value, min_index)
 
+ ```
+ 
+## Test cases
 
-# Test cases
+```python
+
 if __name__ == "__main__":
     test_cases = [
         [5, 2, 8, 1, 4],      # Normal case
@@ -55,3 +81,4 @@ if __name__ == "__main__":
             print(f"Minimum value: {min_val} at index {min_idx}")
         except (ValueError, TypeError) as e:
             print(f"Error: {e}")
+    ```
