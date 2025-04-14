@@ -1,0 +1,75 @@
+li {
+    color: blue;
+}
+
+body {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 00, 0.4)),url("images/menu_background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    margin: 0px;
+    font-family: Arial;
+    background-attachment: scroll;
+}
+
+#small_logo {
+     margin-top: 25px;
+     margin-left: 35px;
+}
+
+h1 {
+    background-color: #DD7835;
+    display: inline;
+    padding: 8px 22px;
+    border-radius: 10px;
+}
+
+.menu_title {
+    margin-top: 45px;
+    margin-bottom: 50px
+}
+
+.menu_list {
+    margin-left: 30px;
+}
+
+.menu_list_item {
+    margin: 30px 0px
+}
+
+.menu_list_title {
+   font-weight:bold;
+   font-size: 20px;
+   display: inline-block;
+   width: 350px;
+}
+
+.menu_list_price {
+   font-size: 20px;
+   color: #DD7835;
+   display: inline-block;
+   width: 70px;
+   margin-left: 8px;
+   text-align: right;
+}
+
+.menu_list_ingredients {
+   font-size: 14px;
+   color: #C8C8C8;
+   margin-top: 4px;
+   display: block;
+   width: 320px;
+}
+
+.menu_list_badge {
+   background-color: #DD7835;
+   color: black;
+   font-size: 9px;
+   padding: 3px 8px;
+   margin-top: 4px;
+   display: inline-block;
+   border-radius: 8px;
+   font-weight:bold;
+}
