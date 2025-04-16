@@ -4,202 +4,200 @@ from datetime import datetime
 
 # Creare la directory contatti se non esiste
 path_contatti = "contatti"
-os.makedirs(path_contatti, exist_ok=True)
+try:
+    os.makedirs(path_contatti, exist_ok=True)
+except PermissionError:
+    print("Errore: Permessi insufficienti per creare la cartella 'contatti'")
+    exit()
+except OSError as e:
+    print(f"Errore durante la creazione della cartella: {str(e)}")
+    exit()
 
 menu = {
+    "0": "Exit",
     "1": "Visualizza i contatti attivi",
     "2": "Aggiungi",
-    "3": "Modifica o elimina un contatto",
-    "0": "Exit"
+    "3": "Modifica o elimina un contatto"
 }
 
 while True:
-    # Visualizzazione del menu
-    print(f"{'MENU':^40}")
+    print(f"\n{'MENU':^40}")
     print("-" * 40)
     for number, option in menu.items():
         print(f"{number}: {option}")
     
-    # Gestione della scelta dell'utente
-    scelta_utente = input("Scegli l'operazione: ")
-    if scelta_utente not in menu.keys():
+    scelta_utente = input("\nScegli l'operazione: ")
+    if scelta_utente not in menu:
         print("Scelta non valida. Premi 0, 1, 2 oppure 3")
         continue
 
-    if scelta_utente == "1":  # Visualizza i contatti attivi
-        os.system('cls' if os.name == 'nt' else 'clear')
-        try:
-            if len(os.listdir(path_contatti)) == 0:
+    match scelta_utente:
+        case "0":
+            print("Grazie per aver usato la rubrica telefonica!")
+            break
+
+        case "1":  # Visualizza i contatti attivi
+            try:
+                contatti_files = os.listdir(path_contatti)
+            except FileNotFoundError:
+                print("Errore: Cartella 'contatti' non trovata")
+                continue
+            except PermissionError:
+                print("Errore: Permessi insufficienti per leggere la cartella")
+                continue
+
+            if not contatti_files:
                 print("Rubrica telefonica vuota.")
-            else:
-                for contatto_file in os.listdir(path_contatti):
-                    try:
-                        path_contatto = os.path.join(path_contatti, contatto_file)
-                        with open(path_contatto, "r", encoding='utf-8') as file:
+                continue
+
+            contatti_trovati = False
+            for contatto_file in contatti_files:
+                try:
+                    path_contatto = os.path.join(path_contatti, contatto_file)
+                    with open(path_contatto, "r", encoding='utf-8') as file:
+                        try:
                             obj = json.load(file)
                             if obj["attivo"]:
-                                print(f"\nNome: {obj['nome']}")
-                                print(f"Cognome: {obj['cognome']}")
+                                print(f"\nNome: {obj['nome']} {obj['cognome']}")
                                 for tel in obj['telefono']:
-                                    print(f"Tipo: {tel['tipo']}, Numero: {tel['numero']}")
-                                print(f"Attività: {', '.join(obj['attivita'])}")
-                                print(f"Note: {obj['note']}")
-                                print("-" * 40)
-                    except Exception as e:
-                        print(f"Errore leggendo il file {contatto_file}: {str(e)}")
-        except Exception as e:
-            print(f"Errore durante la visualizzazione: {str(e)}")
+                                    print(f"  {tel['tipo'].capitalize()}: {tel['numero']}")
+                                print(f"  Attività: {', '.join(obj['attivita'])}")
+                                print(f"  Note: {obj['note']}")
+                                contatti_trovati = True
+                        except json.JSONDecodeError:
+                            print(f"Errore: File {contatto_file} non è un JSON valido")
+                            continue
+                        except KeyError as e:
+                            print(f"Errore: Campo mancante nel file {contatto_file}: {str(e)}")
+                            continue
+                except FileNotFoundError:
+                    print(f"Errore: File {contatto_file} non trovato")
+                    continue
+                except PermissionError:
+                    print(f"Errore: Permessi insufficienti per leggere {contatto_file}")
+                    continue
 
-    elif scelta_utente == "2":  # Aggiungi un contatto
-        try:
-            # Input nome
-            nuovo_nome = input("Inserisci il nome: ").strip().capitalize()
-            while len(nuovo_nome) < 3:
-                print("Il nome deve essere almeno di 3 caratteri.")
-                nuovo_nome = input("Inserisci il nome: ").strip().capitalize()
+            if not contatti_trovati:
+                print("Nessun contatto attivo trovato")
 
-            # Input cognome
-            nuovo_cognome = input("Inserisci il cognome: ").strip().capitalize()
-            while len(nuovo_cognome) < 3:
-                print("Il cognome deve essere almeno di 3 caratteri.")
-                nuovo_cognome = input("Inserisci il cognome: ").strip().capitalize()
+        case "2":  # Aggiungi un contatto
+            nuovo_nome = input("Nome: ").strip().capitalize()
+            nuovo_cognome = input("Cognome: ").strip().capitalize()
 
-            # Input telefono casa
-            tel_tipo_casa = input("Numero telefono di casa: ").strip()
-            while len(tel_tipo_casa) != 10 or not tel_tipo_casa.isdigit():
-                print("Il numero di casa deve essere di 10 cifre numeriche")
-                tel_tipo_casa = input("Numero telefono di casa: ").strip()
-
-            # Input telefono cellulare
-            tel_tipo_cel = input("Numero di cellulare: ").strip()
-            while len(tel_tipo_cel) != 10 or not tel_tipo_cel.isdigit():
-                print("Il numero di cellulare deve essere di 10 cifre numeriche")
-                tel_tipo_cel = input("Numero di cellulare: ").strip()
-
-            # Input stato attivo
-            attivo_input = input("Sei attivo(a)? (si/no): ").strip().lower()
-            while attivo_input not in ["si", "no"]:
-                print("Rispondi con 'si' o 'no'")
-                attivo_input = input("Sei attivo(a)? (si/no): ").strip().lower()
-            attivo = attivo_input == "si"
-
-            # Input attività
-            attivita = []
-            print("Inserisci le attività (lascia vuoto per terminare):")
+            telefono = []
             while True:
-                att = input("Attività: ").strip().capitalize()
-                if not att:
+                tipo = input("Tipo di numero (es. cellulare, casa, lavoro): ").strip().lower()
+                numero = input("Numero: ").strip()
+
+                try:
+                    if not numero.isdigit():
+                        raise ValueError("Il numero deve contenere solo cifre")
+                    if len(numero) < 6:
+                        raise ValueError("Il numero deve avere almeno 6 cifre")
+
+                    telefono.append({"tipo": tipo, "numero": numero})
+                except ValueError as e:
+                    print(f"Errore: {e}")
+                    continue
+
+                altro = input("Vuoi inserire un altro numero? (s/n): ").strip().lower()
+                if altro != "s":
                     break
-                attivita.append(att)
 
-            # Input note
-            note = input("Inserisci una nota: ").strip()
+            attivita = input("Attività (separate da virgola): ").split(",")
+            note = input("Note aggiuntive: ").strip()
 
-            # Creazione struttura dati
             contatto = {
                 "nome": nuovo_nome,
                 "cognome": nuovo_cognome,
-                "telefono": [
-                    {"tipo": "casa", "numero": tel_tipo_casa},
-                    {"tipo": "cellulare", "numero": tel_tipo_cel}
-                ],
-                "attivo": attivo,
-                "attivita": attivita,
-                "note": note
+                "telefono": telefono,
+                "attivita": [a.strip() for a in attivita],
+                "note": note,
+                "attivo": True,
+                "data_creazione": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
 
-            # Salvataggio
-            nome_file = f"{nuovo_nome}_{nuovo_cognome}.json".replace(" ", "_")
-            percorso_completo = os.path.join(path_contatti, nome_file)
-            
-            with open(percorso_completo, "w", encoding='utf-8') as file:
-                json.dump(contatto, file, indent=4, ensure_ascii=False)
-            
-            print(f"Contatto {nuovo_nome} {nuovo_cognome} salvato con successo!")
-            
-        except Exception as e:
-            print(f"Errore durante l'aggiunta del contatto: {str(e)}")
-
-    elif scelta_utente == "3":  # Modifica o elimina
-        while True:
             try:
-                # Menu modifica/elimina
+                nome_file = f"{nuovo_nome}_{nuovo_cognome}.json".replace(" ", "_")
+                percorso_completo = os.path.join(path_contatti, nome_file)
+                
+                if os.path.exists(percorso_completo):
+                    print("Errore: Contatto già esistente")
+                    continue
+                    
+                with open(percorso_completo, "x", encoding='utf-8') as file:  
+                    json.dump(contatto, file, indent=4, ensure_ascii=False)
+                
+                print(f"Contatto {nuovo_nome} {nuovo_cognome} salvato con successo!") 
+            
+            except OSError as e:
+                print(f"Errore durante il salvataggio: {str(e)}")
+
+        case "3":  # Modifica o elimina
+            while True:
                 print("\nSottomenu:")
                 print("1: Modifica contatto")
                 print("2: Elimina contatto")
                 print("0: Torna al menu principale")
                 
-                suboption = input("Scelta: ")
-                if suboption == "0":
-                    break
-                if suboption not in ["1", "2"]:
-                    print("Scelta non valida")
-                    continue
+                try:
+                    suboption = input("Scelta: ")
+                    if suboption == "0":
+                        break
+                    if suboption not in ["1", "2"]:
+                        print("Scelta non valida")
+                        continue
 
-                # Input ricerca
-                nome_cercato = input("Inserisci il nome: ").strip().capitalize()
-                while len(nome_cercato) < 3:
-                    print("Il nome deve essere almeno di 3 caratteri.")
                     nome_cercato = input("Inserisci il nome: ").strip().capitalize()
-
-                cognome_cercato = input("Inserisci il cognome: ").strip().capitalize()
-                while len(cognome_cercato) < 3:
-                    print("Il cognome deve essere almeno di 3 caratteri.")
                     cognome_cercato = input("Inserisci il cognome: ").strip().capitalize()
+                    nome_file = f"{nome_cercato}_{cognome_cercato}.json"
+                    percorso_file = os.path.join(path_contatti, nome_file)
 
-                # Verifica esistenza file
-                nome_file = f"{nome_cercato}_{cognome_cercato}.json"
-                percorso_file = os.path.join(path_contatti, nome_file)
-                
-                if not os.path.exists(percorso_file):
-                    print("Contatto non trovato")
-                    continue
-
-                with open(percorso_file, "r", encoding='utf-8') as file:
-                    contatto = json.load(file)
-
-                if suboption == "1":  # Modifica
-                    print("\nModifica contatto (lascia vuoto per mantenere il valore attuale):")
+                    try:
+                        with open(percorso_file, "r", encoding='utf-8') as file:
+                            contatto = json.load(file)
+                    except FileNotFoundError:
+                        print("Errore: Contatto non trovato")
+                        continue
                     
-                    # Modifica nome
-                    nuovo_nome = input(f"Nome [{contatto['nome']}]: ").strip().capitalize() or contatto['nome']
-                    while len(nuovo_nome) < 3:
-                        print("Il nome deve essere almeno di 3 caratteri.")
-                        nuovo_nome = input(f"Nome [{contatto['nome']}]: ").strip().capitalize() or contatto['nome']
+                    if suboption == "1":  # Modifica
+                        nuovo_nome = input("Nuovo nome (lascia vuoto per mantenere): ").strip().capitalize()
+                        nuovo_cognome = input("Nuovo cognome (lascia vuoto per mantenere): ").strip().capitalize()
 
-                    # Modifica cognome
-                    nuovo_cognome = input(f"Cognome [{contatto['cognome']}]: ").strip().capitalize() or contatto['cognome']
-                    while len(nuovo_cognome) < 3:
-                        print("Il cognome deve essere almeno di 3 caratteri.")
-                        nuovo_cognome = input(f"Cognome [{contatto['cognome']}]: ").strip().capitalize() or contatto['cognome']
+                        if nuovo_nome:
+                            contatto["nome"] = nuovo_nome
+                        else:
+                            nuovo_nome = contatto["nome"]
+                        if nuovo_cognome:
+                            contatto["cognome"] = nuovo_cognome
+                        else:
+                            nuovo_cognome = contatto["cognome"]
 
-                    # Aggiorna dati
-                    contatto['nome'] = nuovo_nome
-                    contatto['cognome'] = nuovo_cognome
+                        try:
+                            nuovo_nome_file = f"{nuovo_nome}_{nuovo_cognome}.json"
+                            nuovo_percorso = os.path.join(path_contatti, nuovo_nome_file)
 
-                    # Salva modifiche
-                    nuovo_nome_file = f"{nuovo_nome}_{nuovo_cognome}.json"
-                    nuovo_percorso = os.path.join(path_contatti, nuovo_nome_file)
+                            if nuovo_nome_file != nome_file:
+                                try:
+                                    os.rename(percorso_file, nuovo_percorso)
+                                except FileExistsError:
+                                    print("Errore: Esiste già un contatto con questo nome")
+                                    continue
 
-                    if nuovo_nome_file != nome_file:
-                        os.remove(percorso_file)
+                            with open(nuovo_percorso if nuovo_nome_file != nome_file else percorso_file, 
+                                    "w", encoding='utf-8') as file:
+                                json.dump(contatto, file, indent=4, ensure_ascii=False)
 
-                    with open(nuovo_percorso, "w", encoding='utf-8') as file:
-                        json.dump(contatto, file, indent=4, ensure_ascii=False)
+                            print("Contatto modificato con successo!")
+                        except OSError as e:
+                            print(f"Errore durante il salvataggio: {str(e)}")
 
-                    print("Contatto modificato con successo!")
-
-                elif suboption == "2":  # Elimina
-                    conferma = input(f"Sei sicuro di voler eliminare {nome_cercato} {cognome_cercato}? (si/no): ").lower()
-                    if conferma == "si":
-                        os.remove(percorso_file)
-                        print("Contatto eliminato con successo!")
-                    else:
-                        print("Operazione annullata")
-
-            except Exception as e:
-                print(f"Errore durante l'operazione: {str(e)}")
-
-    elif scelta_utente == "0":  # Uscita
-        print("Grazie per aver usato la rubrica telefonica!")
-        break
+                    elif suboption == "2":  # Elimina
+                        try:
+                            os.remove(percorso_file)
+                            print("Contatto eliminato con successo!")
+                        except FileNotFoundError:
+                            print("Errore: File già eliminato")
+                        
+                except Exception as e:
+                    print(f"Errore imprevisto: {str(e)}")
