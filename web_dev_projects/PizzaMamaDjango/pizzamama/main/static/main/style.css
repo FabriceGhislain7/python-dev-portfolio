@@ -1,0 +1,26 @@
+/*49. cancel all, and just left the body. Make sur to change the directory of the background image into: url("images/main_background.jpg" */
+body {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 00, 0.4)),url("images/main_background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    margin: 0px;
+    font-family: Arial;
+}
+/*50. Create a folder templates for index.html in main/templates/main/index.html (we can copy the one we have made before and modified it )*/
+
+.centered {
+  position:fixed;  /*or absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a {
+    display: block;
+    text-align: center;
+    color:red;
+    font-size. 18px;
+}
