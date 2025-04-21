@@ -11,18 +11,32 @@ Welcome to my **personal portfolio of Python projects** — a growing collection
 ```bash
 python-dev-portfolio/
 │
-├── automation_scripts/         → Small tools for daily automation (backups, file ops)
+├── web_dev_projects/                  → Django Applications
+│   ├── PizzaMama/                     → E-commerce pizza site (Active Development)
+│   │   ├── static/
+│   │   │   ├── css/                  → Bootstrap 5 + Custom CSS
+│   │   │   └── js/                   → Future React integration
+│   │   ├── templates/
+│   │   │   ├── orders/               → Order management
+│   │   │   └── base.html            → Master template
+│   │   ├── manage.py
+│   │   └── requirements.txt          → Django, Stripe API
+│   │
+│   ├── EquipementsMedpro/            → Medical Equipment e-commerce
+│   │   ├── products/                 → App for equipment listings
+│   │   └── cart/                     → Shopping system
+│   │
+│   └── Blog/                         → Learning Project
+│       └── posts/                    → CRUD operations
 │
-├── iot_projects/               → IoT mini-projects (e.g. phonebook, sensor simulations)
+├── learning/                         → Django Skill Development
+│   ├── basics/                       → Models/Views/Templates
+│   ├── maths/                        → Models of algorithms in maths. 
+│   └── utilities/                    → Algorithms that can be use in professional projects
 │
-├── learning/                   → Practice problems & utilities for algorithmic fluency
-│
-├── web_dev_projects/           → Full web applications using Django and other tools
-│   ├── Blog/                   → Blogging platform (Django basics)
-│   ├── EquipementsMedpro/     → Med-tech inventory dashboard (Data + Django)
-│   └── PizzaMamaDjango/       → Dynamic restaurant website (menus, orders, ORM)
-│
-└── README.md                   → This file
+└── docs/
+    ├── django_cheatsheet.md          → Common patterns
+    └── deployment_guide.md           → AWS/Docker setup
 ```
 
 ---
@@ -89,6 +103,9 @@ python-dev-portfolio/
 - [Django Documentation](https://docs.djangoproject.com/)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Flask Docs](https://flask.palletsprojects.com/)
+- [cheatography](https://cheatography.com/)
+- [Django Cheat Sheet](https://dev.to/saeidjavadi/django-cheat-sheet-2o11)
+- [</> CodeWithHarry: Django Cheatsheet](https://www.codewithharry.com/blogpost/django-cheatsheet)
 
 ### IoT
 - [MicroPython](https://micropython.org/)
