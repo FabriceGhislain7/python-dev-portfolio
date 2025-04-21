@@ -1,154 +1,95 @@
+# 🍕 PizzaMama - Digital Menu System for Pizzerias
 
-# 🍕 PizzaMama - README Technique
+**PizzaMama** is a Django-based application that allows the management of a pizza menu through an admin interface and a simple API. The project is designed to evolve into a full-featured online ordering platform.
 
-## 📐 Architecture Générale
+> ⚠️ **Note**: while the code and models are written in **English**, the menu shown on the frontend is displayed in **French**.
 
-Ce projet Django est structuré autour de deux applications principales : `main` et `menu`, intégrées dans le projet `pizzamama`.
+---
+## View PizzaMama Interface Screenshot
+<details>
+<summary>📸 Click to view screenshot</summary>
 
-L'objectif de ce document est de clarifier le **flux de données**, les **relations entre fichiers**, et comment **chaque composant interagit** dans le projet.
+![PizzaMama Interface](pizzamama/menu/static/menu/images/pizzamama.jpg)
+
+</details>
 
 ---
 
-## 📊 Diagramme Mermaid - Flux de Données & Structure
+## ✅ Features
 
-> Ce diagramme montre comment une requête est traitée, depuis le navigateur jusqu'à la base de données via Django.
-
-```mermaid
-graph TD
-
-subgraph Utilisateur
-    A1[Navigateur Web]
-end
-
-subgraph Django
-    A1 --> B1[urls.py (projet)]
-    B1 --> B2[main/urls.py ou menu/urls.py]
-    B2 --> B3[vues.py (views.py)]
-
-    B3 --> B4[models.py]
-    B3 --> B5[templates (index.html)]
-    B3 --> B6[static (CSS/Images)]
-
-    B4 -->|ORM| C1[(db.sqlite3)]
-end
-
-subgraph Apps Django
-    B4 --> M1[main/models.py]
-    B4 --> M2[menu/models.py]
-end
-
-subgraph Fichiers statiques
-    B6 --> S1[main/static/main/style.css]
-    B6 --> S2[menu/static/menu/style.css]
-end
-
-subgraph Templates
-    B5 --> T1[main/templates/main/index.html]
-    B5 --> T2[menu/templates/menu/index.html]
-end
-
-subgraph Admin
-    ADM1[admin.py] --> B4
-end
-
-subgraph Migrations
-    MG1[makemigrations] --> MIG[menu/migrations/0001_initial.py]
-    MIG -->|migrate| C1
-end
-```
+- [x] Display of the pizza menu  
+- [x] Admin interface using Django  
+- [x] Tag system for vegetarian pizzas  
+- [x] Basic REST API available at `/api/GetPizzas`  
+- [ ] Dashboard for business intelligence using Python  
+- [ ] Online ordering system  
+- [ ] Customer authentication  
+- [ ] User shopping cart  
+- [ ] Email notifications  
 
 ---
 
-## 🔍 Explication détaillée
+## 🛠 Technologies
 
-### 🔁 1. Le parcours d'une requête
-
-- L'utilisateur visite une page web (ex : `/menu/`).
-- Django redirige cette requête via `pizzamama/urls.py`, qui inclut les `urls.py` des apps `main` ou `menu`.
-- Le bon fichier `views.py` est appelé pour générer une réponse.
-
-### 🧠 2. Rôle des vues (`views.py`)
-
-- Les vues agissent comme **logique métier**.
-- Elles peuvent :
-  - Lire des données depuis `models.py` via l’ORM.
-  - Passer ces données à des templates pour affichage HTML.
-  - Interagir avec des formulaires ou gérer des actions spécifiques.
-
-### 🧱 3. Rôle des modèles (`models.py`)
-
-- Ils décrivent les **structures des données** stockées en base.
-- Exemple : une pizza avec son nom, prix, description, etc.
-- Django génère automatiquement les requêtes SQL grâce à son ORM.
-
-### 🎨 4. Templates & Statics
-
-- Les templates HTML (dans `templates/`) sont utilisés pour l'affichage dynamique des pages.
-- Les fichiers statiques comme les `.css` et les images sont stockés dans `static/`.
-
-### 🛠️ 5. Admin Django
-
-- Le fichier `admin.py` configure l'affichage et l'administration des modèles dans l'interface d'administration Django (`/admin`).
-- Super pratique pour insérer ou modifier les données sans interface frontale dédiée.
-
-### 🧬 6. Migrations et BDD
-
-- Les fichiers `migrations/` sont générés automatiquement pour refléter les changements des modèles dans la base de données.
-- Ils permettent de **versionner et appliquer les schémas** de la base via ORM.
+- **Django 5.2**
+- **HTML / CSS**
+- **SQLite** (default database)
 
 ---
 
-## ⚙️ Commandes utiles
+## 🚀 Installation
 
 ```bash
-# Créer un fichier de migration à partir des modèles
-python manage.py makemigrations
-
-# Appliquer les migrations à la base de données
+git clone https://github.com/youraccount/pizzamama.git
+cd pizzamama
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 python manage.py migrate
-
-# Démarrer le serveur de développement
 python manage.py runserver
-
-# Lancer un shell interactif pour manipuler les modèles
-python manage.py shell
-
-# Créer un superutilisateur pour accéder à l’admin
-python manage.py createsuperuser
 ```
 
 ---
 
-## 📎 Résumé des responsabilités des dossiers
-
-| Dossier / Fichier                          | Rôle principal                                      |
-|-------------------------------------------|----------------------------------------------------|
-| `manage.py`                                | Entrée principale pour les commandes Django        |
-| `pizzamama/settings.py`                    | Configuration globale du projet                    |
-| `pizzamama/urls.py`                        | Routeur principal                                  |
-| `main/`, `menu/`                           | Applications Django (avec modèles, vues, etc.)     |
-| `main/templates/`, `menu/templates/`       | Templates HTML spécifiques à chaque app            |
-| `main/static/`, `menu/static/`             | Fichiers CSS/images liés aux templates             |
-| `main/models.py`, `menu/models.py`         | Définition des modèles de données                 |
-| `main/views.py`, `menu/views.py`           | Logique métier, traitement des requêtes           |
-| `main/urls.py`, `menu/urls.py`             | Routage spécifique à chaque app                    |
-| `main/admin.py`, `menu/admin.py`           | Enregistrement des modèles pour l’admin Django     |
-
----
-
-## 💡 Tips de développement
-
-- Utilise le site admin Django pour gérer rapidement tes données.
-- Structure bien chaque app avec ses propres `static`, `templates`, `models`, etc.
-- Utilise le shell Django pour tester ton code rapidement :
+## 🧱 Main Data Model
 
 ```python
-from menu.models import Pizza
-Pizza.objects.create(nom="4 Fromages", prix=12.5)
+class Pizza(models.Model):
+    name = models.CharField(max_length=200)
+    ingredients = models.CharField(max_length=400)
+    price = models.FloatField(default=0)
+    vegetarian = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 ```
 
 ---
 
-Tu peux copier/coller tout ce contenu dans ton `README.md` et voir le diagramme Mermaid directement dans un éditeur Markdown compatible Mermaid (comme VS Code avec une extension Markdown Preview Mermaid, ou sur GitHub).
+## 🔗 Live Demo
 
-Souhaite-tu que je t’aide aussi à générer ce diagramme **en image** ou t’ajouter un diagramme de la **base de données** aussi ?
+You can access the live version of PizzaMama here:  
+👉 [https://fabricedeveloper.pythonanywhere.com](https://fabricedeveloper.pythonanywhere.com)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you'd like to improve **PizzaMama**, please follow these simple steps:
+
+1. **Fork** the repository  
+2. **Create** a new branch (`git checkout -b feature/my-feature`)  
+3. **Commit** your changes (`git commit -am 'Add some feature'`)  
+4. **Push** to the branch (`git push origin feature/my-feature`)  
+5. **Create a Pull Request**
+
+Please make sure your code follows the style of the project and includes appropriate tests and documentation when relevant.
+
+---
+
+## 👤 Author
+
+**Fabrice Ghislain Tebou**  
+📧 ghislaintebou@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/fabrice-ghislain-tebou-72000b211/)
+
