@@ -11,32 +11,39 @@ Welcome to my **personal portfolio of Python projects** — a growing collection
 ```bash
 python-dev-portfolio/
 │
-├── web_dev_projects/                  → Django Applications
-│   ├── PizzaMama/                     → E-commerce pizza site (Active Development)
-│   │   ├── static/
-│   │   │   ├── css/                  → Bootstrap 5 + Custom CSS
-│   │   │   └── js/                   → Future React integration
-│   │   ├── templates/
-│   │   │   ├── orders/               → Order management
-│   │   │   └── base.html            → Master template
+├── web_dev_projects/                      → Main development projects (Django, Console, etc.)
+│   ├── PizzaMamaDjango/                   → Django backend for PizzaMama
+│   │   ├── pizzamama/                     → Main Django app
+│   │   ├── static/                        → Static files (Bootstrap, JS, etc.)
+│   │   │   ├── css/
+│   │   │   └── js/                        → Next step   
+│   │   ├── templates/                     → HTML templates
+│   │   │   ├── orders/
+│   │   │   └── base.html
 │   │   ├── manage.py
-│   │   └── requirements.txt          → Django, Stripe API
+│   │   └── requirements.txt              → Django, Stripe, etc.
 │   │
-│   ├── EquipementsMedpro/            → Medical Equipment e-commerce
-│   │   ├── products/                 → App for equipment listings
-│   │   └── cart/                     → Shopping system
+│   ├── PizzaMamaConsoleWeb/              → Console-based API client for PizzaMama
+│   │   ├── pizzamama_api.py              → Main script (v1, v2, rich versions in README)
+│   │   ├── README.md                     → Documentation for all script versions
+│   │   └── requirements.txt              → requests, rich
 │   │
-│   └── Blog/                         → Learning Project
-│       └── posts/                    → CRUD operations
+│   ├── EquipementsMedpro/                → Medical equipment e-commerce site
+│   │   ├── products/                     → Listings for medical items
+│   │   └── cart/                         → Cart & checkout logic
+│   │
+│   └── Blog/                             → Learning project for blogging system
+│       └── posts/                        → CRUD-based post management
 │
-├── learning/                         → Django Skill Development
-│   ├── basics/                       → Models/Views/Templates
-│   ├── maths/                        → Models of algorithms in maths. 
-│   └── utilities/                    → Algorithms that can be use in professional projects
+├── learning/                             → Personal Django and algorithm practice
+│   ├── basics/                           → Models/Views/Templates
+│   ├── maths/                            → Mathematical algorithms (graphs, primes, etc.)
+│   └── utilities/                        → Reusable logic (pagination, filtering, etc.)
 │
-└── docs/
-    ├── django_cheatsheet.md          → Common patterns
-    └── deployment_guide.md           → AWS/Docker setup
+└── docs/                                 → Developer documentation
+    ├── django_cheatsheet.md             → Common Django commands and patterns
+    └── deployment_guide.md              → Guide for deploying with AWS or Docker
+
 ```
 
 ---
@@ -54,8 +61,8 @@ python-dev-portfolio/
 
 | Area              | Tools / Frameworks                         |
 |-------------------|--------------------------------------------|
-| Core Language     | Python 3.x                                 |
-| Web Development   | Django · FastAPI · HTML/CSS · Bootstrap    |
+| Core Language     | Python 3.13.0                              |
+| Web Development   | Django · API rest · HTML/CSS ·             |
 | Data & Analysis   | Pandas · Matplotlib · Scikit-learn         |
 | Automation        | OS · Shutil · Schedule                     |
 | IoT               | MicroPython · Raspberry Pi (planned)       |
@@ -106,6 +113,13 @@ python-dev-portfolio/
 - [cheatography](https://cheatography.com/)
 - [Django Cheat Sheet](https://dev.to/saeidjavadi/django-cheat-sheet-2o11)
 - [</> CodeWithHarry: Django Cheatsheet](https://www.codewithharry.com/blogpost/django-cheatsheet)
+- [TpointTech](https://www.tpointtech.com/python-tutorial)
+- [Alt-Codes for specials characters on the keybord](https://www.alt-codes.net/)
+- [Sito internet di rich](http://rich.readthedocs.io/en/stable/)
+- [W3Schools Online Web Tutorials](https://www.w3schools.com/python/default.asp)
+- [Link del mio GitHub](https://github.com/FabriceGhislain7)
+- [Scorciatoie da tastiera per VS Code (Windows)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+
 
 ### IoT
 - [MicroPython](https://micropython.org/)
