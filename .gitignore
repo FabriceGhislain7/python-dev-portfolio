@@ -1,0 +1,69 @@
+# =============== PYTHON ===============
+__pycache__/
+*.py[cod]
+*.pyo
+*.log
+*.pot
+*.pyc
+*.pyd
+*.pdb
+
+# Compiled files
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+# =============== ENVIRONNEMENT VIRTUEL ===============
+venv/
+env/
+.venv/
+ENV/
+*.env
+
+# =============== DJANGO ===============
+*.sqlite3
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+media/
+staticfiles/
+local_settings.py
+
+# =============== IDEs / ÉDITEURS ===============
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# =============== SYSTÈME ===============
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# =============== TESTS & COVERAGE ===============
+htmlcov/
+coverage.xml
+.cache/
+.tox/
+.nox/
+.pytest_cache/
+
+# =============== JUPYTER / NOTEBOOKS ===============
+.ipynb_checkpoints/
+
+# =============== MISC ===============
+*.bak
+*.swp
+*.tmp
+*.old
+*.orig
