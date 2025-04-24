@@ -15,17 +15,17 @@
 
 ---
 
-## ✅ Features
+## Features
 
-- [x] Display of the pizza menu  
-- [x] Admin interface using Django  
-- [x] Tag system for vegetarian pizzas  
-- [x] Basic REST API available at `/api/GetPizzas`  
-- [ ] Dashboard for business intelligence using Python  
-- [ ] Online ordering system  
-- [ ] Customer authentication  
-- [ ] User shopping cart  
-- [ ] Email notifications  
+- ☑️ Display of the pizza menu  
+- ☑️ Admin interface using Django  
+- ☑️ Tag system for vegetarian pizzas  
+- ☑️ Basic REST API available at `/api/GetPizzas`  
+- ⬜ Dashboard for business intelligence using Python  
+- ⬜ Online ordering system  
+- ⬜ Customer authentication  
+- ⬜ User shopping cart  
+- ⬜ Email notifications  
 
 ---
 
@@ -37,7 +37,7 @@
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ```bash
 git clone https://github.com/youraccount/pizzamama.git
@@ -51,7 +51,7 @@ python manage.py runserver
 
 ---
 
-## 🧱 Main Data Model
+## Main Data Model
 
 ```python
 class Pizza(models.Model):
