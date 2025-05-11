@@ -19,7 +19,7 @@ build/
 
 # =============== KIVY SPECIFIC ===============
 .kivy/
-kivy_install/
+kivy_install/ 
 *.kv
 *.kv~
 *.kivy
