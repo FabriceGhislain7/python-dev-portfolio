@@ -11,38 +11,30 @@ Welcome to my **personal portfolio of Python projects** — a growing collection
 ```bash
 python-dev-portfolio/
 │
-├── web_dev_projects/                      → Main development projects (Django, Console, etc.)
-│   ├── PizzaMamaDjango/                   → Django backend for PizzaMama
-│   │   ├── pizzamama/                     → Main Django app
-│   │   ├── static/                        → Static files (Bootstrap, JS, etc.)
-│   │   │   ├── css/
-│   │   │   └── js/                        → Next step   
-│   │   ├── templates/                     → HTML templates
-│   │   │   ├── orders/
-│   │   │   └── base.html
-│   │   ├── manage.py
-│   │   └── requirements.txt              → Django, Stripe, etc.
-│   │
-│   ├── PizzaMamaConsoleWeb/              → Console-based API client for PizzaMama
-│   │   ├── pizzamama_api.py              → Main script (v1, v2, rich versions in README)
-│   │   ├── README.md                     → Documentation for all script versions
-│   │   └── requirements.txt              → requests, rich
-│   │
-│   ├── EquipementsMedpro/                → Medical equipment e-commerce site
-│   │   ├── products/                     → Listings for medical items
-│   │   └── cart/                         → Cart & checkout logic
-│   │
-│   └── Blog/                             → Learning project for blogging system
-│       └── posts/                        → CRUD-based post management
+├── web_projects/                  # Full-stack and backend Django projects
+│   ├── PizzaMamaDjango/          # Django app with static/templates/locales
+│   ├── PizzaMamaConsoleWeb/      # Console-based API client
+│   ├── EquipementsMedpro/        # E-commerce app (Django)
+│   └── Blog/                     # CRUD blog system (Django)
 │
-├── learning/                             → Personal Django and algorithm practice
-│   ├── basics/                           → Models/Views/Templates
-│   ├── maths/                            → Mathematical algorithms (graphs, primes, etc.)
-│   └── utilities/                        → Reusable logic (pagination, filtering, etc.)
+├── game_dev/                     # Category for game projects
+│   └── rpg-oop-core/             # OOP RPG project
+|
+├── practice/                     # Python practice and algorithms
+│   ├── basic/                    # Sorting and list operations
+│   ├── maths/                    # Math-related algorithms
+│   └── utilities/                # Reusable modules
+│       ├── data_utils/           # Formatters (e.g., print_dict/list)
+│       ├── file_utils/           # File ops and JSON handling
+│       ├── user_input/           # Input prompts
+│       ├── logic_helpers/        # Logic like gift assignment
+│       └── security/             # Password generation
 │
-└── docs/                                 → Developer documentation
-    ├── django_cheatsheet.md             → Common Django commands and patterns
-    └── deployment_guide.md              → Guide for deploying with AWS or Docker
+├── iot_projects/                 # IoT practice (e.g., phonebook CLI)
+│
+├── resources/                    # PDF cheat sheets and developer docs
+│
+└── README.md                     # Project overview and usage
 
 ```
 
