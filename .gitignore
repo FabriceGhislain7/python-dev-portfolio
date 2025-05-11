@@ -30,11 +30,8 @@ env/
 .venv/
 ENV/
 galaxy_venv/  
-rpg_venv/
 *.env
 .env/
-.env[0-9]*
-.env-*
 
 # =============== DJANGO ===============
 *.sqlite3
