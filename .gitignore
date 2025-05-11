@@ -29,9 +29,10 @@ venv/
 env/
 .venv/
 ENV/
-galaxy_venv/  
+galaxy_venv/
 *.env
 .env/
+equi
 
 # =============== DJANGO ===============
 *.sqlite3
