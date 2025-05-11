@@ -17,12 +17,24 @@ build/
 *.manifest
 *.spec
 
+# =============== KIVY SPECIFIC ===============
+.kivy/
+kivy_install/
+*.kv
+*.kv~
+*.kivy
+
 # =============== ENVIRONNEMENT VIRTUEL ===============
 venv/
 env/
 .venv/
 ENV/
+galaxy_venv/  
+rpg_venv/
 *.env
+.env/
+.env[0-9]*
+.env-*
 
 # =============== DJANGO ===============
 *.sqlite3
@@ -39,9 +51,15 @@ local_settings.py
 # =============== IDEs / ÉDITEURS ===============
 # PyCharm
 .idea/
+*.iml
 
 # VS Code
 .vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
 
 # =============== SYSTÈME ===============
 .DS_Store
@@ -52,14 +70,25 @@ Desktop.ini
 
 # =============== TESTS & COVERAGE ===============
 htmlcov/
+.coverage*
 coverage.xml
 .cache/
 .tox/
 .nox/
 .pytest_cache/
+.mypy_cache/
 
 # =============== JUPYTER / NOTEBOOKS ===============
 .ipynb_checkpoints/
+*.ipynb
+
+# =============== DEPLOYMENT / PACKAGING ===============
+*.deb
+*.rpm
+*.msi
+*.dmg
+*.app
+*.exe
 
 # =============== MISC ===============
 *.bak
@@ -67,3 +96,10 @@ coverage.xml
 *.tmp
 *.old
 *.orig
+*~
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.swo
+*.swn
