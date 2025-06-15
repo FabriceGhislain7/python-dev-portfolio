@@ -1,0 +1,4 @@
+
+
+class MissioneFactory:
+    pass

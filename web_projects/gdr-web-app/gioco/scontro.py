@@ -1,0 +1,4 @@
+
+
+class Scontro:
+    pass
