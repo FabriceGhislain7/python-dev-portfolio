@@ -1,5 +1,0 @@
-
-
-class MissioneFactory():
-    def __init__():
-        pass
