@@ -1,26 +1,70 @@
-<!-- templates/layout.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}RPG Web{% endblock %}</title>
-    <!-- Bootstrap CSS via CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gioco di ruolo online - RPG Web">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons (opzionale per icone) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    {% block head %}{% endblock %}
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url_for('gioco.index') }}">RPG Web</a>
-    <div class="collapse navbar-collapse">
+    <a class="navbar-brand" href="{{ url_for('gioco.index') }}">🎲 RPG Web</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.index') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.new_game') }}">Nuovo Gioco</a></li>
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.load_game') }}">Carica Partita</a></li> #}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.select_mission') }}">Missioni</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.battle') }}">Battaglia</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.inventory') }}">Inventario</a></li>
+        <!-- Gruppo: Gioco -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.index' %}active{% endif %}" href="{{ url_for('gioco.index') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.new_game' %}active{% endif %}" href="{{ url_for('gioco.new_game') }}">Nuovo Gioco</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.load_game' %}active{% endif %}" href="{{ url_for('gioco.load_game') }}">Carica Partita</a>
+        </li>
+
+        <!-- Gruppo: Gameplay -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.select_mission' %}active{% endif %}" href="{{ url_for('gioco.select_mission') }}">Missioni</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.battle' %}active{% endif %}" href="{{ url_for('gioco.battle') }}">Battaglia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'gioco.inventory' %}active{% endif %}" href="{{ url_for('gioco.inventory') }}">Inventario</a>
+        </li>
       </ul>
+
+      <!-- A destra: profilo -->
+      <ul class="navbar-nav ms-auto">
+        {% if session.get('player_name') %}
+          <li class="nav-item">
+            <span class="navbar-text text-light me-2">👤 {{ session['player_name'] }}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('gioco.logout') }}">Logout</a>
+          </li>
+        {% endif %}
+      </ul>
+
     </div>
   </div>
 </nav>
@@ -48,6 +92,8 @@
 
 <!-- Bootstrap JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% block scripts %}{% endblock %}
 
 </body>
