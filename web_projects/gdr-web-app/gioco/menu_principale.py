@@ -8,7 +8,7 @@ from gioco.missione import Missione
 from utils.salvataggio import SerializableMixin
 import os
 
-# ---------------- VERSIONE PROVISORIA ------------------------------
+# ======================= VERSIONE PROVISORIA ===================================
 @SerializableMixin.register_class
 class MenuPrincipale(SerializableMixin):
     """

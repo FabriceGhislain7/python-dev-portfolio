@@ -1,7 +1,7 @@
 import random
-from gioco.ambiente import Ambiente
-from gioco.inventario import Inventario
-from gioco.personaggio import Personaggio
+from ambiente import Ambiente
+from inventario import Inventario
+from personaggio import Personaggio
 from utils.log import Log
 from utils.salvataggio import SerializableMixin
 

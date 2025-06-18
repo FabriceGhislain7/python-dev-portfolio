@@ -1,46 +1,60 @@
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
+
+#from gioco.menu_principale import MenuPrincipale
+#from gioco.missione import MissioneFactory
+#from gioco.ambiente import AmbienteFactory
+#from gioco.scontro import Scontro
 
 gioco = Blueprint('gioco',
                   __name__,
                   template_folder='../templates')
 
-
+# --------------- INDEX -------------------------------------
 @gioco.route('/')
 def index():
     return render_template('index.html')
 
+# --------------- MENU ---------------------------------------
+@gioco.route('/menu')
+def menu():
+    return render_template('menu.html')
 
-@gioco.route('/new_game', methods=['GET', 'POST'])
-def new_game():
-    # Qui andrà il form di creazione dei personaggi
-    return render_template('create_char.html')
+# --------------- SELEZIONA_AMBIENTE -------------------------
+@gioco.route('/seleziona_ambiente', methods=['GET', 'POST'])
+def seleziona_ambiente():
+    return render_template('seleziona_ambiente.html')
 
+# --------------- CREA_PERSONAGGIO ---------------------------
+@gioco.route('/crea_personaggio', methods=['GET', 'POST'])
+def crea_personaggio():
+    return render_template('crea_personaggi.html')
 
-@gioco.route('/load_game')
-def load_game():
-    # Qui andrà la logica per caricare un salvataggio
-    return render_template('load_game.html')
+# --------------- INVENTARIO ---------------------------------
+@gioco.route('/inventario', methods=['GET', 'POST'])
+def inventario():
+    return render_template('inventario.html')
 
+# --------------- PERSONAGGI_CREATI--------------------------
+@gioco.route('/personaggi_creati', methods=['GET', 'POST'])
+def personaggi_creati():
+    return render_template('personaggi_creati.html')
 
-@gioco.route('/select_mission', methods=['GET', 'POST'])
-def select_mission():
-    # Qui andrà la selezione e attivazione missioni
-    return render_template('select_mission.html')
+# --------------- BATTAGLIA --------------------------------
+@gioco.route('/battaglia', methods=['GET', 'POST'])
+def battaglia():
+    return render_template('battaglia.html')
 
+# --------------- NUOVA_PARTITA ----------------------------
+@gioco.route('/nuova_partita', methods=['GET', 'POST'])
+def nuova_partita():
+    return render_template('nuova_partita.html')
 
-@gioco.route('/battle', methods=['GET', 'POST'])
-def battle():
-    # Qui andrà lo svolgimento dello scontro
-    return render_template('battle.html')
+# --------------- CARICA_PARTITA ---------------------------
+@gioco.route('/carica_partita', methods=['GET', 'POST'])
+def carica_partita():
+    return render_template('carica_partita.html')
 
-
-@gioco.route('/inventory')
-def inventory():
-    # Qui andrà la visualizzazione dell'inventario del giocatore
-    return render_template('inventory.html')
-
-
-@gioco.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('gioco.index'))
+# --------------- SELZIONA_MISSIONE ------------------------
+@gioco.route('/seleziona_missione', methods=['GET', 'POST'])
+def seleziona_missione():
+    return render_template('seleziona_missione.html')

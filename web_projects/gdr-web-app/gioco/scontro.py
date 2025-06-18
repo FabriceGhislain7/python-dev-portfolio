@@ -1,4 +1,5 @@
 import random
+
 from utils.log import Log
 from gioco.oggetto import PozioneCura, BombaAcida, Medaglione
 from gioco.inventario import Inventario

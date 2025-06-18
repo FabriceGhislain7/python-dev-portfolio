@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Menu iniziale{% endblock %}
+
+{% block content %}
+<h2>Menu principale del gioco</h2>
+<p>Menu principale.</p>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a href="{{ url_for('gioco.crea_personaggio') }}" class="btn btn-primary btn-lg mb-2">Crea Personaggi</a>
+    <a href="{{ url_for('gioco.seleziona_ambiente') }}" class="btn btn-primary btn-lg mb-2">Seleziona ambiente</a>
+    <a href="{{ url_for('gioco.inventario') }}" class="btn btn-primary btn-lg mb-2">Inventario</a>
+    <a href="{{ url_for('gioco.personaggi_creati') }}" class="btn btn-primary btn-lg mb-2">Personaggi Creati</a>
+    <a href="{{ url_for('gioco.battaglia') }}" class="btn btn-primary btn-lg mb-2">Battaglia</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

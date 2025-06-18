@@ -1,6 +1,7 @@
 import random
 from gioco.ambiente import Ambiente
 from gioco.inventario import Inventario
+from utils.interfaccia import InterfacciaUtente as I_U # Da modificare
 from gioco.strategy import StrategiaAttacco
 from gioco.personaggio import Personaggio
 from gioco.classi import Guerriero, Mago, Ladro

@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %}
-Home - RPG
-{% endblock %}
+{% extends "layout.html" %}
+{% block title %}Home - Gdr{% endblock %}
 
 {% block content %}
-<h1>Ciao, Benvenuto al Gioco Di Ruolo!</h1>
-<p>Benvenuto alla prima pagina</p>
+<h2>Benvenuto nel gioco GDR</h2>
+<p>Clicca sul pulsante per accedere al Menu Principale.</p>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a href="{{ url_for('gioco.menu') }}" class="btn btn-primary btn-lg mb-2">Menu Principale</a>
+</div>
+{% endblock %}
 
-<a href="/chi-sono">
-    <button class="btn btn-primary">Chi sono</button>
-</a>
+{% block scripts %}
 {% endblock %}

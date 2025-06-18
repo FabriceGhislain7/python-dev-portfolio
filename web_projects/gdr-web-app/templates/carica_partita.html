@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Carica Partita
+{% endblock %}
+
+{% block content %}
+<h1>Continua la partita iniziata</h1>
+    <a href="{{ url_for('gioco.battaglia')}}">
+        <button class="btn btn-primary">Battaglia</button>
+    </a>
+{% endblock %}
