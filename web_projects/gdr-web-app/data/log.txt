@@ -115,3 +115,7 @@
 2025-06-21 23:02:02 - Ambiente mostrato: Vulcano
 2025-06-21 23:02:27 - Ambiente mostrato: Vulcano
 2025-06-21 23:30:18 - Ambiente mostrato: Vulcano
+2025-06-21 23:49:20 - Ambiente selezionato: Foresta (id: 1)
+2025-06-21 23:49:20 - Ambiente mostrato: Foresta
+2025-06-21 23:49:25 - Ambiente selezionato: Vulcano (id: 2)
+2025-06-21 23:49:25 - Ambiente mostrato: Vulcano

@@ -2,52 +2,60 @@
 {% block title %}Benvenuto - GDR Web{% endblock %}
 
 {% block content %}
-<!-- HERO di benvenuto senza immagine -->
-<section class="py-5 text-center bg-primary text-white rounded-4 shadow-sm">
-  <div class="container">
+<!-- Sfondo a tutta pagina con immagine -->
+<div class="text-white" style="
+  background-image: url('{{ url_for('static', filename='ambiente.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+">
+
+  <div class="container text-center bg-dark bg-opacity-75 p-5 rounded-4 shadow-sm">
     <h1 class="display-4 fw-bold">Benvenuto nel GDR Web App</h1>
     <p class="lead">Inizia la tua avventura fantasy nel nostro gioco di ruolo online.</p>
-    <a href="{{ url_for('gioco.menu') }}" class="btn btn-light btn-lg mt-4">Vai al Menu Principale</a>
+    <a href="{{ url_for('gioco.menu') }}" class="btn btn-light btn-lg mt-4 bg-opacity-75">Vai al Menu Principale</a>
   </div>
-</section>
 
-<!-- Sezioni opzionali -->
-<div class="container mt-5">
-  <div class="row text-center g-4">
+  <!-- Sezioni opzionali -->
+  <div class="container mt-5">
+    <div class="row text-center g-4">
 
-    <!-- About -->
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
-          <h5 class="card-title">Chi siamo</h5>
-          <p class="card-text">Scopri chi ha creato il gioco, la filosofia dietro il progetto e i prossimi obiettivi.</p>
-          <a href="{{ url_for('gioco.about') }}" class="btn btn-outline-primary btn-sm">About</a>
+      <!-- About -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 bg-light bg-opacity-50">
+          <div class="card-body">
+            <h5 class="card-title">Chi siamo</h5>
+            <p class="card-text">Scopri chi ha creato il gioco, la filosofia dietro il progetto e i prossimi obiettivi.</p>
+            <a href="{{ url_for('gioco.about') }}" class="btn btn-outline-primary btn-sm">About</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Guida -->
-    <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
-          <h5 class="card-title">Guida al gioco</h5>
-          <p class="card-text">Leggi le regole base, comandi principali e consigli per iniziare il tuo viaggio.</p>
-          <a href="{{ url_for('gioco.guide_game') }}" class="btn btn-outline-primary btn-sm">Game guide</a>
+      <!-- Guida -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 bg-light bg-opacity-50">
+          <div class="card-body">
+            <h5 class="card-title">Guida al gioco</h5>
+            <p class="card-text">Leggi le regole base, comandi principali e consigli per iniziare il tuo viaggio.</p>
+            <a href="{{ url_for('gioco.guide_game') }}" class="btn btn-outline-primary btn-sm">Game guide</a>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-<!-- Credits -->
-<div class="col-md-4">
-    <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
+      <!-- Credits -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 bg-light bg-opacity-50">
+          <div class="card-body">
             <h5 class="card-title">Credits</h5>
             <p class="card-text">Ringraziamenti, fonti grafiche e contributori open source.</p>
             <a href="{{ url_for('gioco.credits') }}" class="btn btn-outline-primary btn-sm">Credits</a>
+          </div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 {% endblock %}
