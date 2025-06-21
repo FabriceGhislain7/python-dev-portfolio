@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Seleziona Ambiente</h2>
+<form method="post">
+  <select name="ambiente_id" required>
+    <option disabled selected>-- scegli ambiente --</option>
+    {% for id, ambiente in ambienti.items() %}
+      <option value="{{ id }}">{{ ambiente.nome }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-primary mt-2">Seleziona</button>
+</form>
+{% endblock %}

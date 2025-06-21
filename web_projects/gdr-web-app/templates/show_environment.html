@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Ambiente Selezionato</h2>
+<p>Nome: {{ ambiente.nome }}</p>
+<p>Modifica Attacco: {{ ambiente.modifica_attacco }}</p>
+<p>Modifica Cura: {{ ambiente.modifica_cura }}</p>
+<a href="{{ url_for('environment.select_environment') }}" class="btn btn-secondary mt-3">Cambia Ambiente</a>
+{% endblock %}

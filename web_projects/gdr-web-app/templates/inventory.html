@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+    <meta charset="UTF-8">
+ {% block title %}Inventario Personaggi {% endblock %}
+{% block content %}
+    <h1>Seleziona un personaggio</h1>
+
+    <form method="post">
+        <select name="personaggio_id">
+            <option value="">-- Scegli un personaggio --</option>
+            {% for p in personaggi %}
+                <option value="{{ p.id }}" {% if id_selezionato == p.id %}selected{% endif %}>
+                    {{ p.nome }} ({{ p.classe }})
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Mostra Inventario</button>
+    </form>
+
+    {% if inventario %}
+        <h2>Inventario di {{ nome_per_id.get(inventario.proprietario, "Sconosciuto") }}</h2>
+        <ul>
+            {% for oggetto in inventario.oggetti %}
+                <li>
+                    <strong>{{ oggetto.nome }}</strong> ({{ oggetto.classe }})
+                    {% if oggetto.offensivo %} - Offensivo{% endif %}
+                    {% if oggetto.usato %} - Usato{% else %} - Non usato{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif id_selezionato %}
+        <p><em>Nessun inventario trovato per questo personaggio.</em></p>
+    {% endif %}
+{% endblock %}
