@@ -9,14 +9,36 @@ from gioco.classi import Mago, Guerriero, Ladro
 #from gioco.ambiente import AmbienteFactory
 #from gioco.scontro import Scontro
 import os
+
 template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
 gioco = Blueprint('gioco', __name__, template_folder=template_dir)
 
 # gioco = Blueprint('gioco', __name__, template_folder='../templates')
 
-# Home / menu principale
+# Home Page
 @gioco.route('/')
 def index():
+    return render_template('index.html')
+
+# About
+@gioco.route('/about')
+def about():
+    return render_template('about.html')
+
+# Guide Game
+@gioco.route('/guide_game')
+def guide_game():
+    return render_template('guide_game.html')
+
+# Credits
+@gioco.route("/credits")
+def credits():
+    return render_template("credits.html")
+
+
+# Home / menu principale
+@gioco.route('/menu')
+def menu():
     return render_template('menu.html')
 
 """

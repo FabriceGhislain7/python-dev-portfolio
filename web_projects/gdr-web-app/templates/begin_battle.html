@@ -1,18 +1,33 @@
 {% extends "layout.html" %}
-{% block title %}BeginBattle{% endblock %}
+{% block title %}Inizio Battaglia{% endblock %}
 
 {% block content %}
-    <p>Stai per giocare la missione : {{missione_corrente.nome}}</p> 
-    <!--<a href="{{ url_for('mission.select_mission') }}" class="btn btn-warning btn-lg mb-2">Seleziona Missione</a>-->
-    <p>Nell'ambiente {{ambiente_corrente.__class__.__name__}}</p>
-    <a href="{{ url_for('environment.select_environment') }}" class="btn btn-warning btn-lg mb-2">Seleziona Ambiente</a>
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">Preparati alla Battaglia!</h2>
+    <p class="lead">Stai per giocare la missione: <strong>{{ missione_corrente.nome }}</strong></p>
+    <p>Ambiente selezionato: <span class="badge bg-secondary">{{ ambiente_corrente.__class__.__name__ }}</span></p>
+    <a href="{{ url_for('environment.select_environment') }}" class="btn btn-outline-warning btn-sm mt-2">Cambia Ambiente</a>
+  </div>
+
+  <div class="card shadow-sm p-4 mx-auto" style="max-width: 500px;">
     <form method="post">
-        <select class="form-select" id="selected_pg">
-          <option value="" disabled selected>Seleziona un personaggio</option>
+      <div class="mb-3">
+        <label for="selected_pg" class="form-label">Seleziona un personaggio per la battaglia</label>
+        <select name="personaggio_id" class="form-select" id="selected_pg" required>
+          <option value="" disabled selected>-- Scegli un personaggio --</option>
           {% for personaggio in personaggi %}
-            <option value="{{ personaggio }}">{{personaggio.nome }} Classe: {{personaggio.__class__.__name__}}</option>
+            <option value="{{ personaggio.id }}">{{ personaggio.nome }} ({{ personaggio.__class__.__name__ }})</option>
           {% endfor %}
         </select>
-        <button type="submit">Inizia la battaglia!</button>
+      </div>
+      <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-secondary">Inizia la Battaglia</a>
+      <!-- <a><button type="submit" class="btn btn-success w-100">Inizia la Battaglia!</button></a> -->
     </form>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('gioco.menu') }}" class="btn btn-secondary">Torna al Menu Principale</a>
+  </div>
+</div>
 {% endblock %}

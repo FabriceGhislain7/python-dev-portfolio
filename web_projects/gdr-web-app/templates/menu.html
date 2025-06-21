@@ -2,25 +2,70 @@
 {% block title %}Menu iniziale{% endblock %}
 
 {% block content %}
-<h2>Benvenuto nel gioco GDR</h2>
-<p>Seleziona un'opzione per iniziare.</p>
-<div class="d-grid gap-2 col-6 mx-auto">
-    
-    <a href="{{ url_for('characters.create_char') }}" class="btn btn-dark btn-lg mb-2">Crea Personaggi</a>
-    <!-- Commenta temporaneamente i link alle route non definite -->
-    {# <a href="{{ url_for('load_game') }}" class="btn btn-secondary btn-lg">Carica Gioco</a> #}
-   
-    <!-- Aggiungi link di test per la lista dei personaggi -->
-    <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-primary btn-lg mb-2">Lista personaggi</a>
+<!-- HERO: Titolo benvenuto -->
+<section class="py-5 text-center bg-secondary text-white rounded-5 mb-4 shadow-sm">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Menu principale</h1>
+        <p class="lead">Benvenuto nel gioco GDR! Scegli un'opzione per iniziare la tua avventura.</p>
+    </div>
+</section>
 
-    <a href="{{ url_for('inventory.inventory') }}" class="btn btn-primary btn-lg mb-2">Test Inventario</a>
-    <a href="{{ url_for('mission.select_mission') }}" class="btn btn-success btn-lg mb-2">Seleziona Missione</a>
+<!-- SEZIONI a schede -->
+<div class="container">
+  <div class="row g-4 justify-content-center">
 
-    <a href="{{ url_for('environment.select_environment') }}" class="btn btn-danger btn-lg mb-2">Seleziona Ambiente</a>
-    <a href="{{ url_for('environment.show_environment') }}" class="btn btn-warning btn-lg mb-2">Mostra Ambiente</a>
-    <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-dark btn-lg mb-2">Battle</a>
+    <!-- Personaggi -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-semibold mb-3">Personaggi</h5>
+          <a href="{{ url_for('characters.create_char') }}" class="btn btn-primary w-100 mb-2">Crea personaggio</a>
+          <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary w-100">Lista personaggi</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventario -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-semibold mb-3">Inventario</h5>
+          <a href="{{ url_for('inventory.inventory') }}" class="btn btn-success w-100">Gestisci inventario</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Missioni e ambienti -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-semibold mb-3">Missioni & Ambienti</h5>
+          <a href="{{ url_for('mission.select_mission') }}" class="btn btn-warning w-100 mb-2 text-dark">Seleziona missione</a>
+          <a href="{{ url_for('environment.select_environment') }}" class="btn btn-danger w-100 mb-2">Seleziona ambiente</a>
+          <a href="{{ url_for('environment.show_environment') }}" class="btn btn-outline-danger w-100">Mostra ambiente</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battle -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-semibold mb-3">Battaglia</h5>
+          <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-secondary w-100">Inizia battaglia</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer badge -->
+<div class="text-center mt-5">
+  <span class="badge bg-secondary">GDR Web App &nbsp;|&nbsp; Flask + Bootstrap 5</span>
 </div>
 {% endblock %}
 
 {% block scripts %}
+{# Inserisci qui eventuali script JS extra in futuro #}
 {% endblock %}

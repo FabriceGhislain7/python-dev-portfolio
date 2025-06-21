@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Credits - GDR Web{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+          <h1 class="h3 mb-4 text-center"> Credits & Ringraziamenti</h1>
+
+          <p>
+            Questo progetto è stato realizzato durante il corso di formazione
+            <strong>"Programmatore e Sviluppatore Python"</strong>, organizzato da
+            <strong>Ente F.I.RE</strong> e co-finanziato dal programma <strong>FSE+</strong>
+            della <strong>Regione Liguria</strong>. Ringrazio anche l'ufficio F.I.RE per la
+            disponibilità e la gentilezza dimostrate durante tutto il percorso formativo.
+          </p>
+
+          <p>
+            Desidero ringraziare il nostro docente <strong>[Nome del Docente]</strong> per la disponibilità, la guida tecnica e l’entusiasmo trasmesso durante le lezioni.
+          </p>
+
+          <p>
+            Un grande grazie anche a tutti i miei colleghi di corso, con cui ho condiviso sfide, risate e tante righe di codice!
+            Il gioco è nato dalla collaborazione, ma ha anche accolto idee, modifiche e ristrutturazioni personali in alcune sezioni.
+          </p>
+
+          <hr>
+
+          <p>
+            Le risorse grafiche utilizzate (immagini di sfondo, icone, e design) sono state tratte da fonti open source, 
+            generatori AI e librerie gratuite come <strong>Bootstrap 5</strong> e <strong>FontAwesome</strong>.
+          </p>
+
+          <div class="text-center mt-4">
+            <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-primary">Torna al Menu Principale</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

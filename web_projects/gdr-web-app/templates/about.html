@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}Chi siamo - GDR Web App{% endblock %}
+
+{% block content %}
+<section class="py-5 text-center bg-secondary border-bottom rounded-5">
+  <div class="container">
+    <h1 class="display-5 fw-bold text-white">Chi siamo</h1>
+    <p class="lead text-white">Un progetto nato durante il corso di formazione "Programmatore e Sviluppatore Python".</p>
+  </div>
+</section>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+          <h3 class="h5 fw-semibold">Descrizione del progetto</h3>
+          <p>
+            Questo progetto è il risultato della collaborazione tra studenti del corso in presenza
+            "Programmatore e Sviluppatore Python", organizzato da Ente F.IRE e cofinanziato dal programma FSE+ della Regione Liguria,
+            sotto la supervisione del docente del corso.
+          </p>
+          <p>
+            La versione attuale del progetto è stata ristrutturata e adattata da me personalmente,
+            mantenendo gli elementi chiave, ma con modifiche strutturali e stilistiche.  
+            Non mi prendo tutto il merito: è frutto di un lavoro di gruppo, ma anche di iniziativa individuale.
+          </p>
+
+          <h3 class="h5 fw-semibold mt-4">Obiettivi formativi</h3>
+          <p>
+            Il corso mira a fornire competenze pratiche in:
+            programmazione Python, sviluppo software, sistemi IoT e applicazioni AI.
+            Il nostro gioco di ruolo è uno dei progetti sviluppati a partire dai moduli pratici.
+          </p>
+
+          <h3 class="h5 fw-semibold mt-4">Collaborazione e sviluppo</h3>
+          <p>
+            Il gioco GDR è stato sviluppato in gruppo, seguendo un approccio incrementale, versione dopo versione.
+            Ogni funzionalità è frutto di confronto, test e collaborazione tra colleghi.
+          </p>
+
+          <h3 class="h5 fw-semibold mt-4">Tecnologie e strumenti</h3>
+          <ul>
+            <li>Python 3 e Flask</li>
+            <li>HTML5 + Bootstrap 5</li>
+            <li>Controllo versione con Git</li>
+            <li>Ambiente di sviluppo: VS Code</li>
+          </ul>
+
+          <h3 class="h5 fw-semibold mt-4">Note personali</h3>
+          <p>
+            Questo progetto rappresenta un portfolio vivo del nostro percorso. Ogni commit è un piccolo passo avanti:
+            un errore superato, una funzionalità completata, un’idea diventata codice.
+          </p>
+
+          <!-- Pulsanti centrati -->
+          <div class="mt-5 text-center">
+            <a href="{{ url_for('gioco.index') }}" class="btn btn-primary me-2">Torna alla Home</a>
+            <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-secondary">Vai al Menu Principale</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}{% endblock %}

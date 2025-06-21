@@ -46,3 +46,72 @@
 2025-06-20 20:23:41 - Richiesta lista personaggi. Numero personaggi: 1
 2025-06-20 20:23:49 - Visualizzazione dettagli personaggio con ID: 0c889485-4c68-4b19-909a-3d1cf7320f45, Nome: Zoro
 2025-06-21 10:31:09 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 11:36:32 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 11:52:37 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 11:53:08 - Visualizzazione dettagli personaggio con ID: 0c889485-4c68-4b19-909a-3d1cf7320f45, Nome: Zoro
+2025-06-21 11:53:25 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:24:39 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:24:58 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:25:00 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:25:07 - Visualizzazione dettagli personaggio con ID: 0c889485-4c68-4b19-909a-3d1cf7320f45, Nome: Zoro
+2025-06-21 17:25:17 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:25:21 - Visualizzazione dettagli personaggio con ID: 0c889485-4c68-4b19-909a-3d1cf7320f45, Nome: Zoro
+2025-06-21 17:25:22 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:44:00 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:53:51 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 17:58:30 - Inventario di Zoro selezionato.
+2025-06-21 18:10:48 - Nessun ambiente selezionato.
+2025-06-21 18:27:25 - Nessun ambiente selezionato.
+2025-06-21 18:27:51 - Richiesta lista personaggi. Numero personaggi: 0
+2025-06-21 21:13:19 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-21 22:02:32 - Nessun ambiente selezionato.
+2025-06-21 22:03:07 - Creato personaggio: Zoro-2, Classe: Mago, id: cb2177f8-5774-4bdf-81b4-d062f58dba6b, Oggetto iniziale: PozioneCura
+2025-06-21 22:04:49 - Creato personaggio: Luca, Classe: Guerriero, id: 215fa84d-0785-451c-ac65-346011f8dc16, Oggetto iniziale: BombaAcida
+2025-06-21 22:04:54 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-21 22:05:18 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-21 22:06:00 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-21 22:07:51 - Inventario di Zoro selezionato.
+2025-06-21 22:24:15 - Ambiente selezionato: Foresta (id: 1)
+2025-06-21 22:24:15 - Ambiente mostrato: Foresta
+2025-06-21 22:27:20 - Ambiente mostrato: Foresta
+2025-06-21 22:28:12 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:28:12 - Ambiente mostrato: Foresta
+2025-06-21 22:29:01 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:29:01 - Ambiente mostrato: Foresta
+2025-06-21 22:29:05 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:29:05 - Ambiente mostrato: Foresta
+2025-06-21 22:31:33 - Ambiente mostrato: Foresta
+2025-06-21 22:32:25 - Ambiente mostrato: Foresta
+2025-06-21 22:32:43 - Ambiente mostrato: Foresta
+2025-06-21 22:32:59 - Inventario di Zoro selezionato.
+2025-06-21 22:33:17 - Inventario di Zoro-2 selezionato.
+2025-06-21 22:33:31 - Inventario di Luca selezionato.
+2025-06-21 22:33:42 - Inventario di Luca selezionato.
+2025-06-21 22:33:50 - Inventario di Zoro selezionato.
+2025-06-21 22:34:02 - Ambiente selezionato: Foresta (id: 1)
+2025-06-21 22:34:02 - Ambiente mostrato: Foresta
+2025-06-21 22:34:08 - Ambiente selezionato: Foresta (id: 1)
+2025-06-21 22:34:08 - Ambiente mostrato: Foresta
+2025-06-21 22:34:14 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:34:14 - Ambiente mostrato: Foresta
+2025-06-21 22:51:47 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:51:47 - Ambiente mostrato: Foresta
+2025-06-21 22:51:56 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:51:56 - Ambiente mostrato: Foresta
+2025-06-21 22:51:59 - Ambiente mostrato: Foresta
+2025-06-21 22:52:02 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:52:02 - Ambiente mostrato: Foresta
+2025-06-21 22:52:05 - Ambiente selezionato: Foresta (id: None)
+2025-06-21 22:52:05 - Ambiente mostrato: Foresta
+2025-06-21 22:52:14 - Inventario di Zoro selezionato.
+2025-06-21 22:52:18 - Ambiente mostrato: Foresta
+2025-06-21 22:52:23 - Ambiente selezionato: Foresta (id: 1)
+2025-06-21 22:52:23 - Ambiente mostrato: Foresta
+2025-06-21 22:52:27 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-21 22:52:32 - Eliminato personaggio con ID: 215fa84d-0785-451c-ac65-346011f8dc16, Nome: Luca
+2025-06-21 22:52:32 - Richiesta lista personaggi. Numero personaggi: 2
+2025-06-21 22:54:29 - Inventario di Zoro selezionato.
+2025-06-21 23:02:02 - Ambiente selezionato: Vulcano (id: 2)
+2025-06-21 23:02:02 - Ambiente mostrato: Vulcano
+2025-06-21 23:02:27 - Ambiente mostrato: Vulcano
+2025-06-21 23:30:18 - Ambiente mostrato: Vulcano

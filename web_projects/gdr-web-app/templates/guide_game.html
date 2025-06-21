@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block title %}Guida al Gioco - GDR Web App{% endblock %}
+
+{% block content %}
+<section class="py-5 text-center bg-primary text-white rounded-4 shadow-sm mb-4">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Guida al Gioco</h1>
+    <p class="lead">Scopri come giocare al GDR Web App: dalla creazione del personaggio alla vittoria finale!</p>
+  </div>
+</section>
+
+<div class="container pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <!-- INTRODUZIONE -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> Introduzione</h2>
+        <p>
+          Il GDR Web App è un gioco di ruolo fantasy basato su Flask e Python, dove ogni giocatore può creare un personaggio, esplorare ambienti, combattere nemici e ottenere ricompense. L'interfaccia è semplice e ogni azione è supportata da una logica Python ben strutturata.
+        </p>
+      </div>
+
+      <!-- CREAZIONE DEL PERSONAGGIO -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> 1. Creazione del Personaggio</h2>
+        <p>
+          Puoi scegliere tra tre classi principali:
+        </p>
+        <ul>
+          <li><strong>Guerriero</strong>: forte in attacco fisico, favorito nella Foresta.</li>
+          <li><strong>Mago</strong>: potente nel Vulcano, usa incantesimi devastanti.</li>
+          <li><strong>Ladro</strong>: agile, si cura meglio in ambienti come la Foresta.</li>
+        </ul>
+        <p>
+          Ogni personaggio inizia con <strong>100 HP</strong>, uno storico dei danni, e la possibilità di salire di livello man mano che affronta missioni.
+        </p>
+      </div>
+
+      <!-- INVENTARIO E OGGETTI -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> 2. Inventario e Oggetti</h2>
+        <p>
+          Durante le missioni riceverai oggetti da usare in battaglia. Ogni oggetto ha un effetto specifico:
+        </p>
+        <ul>
+          <li><strong>Pozione Rossa</strong>: recupera salute.</li>
+          <li><strong>Bomba Acida</strong>: infligge danni a un nemico.</li>
+          <li><strong>Medaglione</strong>: potenzia l’attacco massimo del personaggio.</li>
+        </ul>
+        <p>
+          Alcuni oggetti hanno effetti speciali in ambienti specifici, come le Bombe Acide nel Vulcano.
+        </p>
+      </div>
+
+      <!-- AMBIENTI -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> 3. Ambienti</h2>
+        <p>
+          Ogni missione si svolge in un <strong>ambiente</strong>, che può modificare il comportamento di personaggi e oggetti:
+        </p>
+        <ul>
+          <li><strong>Foresta</strong>: potenzia Guerrieri e la cura dei Ladri.</li>
+          <li><strong>Vulcano</strong>: potenzia i Maghi e aumenta il danno delle Bombe Acide.</li>
+          <li><strong>Palude</strong>: riduce attacco dei Ladri/Guerrieri e indebolisce le pozioni.</li>
+        </ul>
+      </div>
+
+      <!-- MISSIONI -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> 4. Missioni e Combattimenti</h2>
+        <p>
+          Ogni missione ha:
+        </p>
+        <ul>
+          <li>Un nome (es: <em>Imboscata</em>, <em>Salva la Principessa</em>...)</li>
+          <li>Un ambiente</li>
+          <li>Una lista di nemici</li>
+          <li>Un set di ricompense</li>
+        </ul>
+        <p>
+          Dopo ogni attacco, il gioco verifica se il nemico è sconfitto. Alla fine della missione, se tutti i nemici sono sconfitti, i premi vengono assegnati casualmente agli inventari dei giocatori.
+        </p>
+      </div>
+
+      <!-- STRATEGIA -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> 5. Strategia di Gioco</h2>
+        <p>
+          Le decisioni contano! Usa saggiamente gli oggetti, scegli l’ordine degli attacchi e sfrutta gli ambienti a tuo vantaggio. Ricorda che:
+        </p>
+        <ul>
+          <li>Il danno è variabile (range min-max + ambiente)</li>
+          <li>Ogni personaggio può potenziarsi salendo di livello</li>
+          <li>Ogni oggetto può essere usato una sola volta</li>
+        </ul>
+      </div>
+
+      <!-- CONCLUSIONE -->
+      <div class="mb-5">
+        <h2 class="h4 fw-bold"> Conclusione</h2>
+        <p>
+          Il gioco termina quando tutte le missioni vengono completate. Ogni giocatore potrà conservare il suo personaggio e i log delle partite per future avventure!
+        </p>
+      </div>
+
+      <!-- Pulsanti -->
+      <div class="text-center mt-5">
+        <a href="{{ url_for('gioco.index') }}" class="btn btn-primary me-2">Torna alla Home</a>
+        <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-secondary">Vai al Menu Principale</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}{% endblock %}

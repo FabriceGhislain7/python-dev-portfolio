@@ -4,6 +4,7 @@ from gioco.personaggio import Personaggio
 from gioco.inventario import Inventario
 from gioco.ambiente import Ambiente,Foresta
 from gioco.missione import Missione,GestoreMissioni
+
 @battle_bp.route('/begin_battle')
 def begin_battle():
     #if request.method == 'POST':
