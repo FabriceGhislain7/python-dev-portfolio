@@ -34,40 +34,54 @@ pip install Flask-Session
 ```
 
 ---
-
-## Struttura cartelle consigliata
-
 ```
-Gdr-flask/
-├── app.py
-├── gioco/
-│   ├── ambiente.py
-│   ├── classi.py
-│   ├── compagnia.py
-│   ├── inventario.py
-│   ├── menu_principale.py
-│   ├── missione.py
-│   ├── oggetto.py
-│   ├── personaggio.py
-│   ├── routes.py
-│   ├── scontro.py
-│   ├── strategy.py
-│   └── turno.py
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── img/
-├── templates/
-│   ├── layout.html
-│   ├── menu.html
-│   ├── create_char.html
-│   ├── select_mission.html
-│   └── battle.html
-├── utils/
-│   ├── log.py
-│   └── salvataggio.py
-├── venv/
-└── README.md
+gdr-web-app/
+│
+├── app.py                     # Entry point dell'applicazione Flask
+├── README.md                  # Documentazione del progetto
+├── requirements.txt           # Dipendenze del progetto
+│
+├── venv/                      # Ambiente virtuale Python
+│
+├── static/                    # File statici (CSS, immagini, JS)
+│   └── ambiente.jpg           # Sfondo della homepage (esempio)
+│
+├── templates/                 # Template HTML (Jinja2)
+│   ├── layout.html            # Layout base comune a tutte le pagine
+│   ├── index.html             # Homepage
+│   ├── guide_game.html        # Guida al gioco
+│   ├── credits.html           # Ringraziamenti
+│   └── ...                    # Altri template (menu, inventario, ambienti, missioni)
+│
+├── data/                      # Eventuali dati persistenti (JSON di salvataggio ecc.)
+│   └── salvataggio.json       # (opzionale) Salvataggio partite
+│
+├── gioco/                     # Modulo principale con logica di gioco
+│   ├── ambiente.py            # Definizione degli ambienti (Foresta, Palude, Vulcano)
+│   ├── basic.py               # Classe base generica
+│   ├── classi.py              # Mago, Ladro, Guerriero (specializzazioni di Personaggio)
+│   ├── inventario.py          # Gestione inventari e oggetti contenuti
+│   ├── missione.py            # Classi per le missioni
+│   ├── oggetto.py             # Pozione, bomba, medaglione ecc.
+│   ├── personaggio.py         # Classe `Personaggio` e sue logiche (attacco, cura ecc.)
+│   ├── scontro.py             # Logica di combattimento
+│   ├── strategy.py            # Strategia IA avversari?
+│   └── routes.py              # Blueprint Flask per le rotte `/gioco/...`
+│
+├── environment/               # Blueprint Flask per ambienti (selezione ambiente)
+│   └── routes.py              # Gestione delle view dell’ambiente
+│
+├── inventory/                 # Blueprint Flask per la gestione inventari
+│   └── routes.py              # Rotte per visualizzare o modificare l'inventario
+│
+├── mission/                   # Blueprint Flask per le missioni
+│   └── routes.py              # Rotte di selezione, inizio e verifica missioni
+│
+└── utils/                     # Utility varie (log, messaggi, ecc.)
+    ├── log.py                 # Logging semplice su file/testo
+    ├── messaggi.py            # Classe Messaggi per accumulare output del gioco
+    └── salvataggio.py         # Altri helper se presenti
+
 ```
 
 ---
