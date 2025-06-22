@@ -115,3 +115,19 @@
 2025-06-21 23:02:02 - Ambiente mostrato: Vulcano
 2025-06-21 23:02:27 - Ambiente mostrato: Vulcano
 2025-06-21 23:30:18 - Ambiente mostrato: Vulcano
+2025-06-22 14:38:35 - Creato personaggio: Luca, Classe: Mago, id: 43817364-5d47-4bea-8bda-dacde8465299, Oggetto iniziale: PozioneCura
+2025-06-22 14:39:25 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-22 14:39:46 - Creato personaggio: Lucky luck, Classe: Mago, id: b6a40eb7-061f-45bc-8dce-64f77e41e0c0, Oggetto iniziale: PozioneCura
+2025-06-22 14:46:11 - Creato personaggio: Bertoldo, Classe: Guerriero, id: 7a19009c-968e-4232-9aed-a54c87bfc385, Oggetto iniziale: PozioneCura
+2025-06-22 14:46:19 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-22 14:48:24 - Visualizzazione dettagli personaggio con ID: 43817364-5d47-4bea-8bda-dacde8465299, Nome: Luca
+2025-06-22 14:48:31 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-22 15:02:28 - Inventario di Luca selezionato.
+2025-06-22 15:04:22 - Inventario di Luca selezionato.
+2025-06-22 15:04:49 - Ambiente selezionato: Foresta (id: 1)
+2025-06-22 15:04:49 - Ambiente mostrato: Foresta
+2025-06-22 15:05:05 - Ambiente mostrato: Foresta
+2025-06-22 15:12:52 - Ambiente selezionato: Foresta (id: 1)
+2025-06-22 15:12:52 - Ambiente mostrato: Foresta
+2025-06-22 15:21:23 - Ambiente mostrato: Foresta
+2025-06-22 15:21:27 - Ambiente mostrato: Foresta

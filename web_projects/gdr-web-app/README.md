@@ -1,20 +1,20 @@
-
 # Gioco di Ruolo - Web App Flask
 
 ## Obiettivo
-Migrare il gioco di ruolo in una versione web, usando Flask per gestire:
 
-- Creazione dei personaggi
-- Selezione delle missioni
-- Gestione del combattimento
-- Inventario e oggetti
-- Salvataggio dello stato di gioco
+Portare il gioco di ruolo in versione web, organizzando l'app con moduli Flask separati e struttura OOP per:
+
+* Creazione e gestione dei personaggi
+* Selezione delle missioni
+* Combattimento con logica a turni
+* Inventario e oggetti con effetti diversi
+* Salvataggio e caricamento dello stato di gioco
 
 ---
 
-## Setup iniziale
+## Setup Iniziale
 
-### Creazione ambiente virtuale
+### Ambiente Virtuale
 
 ```bash
 python -m venv venv
@@ -22,98 +22,100 @@ python -m venv venv
 source venv/bin/activate
 # Windows:
 venv\Scripts\activate
-````
+```
 
-### Installazione dipendenze
+### Installazione Dipendenze
 
 ```bash
-pip install Flask
-pip install Flask-SQLAlchemy
-pip install Flask-Login
-pip install Flask-Session
+pip install Flask Flask-SQLAlchemy Flask-Login Flask-Session
 ```
 
 ---
 
+## Struttura del Progetto
+
+```
 gdr-web-app/
 │
-├── app.py                     # Entry point dell'applicazione Flask
-├── README.md                  # Documentazione del progetto
+├── app.py                     # Entry point Flask, registra i blueprint
 ├── requirements.txt           # Dipendenze del progetto
+├── README.md                  # Documentazione
 │
-├── venv/                      # Ambiente virtuale Python
+├── venv/                      # Ambiente virtuale
 │
-├── static/                    # File statici (CSS, immagini, JS)
-│   └── ambiente.jpg           # Sfondo della homepage (esempio)
+├── static/                    # CSS, JS, immagini (es. ambiente.jpg)
 │
-├── templates/                 # Template HTML (Jinja2)
-│   ├── layout.html            # Layout base comune a tutte le pagine
-│   ├── index.html             # Homepage
-│   ├── guide_game.html        # Guida al gioco
-│   ├── credits.html           # Ringraziamenti
-│   └── ...                    # Altri template (menu, inventario, ambienti, missioni)
+├── templates/                 # Template Jinja2
+│   ├── layout.html
+│   ├── index.html
+│   ├── menu.html
+│   ├── create_char.html
+│   ├── select_mission.html
+│   ├── battle.html
+│   ├── guide_game.html
+│   ├── credits.html
+│   └── ...
 │
-├── data/                      # Eventuali dati persistenti (JSON di salvataggio ecc.)
-│   └── salvataggio.json       # (opzionale) Salvataggio partite
+├── data/                      # Eventuali salvataggi (es. salvataggio.json)
 │
-├── gioco/                     # Modulo principale con logica di gioco
-│   ├── ambiente.py            # Definizione degli ambienti (Foresta, Palude, Vulcano)
-│   ├── basic.py               # Classe base generica
-│   ├── classi.py              # Mago, Ladro, Guerriero (specializzazioni di Personaggio)
-│   ├── inventario.py          # Gestione inventari e oggetti contenuti
-│   ├── missione.py            # Classi per le missioni
-│   ├── oggetto.py             # Pozione, bomba, medaglione ecc.
-│   ├── personaggio.py         # Classe `Personaggio` e sue logiche (attacco, cura ecc.)
-│   ├── scontro.py             # Logica di combattimento
-│   ├── strategy.py            # Strategia IA avversari?
-│   └── routes.py              # Blueprint Flask per le rotte `/gioco/...`
+├── utils/                     # Moduli condivisi
+│   ├── log.py
+│   ├── messaggi.py
+│   └── salvataggio.py
 │
-├── environment/               # Blueprint Flask per ambienti (selezione ambiente)
-│   └── routes.py              # Gestione delle view dell’ambiente
+├── gioco/                     # Logica principale
+│   ├── __init__.py
+│   ├── ambiente.py
+│   ├── basic.py
+│   ├── classi.py
+│   ├── inventario.py
+│   ├── missione.py
+│   ├── oggetto.py
+│   ├── personaggio.py
+│   ├── scontro.py
+│   ├── strategy.py
+│   └── routes.py
 │
-├── inventory/                 # Blueprint Flask per la gestione inventari
-│   └── routes.py              # Rotte per visualizzare o modificare l'inventario
+├── battle/                    # Modulo battaglia
+│   ├── __init__.py
+│   └── routes.py
 │
-├── mission/                   # Blueprint Flask per le missioni
-│   └── routes.py              # Rotte di selezione, inizio e verifica missioni
+├── characters/                # Modulo gestione personaggi
+│   ├── __init__.py
+│   └── routes.py
 │
-└── utils/                     # Utility varie (log, messaggi, ecc.)
-    ├── log.py                 # Logging semplice su file/testo
-    ├── messaggi.py            # Classe Messaggi per accumulare output del gioco
-    └── salvataggio.py                    # Altri helper se presenti
-
+├── environment/               # Ambienti disponibili
+│   ├── __init__.py
+│   └── routes.py
+│
+├── inventory/                 # Inventario dei personaggi
+│   ├── __init__.py
+│   └── routes.py
+│
+├── mission/                   # Missioni selezionabili
+│   ├── __init__.py
+│   └── routes.py
 ```
 
 ---
 
-## Blueprint: cosa sono e perché usarli
+## Blueprint: Uso e Vantaggi
 
-Un Blueprint in Flask è un "modulo" riutilizzabile con le sue route, template e risorse statiche. Ti aiuta a:
+Un Blueprint in Flask consente di organizzare il codice in moduli riutilizzabili. È utile per:
 
-* Organizzare il codice per aree funzionali (es: gioco, auth, API)
+* Separare le rotte per area funzionale (`gioco`, `inventory`, ecc.)
+* Facilitare manutenzione e scalabilità
 * Evitare import circolari
-* Riutilizzare le componenti anche in altri progetti
 
-### Esempio di blueprint
-
-```python
-# gioco/routes.py
-from flask import Blueprint, render_template
-
-gioco = Blueprint('gioco', __name__, template_folder='../templates')
-
-@gioco.route('/')
-def index():
-    return render_template('menu.html')
-```
-
-### Registrazione nel file principale
+### Registrazione in `app.py`
 
 ```python
-# app.py
 from flask import Flask
 from flask_session import Session
 from gioco.routes import gioco
+from inventory.routes import inventory
+from mission.routes import mission
+# ...
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '...'
@@ -121,121 +123,112 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 app.register_blueprint(gioco)
+app.register_blueprint(inventory)
+app.register_blueprint(mission)
+# ...
 ```
 
 ---
 
-## Route previste
+## Route Chiave
 
-In `gioco/routes.py`:
-
-* `/` — Menu principale
-* `/new-game` — Form per creare la compagnia
-* `/load-game` — Caricamento stato salvato
-* `/select-mission` — Scelta missione
-* `/battle` — Logica e turni di battaglia
-* `/inventory` — Visualizzazione oggetti
-
----
-
-## Templates
-
-Posizionati in `templates/`:
-
-* `layout.html` — Template base con navbar e footer
-* `menu.html` — Pagina principale
-* `create_char.html` — Form per personaggi
-* `select_mission.html` — Lista missioni
-* `battle.html` — Combattimento a turni
+| Route             | Descrizione                        |
+| ----------------- | ---------------------------------- |
+| `/`               | Menu principale                    |
+| `/new-game`       | Creazione compagnia/personaggi     |
+| `/load-game`      | Caricamento stato da file/sessione |
+| `/select-mission` | Selezione missione                 |
+| `/battle`         | Combattimento a turni              |
+| `/inventory`      | Visualizzazione oggetti/personaggi |
+| `/save-game`      | Esporta salvataggio in JSON        |
 
 ---
 
-## Concetti avanzati da integrare
+## Concetti Avanzati
 
-### Serializzazione oggetti
+### Serializzazione degli Oggetti
 
-Tutte le classi (Personaggio, Missione, Ambiente, ecc.) devono:
+Ogni classe importante (es. Personaggio, Missione) deve:
 
-* Avere un metodo `to_dict()` per salvare lo stato
-* Un metodo `from_dict()` per ricostruirlo
+```python
+def to_dict(self): ...
+@classmethod
+def from_dict(cls, data): ...
+```
 
-Serve per salvare in sessione o file JSON.
+Serve per salvataggio in sessione o file.
 
-### Factory
+### Factory Pattern
 
-* `PersonaggioFactory`, `MissioneFactory`, `AmbienteFactory`
-* Metodi:
+Per ambienti, missioni e classi personaggio:
 
-  * `.get_opzioni()` → restituisce lista opzioni da mostrare nei form
-  * `.seleziona_da_id(id)` → istanzia oggetto dalla scelta utente
+* `.get_opzioni()` – restituisce opzioni da mostrare
+* `.seleziona_da_id(id)` – restituisce oggetto istanziato
 
 ### Sessione
 
-Salvare in sessione:
+* Salva oggetti Python convertiti in dict
+* Memorizza lo stato di gioco (scontro attivo, inventario, ecc.)
 
-* Lo stato della compagnia
-* La missione corrente
-* Eventualmente l'intero oggetto `Scontro`
+### Salvataggio
 
-### Salvataggio/caricamento file
-
-* Route `/save-game` e `/load-game`
-* File JSON o Pickle
-* Possibilità di scegliere uno "slot" o scaricare il file
+* JSON (leggibile, esportabile)
+* Possibile anche in Pickle o database
 
 ---
 
-## Static files
+## Static & Template
 
-In `static/` salviamo:
+**Static:**
 
-* CSS personalizzati
-* JS per interazioni dinamiche
-* Immagini (icone, sfondi, ritratti PG)
+* `/static/css/` — stili personalizzati
+* `/static/js/` — interazioni dinamiche
+* `/static/img/` — ambienti, icone, ritratti
+
+**Templates:**
+
+* `layout.html` – base comune
+* `menu.html` – schermata principale
+* `create_char.html` – creazione personaggi
+* `select_mission.html` – missioni disponibili
+* `battle.html` – combattimento
+* `inventory.html` – visualizzazione inventario
+* `guide_game.html` – guida
+* `credits.html` – ringraziamenti
 
 ---
 
-## Problemi risolti durante lo sviluppo
+## Problemi Risolti
 
-### Errore: `python` non riconosciuto in PowerShell
+### PowerShell non riconosce `python`
 
-Messaggio:
+Errore:
 
 ```
 The term 'C:\Python39\python.exe' is not recognized...
 ```
 
-Soluzione: modifica `$PROFILE` con:
+Soluzione:
 
 ```powershell
 notepad $PROFILE
 ```
 
-E commenta la riga:
+E commenta la funzione personalizzata `python`.
 
-```powershell
-function python { & 'C:\Python39\python.exe' @args }
-```
-
-### Errore: `pip3 --list` non funziona
-
-Messaggio:
-
-```
-no such option: --list
-```
+### `pip3 --list` non funziona
 
 Soluzione:
 
 ```bash
 pip list
 # oppure
-py -m pip list
+python -m pip list
 ```
 
 ---
 
-## Avvio dell’app
+## Avvio dell’App
 
 Con ambiente attivo:
 
@@ -245,10 +238,13 @@ python app.py
 
 ---
 
-## Prossimi step consigliati
+## Prossimi Step
 
-* Aggiunta immagini (personaggi, missioni)
-* Stile personalizzato con Bootstrap
-* Modalità "boss battle" o finale
-* Effetti dinamici via JS (es. log a scorrimento automatico)
+* Aggiungere immagini per personaggi e missioni
+* Migliorare lo stile con Bootstrap
+* Introdurre boss battle o finale narrativo
+* Aggiungere interattività con JavaScript (log dinamico)
+* Autenticazione con Flask-Login
+* Persistenza con Flask-SQLAlchemy
+* Scrittura di test automatizzati
 
