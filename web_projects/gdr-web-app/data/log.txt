@@ -146,3 +146,16 @@
 2025-06-22 19:24:43 - Ambiente selezionato: Foresta (id: 1)
 2025-06-22 19:24:43 - Ambiente mostrato: Foresta
 2025-06-22 22:13:42 - Ambiente mostrato: Foresta
+2025-06-23 00:41:47 - Richiesta lista personaggi. Numero personaggi: 2
+2025-06-23 00:41:53 - Visualizzazione dettagli personaggio con ID: 43817364-5d47-4bea-8bda-dacde8465299, Nome: Luca
+2025-06-23 00:42:46 - Richiesta lista personaggi. Numero personaggi: 2
+2025-06-23 00:42:49 - Visualizzazione dettagli personaggio con ID: b6a40eb7-061f-45bc-8dce-64f77e41e0c0, Nome: Lucky luck
+2025-06-23 00:42:51 - Richiesta lista personaggi. Numero personaggi: 2
+2025-06-23 00:43:03 - Inventario di Lucky luck selezionato.
+2025-06-23 00:43:12 - Ambiente selezionato: Vulcano (id: 2)
+2025-06-23 00:43:12 - Ambiente mostrato: Vulcano
+2025-06-23 00:43:20 - Ambiente mostrato: Vulcano
+2025-06-23 00:43:27 - Ambiente selezionato: Foresta (id: None)
+2025-06-23 00:43:27 - Ambiente mostrato: Foresta
+2025-06-23 03:45:07 - Ambiente selezionato: Foresta (id: None)
+2025-06-23 03:45:07 - Ambiente mostrato: Foresta

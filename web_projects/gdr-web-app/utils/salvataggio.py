@@ -7,16 +7,16 @@ class Json:
     def scrivi_dati(file_path: str, dati_da_salvare: dict) -> None:
         """
         Scrive i dati in un file JSON.
-        
+
         Args:
             file_path (str): Percorso del file in cui salvare i dati.
             dati_da_salvare (dict): Dati da salvare nel file JSON.
             encoder (function): Funzione di codifica per convertire oggetti in JSON.
-        
+
         Return:
             None
         """
-        
+
         try:
             with open(file_path, 'w') as file:
                 json.dump(dati_da_salvare, file, indent=4)
@@ -42,6 +42,7 @@ class Json:
         except Exception as e:
             print(f"Errore nella lettura del file JSON: {e}")
             return None
+
     @staticmethod
     def applica_patch(patch_element: dict) -> None:
         """
