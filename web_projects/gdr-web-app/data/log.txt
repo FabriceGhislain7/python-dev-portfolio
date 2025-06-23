@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 2025-06-20 12:28:12 - Creato personaggio: kebab2, Classe: Mago, id: 0b7f97d7-448f-4b59-9c41-c19bf5e4ee40, Oggetto iniziale: PozioneCura
 2025-06-20 12:28:13 - Richiesta lista personaggi. Numero personaggi: 8
-=======
 2025-06-20 11:59:56 - Ambiente selezionato: Foresta (id: 1)
 2025-06-20 11:59:56 - Ambiente mostrato: Foresta
 2025-06-20 12:00:02 - Ambiente selezionato: Palude (id: 3)
@@ -28,7 +26,6 @@
 2025-06-20 12:10:54 - Ambiente mostrato: Vulcano (id: None)
 2025-06-20 12:13:55 - Ambiente selezionato: Foresta (id: 1)
 2025-06-20 12:13:55 - Ambiente mostrato: Foresta
->>>>>>> 0c99b928fe3274c4b3514ec5ce016f0c5f7786d8
 2025-06-20 12:35:38 - Creato personaggio: ce, Classe: Ladro, id: e7199f93-0ef0-4d70-ac49-9e5eadc8ecd0, Oggetto iniziale: BombaAcida
 2025-06-20 12:35:39 - Richiesta lista personaggi. Numero personaggi: 1
 2025-06-20 12:36:21 - Creato personaggio: daniele, Classe: Mago, id: 66462b53-8765-4351-9bda-b9167831e418, Oggetto iniziale: PozioneCura
@@ -115,7 +112,3 @@
 2025-06-21 23:02:02 - Ambiente mostrato: Vulcano
 2025-06-21 23:02:27 - Ambiente mostrato: Vulcano
 2025-06-21 23:30:18 - Ambiente mostrato: Vulcano
-2025-06-21 23:49:20 - Ambiente selezionato: Foresta (id: 1)
-2025-06-21 23:49:20 - Ambiente mostrato: Foresta
-2025-06-21 23:49:25 - Ambiente selezionato: Vulcano (id: 2)
-2025-06-21 23:49:25 - Ambiente mostrato: Vulcano

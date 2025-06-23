@@ -1,21 +1,59 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url_for('gioco.index') }}">RPG Web</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.index') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.about') }}">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.guide_game') }}">Game guide</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.menu') }}">Menu Principale</a></li>
-        <!-- Commento temporaneamente i link alle route non ancora definite -->
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.new_game') }}">Nuovo Gioco</a></li> #}
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.load_game') }}">Carica Partita</a></li> #}
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.select_mission') }}">Missioni</a></li> #}
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.battle') }}">Battaglia</a></li> #}
-        {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.inventory') }}">Inventario</a></li> #}
-        <!-- link alla pagina di test -->
-       {# <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.test_inventory') }}">Test Inventario</a></li>#}
-      </ul> 
+
+    
+    <!-- NOME DEL SITO -->
+    <a class="navbar-brand ms-2" href="{{ url_for('gioco.index') }}">RPG Web</a>
+    
+    <!-- NAVBAR COLLAPSIBLE MENU -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'gioco.index' %}active{% endif %}" href="{{ url_for('gioco.index') }}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'gioco.about' %}active{% endif %}" href="{{ url_for('gioco.about') }}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'gioco.guide_game' %}active{% endif %}" href="{{ url_for('gioco.guide_game') }}">Game guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'gioco.menu' %}active{% endif %}" href="{{ url_for('gioco.menu') }}">Menu Principale</a>
+      </li>
+      
+      <!-- Commenti temporanei -->
+      {# 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.new_game') }}">Nuovo Gioco</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.load_game') }}">Carica Partita</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.select_mission') }}">Missioni</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.battle') }}">Battaglia</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.inventory') }}">Inventario</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('gioco.test_inventory') }}">Test Inventario</a></li>
+        #}
+      </ul>
     </div>
+    
+    <!-- LOGIN/LOGOUT A DESTRA -->
+    <div class="d-flex align-items-center ms-auto">
+      {% if 'username' in session %}
+        <span class="text-light me-2">
+          <i class="bi bi-person-circle me-1"></i>Ciao, {{ session['username'] }}
+        </span>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-light btn-sm me-2 rounded-pill">Logout</a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm me-2 rounded-pill">
+          <i class="bi bi-box-arrow-in-right me-1"></i> Login
+        </a>
+        <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-success btn-sm rounded-pill">
+          <i class="bi bi-person-plus me-1"></i> Sign up
+        </a>
+      {% endif %}
+    </div>
+
   </div>
 </nav>

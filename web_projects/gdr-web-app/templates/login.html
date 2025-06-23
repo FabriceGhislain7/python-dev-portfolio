@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px;">
+  <h2 class="mb-4 text-center">Login</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="username" class="form-label">Nome utente</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Accedi</button>
+  </form>
+</div>
+{% endblock %}

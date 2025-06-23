@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Debug{% endblock %}
+
+{% block content %}
+<h2>Contenuto della sessione</h2>
+<pre>{{ session_data | tojson(indent=2) }}</pre>
+{% endblock %}
