@@ -146,3 +146,28 @@
 2025-06-22 19:24:43 - Ambiente selezionato: Foresta (id: 1)
 2025-06-22 19:24:43 - Ambiente mostrato: Foresta
 2025-06-22 22:13:42 - Ambiente mostrato: Foresta
+2025-06-24 14:04:02 - Creato personaggio: Luca, Classe: Mago, id: 11086e6f-c08a-4d9a-bee4-81cff8350fff, Oggetto iniziale: PozioneCura
+2025-06-24 14:04:04 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-24 14:04:13 - Creato personaggio: Bertold, Classe: Mago, id: d8034eaa-55ab-4764-bca7-af5b3640171a, Oggetto iniziale: PozioneCura
+2025-06-24 14:04:14 - Richiesta lista personaggi. Numero personaggi: 2
+2025-06-24 14:04:29 - Creato personaggio: Zoro, Classe: Guerriero, id: 2d8b8542-6b3d-4270-aa08-92f44bef9b5a, Oggetto iniziale: Medaglione
+2025-06-24 14:04:30 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-24 14:04:36 - Visualizzazione dettagli personaggio con ID: d8034eaa-55ab-4764-bca7-af5b3640171a, Nome: Bertold
+2025-06-24 14:04:40 - Richiesta lista personaggi. Numero personaggi: 3
+2025-06-24 14:04:55 - Inventario di Zoro selezionato.
+2025-06-24 14:05:12 - Ambiente selezionato: Foresta (id: 1)
+2025-06-24 14:05:12 - Ambiente mostrato: Foresta
+2025-06-24 14:05:24 - Ambiente selezionato: Foresta (id: None)
+2025-06-24 14:05:24 - Ambiente mostrato: Foresta
+2025-06-24 14:05:30 - Ambiente selezionato: Foresta (id: None)
+2025-06-24 14:05:30 - Ambiente mostrato: Foresta
+2025-06-24 20:03:59 - Inventario di Luca selezionato.
+2025-06-24 20:04:18 - Inventario di Zoro selezionato.
+2025-06-24 20:04:20 - Inventario di Zoro selezionato.
+2025-06-24 20:04:23 - Inventario di Luca selezionato.
+2025-06-27 00:05:52 - Richiesta lista personaggi. Numero personaggi: 0
+2025-06-27 13:47:05 - Nessun ambiente selezionato.
+2025-06-27 13:48:21 - Creato personaggio: Zoro, Classe: Guerriero, id: 358777dc-64c6-4695-8cc5-a693a6bc0e2b, Oggetto iniziale: Medaglione
+2025-06-27 13:48:23 - Richiesta lista personaggi. Numero personaggi: 1
+2025-06-27 13:48:27 - Visualizzazione dettagli personaggio con ID: 358777dc-64c6-4695-8cc5-a693a6bc0e2b, Nome: Zoro
+2025-06-28 13:35:35 - Inventario di Zoro selezionato.
