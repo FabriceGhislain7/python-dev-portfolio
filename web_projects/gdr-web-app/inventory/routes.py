@@ -20,6 +20,7 @@ def inventory():
     if request.method == 'POST':
         id_selezionato = request.form.get('personaggio_id')
         # Cerca l'inventario del personaggio selezionato
+        
         for inv in inventari:
             if inv['id_proprietario'] == id_selezionato:
                 inventario_selezionato = inv
