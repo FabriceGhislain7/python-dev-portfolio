@@ -159,3 +159,52 @@
 2025-06-23 00:43:27 - Ambiente mostrato: Foresta
 2025-06-23 03:45:07 - Ambiente selezionato: Foresta (id: None)
 2025-06-23 03:45:07 - Ambiente mostrato: Foresta
+2025-07-01 20:33:09 - Creato personaggio: Zoro, Classe: Guerriero, id: e6106ae4-69fd-42ec-977e-e7d8afe34197, Oggetto iniziale: PozioneCura
+2025-07-01 20:33:12 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-01 20:33:17 - Visualizzazione dettagli personaggio con ID: e6106ae4-69fd-42ec-977e-e7d8afe34197, Nome: Zoro
+2025-07-01 20:33:20 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-01 20:33:28 - Inventario di Zoro selezionato.
+2025-07-01 20:43:22 - Inventario di Zoro selezionato.
+2025-07-01 20:43:42 - Creato personaggio: Bertold, Classe: Ladro, id: b8ec96b1-5e62-4714-9a44-8ae63f059002, Oggetto iniziale: BombaAcida
+2025-07-01 20:43:44 - Richiesta lista personaggi. Numero personaggi: 2
+2025-07-01 20:43:48 - Visualizzazione dettagli personaggio con ID: e6106ae4-69fd-42ec-977e-e7d8afe34197, Nome: Zoro
+2025-07-01 20:50:40 - Inventario di Zoro selezionato.
+2025-07-01 20:51:16 - Inventario di Bertold selezionato.
+2025-07-01 20:51:20 - Inventario di Bertold selezionato.
+2025-07-01 20:51:24 - Inventario di Zoro selezionato.
+2025-07-01 20:51:51 - Creato personaggio: Lucky luck, Classe: Guerriero, id: 8a32dc18-87a8-473d-8612-9481ccc8674a, Oggetto iniziale: Medaglione
+2025-07-01 20:51:57 - Richiesta lista personaggi. Numero personaggi: 3
+2025-07-01 22:51:14 - Creato personaggio: Lucky luck, Classe: Guerriero, id: 2cf8b024-7e31-4d9e-a301-83bf4fe1b840, Oggetto iniziale: BombaAcida
+2025-07-01 22:51:26 - Creato personaggio: Bertold, Classe: Guerriero, id: e30aa57d-6182-41cb-86c5-dcb1b1200c06, Oggetto iniziale: BombaAcida
+2025-07-01 22:51:27 - Richiesta lista personaggi. Numero personaggi: 5
+2025-07-01 23:02:35 - Inventario di Bertold selezionato.
+2025-07-01 23:02:42 - Richiesta lista personaggi. Numero personaggi: 5
+2025-07-02 00:03:13 - Creato personaggio: Lucky luck, Classe: Mago, id: d88b6179-da44-4be3-a86f-ce55d92fafe4, Oggetto iniziale: PozioneCura
+2025-07-02 00:03:15 - Richiesta lista personaggi. Numero personaggi: 6
+2025-07-02 00:03:32 - Eliminato personaggio con ID: 2cf8b024-7e31-4d9e-a301-83bf4fe1b840, Nome: Lucky luck
+2025-07-02 00:03:32 - Richiesta lista personaggi. Numero personaggi: 5
+2025-07-02 00:14:10 - Creato personaggio: Bertold, Classe: Mago, id: a343b37e-0db8-457e-8ed2-48ca5ff53182, Oggetto iniziale: PozioneCura
+2025-07-02 00:14:15 - Richiesta lista personaggi. Numero personaggi: 6
+2025-07-02 00:15:54 - Visualizzazione dettagli personaggio con ID: e30aa57d-6182-41cb-86c5-dcb1b1200c06, Nome: Bertold
+2025-07-02 01:09:28 - Creato personaggio: Lucky luck, Classe: Mago, id: 478f1da9-5d38-4031-8ba3-dd827c11e538, Oggetto iniziale: PozioneCura
+2025-07-02 01:09:30 - Richiesta lista personaggi. Numero personaggi: 7
+2025-07-02 01:09:31 - Visualizzazione dettagli personaggio con ID: 8a32dc18-87a8-473d-8612-9481ccc8674a, Nome: Lucky luck
+2025-07-02 01:09:33 - Richiesta lista personaggi. Numero personaggi: 7
+2025-07-02 01:09:36 - Eliminato personaggio con ID: 8a32dc18-87a8-473d-8612-9481ccc8674a, Nome: Lucky luck
+2025-07-02 01:09:36 - Richiesta lista personaggi. Numero personaggi: 6
+2025-07-02 01:09:39 - Eliminato personaggio con ID: b8ec96b1-5e62-4714-9a44-8ae63f059002, Nome: Bertold
+2025-07-02 01:09:39 - Richiesta lista personaggi. Numero personaggi: 5
+2025-07-02 01:40:47 - Richiesta lista personaggi. Numero personaggi: 5
+2025-07-02 01:40:51 - Eliminato personaggio con ID: e6106ae4-69fd-42ec-977e-e7d8afe34197, Nome: Zoro
+2025-07-02 01:40:51 - Richiesta lista personaggi. Numero personaggi: 4
+2025-07-02 01:40:53 - Eliminato personaggio con ID: e30aa57d-6182-41cb-86c5-dcb1b1200c06, Nome: Bertold
+2025-07-02 01:40:53 - Richiesta lista personaggi. Numero personaggi: 3
+2025-07-02 01:40:55 - Eliminato personaggio con ID: d88b6179-da44-4be3-a86f-ce55d92fafe4, Nome: Lucky luck
+2025-07-02 01:40:55 - Richiesta lista personaggi. Numero personaggi: 2
+2025-07-02 01:40:57 - Eliminato personaggio con ID: a343b37e-0db8-457e-8ed2-48ca5ff53182, Nome: Bertold
+2025-07-02 01:40:57 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-02 01:55:16 - Inventario di Lucky luck selezionato.
+2025-07-02 01:55:22 - Inventario di Lucky luck selezionato.
+2025-07-02 01:55:33 - Inventario di Lucky luck selezionato.
+2025-07-02 02:02:05 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-02 02:08:32 - Richiesta lista personaggi. Numero personaggi: 1

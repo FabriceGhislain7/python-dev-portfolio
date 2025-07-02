@@ -1,23 +1,23 @@
 from gioco.personaggio import Personaggio
-from utils.log import Log
- 
-from utils.messaggi import Messaggi
 
 # Modulo oggetti
 # Contiene la classe base Oggetto e le classi derivate
- 
+
 class Oggetto ():
     """
     Classe padre di tutti gli oggetti contenibili nell'inventario
     """
-    def __init__(self, nome: str, offensivo: bool = False) -> None:
+    def __init__(
+        self,
+        nome: str,
+        valore: int = 0,
+        tipo_oggetto: str = ""
+        ) -> None:
         """
         Inizializza un oggetto con nome e tipo
 
         Args:
             nome (str): Nome dell'oggetto
-            tipo (str): Tipo dell'oggetto
-            offensivo (bool): Se l'oggetto è offensivo o meno (default: False)
 
         Returns:
             None
@@ -25,29 +25,26 @@ class Oggetto ():
         """
         self.nome = nome
         self.usato = False
-        self.offensivo = offensivo
-        self.messaggi = ""
-    
+        self.valore = valore
+        self.tipo_oggetto = tipo_oggetto
+
 
     def usa(
             self,
-            utilizzatore: Personaggio,
-            bersaglio: bool = None,
             mod_ambiente: int = 0
-            ) -> None:
+            ) -> int:
         """
         Metodo da implementare in ogni oggetto
 
         Args:
-            utilizzatore (Personaggio): Personaggio che usa l'oggetto
-            bersaglio (Personaggio): Personaggio bersaglio dell'oggetto
             mod_ambiente (int): variabile dell'Ambiente in cui si trova l'oggetto
 
         Returns:
-            None
+            int: Valore dell'oggetto usato
         """
         raise NotImplementedError("Questo oggetto non ha effetto definito.")
-    
+
+
     def to_dict(self) -> dict:
         """Restituisce uno stato serializzabile per session o JSON.
 
@@ -58,8 +55,8 @@ class Oggetto ():
             "classe": self.__class__.__name__,
             "nome": self.nome,
             "usato": self.usato,
-            "offensivo": self.offensivo,
-            "messaggi": self.messaggi
+            "valore": self.valore,
+            "tipo_oggetto": self.tipo_oggetto
         }
 
     @classmethod
@@ -74,10 +71,11 @@ class Oggetto ():
         """
         oggetto = cls(nome=data["nome"])
         oggetto.usato = data.get("usato", False)
-        oggetto.messaggi = data.get("messaggi", "")
+        oggetto.valore = data.get("valore", 0)
+        oggetto.tipo_oggetto = data.get("tipo_oggetto", "")
         return oggetto
 
- 
+
 class PozioneCura(Oggetto):
     """
     Cura il personaggio che la usa di un certo valore
@@ -85,7 +83,8 @@ class PozioneCura(Oggetto):
     def __init__(
             self,
             nome: str = "Pozione Rossa",
-            valore: int = 30
+            valore: int = 30,
+            tipo_oggetto: str = "Ristorativo"
             ) -> None:
         """
         Inizializza una pozione di cura
@@ -93,49 +92,29 @@ class PozioneCura(Oggetto):
         Args:
             nome (str): Nome della pozione
             valore (int): Valore di cura della pozione
+            tipo_oggetto (str): Tipologia di oggetto
 
         Returns:
             None
         """
-        super().__init__(nome)
-        self.valore = valore
+        super().__init__(nome=nome, valore=valore, tipo_oggetto=tipo_oggetto)
 
-    def usa(self,
-            utilizzatore: Personaggio,
-            bersaglio: Personaggio = None,
-            mod_ambiente: int = 0
-            ) -> None:
+    def usa(self, mod_ambiente: int = 0) -> int:
         """
         Cura il personaggio che la usa di un certo valore
 
         Args:
-            utilizzatore (Personaggio): Personaggio che usa la pozione
-            bersaglio (Personaggio): Personaggio bersaglio della pozione
             mod_ambiente (int): variabile dell'Ambiente in cui si trova l'oggetto
 
         Returns:
-            None
+            int: Valore di cura della pozione
         """
-        if bersaglio is None:
-            target = utilizzatore
-            msg = "su se stesso"
-        else:
-            target = bersaglio
-            msg = f"su {bersaglio.nome}"
-        target.salute = min(target.salute + self.valore + mod_ambiente, target.salute_max)
-        text = f"{utilizzatore.nome} usa {self.nome} {msg} e ripristinando {self.valore + mod_ambiente} salute!"
-        Messaggi.add_to_messaggi(text)
-        Log.scrivi_log(text)
         self.usato = True
-        
+        return self.valore + mod_ambiente
+
     def to_dict(self) -> dict:
-        return {
-            "classe": self.__class__.__name__,
-            "nome": self.nome,
-            "usato": self.usato,
-            "offensivo": self.offensivo,
-            "messaggi": self.messaggi
-        }
+        data = super().to_dict()
+        return data
 
     @classmethod
     def from_dict(cls, data: dict) -> "PozioneCura":
@@ -147,16 +126,23 @@ class PozioneCura(Oggetto):
         Returns:
             Ambiente: Dati deserializzati
         """
-        oggetto = cls(nome=data["nome"], valore=data["valore"])
+        oggetto = cls(nome=data["nome"])
         oggetto.usato = data.get("usato", False)
+        oggetto.valore = data.get("valore", 30)
+        oggetto.tipo_oggetto = data.get("tipo_oggetto", "Ristorativo")
         return oggetto
 
- 
+
 class BombaAcida(Oggetto):
     """
     Infligge danno pari al valore(Proprietà)
     """
-    def __init__(self, nome: str = "Bomba Acida", danno: int = 30) -> None:
+    def __init__(
+        self,
+        nome: str = "Bomba Acida",
+        valore: int = 30,
+        tipo_oggetto: str = "Offensivo"
+        ) -> None:
         """
         Inizializza una bomba acida
 
@@ -167,35 +153,23 @@ class BombaAcida(Oggetto):
         Returns:
             None
         """
-        super().__init__(nome, offensivo=True)
-        self.danno = danno
+        super().__init__(nome=nome, valore=valore, tipo_oggetto=tipo_oggetto)
 
-    def usa(self, utilizzatore: Personaggio, bersaglio: Personaggio = None, mod_ambiente: int = 0) -> None:
+    def usa(self, mod_ambiente: int = 0) -> int:
         """
         Infligge danno al bersaglio
+        !!!ATTENZIONE!!!
+        Il valore viene passato come un valore negativo!
 
         Args:
-            utilizzatore (Personaggio): Personaggio che usa la bomba
-            bersaglio (Personaggio): Personaggio bersaglio della bomba
             mod_ambiente (int): variabile dell'Ambiente in cui si trova l'oggetto
 
         Returns:
-            None
+            int: Danno inflitto dalla bomba
         """
-        if bersaglio is None:
-            msg= f"{utilizzatore.nome} cerca di usare {self.nome}, ma non ha un bersaglio!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
-            return
-        bersaglio.subisci_danno(self.danno + mod_ambiente)
-        msg = f"{utilizzatore.nome} lancia {self.nome} su {bersaglio.nome}, infliggendo {self.danno + mod_ambiente} danni!"
-        Messaggi.add_to_messaggi(msg)
-        Log.scrivi_log(msg)
-        msg = f"A {bersaglio.nome} resta {bersaglio.salute} salute"
-        Messaggi.add_to_messaggi(msg)
-        Log.scrivi_log(msg)
         self.usato = True
-        
+        return - (self.valore + mod_ambiente)
+
     def to_dict(self) -> dict:
         """Restituisce uno stato serializzabile per session o JSON.
 
@@ -203,10 +177,8 @@ class BombaAcida(Oggetto):
             dict: Dizionario del materiale serializzato
         """
         data = super().to_dict()
-        data.update({
-            "danno": self.danno
-        })
         return data
+
 
     @classmethod
     def from_dict(cls, data: dict) -> "BombaAcida":
@@ -218,16 +190,21 @@ class BombaAcida(Oggetto):
         Returns:
             Ambiente: Dati deserializzati
         """
-        oggetto = cls(nome=data["nome"], danno=data["danno"])
+        oggetto = cls(nome=data["nome"])
         oggetto.usato = data.get("usato", False)
+        oggetto.valore = data.get("valore", 30)
+        oggetto.tipo_oggetto = data.get("tipo_oggetto", "Offensivo")
         return oggetto
 
- 
+
 class Medaglione(Oggetto):
     """
     Incrementa l'attacco_max del personaggio che lo usa
     """
-    def __init__(self) -> None:
+    def __init__(self,
+                 nome: str = "Medaglione",
+                 valore: int = 10,
+                 tipo_oggetto: str = "Supporto") -> None:
         """
         Inizializza un medaglione
 
@@ -237,33 +214,29 @@ class Medaglione(Oggetto):
         Returns:
             None
         """
-        super().__init__("Medaglione")
+        super().__init__(nome=nome, valore=valore, tipo_oggetto=tipo_oggetto)
 
-    def usa(self, utilizzatore: 'Personaggio', bersaglio: 'Personaggio' = None, mod_ambiente: int = 0) -> None:
+    def usa(self, mod_ambiente: int = 0) -> None:
         """
         Incrementa l'attacco_max del personaggio che lo usa
 
         Args:
-            utilizzatore (Personaggio): Personaggio che usa il medaglione
-            bersaglio (Personaggio): Personaggio bersaglio del medaglione
             mod_ambiente (int): variabile dell'Ambiente in cui si trova l'oggetto
 
         Returns:
             None
         """
-        target = bersaglio if bersaglio else utilizzatore
-        target.attacco_max += 10 + mod_ambiente
-        msg = f"{target.nome} indossa {self.nome}, aumentando il suo attacco massimo!"
-        Messaggi.add_to_messaggi(msg)
-        Log.scrivi_log(msg)
+
         self.usato = True
-        
+        return int(self.valore + mod_ambiente)
+
     def to_dict(self) -> dict:
         """Restituisce uno stato serializzabile per session o JSON.
 
         Returns:
             dict: Dizionario del materiale serializzato
         """
+
         return super().to_dict()
 
     @classmethod
@@ -276,6 +249,8 @@ class Medaglione(Oggetto):
         Returns:
             Ambiente: Dati deserializzati
         """
-        oggetto = cls()
+        oggetto = cls(nome=data["nome"])
         oggetto.usato = data.get("usato", False)
+        oggetto.valore = data.get("valore", 10)
+        oggetto.tipo_oggetto = data.get("tipo_oggetto", "Supporto")
         return oggetto

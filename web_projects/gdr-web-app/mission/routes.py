@@ -1,10 +1,20 @@
 from . import mission_bp
-from flask import render_template
+from flask import render_template, request, session, redirect, url_for
 from gioco.missione import GestoreMissioni
 
-@mission_bp.route('/select_mission')
+@mission_bp.route('/select_mission', methods=['GET', 'POST'])
 def select_mission():
-    return render_template('select_mission.html')
+    missioni = GestoreMissioni.lista_missioni()
+    if request.method == 'POST':
+        missione_id = request.form['missione_id']
+        lista_missioni = session.get('missioni', [])
+        for missione in lista_missioni:
+            if missione_id == missione.id:
+                missione_sel = missione
+                break
+        return redirect(url_for('gioco.menu', missione_sel=missione_sel))
+
+    return render_template('select_mission.html', missioni=missioni)
 
 @mission_bp.route('/missioni')
 def mostra_missioni():

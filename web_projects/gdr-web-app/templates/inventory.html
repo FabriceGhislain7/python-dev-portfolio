@@ -17,9 +17,9 @@
               <label for="personaggio_id" class="form-label">Seleziona un personaggio</label>
               <select name="personaggio_id" id="personaggio_id" class="form-select text-center">
                 <option value="" >------ Scegli un personaggio ------</option>
-                {% for p in personaggi %}
-                  <option value="{{ p.id }}" {% if id_selezionato == p.id %}selected{% endif %}>
-                    {{ p.nome }} ({{ p.classe }})
+                {% for personaggio in personaggi %}
+                  <option value="{{ personaggio.id }}" {% if id_selezionato == personaggio.id %}selected{% endif %}>
+                    {{ personaggio.nome }} ({{ personaggio.classe }})
                   </option>
                 {% endfor %}
               </select>

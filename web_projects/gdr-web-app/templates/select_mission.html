@@ -4,8 +4,8 @@
 <form method="post">
   <select name="missione_id" class="form-select" required>
     <option disabled selected>-- scegli missione --</option>
-    {% for id, m in missioni.items() %}
-      <option value="{{ id }}">{{ m.nome }}</option>
+    {% for id, missione in missioni %}
+      <option value="{{ missione.id }}">{{ missione.nome }}</option>
     {% endfor %}
   </select>
   <button class="btn btn-primary mt-2">Vai</button>

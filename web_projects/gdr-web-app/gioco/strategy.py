@@ -1,41 +1,40 @@
 import random
-from ambiente import Ambiente
-from inventario import Inventario
-from personaggio import Personaggio
+from gioco.ambiente import Ambiente
+from gioco.inventario import Inventario
 from utils.log import Log
- 
 
 
- 
-class StrategiaAttacco ():
+class Strategia ():
     '''
-    La classe StrategiaAttacco è una classe base per le strategie di attacco
-    dei nemici.
+    La classe Strategia è una classe base per le strategie di attacco
+    degli NPC (non-player-character, personaggio non giocabile).
     Ogni strategia di attacco deve derivare da questa classe e implementare il
-    metodo esegui_attacco.
+    metodo uso_inventario_npc.
     '''
     def __init__(self, nome: 'str' = "Strategia di attacco"):
         self.nome = nome
+        msg = "Attenzione! le classi da utilizzare sono le classi derivate!"
+        Log.scrivi_log(msg)
 
     @staticmethod
-    def esegui_attacco(
-        nemico: 'Personaggio',
-        bersaglio: 'Personaggio',
+    def uso_inventario_npc(
+        salute_npc: int,
         inventario: 'Inventario',
-        ambiente: 'Ambiente' = None
-    ) -> None:
+        ambiente: 'Ambiente' = None,
+    ) -> int | None:
         '''
         viene definito un metodo astratto che deve essere implementato
         dalle classi derivate.
 
         Args:
-            nemico (Personaggio): il nemico che esegue l'attacco
-            bersaglio (Personaggio): il bersaglio dell'attacco
-            inventario (Inventario): l'inventario del nemico
+            salute_npc (int): la salute del NPC
+            inventario (Inventario): l'inventario del NPC
             ambiente (Ambiente): l'ambiente di gioco (opzionale)
 
         Returns:
-            None
+            int | None: il risultato dell'attacco, che può essere un intero
+            rappresentante i danni inflitti o None se non viene utilizzato
+            nessun oggetto
 
         Raises:
             NotImplementedError: il metodo è implementato nelle classi
@@ -45,44 +44,67 @@ class StrategiaAttacco ():
             "Devi implementare il metodo esegui nella sottoclasse"
         )
 
+    def to_dict(self) -> dict:
+        """Restituisce uno stato serializzabile per session o JSON.
+
+        Returns:
+            dict: Dizionario del materiale serializzato
+        """
+        return {
+            "classe": self.__class__.__name__,
+            "nome": self.nome
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "Strategia":
+        """Ricostruisce l’istanza a partire da un dict serializzato.
+
+        Args:
+            data (dict): Dati serializzati
+
+        Returns:
+            Strategia:Dati deserializzati
+        """
+        strat = cls(data["nome"])
+        return strat
+
 
 '''
-le classi si occuperanno di gestire le decisioni del nemico
+le classi si occuperanno di gestire le decisioni del NPC
 durante il suo turno
 '''
 
 
- 
-class Aggressiva(StrategiaAttacco):
+class Aggressiva(Strategia):
     '''
-    la classe Aggressiva rappresenta una strategia in cui nemico decide di
+    la classe Aggressiva rappresenta una strategia in cui l'NPC decide di
     focalizzarsi sul fare il maggior danno possibile alla salute del bersaglio.
     '''
     def __init__(self):
         super().__init__(nome="Aggressiva")
+        msg = (
+            "Il NPC ha scelto una strategia aggressiva! "
+            "Attaccherà con tutte le sue forze!"
+        )
+        Log.scrivi_log(msg)
 
     @staticmethod
-    def esegui_attacco(
-        nemico: 'Personaggio',
-        bersaglio: 'Personaggio',
+    def uso_inventario_npc(
+        salute_npc: int,
         inventario: 'Inventario',
         ambiente: 'Ambiente' = None
-    ) -> None:
+    ) -> int | bool:
         '''
-        Esegue l'attacco aggressivo del nemico sul bersaglio. l'unico oggetto
+        Esegue l'attacco aggressivo del NPC sul bersaglio. l'unico oggetto
         che può essere usato è la Bomba Acida, che infligge danni al bersaglio.
 
         args:
-            nemico (Personaggio): il nemico che esegue l'attacco
-            bersaglio (Personaggio): il bersaglio dell'attacco
-            inventario (Inventario): l'inventario del nemico
+            inventario (Inventario): l'inventario del NPC
             ambiente (Ambiente): l'ambiente di gioco (opzionale)
         Returns:
             Nessuno
         '''
-        Log.scrivi_log(
-            f"{nemico} attacca {bersaglio.nome} con un attacco aggressivo!"
-        )
+        result = None
         if inventario and inventario.oggetti:
             ogg = next(
                 (
@@ -92,21 +114,28 @@ class Aggressiva(StrategiaAttacco):
                 None
             )
             if ogg and (random.randint(0, 1) == 0):
-                inventario.usa_oggetto(
+                result = inventario.usa_oggetto(
                     oggetto=ogg,
-                    bersaglio=bersaglio,
                     ambiente=ambiente
                 )
-        if bersaglio.sconfitto():
-            return
-        mod_attacco = ambiente.modifica_attacco_max(nemico) if ambiente else 0
-        nemico.attacca(bersaglio, mod_ambiente=mod_attacco)
+        return result
 
+    def bonus_destrezza(self, destrezza: int) -> int:
+        '''
+        Incrementa la destrezza del NPC di 3 punti quando usa la strategia
+        aggressiva.
 
- 
-class Difensiva(StrategiaAttacco):
+        Args:
+            destrezza (int): la destrezza del NPC
+
+        Returns:
+            int: la destrezza incrementata di 3 punti
+        '''
+        return destrezza + 3
+
+class Difensiva(Strategia):
     '''
-    La classe Difensiva rappresenta una strategia in cui il nemico si concentra
+    La classe Difensiva rappresenta una strategia in cui il NPC si concentra
     sulla propria salute, curandosi quando questa è sotto i 60 punti e
     attaccando il bersaglio altrimenti.
     '''
@@ -114,34 +143,29 @@ class Difensiva(StrategiaAttacco):
         super().__init__(nome="Difensiva")
 
     @staticmethod
-    def esegui_attacco(
-        nemico: 'Personaggio',
-        bersaglio: 'Personaggio',
+    def uso_inventario_npc(
+        salute_npc: int,
         inventario: 'Inventario',
         ambiente: 'Ambiente' = None
     ) -> None:
         '''
-        Esegue l'attacco difensivo del nemico sul bersaglio.
-        Se la salute del nemico è inferiore a 60 punti, usa una Pozione Rossa
+        Esegue l'attacco difensivo del NPC sul bersaglio.
+        Se la salute del personaggio non giocante (npc) è inferiore a 60 punti, usa una Pozione Rossa
         per curarsi e poi attacca il bersaglio, altrimenti attacca soltanto.
         La probabilità di usare la Pozione Rossa è randomica,
         con una probabilità del 50%.
 
         Args:
-            nemico (Personaggio): il nemico che esegue l'attacco
-            bersaglio (Personaggio): il bersaglio dell'attacco
-            inventario (Inventario): l'inventario del nemico
+            salute_npc (int): la salute del NPC
+            inventario (Inventario): l'inventario del NPC
             ambiente (Ambiente): l'ambiente di gioco (opzionale)
 
         Returns:
             None
 
         '''
-        Log.scrivi_log(
-            f"{nemico.nome} attacca {bersaglio.nome} con un attacco difensivo!"
-        )
-
-        if nemico.salute < 60 and inventario and inventario.oggetti:
+        result = None
+        if salute_npc < 60 and inventario and inventario.oggetti:
             ogg = next(
                 (
                     ogg for ogg in inventario.oggetti
@@ -150,57 +174,66 @@ class Difensiva(StrategiaAttacco):
                 None
             )
             if ogg and (random.randint(0, 1) == 0):
-                inventario.usa_oggetto(
+                result = inventario.usa_oggetto(
                     oggetto=ogg,
-                    bersaglio=nemico,
                     ambiente=ambiente
-                )
+            )
+        return result
 
-        mod_attacco = ambiente.modifica_attacco_max(nemico) if ambiente else 0
-        nemico.attacca(bersaglio, mod_attacco)
+    def malus_destrezza(self, destrezza: int) -> int:
+        '''
+        Riduce la destrezza del NPC avversario di 2 punti quando usa la strategia
+        difensiva.
 
+        Args:
+            destrezza (int): la destrezza del NPC
 
- 
-class Equilibrata(StrategiaAttacco):
+        Returns:
+            int: la destrezza incrementata di 5 punti
+        '''
+        return destrezza + 2
+class Equilibrata(Strategia):
     '''
-    La classe Equilibrata rappresenta una strategia in cui il nemico decide di
+    La classe Equilibrata rappresenta una strategia in cui il NPC decide di
     curarsi quando la salute è sotto i 40 punti, altrimenti di usare una bomba
     acida e infine attaccare il bersaglio
     l'uso degli oggetti è randomico.
     '''
     def __init__(self):
         super().__init__(nome="Equilibrata")
+        msg = (
+            " il NPC ha scelto una strategia equilibrata! "
+        )
+        Log.scrivi_log(msg)
 
     @staticmethod
-    def esegui_attacco(
-        nemico: 'Personaggio',
-        bersaglio: 'Personaggio',
+    def uso_inventario_npc(
+        salute_npc: int,
         inventario: 'Inventario',
         ambiente: 'Ambiente' = None
-    ) -> None:
+    ) -> int | None:
         '''
 
-        Esegue l'attacco equilibrato del nemico sul bersaglio. Se la salute
-        del nemico è inferiore a 40 punti, usa una Pozione Rossa per curarsi e
+        Esegue l'attacco equilibrato del NPC sul bersaglio. Se la salute
+        del NPC è inferiore a 40 punti, usa una Pozione Rossa per curarsi e
         poi attacca il bersaglio, altrimenti usa una Bomba Acida per infliggere
         danni al bersaglio e poi attacca.
         L'uso degli oggetti avviene in modo randomico, con una probabilità del
         33% per ciascun oggetto.
 
         Args:
-            nemico (Personaggio): il nemico che esegue l'attacco
+            NPC (Personaggio): il NPC che esegue l'attacco
             bersaglio (Personaggio): il bersaglio dell'attacco
-            inventario (Inventario): l'inventario del nemico
+            inventario (Inventario): l'inventario del NPC
             ambiente (Ambiente): l'ambiente di gioco (opzionale)
 
         Returns:
-            None
+            int | None: il risultato dell'azione, che può essere un intero
+            rappresentante i danni inflitti o None se non viene effettuato
         '''
-        Log.scrivi_log(
-            f"{nemico.nome} attacca {bersaglio.nome} "
-            "con un attacco equilibrato!"
-        )
-        if nemico.salute < 40:
+        result = None
+        msg = ""
+        if salute_npc < 40:
             if inventario and inventario.oggetti:
                 ogg = next(
                     (
@@ -210,11 +243,13 @@ class Equilibrata(StrategiaAttacco):
                     None
                 )
                 if ogg and (random.randint(0, 2) == 0):
-                    inventario.usa_oggetto(
+                    result = inventario.usa_oggetto(
                         oggetto=ogg,
-                        bersaglio=nemico,
                         ambiente=ambiente
                     )
+                    msg = (
+                        "viene usata una Pozione Rossa per curarsi di "
+                        f"{result} punti ferita")
         elif inventario and inventario.oggetti:
             ogg = next(
                 (
@@ -224,27 +259,29 @@ class Equilibrata(StrategiaAttacco):
                 None
             )
             if ogg and (random.randint(0, 2) == 0):
-                inventario.usa_oggetto(
+                result = inventario.usa_oggetto(
                     ogg,
-                    bersaglio=bersaglio,
                     ambiente=ambiente
                 )
-                if bersaglio.sconfitto():
-                    return
+                msg = (
+                    "viene utilizzata una Bomba Acida causando un danno di "
+                    f"{result} punti ferita"
+                )
+        if msg != "":
+            Log.scrivi_log(msg)
+        return result
 
-        mod_attacco = ambiente.modifica_attacco_max(nemico) if ambiente else 0
-        nemico.attacca(bersaglio, mod_attacco)
 # ----------------------------------------------------------------------------
 
 
-class StrategiaAttaccoFactory:
+class StrategiaFactory:
     '''
-    la classe StrategiaAttaccoFactory è una factory che crea le istanze delle
-    classi derivate di StrategiaAttacco in base
+    la c è una factory che crea le istanze delle
+    classi derivate di Strategia in base
     al tipo di strategia richiesta o randomicamente.
     '''
     @staticmethod
-    def strategia_random() -> StrategiaAttacco:
+    def strategia_random() -> Strategia:
         '''
         Restituisce una strategia randomica tra le tre disponibili utilizzando
         l'altro metodo usa_strategia.
@@ -253,15 +290,15 @@ class StrategiaAttaccoFactory:
             None
 
         Returns:
-            StrategiaAttacco: un'istanza della strategia randomica.
+            Strategia: un'istanza della strategia randomica.
         '''
         random_choice = random.choice(
             ["aggressiva", "difensiva", "equilibrata"]
         )
-        return StrategiaAttaccoFactory.usa_strategia(random_choice)
+        return StrategiaFactory.usa_strategia(random_choice)
 
     @staticmethod
-    def usa_strategia(tipo: str) -> StrategiaAttacco:
+    def usa_strategia(tipo: str) -> Strategia:
         '''
         Restituisce un'istanza della strategia richiesta in base
         al tipo passato come argomento.
@@ -271,7 +308,7 @@ class StrategiaAttaccoFactory:
                 può essere "aggressiva", "difensiva" o "equilibrata".
 
         Returns:
-            StrategiaAttacco: un'istanza della strategia richiesta.
+            Strategia: un'istanza della strategia richiesta.
 
         Raises:
             ValueError: se il tipo di strategia non è valido.

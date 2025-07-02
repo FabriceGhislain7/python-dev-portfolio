@@ -21,7 +21,7 @@ def inventory():
         id_selezionato = request.form.get('personaggio_id')
         # Cerca l'inventario del personaggio selezionato
         for inv in inventari:
-            if inv['proprietario'] == id_selezionato:
+            if inv['id_proprietario'] == id_selezionato:
                 inventario_selezionato = inv
                 Log.scrivi_log(f"Inventario di {nome_per_id[id_selezionato]} selezionato.")
 
@@ -34,6 +34,7 @@ def inventory():
         id_selezionato=id_selezionato,
         inventario=inventario_selezionato
     )
+
 
 """
 @inventory_bp.route('/test-inventory', methods=['GET', 'POST'])
