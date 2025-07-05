@@ -14,7 +14,7 @@ class Inventario(Basic):
     Gestisce la lista di oggetti posseduto da ogni personaggio
     Sarà la classe inventario a gestire le istanze di classe Oggetto
     """
-    def __init__(self, id_proprietario : uuid.UUID = None ) -> None:
+    def __init__(self, id_proprietario : uuid.UUID = None )->None:
         super().__init__()
         self.oggetti = []
         self.id_proprietario = id_proprietario

@@ -2,26 +2,5 @@
 {% block title %}Ambiente Selezionato{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
 
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h2 class="card-title mb-4">Ambiente Selezionato</h2>
-
-          <p><strong>Nome:</strong> {{ ambiente.nome }}</p>
-          <p><strong>Modifica Attacco:</strong> {{ ambiente.modifica_attacco }}</p>
-          <p><strong>Modifica Cura:</strong> {{ ambiente.modifica_cura }}</p>
-
-          <div class="mt-4 d-grid gap-2">
-            <a href="{{ url_for('environment.select_environment') }}" class="btn btn-warning">Cambia Ambiente</a>
-            <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-secondary">Conferma e torna al Menu Principale</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
 {% endblock %}

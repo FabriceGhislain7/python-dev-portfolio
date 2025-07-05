@@ -21,7 +21,7 @@ class Personaggio(Basic):
         self.storico_danni_subiti = []
         self.livello = 1
         self.destrezza = 15  # Caratteristica per la sistema d20
-        self.npc = npc  # Indica se il personaggio è un NPC(Non Player)
+        self.npc = npc  # Indica se il personaggio è un NPC
 
 
     def esegui_azione(self) -> bool:

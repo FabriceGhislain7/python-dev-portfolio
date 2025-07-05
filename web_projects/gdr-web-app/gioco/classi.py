@@ -35,7 +35,8 @@ class Mago(Personaggio):
         Returns:
             int: danno inflitto all'avversario
         """
-        danno = random.randint(self.attacco_min - 5, self.attacco_max + 10) + mod_ambiente
+        danno = random.randint(self.attacco_min - 5, self.attacco_max + 10)
+        danno += mod_ambiente
         msg = f"{self.nome} lancia un incantesimo infliggendo {danno} danni!"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)
@@ -46,7 +47,8 @@ class Mago(Personaggio):
         Recupera la salute del Mago alla fine di ogni duello del 20%
 
         Args:
-            mod_ambiente (int): modificatore ambientale di recupero (default: 0)
+            mod_ambiente (int): modificatore ambientale di recupero
+            (default: 0)
 
         Returns:
             None
@@ -55,7 +57,8 @@ class Mago(Personaggio):
         nuova_salute = min(self.salute + recupero, 80)
         effettivo = nuova_salute - self.salute
         self.salute = nuova_salute
-        msg = f"{self.nome} medita e recupera {effettivo} HP. Salute attuale: {self.salute}"
+        msg = f"{self.nome} medita e recupera {effettivo} HP." \
+            f" Salute attuale: {self.salute}"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)
 
@@ -91,7 +94,10 @@ class Guerriero(Personaggio):
         Returns:
             None
         """
-        danno = random.randint(self.attacco_min + 15, self.attacco_max + mod_ambiente + 20)
+        danno = random.randint(
+            self.attacco_min + 15,
+            self.attacco_max + mod_ambiente + 20
+        )
         msg = f"{self.nome} colpisce con la spada infliggendo {danno} danni!"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)
@@ -102,7 +108,8 @@ class Guerriero(Personaggio):
         Il guerriero al termine di ogni duello recupera salute pari 30
 
         Args:
-            mod_ambiente (int): modificatore ambientale di recupero (default: 0)
+            mod_ambiente (int): modificatore ambientale di recupero
+            (default: 0)
 
         Returns:
             None
@@ -111,7 +118,8 @@ class Guerriero(Personaggio):
         nuova_salute = min(self.salute + recupero, 120)
         effettivo = nuova_salute - self.salute
         self.salute = nuova_salute
-        msg = f"{self.nome} si fascia le ferite e recupera {effettivo} HP. Salute attuale: {self.salute}"
+        msg = f"{self.nome} si fascia le ferite e recupera {effettivo} HP." \
+            f" Salute attuale: {self.salute}"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)
 
@@ -147,7 +155,9 @@ class Ladro(Personaggio):
         Returns:
             None
         """
-        danno = random.randint(self.attacco_min + 5, self.attacco_max + 5) + mod_ambiente
+        danno = random.randint(
+            self.attacco_min + 5, self.attacco_max + 5
+        ) + mod_ambiente
         msg = f"{self.nome} colpisce furtivamente infliggendo {danno} danni!"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)
@@ -159,7 +169,8 @@ class Ladro(Personaggio):
         di punti salute in un range 10-40, modificato dall'ambiente
 
         Args:
-            mod_ambiente (int): modificatore ambientale di recupero (default: 0)
+            mod_ambiente (int): modificatore ambientale di recupero
+            (default: 0)
 
         Returns:
             None
@@ -168,6 +179,7 @@ class Ladro(Personaggio):
         nuova_salute = min(self.salute + recupero, 140)
         effettivo = nuova_salute - self.salute
         self.salute = nuova_salute
-        msg = f"{self.nome} si cura rapidamente e recupera {effettivo} HP. Salute attuale: {self.salute}"
+        msg = f"{self.nome} si cura rapidamente e recupera {effettivo} HP. " \
+            f"Salute attuale: {self.salute}"
         Messaggi.add_to_messaggi(msg)
         Log.scrivi_log(msg)

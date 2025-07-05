@@ -1,31 +1,32 @@
-from flask import render_template, session
+from flask import redirect, render_template, session, url_for, request, flash, jsonify
 from . import battle_bp
 from gioco.personaggio import Personaggio
 from gioco.inventario import Inventario
-from gioco.ambiente import Ambiente,Foresta
-from gioco.missione import Missione,GestoreMissioni
+from gioco.ambiente import Ambiente, Foresta
+from gioco.missione import Missione, GestoreMissioni
+from gioco.oggetto import Oggetto
+from utils.messaggi import Messaggi
+from utils.log import Log
+import random
+import json
+import os
 
-@battle_bp.route('/begin_battle')
+#---------------------------SHOW_INVENTORY--------------------------------
+@battle_bp.route('/show_inventory', methods=['GET', 'POST'])
+def show_inventory():
+    pass
+
+#---------------------------BEGIN THE BATTLE------------------------------
+@battle_bp.route('/begin_battle', methods=['GET', 'POST'])
 def begin_battle():
-    #if request.method == 'POST':
+    pass
 
-    #prendo i dati da sessione :
-    personaggi=[]
-    inventari=[]
-    ambiente = Foresta()
-    gestore_missioni = GestoreMissioni()
-    missione_corrente = gestore_missioni.sorteggia()
-    if 'ambiente' in session :
-        #Recupero l'oggetto ambiente dalla sessione deserializzandolo
-        ambiente = Ambiente.from_dict(session['ambiente'])
-    if 'personaggi' in session and 'inventari' in session:
-        pg_list = session.get('personaggi', [])
-        inv_list = session.get('inventari',  [])
-        #Deserializzo gli elementi delle liste
-        for serialized in  pg_list :
-            personaggi.append(Personaggio.from_dict(serialized))
-        for serialized in inv_list:
-            inventari.append(Inventario.from_dict(serialized))
-        #Ora le liste personaggi e  inventari contengono i dati deserializzati
+#---------------------------SELECT_CHAR-----------------------------------
+@battle_bp.route('/select_char', methods=['GET', 'POST'])
+def select_char():
+    pass
 
-    return render_template('begin_battle.html', personaggi=personaggi, inventari=inventari, ambiente_corrente = ambiente, missione_corrente = missione_corrente)
+#---------------------------TEST BATTLE-----------------------------------
+@battle_bp.route('/test_battle', methods=['GET', 'POST'])
+def test_battle():
+    pass
