@@ -39,7 +39,7 @@
     </div>
     
     <!-- LOGIN/LOGOUT A DESTRA -->
-    <div class="d-flex align-items-center ms-auto">
+    <!-- <div class="d-flex align-items-center ms-auto">
       {% if 'username' in session %}
         <span class="text-light me-2">
           <i class="bi bi-person-circle me-1"></i>Ciao, {{ session['username'] }}
@@ -49,11 +49,11 @@
         <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-sm me-2 rounded-pill">
           <i class="bi bi-box-arrow-in-right me-1"></i> Login
         </a>
-        <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-success btn-sm rounded-pill">
+        {#<a href="{{ url_for('auth.signup') }}" class="btn btn-outline-success btn-sm rounded-pill">#}
           <i class="bi bi-person-plus me-1"></i> Sign up
         </a>
       {% endif %}
-    </div>
+    </div> -->
 
   </div>
 </nav>

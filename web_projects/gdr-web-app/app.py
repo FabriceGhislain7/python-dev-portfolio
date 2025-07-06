@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_session import Session
-from gioco.routes import gioco
+from gioco.routes import gioco_bp
 from battle.routes import battle_bp
 from characters.routes import characters_bp
 from environment.routes import environment_bp
@@ -28,9 +28,9 @@ def create_app():
 
     db.init_app(app)
     migrate = Migrate(app, db)  # Assegnata non utilizzata
-    login_manager.init_app(app)
+    # login_manager.init_app(app)
     Session(app)
-    app.register_blueprint(gioco)
+    app.register_blueprint(gioco_bp)
     app.register_blueprint(battle_bp)
     app.register_blueprint(characters_bp)
     app.register_blueprint(environment_bp)

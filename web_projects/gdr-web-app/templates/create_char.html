@@ -1,6 +1,20 @@
 {% extends "layout.html" %}
 {% block title %}Creazione Personaggio{% endblock %}
 
+<h1>Crea un personaggio</h1>
+    <form method="POST" action="{{ url_for('characters.create_char') }}">
+        <label for="classe">Choisissez une classe :</label>
+        <select name="classe_pg" id="classe" required>
+            <option value="" disabled selected>-- Sélectionnez une classe --</option>
+            {% for class_name in classi %}
+                <option value="{{ class_name }}">{{ class_name }}</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+        <input type="submit" value="Créer">
+    </form>
+
 {% block content %}
 
 {% endblock %}

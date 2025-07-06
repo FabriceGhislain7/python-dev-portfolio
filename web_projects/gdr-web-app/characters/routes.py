@@ -9,11 +9,14 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from auth.models import User
 from auth.models import db
 from auth.credits import credits_to_create, credits_to_refund
-from config import DATA_DIR
+from config import DATA_JSON_DIR
+
+classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
+oggetti = {ogg.__name__: ogg for ogg in Oggetto.__subclasses__()}
 
 # -------------------------LOAD CHAR----------------------------------
-@characters_bp.route('load_char')
-@login_required
+@characters_bp.route('/load_char')
+# @login_required
 def load_char():
     pass
 
@@ -23,20 +26,29 @@ def CreateJsonChar(pg_creato: Personaggio):
 
 # -------------------------CREAZIONE PERSONAGGIO-------------------------
 @characters_bp.route('/create_char', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def create_char():
-    pass
+    classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
+    oggetti = {ogg.__name__: ogg for ogg in Oggetto.__subclasses__()}
+    
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        return render_template()
+
+    return render_template('create_char.html',
+                           classi=classi,
+                           oggetti=oggetti)
 
 # -------------------------EDIT PERSONAGGIO------------------------------
 @characters_bp.route('/edit_cha/<int:id>', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def edit_char(id):
     pass
 
 # -------------------------RECUPERA PERSONAGGI----------------------------
 @characters_bp.route('/recupera_personaggi_posseduti')
 def recupera_personaggi_posseduti(owned_chars):
-    pass 
+    pass
 
 # -------------------------MOSTRA PERSONAGGI----------------------------
 @characters_bp.route('/personaggi', methods=['GET'])
@@ -45,7 +57,7 @@ def mostra_personaggi():
 
 # -------------------------DETAGLI PERSONAGGIO----------------------------
 @characters_bp.route('/personaggi/<string:char_id>', methods=['GET'])
-@login_required
+# @login_required
 def dettaglio_personaggio(char_id):
     pass
 

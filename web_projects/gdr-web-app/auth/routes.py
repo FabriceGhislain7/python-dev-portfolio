@@ -41,19 +41,19 @@ def edit_user():
 
 #----------------------------ELIMINAZIONE UTENTE-------------------------------------
 @auth_bp.route('/delete_user', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def delete_user():
     pass
 
 #----------------------------CREAZIONE DEI CREDITI----------------------------------
 @auth_bp.route('/credit_refill', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def credit_refill():
     pass
 
 #----------------------------LOGOUT-------------------------------------------------------
 @auth_bp.route('/logout')
-@login_required
+# @login_required
 def logout():
     logout_user()
     session.clear()
