@@ -1,20 +1,37 @@
 {% extends "layout.html" %}
 {% block title %}Creazione Personaggio{% endblock %}
 
+{% block content %}
 <h1>Crea un personaggio</h1>
-    <form method="POST" action="{{ url_for('characters.create_char') }}">
-        <label for="classe">Choisissez une classe :</label>
-        <select name="classe_pg" id="classe" required>
-            <option value="" disabled selected>-- Sélectionnez une classe --</option>
-            {% for class_name in classi %}
-                <option value="{{ class_name }}">{{ class_name }}</option>
+
+<form action="{{ url_for('characters.create_char') }}" method="POST">
+    <div>
+        <label for="nome">Nome personaggio:</label><br>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+
+    <div>
+        <label for="classe">Seleziona la classe:</label><br>
+        <select id="classe" name="classe" required>
+            <option value="" disabled selected>-- Seleziona una classe --</option>
+            {% for classe_pg in classi.keys() %}
+                <option value="{{ classe_pg }}">{{ classe_pg }}</option>
             {% endfor %}
         </select>
+    </div>
 
-        <br><br>
-        <input type="submit" value="Créer">
-    </form>
+    <div>
+        <label for="oggetto">Seleziona l'oggetto:</label><br>
+        <select id="oggetto" name="oggetto" required>
+            <option value="" disabled selected>-- Seleziona un oggetto --</option>
+            {% for oggetto in oggetti.keys() %}
+                <option value="{{ oggetto }}">{{ oggetto }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
-{% block content %}
-
+    <br>
+    <input type="submit" value="Crea Personaggio">
+    <input type="reset" value="Reset">
+</form>
 {% endblock %}

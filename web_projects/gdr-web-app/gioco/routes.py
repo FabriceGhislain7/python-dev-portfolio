@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 from gioco.personaggio import Personaggio
 from gioco.classi import Mago, Guerriero, Ladro
+from flask_login import login_user, logout_user, login_required, current_user, UserMixin 
 import os
 
 template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
@@ -28,6 +29,7 @@ def credits():
 
 #-----------------------MENU_PRINCIPALE------------------------------
 @gioco_bp.route('/menu')
+@login_required
 def menu():
     return render_template('menu.html')
 

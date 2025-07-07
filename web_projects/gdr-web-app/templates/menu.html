@@ -2,61 +2,93 @@
 {% block title %}Menu iniziale{% endblock %}
 
 {% block content %}
-<!-- HERO: Titolo benvenuto -->
+<!-- HERO -->
 <section class="py-5 text-center bg-secondary text-white rounded-5 mb-4 shadow-sm">
-    <div class="container">
-        <h1 class="display-5 fw-bold">Menu principale</h1>
-        <p class="lead">Benvenuto nel gioco GDR! Scegli un'opzione per iniziare la tua avventura.</p>
-    </div>
+  <div class="container">
+    <h1 class="display-5 fw-bold">Menu Principale</h1>
+    <p class="lead">Benvenuto nel gioco GDR! Scegli una sezione per proseguire.</p>
+  </div>
 </section>
 
-<!-- SEZIONI a schede -->
-<div class="container">
-  <div class="row g-4 justify-content-center">
+<!-- Pulsanti di scelta -->
+<div class="container mb-4">
+  <div class="row justify-content-center g-3">
+    <!-- Spazio a sinistra -->
+    <div class="col-1 d-none d-md-block"></div>
 
-    <!-- Personaggi -->
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-semibold mb-3">Personaggi</h5>
+    <!-- Pulsante: Area Personale -->
+    <div class="col-10 col-md-4">
+      <button id="btn-area" class="btn btn-outline-primary w-100 btn-lg fw-bold" onclick="showSection('area-personale')">
+        <i class="bi bi-person-circle me-2"></i>Area Personale
+      </button>
+    </div>
+
+    <!-- Spazio tra pulsanti -->
+    <div class="col-1 d-none d-md-block"></div>
+
+    <!-- Pulsante: Modalità di Gioco -->
+    <div class="col-10 col-md-4">
+      <button id="btn-gioco" class="btn btn-outline-success w-100 btn-lg fw-bold" onclick="showSection('modalita-gioco')">
+        <i class="bi bi-controller me-2"></i>Modalità di Gioco
+      </button>
+    </div>
+
+    <!-- Spazio a destra -->
+    <div class="col-1 d-none d-md-block"></div>
+  </div>
+</div>
+
+
+<!-- Sezione: Area Personale -->
+<div class="container mt-4 section-block" id="area-personale" style="display: none;">
+  <h2 class="text-center mb-4 text-primary">Area Personale</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-5">
+      <div class="card h-100 text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Profilo</h5>
+          <a href="{{ url_for('auth.edit_user') }}" class="btn btn-warning w-100 mb-2">Modifica utente</a>
+          <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-info w-100 mb-2 text-white">Ricarica crediti</a>
+          <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-danger w-100"
+             onclick="return confirm('Sei sicuro di voler eliminare il tuo account?');">Elimina utente</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card h-100 text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Personaggi</h5>
           <a href="{{ url_for('characters.create_char') }}" class="btn btn-primary w-100 mb-2">Crea personaggio</a>
           <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary w-100">Lista personaggi</a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Inventario -->
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-semibold mb-3">Inventario</h5>
-          <a href="{{ url_for('inventory.inventory') }}" class="btn btn-success w-100">Gestisci inventario</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Missioni e ambienti -->
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-semibold mb-3">Missioni & Ambienti</h5>
+<!-- Sezione: Modalità di Gioco -->
+<div class="container mt-4 section-block" id="modalita-gioco" style="display: none;">
+  <h2 class="text-center mb-4 text-success">Modalità di Gioco</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-5">
+      <div class="card h-100 text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Missioni & Ambienti</h5>
           <a href="{{ url_for('mission.select_mission') }}" class="btn btn-info w-100 mb-2 text-dark">Seleziona missione</a>
           <a href="{{ url_for('environment.select_environment') }}" class="btn btn-info w-100 mb-2">Seleziona ambiente</a>
           <a href="{{ url_for('environment.show_environment') }}" class="btn btn-outline-info w-100">Mostra ambiente</a>
         </div>
       </div>
     </div>
-
-    <!-- Battle -->
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-semibold mb-3">Battaglia</h5>
+    <div class="col-md-5">
+      <div class="card h-100 text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Inventario & Battaglia</h5>
+          <a href="{{ url_for('inventory.inventory') }}" class="btn btn-success w-100 mb-2">Gestisci inventario</a>
           <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-secondary w-100">Inizia battaglia</a>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -67,5 +99,42 @@
 {% endblock %}
 
 {% block scripts %}
-{# Inserisci qui eventuali script JS extra in futuro #}
+<script>
+  function showSection(sectionId) {
+    const sections = ['area-personale', 'modalita-gioco'];
+    const buttons = {
+      'area-personale': document.getElementById('btn-area'),
+      'modalita-gioco': document.getElementById('btn-gioco')
+    };
+
+    // Nascondi tutte le sezioni e resetta bottoni
+    sections.forEach(id => {
+      document.getElementById(id).style.display = 'none';
+      buttons[id].classList.remove('btn-primary', 'btn-success', 'text-white');
+      buttons[id].classList.add(
+        id === 'area-personale' ? 'btn-outline-primary' : 'btn-outline-success'
+      );
+    });
+
+    // Mostra sezione selezionata
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Evidenzia bottone attivo
+    if (sectionId === 'area-personale') {
+      buttons[sectionId].classList.remove('btn-outline-primary');
+      buttons[sectionId].classList.add('btn-primary', 'text-white');
+    } else {
+      buttons[sectionId].classList.remove('btn-outline-success');
+      buttons[sectionId].classList.add('btn-success', 'text-white');
+    }
+
+    // Scroll automatico
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Opzionale: mostra una sezione all'avvio (es: area-personale)
+  document.addEventListener('DOMContentLoaded', () => {
+    showSection('area-personale');
+  });
+</script>
 {% endblock %}

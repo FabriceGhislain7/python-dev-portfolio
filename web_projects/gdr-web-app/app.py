@@ -28,8 +28,9 @@ def create_app():
 
     db.init_app(app)
     migrate = Migrate(app, db)  # Assegnata non utilizzata
-    # login_manager.init_app(app)
+    login_manager.init_app(app)
     Session(app)
+
     app.register_blueprint(gioco_bp)
     app.register_blueprint(battle_bp)
     app.register_blueprint(characters_bp)
@@ -48,9 +49,9 @@ def create_app():
 # Registra il blueprint che contiene tutte le route di gioco
 
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.get(int(user_id))
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 if __name__ == '__main__':

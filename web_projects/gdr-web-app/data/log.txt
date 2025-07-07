@@ -208,3 +208,4 @@
 2025-07-02 01:55:33 - Inventario di Lucky luck selezionato.
 2025-07-02 02:02:05 - Richiesta lista personaggi. Numero personaggi: 1
 2025-07-02 02:08:32 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-07 02:05:41 - Creato personaggio: Lucky luck, Classe: Mago, id: f63406ea-ccd4-4a01-8f74-965d664f0fac, Oggetto iniziale: PozioneCura
