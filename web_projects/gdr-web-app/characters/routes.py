@@ -97,32 +97,82 @@ def create_char():
 
     return render_template('create_char.html', classi=classi, oggetti=oggetti)
 
-# -------------------------EDIT PERSONAGGIO------------------------------
-@characters_bp.route('/edit_cha/<int:id>', methods=['POST', 'GET'])
-# @login_required
-def edit_char(id):
-    pass
+# -------------------------MODIFICA PERSONAGGIO------------------------------
+@characters_bp.route('/modified_char/<string:id_pers>', methods=['POST', 'GET'])
+@login_required
+def modifica_personaggio(id):
+    return render_template('char_modified.html')
 
 # -------------------------RECUPERA PERSONAGGI----------------------------
-@characters_bp.route('/recupera_personaggi_posseduti')
-def recupera_personaggi_posseduti(owned_chars):
-    pass
+def carica_personaggi_da_ids(owned_chars_ids: list[str]) -> list[dict]:
+    personaggi = []
+    for id in owned_chars_ids:
+        path = os.path.join(DATA_JSON_DIR, f"{id}.json")
+        if os.path.exists(path):  # Verifica se il file esiste
+            with open(path, "r", encoding='utf-8') as file:
+                char_dict = json.load(file)
+                personaggi.append(char_dict)
+        else:
+            print(f"[AVVISO] File JSON non trovato per il personaggio con ID: {id}")
+    return personaggi
 
 # -------------------------MOSTRA PERSONAGGI----------------------------
 @characters_bp.route('/personaggi', methods=['GET'])
 def mostra_personaggi():
-    return render_template('characters.html')
+    chars_ids = current_user.character_ids
+    personaggi = carica_personaggi_da_ids(chars_ids)
+
+    return render_template('list_characters.html', personaggi=personaggi)
 
 # -------------------------DETAGLI PERSONAGGIO----------------------------
-@characters_bp.route('/personaggi/<string:char_id>', methods=['GET'])
-# @login_required
-def dettaglio_personaggio(char_id):
-    pass
+@characters_bp.route('/personaggi/<string:id_pers>', methods=['GET'])
+@login_required
+def dettaglio_personaggio(id_pers):
+    return render_template('')
 
 # -------------------------ELIMINA PERSONAGGIO----------------------------
-@characters_bp.route('/personaggi/<int:id>', methods=['POST'])
-def elimina_personaggio(id):
-    pass
+@characters_bp.route('/personaggi/<int:id_html_pers>', methods=['POST'])
+def elimina_personaggio(id_html_pers):
+    list_personaggi = session.get('personaggi', [])
+    try:
+        # Rimuovi personaggio dalla lista in sessione
+        pg = list_personaggi.pop(id_html_pers)
+        session['personaggi'] = list_personaggi
+
+        # Elimina file JSON
+        file_path = os.path.join(DATA_JSON_DIR, f"{pg['id']}.json")
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            Log.scrivi_log(f"file JSON eliminato: {file_path}")
+            Log.scrivi_log(f"Eliminato personaggio con ID: {pg.get('id')}, Nome: {pg.get('nome', 'N/A')}")
+        else:
+            Log.scrivi_log("File JSON non trovato.")
+
+        # Aggiorna lista degli ID dell’utente
+        ids = current_user.character_ids or []
+        id_to_remove = pg.get('id')
+        if id_to_remove in ids:
+            ids.remove(id_to_remove)
+        current_user.character_ids = ids
+
+        # Ricostruisci oggetto personaggio per rimborso
+        classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
+        try:
+            pg_ogg = classi.get(pg['classe'])(pg['nome'])
+        except (KeyError, AttributeError, TypeError) as e:
+            raise ValueError(f"Errore nella creazione del personaggio: {e}")
+
+        # Aggiungi crediti e conferma
+        current_user.crediti += credits_to_refund(pg_ogg)
+        db.session.commit()
+        flash("Personaggio eliminato con successo!", "success")
+
+    except IndexError:
+        Log.scrivi_log(f"Errore durante eliminazione: ID HTML inesistente: {id_html_pers}")
+        abort(404)
+
+    return redirect(url_for('characters.mostra_personaggi', personaggi=list_personaggi))
+
 
 # -------------------------INIZIA COMBATTIMENTO----------------------------
 @characters_bp.route('/combattimento', methods=['GET', 'POST'])

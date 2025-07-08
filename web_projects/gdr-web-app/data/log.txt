@@ -209,3 +209,17 @@
 2025-07-02 02:02:05 - Richiesta lista personaggi. Numero personaggi: 1
 2025-07-02 02:08:32 - Richiesta lista personaggi. Numero personaggi: 1
 2025-07-07 02:05:41 - Creato personaggio: Lucky luck, Classe: Mago, id: f63406ea-ccd4-4a01-8f74-965d664f0fac, Oggetto iniziale: PozioneCura
+2025-07-07 22:04:56 - Creato personaggio: Lucky luck, Classe: Guerriero, id: cf96584e-cd2e-41de-965a-02ddf329833a, Oggetto iniziale: PozioneCura
+2025-07-07 23:22:16 - Creato personaggio: Luca, Classe: Guerriero, id: 10ef6f06-f910-4dfd-8e52-ea16f8addbbb, Oggetto iniziale: BombaAcida
+2025-07-08 00:53:45 - Creato personaggio: Zoro, Classe: Guerriero, id: 3627ae34-bfc0-4ee8-ae33-5dd5aad6b126, Oggetto iniziale: PozioneCura
+2025-07-08 02:55:11 - file JSON eliminato: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\3627ae34-bfc0-4ee8-ae33-5dd5aad6b126.json
+2025-07-08 02:55:11 - Eliminato personaggio con ID: 3627ae34-bfc0-4ee8-ae33-5dd5aad6b126, Nome: Zoro
+2025-07-08 02:55:20 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 02:56:03 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 02:56:35 - Errore durante eliminazione: ID HTML inesistente: 2
+2025-07-08 02:56:49 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:09:23 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:09:36 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 03:12:17 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:12:25 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 03:13:03 - Errore durante eliminazione: ID HTML inesistente: 0

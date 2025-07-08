@@ -2,6 +2,7 @@
 {% block title %}Menu iniziale{% endblock %}
 
 {% block content %}
+
 <!-- HERO -->
 <section class="py-5 text-center bg-secondary text-white rounded-5 mb-4 shadow-sm">
   <div class="container">
@@ -13,49 +14,44 @@
 <!-- Pulsanti di scelta -->
 <div class="container mb-4">
   <div class="row justify-content-center g-3">
-    <!-- Spazio a sinistra -->
     <div class="col-1 d-none d-md-block"></div>
 
-    <!-- Pulsante: Area Personale -->
     <div class="col-10 col-md-4">
       <button id="btn-area" class="btn btn-outline-primary w-100 btn-lg fw-bold" onclick="showSection('area-personale')">
         <i class="bi bi-person-circle me-2"></i>Area Personale
       </button>
     </div>
 
-    <!-- Spazio tra pulsanti -->
     <div class="col-1 d-none d-md-block"></div>
 
-    <!-- Pulsante: Modalità di Gioco -->
     <div class="col-10 col-md-4">
       <button id="btn-gioco" class="btn btn-outline-success w-100 btn-lg fw-bold" onclick="showSection('modalita-gioco')">
         <i class="bi bi-controller me-2"></i>Modalità di Gioco
       </button>
     </div>
 
-    <!-- Spazio a destra -->
     <div class="col-1 d-none d-md-block"></div>
   </div>
 </div>
-
 
 <!-- Sezione: Area Personale -->
 <div class="container mt-4 section-block" id="area-personale" style="display: none;">
   <h2 class="text-center mb-4 text-primary">Area Personale</h2>
   <div class="row g-4 justify-content-center">
     <div class="col-md-5">
-      <div class="card h-100 text-center shadow-sm">
+      <div class="card h-100 text-center shadow-sm" id="card-profilo">
         <div class="card-body">
           <h5 class="card-title">Profilo</h5>
           <a href="{{ url_for('auth.edit_user') }}" class="btn btn-warning w-100 mb-2">Modifica utente</a>
           <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-info w-100 mb-2 text-white">Ricarica crediti</a>
-          <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-danger w-100"
-             onclick="return confirm('Sei sicuro di voler eliminare il tuo account?');">Elimina utente</a>
+          <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Elimina utente
+          </button>
         </div>
       </div>
     </div>
     <div class="col-md-5">
-      <div class="card h-100 text-center shadow-sm">
+      <div class="card h-100 text-center shadow-sm" id="card-personaggi">
         <div class="card-body">
           <h5 class="card-title">Personaggi</h5>
           <a href="{{ url_for('characters.create_char') }}" class="btn btn-primary w-100 mb-2">Crea personaggio</a>
@@ -71,7 +67,7 @@
   <h2 class="text-center mb-4 text-success">Modalità di Gioco</h2>
   <div class="row g-4 justify-content-center">
     <div class="col-md-5">
-      <div class="card h-100 text-center shadow-sm">
+      <div class="card h-100 text-center shadow-sm" id="card-gioco">
         <div class="card-body">
           <h5 class="card-title">Missioni & Ambienti</h5>
           <a href="{{ url_for('mission.select_mission') }}" class="btn btn-info w-100 mb-2 text-dark">Seleziona missione</a>
@@ -81,10 +77,10 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div class="card h-100 text-center shadow-sm">
+      <div class="card h-100 text-center shadow-sm" id="card-inventario">
         <div class="card-body">
           <h5 class="card-title">Inventario & Battaglia</h5>
-          <a href="{{ url_for('inventory.inventory') }}" class="btn btn-success w-100 mb-2">Gestisci inventario</a>
+          <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-success w-100 mb-2">Gestisci inventario</a>
           <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-secondary w-100">Inizia battaglia</a>
         </div>
       </div>
@@ -92,10 +88,37 @@
   </div>
 </div>
 
-<!-- Footer badge -->
-<div class="text-center mt-5">
-  <span class="badge bg-secondary">GDR Web App &nbsp;|&nbsp; Flask + Bootstrap 5</span>
+<!-- Modal di conferma eliminazione -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0 d-block position-relative">
+        <h5 class="modal-title">Conferma eliminazione</h5>
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler eliminare il tuo account?<br>Questa operazione non può essere annullata.
+      </div>
+      <div class="modal-footer justify-content-center border-0">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Annulla</button>
+        <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-danger">Elimina definitivamente</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+<style>
+  .highlight-primary {
+    border: 3px solid #0d6efd !important;
+    box-shadow: 0 0 0.5rem #0d6efd66;
+  }
+
+  .highlight-success {
+    border: 3px solid #198754 !important;
+    box-shadow: 0 0 0.5rem #19875466;
+  }
+</style>
+
 {% endblock %}
 
 {% block scripts %}
@@ -107,13 +130,33 @@
       'modalita-gioco': document.getElementById('btn-gioco')
     };
 
-    // Nascondi tutte le sezioni e resetta bottoni
+    // Cards da evidenziare
+    const cardsBySection = {
+      'area-personale': [
+        document.getElementById('card-profilo'),
+        document.getElementById('card-personaggi')
+      ],
+      'modalita-gioco': [
+        document.getElementById('card-gioco'),
+        document.getElementById('card-inventario')
+      ]
+    };
+
+    // Nascondi tutte le sezioni, resetta bottoni e bordi
     sections.forEach(id => {
       document.getElementById(id).style.display = 'none';
+
       buttons[id].classList.remove('btn-primary', 'btn-success', 'text-white');
       buttons[id].classList.add(
         id === 'area-personale' ? 'btn-outline-primary' : 'btn-outline-success'
       );
+
+      // Rimuovi bordi evidenziati da tutte le cards
+      cardsBySection[id].forEach(card => {
+        if (card) {
+          card.classList.remove('highlight-primary', 'highlight-success');
+        }
+      });
     });
 
     // Mostra sezione selezionata
@@ -123,16 +166,25 @@
     if (sectionId === 'area-personale') {
       buttons[sectionId].classList.remove('btn-outline-primary');
       buttons[sectionId].classList.add('btn-primary', 'text-white');
+
+      // Evidenzia entrambe le cards in area-personale
+      cardsBySection[sectionId].forEach(card => {
+        if (card) card.classList.add('highlight-primary');
+      });
     } else {
       buttons[sectionId].classList.remove('btn-outline-success');
       buttons[sectionId].classList.add('btn-success', 'text-white');
+
+      // Evidenzia tutte le cards in modalità di gioco
+      cardsBySection[sectionId].forEach(card => {
+        if (card) card.classList.add('highlight-success');
+      });
     }
 
     // Scroll automatico
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Opzionale: mostra una sezione all'avvio (es: area-personale)
   document.addEventListener('DOMContentLoaded', () => {
     showSection('area-personale');
   });

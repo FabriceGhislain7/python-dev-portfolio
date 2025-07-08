@@ -8,7 +8,7 @@ from utils.messaggi import Messaggi
 from utils.log import Log
 
 @inventory_bp.route('/inventory', methods=['GET', 'POST'])
-def inventory():
+def mostra_inventario():
     pass
 
 

@@ -2,36 +2,74 @@
 {% block title %}Creazione Personaggio{% endblock %}
 
 {% block content %}
-<h1>Crea un personaggio</h1>
+<!-- Sezione principale con margine verticale -->
+<section class="container my-5">
 
-<form action="{{ url_for('characters.create_char') }}" method="POST">
-    <div>
-        <label for="nome">Nome personaggio:</label><br>
-        <input type="text" id="nome" name="nome" required>
+  <!-- Riga centrata orizzontalmente -->
+  <div class="row justify-content-center">
+
+    <!-- Colonna responsive: media = 8 colonne, large = 6 colonne -->
+    <div class="col-md-8 col-lg-6">
+
+      <!-- Card con bordo rimosso e ombra evidente -->
+      <div class="card shadow-lg border-0">
+
+        <!-- Corpo della card -->
+        <div class="card-body">
+
+          <!-- Titolo del form centrato e colorato -->
+          <h2 class="card-title text-center mb-4 text-primary">
+            Crea un personaggio
+          </h2>
+
+            <!-- Inizio del form -->
+            <form action="{{ url_for('characters.create_char') }}" method="POST">
+
+                <!-- Campo nome -->
+                <div class="mb-3">
+                <label for="nome" class="form-label">Nome personaggio:</label>
+                <input type="text" id="nome" name="nome" class="form-control" required>
+                </div>
+
+                <!-- Campo selezione classe -->
+                <div class="mb-3">
+                <label for="classe" class="form-label">Seleziona la classe:</label>
+                <select id="classe" name="classe" class="form-select" required>
+                    <option value="" disabled selected>-- Seleziona una classe --</option>
+                    {% for classe_pg in classi.keys() %}
+                    <option value="{{ classe_pg }}">{{ classe_pg }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+                <!-- Campo selezione oggetto -->
+                <div class="mb-3">
+                <label for="oggetto" class="form-label">Seleziona l'oggetto:</label>
+                <select id="oggetto" name="oggetto" class="form-select" required>
+                    <option value="" disabled selected>-- Seleziona un oggetto --</option>
+                    {% for oggetto in oggetti.keys() %}
+                    <option value="{{ oggetto }}">{{ oggetto }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+                <!-- Pulsanti di invio e reset -->
+                <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-success w-50 me-2">Crea Personaggio</button>
+                <button type="reset" class="btn btn-secondary w-50">Reset</button>
+                </div>
+
+                <!-- Pulsante per tornare alla home -->
+                <div class="mt-4 text-center">
+                    <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-primary">
+                         &larr;  Torna al menu principale
+                    </a>
+                </div>
+
+            </form>
+        </div>
+      </div>
     </div>
-
-    <div>
-        <label for="classe">Seleziona la classe:</label><br>
-        <select id="classe" name="classe" required>
-            <option value="" disabled selected>-- Seleziona una classe --</option>
-            {% for classe_pg in classi.keys() %}
-                <option value="{{ classe_pg }}">{{ classe_pg }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div>
-        <label for="oggetto">Seleziona l'oggetto:</label><br>
-        <select id="oggetto" name="oggetto" required>
-            <option value="" disabled selected>-- Seleziona un oggetto --</option>
-            {% for oggetto in oggetti.keys() %}
-                <option value="{{ oggetto }}">{{ oggetto }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <br>
-    <input type="submit" value="Crea Personaggio">
-    <input type="reset" value="Reset">
-</form>
+  </div>
+</section>
 {% endblock %}
