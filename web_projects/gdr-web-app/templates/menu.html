@@ -42,10 +42,14 @@
       <div class="card h-100 text-center shadow-sm" id="card-profilo">
         <div class="card-body">
           <h5 class="card-title">Profilo</h5>
-          <a href="{{ url_for('auth.edit_user') }}" class="btn btn-warning w-100 mb-2">Modifica utente</a>
-          <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-info w-100 mb-2 text-white">Ricarica crediti</a>
+          <a href="{{ url_for('auth.modified_user') }}" class="btn btn-warning w-100 mb-2">
+            <i class="bi bi-pencil-square me-2"></i>Modifica utente
+          </a>
+          <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-info w-100 mb-2 text-white">
+            <i class="bi bi-bank me-2"></i>Ricarica crediti
+          </a>
           <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            Elimina utente
+            <i class="bi bi-trash3 me-2"></i>Elimina utente
           </button>
         </div>
       </div>
@@ -54,8 +58,12 @@
       <div class="card h-100 text-center shadow-sm" id="card-personaggi">
         <div class="card-body">
           <h5 class="card-title">Personaggi</h5>
-          <a href="{{ url_for('characters.create_char') }}" class="btn btn-primary w-100 mb-2">Crea personaggio</a>
-          <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary w-100">Lista personaggi</a>
+          <a href="{{ url_for('characters.create_char') }}" class="btn btn-success w-100 mb-2">
+            <i class="bi bi-person-plus me-2"></i>Crea personaggio
+          </a>
+          <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-primary w-100">
+            <i class="bi bi-people-fill me-2"></i>Lista personaggi
+          </a>
         </div>
       </div>
     </div>
@@ -130,7 +138,6 @@
       'modalita-gioco': document.getElementById('btn-gioco')
     };
 
-    // Cards da evidenziare
     const cardsBySection = {
       'area-personale': [
         document.getElementById('card-profilo'),
@@ -142,7 +149,6 @@
       ]
     };
 
-    // Nascondi tutte le sezioni, resetta bottoni e bordi
     sections.forEach(id => {
       document.getElementById(id).style.display = 'none';
 
@@ -151,7 +157,6 @@
         id === 'area-personale' ? 'btn-outline-primary' : 'btn-outline-success'
       );
 
-      // Rimuovi bordi evidenziati da tutte le cards
       cardsBySection[id].forEach(card => {
         if (card) {
           card.classList.remove('highlight-primary', 'highlight-success');
@@ -159,15 +164,12 @@
       });
     });
 
-    // Mostra sezione selezionata
     document.getElementById(sectionId).style.display = 'block';
 
-    // Evidenzia bottone attivo
     if (sectionId === 'area-personale') {
       buttons[sectionId].classList.remove('btn-outline-primary');
       buttons[sectionId].classList.add('btn-primary', 'text-white');
 
-      // Evidenzia entrambe le cards in area-personale
       cardsBySection[sectionId].forEach(card => {
         if (card) card.classList.add('highlight-primary');
       });
@@ -175,13 +177,11 @@
       buttons[sectionId].classList.remove('btn-outline-success');
       buttons[sectionId].classList.add('btn-success', 'text-white');
 
-      // Evidenzia tutte le cards in modalità di gioco
       cardsBySection[sectionId].forEach(card => {
         if (card) card.classList.add('highlight-success');
       });
     }
 
-    // Scroll automatico
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
   }
 

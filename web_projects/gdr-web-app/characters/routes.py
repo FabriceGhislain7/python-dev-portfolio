@@ -1,46 +1,48 @@
-import os, json
-from . import characters_bp
+import os
+import json
+
 from flask import render_template, request, redirect, url_for, session, abort, flash
+from flask_login import login_user, logout_user, login_required, current_user, UserMixin
+
+from . import characters_bp
 from gioco.personaggio import Personaggio
 from gioco.oggetto import Oggetto
 from gioco.inventario import Inventario
 from utils.log import Log
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
-from auth.models import User
-from auth.models import db
+from auth.models import User, db
 from auth.credits import credits_to_create, credits_to_refund
 from config import DATA_JSON_DIR
 
+# ------------------------------------------------------
+# MAPPING CLASSI E OGGETTI DISPONIBILI
+# ------------------------------------------------------
 classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
 oggetti = {ogg.__name__: ogg for ogg in Oggetto.__subclasses__()}
 
-# -------------------------LOAD CHAR----------------------------------
+
+# -------------------------LOAD CHAR (PLACEHOLDER)----------------------------
 @characters_bp.route('/load_char')
 # @login_required
 def load_char():
     pass
 
-# -------------------------CREAZIONE SINGLO FILE JSON------------------
+
+# -------------------------CARICA PERSONAGGI DA ID----------------------------
+def carica_personaggi_da_ids(owned_chars_ids: list[str]) -> list[dict]:
+    personaggi = []
+    for id in owned_chars_ids:
+        path = os.path.join(DATA_JSON_DIR, f"{id}.json")
+        if os.path.exists(path):
+            with open(path, "r", encoding='utf-8') as file:
+                char_dict = json.load(file)
+                personaggi.append(char_dict)
+        else:
+            print(f"[AVVISO] File JSON non trovato per il personaggio con ID: {id}")
+    return personaggi
+
+
+# -------------------------SALVATAGGIO SINGOLO FILE JSON----------------------
 def CharSingleJson(pg_creato: Personaggio):
-    """
-    Salva su disco i dati di un personaggio in formato JSON.
-
-    Questa funzione prende un oggetto `Personaggio`, ne estrae i dati tramite 
-    `to_dict()` e li salva in un file JSON identificato dal suo ID, 
-    all'interno della directory definita da `DATA_JSON_DIR`.
-
-    Il file viene chiamato `<id>.json`, dove `id` è l'identificatore univoco del personaggio.
-
-    Args:
-        pg_creato (Personaggio): L'istanza del personaggio da salvare.
-
-    Side Effects:
-        - Crea o sovrascrive un file JSON nella directory `DATA_JSON_DIR`.
-
-    Raises:
-        TypeError: Se `pg_creato` non implementa il metodo `to_dict()`.
-        OSError: Se ci sono problemi nella scrittura del file (es. permessi, spazio disco).
-    """
     pg_dict = pg_creato.to_dict()
     name_file = f"{pg_dict['id']}.json"
     path = os.path.join(DATA_JSON_DIR, name_file)
@@ -48,7 +50,7 @@ def CharSingleJson(pg_creato: Personaggio):
         json.dump(pg_dict, file, indent=4)
 
 
-# -------------------------CREAZIONE PERSONAGGIO-------------------------
+# -------------------------CREAZIONE PERSONAGGIO------------------------------
 @characters_bp.route('/create_char', methods=['POST', 'GET'])
 @login_required
 def create_char():
@@ -72,7 +74,7 @@ def create_char():
         else:
             current_user.crediti -= costo_pg
 
-        # Aggiorna lista personaggi e inventario in sessione
+        # Aggiorna sessione
         pg_current_list = session.get('personaggi', [])
         inv_current_list = session.get('inventari', [])
         pg_current_list.append(pg.to_dict())
@@ -80,11 +82,11 @@ def create_char():
         session['personaggi'] = pg_current_list
         session['inventari'] = inv_current_list
 
-        # Salva id nel profilo utente
+        # Salva ID nel profilo utente
         characters_ids = (current_user.character_ids or []) + [pg.id]
         current_user.character_ids = characters_ids
 
-        # Genera file JSON singolo
+        # Salva su file
         CharSingleJson(pg)
 
         db.session.commit()
@@ -97,84 +99,122 @@ def create_char():
 
     return render_template('create_char.html', classi=classi, oggetti=oggetti)
 
+
 # -------------------------MODIFICA PERSONAGGIO------------------------------
 @characters_bp.route('/modified_char/<string:id_pers>', methods=['POST', 'GET'])
 @login_required
-def modifica_personaggio(id):
-    return render_template('char_modified.html')
+def modifica_personaggio(id_pers):
+    # ------------------------------------------------------
+    # CARICAMENTO E VERIFICA DEL PERSONAGGIO
+    # ------------------------------------------------------
+    owned_ids = current_user.character_ids or []
 
-# -------------------------RECUPERA PERSONAGGI----------------------------
-def carica_personaggi_da_ids(owned_chars_ids: list[str]) -> list[dict]:
-    personaggi = []
-    for id in owned_chars_ids:
-        path = os.path.join(DATA_JSON_DIR, f"{id}.json")
-        if os.path.exists(path):  # Verifica se il file esiste
-            with open(path, "r", encoding='utf-8') as file:
-                char_dict = json.load(file)
-                personaggi.append(char_dict)
-        else:
-            print(f"[AVVISO] File JSON non trovato per il personaggio con ID: {id}")
-    return personaggi
+    if id_pers not in owned_ids:
+        flash("Impossibile trovare il personaggio", "danger")
+        return redirect(url_for("characters.mostra_personaggi"))
 
-# -------------------------MOSTRA PERSONAGGI----------------------------
+    path = os.path.join(DATA_JSON_DIR, f"{id_pers}.json")
+
+    if not os.path.isfile(path):
+        flash("Personaggio non raggiungibile", "danger")
+        return redirect(url_for('characters.mostra_personaggi'))
+
+    with open(path, 'r', encoding='utf-8') as f:
+        pg = json.load(f)
+
+    classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
+
+    # ------------------------------------------------------
+    # GESTIONE FORM POST
+    # ------------------------------------------------------
+    if request.method == 'POST':
+        vecchio_nome = pg['nome']
+        nuovo_nome = request.form['nome'].strip()
+        nuova_classe = request.form['classe']
+
+        pg['nome'] = nuovo_nome
+        pg['classe'] = nuova_classe
+
+        pg_obj = Personaggio.from_dict(pg)
+        CharSingleJson(pg_obj)
+
+        Log.scrivi_log(
+            f"Modificato personaggio id={id_pers}: "
+            f"Nome: da '{vecchio_nome}' a '{nuovo_nome}', "
+            f"Nuova classe: '{nuova_classe}'"
+        )
+
+        flash("Personaggio aggiornato con successo", "success")
+        return redirect(url_for('characters.mostra_personaggi'))
+
+    # ------------------------------------------------------
+    # RENDERING FORM GET
+    # ------------------------------------------------------
+    return render_template(
+        'char_modified.html',
+        pg=pg,
+        classi=list(classi.keys())
+    )
+
+
+# -------------------------MOSTRA PERSONAGGI------------------------------
 @characters_bp.route('/personaggi', methods=['GET'])
 def mostra_personaggi():
     chars_ids = current_user.character_ids
     personaggi = carica_personaggi_da_ids(chars_ids)
-
+    session['personaggi'] = personaggi
     return render_template('list_characters.html', personaggi=personaggi)
 
-# -------------------------DETAGLI PERSONAGGIO----------------------------
+
+# -------------------------DETTAGLIO PERSONAGGIO--------------------------
 @characters_bp.route('/personaggi/<string:id_pers>', methods=['GET'])
 @login_required
 def dettaglio_personaggio(id_pers):
-    return render_template('')
+    list_personaggi = session.get('personaggi', [])
+    personaggio = next((p for p in list_personaggi if p['id'] == id_pers), None)
+    return render_template('details_char.html', pg=personaggio)
+
 
 # -------------------------ELIMINA PERSONAGGIO----------------------------
-@characters_bp.route('/personaggi/<int:id_html_pers>', methods=['POST'])
-def elimina_personaggio(id_html_pers):
+@characters_bp.route('/elimina/<string:id_pers>', methods=['POST'])
+@login_required
+def elimina_personaggio(id_pers):
     list_personaggi = session.get('personaggi', [])
-    try:
-        # Rimuovi personaggio dalla lista in sessione
-        pg = list_personaggi.pop(id_html_pers)
-        session['personaggi'] = list_personaggi
+    pg = next((p for p in list_personaggi if p['id'] == id_pers), None)
 
-        # Elimina file JSON
-        file_path = os.path.join(DATA_JSON_DIR, f"{pg['id']}.json")
-        if os.path.exists(file_path):
-            os.remove(file_path)
-            Log.scrivi_log(f"file JSON eliminato: {file_path}")
-            Log.scrivi_log(f"Eliminato personaggio con ID: {pg.get('id')}, Nome: {pg.get('nome', 'N/A')}")
-        else:
-            Log.scrivi_log("File JSON non trovato.")
+    if not pg:
+        Log.scrivi_log(f"[ERRORE] Personaggio con ID {id_pers} non trovato nella sessione")
+        flash("Personaggio non trovato", "danger")
+        return redirect(url_for('characters.mostra_personaggi'))
 
-        # Aggiorna lista degli ID dell’utente
-        ids = current_user.character_ids or []
-        id_to_remove = pg.get('id')
-        if id_to_remove in ids:
-            ids.remove(id_to_remove)
+    # Rimuovi dalla sessione
+    list_personaggi = [p for p in list_personaggi if p['id'] != id_pers]
+    session['personaggi'] = list_personaggi
+
+    # Elimina file JSON
+    file_path = os.path.join(DATA_JSON_DIR, f"{pg['id']}.json")
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        Log.scrivi_log(f"Eliminato file JSON: {file_path}")
+
+    # Aggiorna lista ID e crediti
+    ids = current_user.character_ids or []
+    if id_pers in ids:
+        ids.remove(id_pers)
         current_user.character_ids = ids
 
-        # Ricostruisci oggetto personaggio per rimborso
-        classi = {cls.__name__: cls for cls in Personaggio.__subclasses__()}
-        try:
-            pg_ogg = classi.get(pg['classe'])(pg['nome'])
-        except (KeyError, AttributeError, TypeError) as e:
-            raise ValueError(f"Errore nella creazione del personaggio: {e}")
-
-        # Aggiungi crediti e conferma
+    try:
+        pg_ogg = classi.get(pg['classe'])(pg['nome'])
         current_user.crediti += credits_to_refund(pg_ogg)
-        db.session.commit()
-        flash("Personaggio eliminato con successo!", "success")
+    except Exception as e:
+        Log.scrivi_log(f"Errore nel rimborso: {e}")
 
-    except IndexError:
-        Log.scrivi_log(f"Errore durante eliminazione: ID HTML inesistente: {id_html_pers}")
-        abort(404)
-
-    return redirect(url_for('characters.mostra_personaggi', personaggi=list_personaggi))
+    db.session.commit()
+    flash("Personaggio eliminato con successo!", "success")
+    return redirect(url_for('characters.mostra_personaggi'))
 
 
-# -------------------------INIZIA COMBATTIMENTO----------------------------
+# -------------------------INIZIA COMBATTIMENTO (PLACEHOLDER)-----------------
 @characters_bp.route('/combattimento', methods=['GET', 'POST'])
 def inizio_combattimento():
     pass

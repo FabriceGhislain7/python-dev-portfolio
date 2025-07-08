@@ -17,7 +17,7 @@
 
     <!-- About -->
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
+      <div class="card h-100 shadow-lg border-0 bg-light">
         <div class="card-body">
           <h5 class="card-title">Chi siamo</h5>
           <p class="card-text">Scopri chi ha creato il gioco, la filosofia dietro il progetto e i prossimi obiettivi.</p>
@@ -28,28 +28,29 @@
 
     <!-- Guida -->
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
+      <div class="card h-100 shadow-lg border-0 bg-light">
         <div class="card-body">
           <h5 class="card-title">Guida al gioco</h5>
           <p class="card-text">Leggi le regole base, comandi principali e consigli per iniziare il tuo viaggio.</p>
           <a href="{{ url_for('gioco.guide_game') }}" class="btn btn-outline-primary btn-sm">Game guide</a>
         </div>
+      </div>
     </div>
-</div>
 
-<!-- Credits -->
-<div class="col-md-4">
-    <div class="card h-100 shadow-sm border-0 bg-light">
+    <!-- Credits -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-lg border-0 bg-light">
         <div class="card-body">
-            <h5 class="card-title">Credits</h5>
-            <p class="card-text">Ringraziamenti, fonti grafiche e contributori open source.</p>
-            <a href="{{ url_for('gioco.credits') }}" class="btn btn-outline-primary btn-sm">Credits</a>
+          <h5 class="card-title">Credits</h5>
+          <p class="card-text">Ringraziamenti, fonti grafiche e contributori open source.</p>
+          <a href="{{ url_for('gioco.credits') }}" class="btn btn-outline-primary btn-sm">Credits</a>
         </div>
       </div>
     </div>
 
   </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}{% endblock %}

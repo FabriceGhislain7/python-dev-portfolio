@@ -2,5 +2,71 @@
 {% block title %}Inventario Personaggi{% endblock %}
 
 {% block content %}
+<div class="d-flex justify-content-center align-items-center flex-column py-5">
 
+  {% if not id_personaggio %}
+    <form method="post" class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
+      <h1 class="h4 text-center mb-4">Seleziona un personaggio</h1>
+
+      <div class="mb-3">
+        <label for="personaggio_id" class="form-label">Personaggio</label>
+        <select name="personaggio_id" id="personaggio_id" class="form-select" required>
+          <option value="">-- Scegli un personaggio --</option>
+          {% for p in personaggi %}
+            <option value="{{ p.id }}" {% if id_personaggio == p.id %}selected{% endif %}>
+              {{ p.nome }} ({{ p.classe }})
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary w-100">Mostra Inventario</button>
+    </form>
+  {% endif %}
+
+  {% if id_personaggio and inventario and personaggio %}
+    <div class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
+      <h1 class="h4 text-center mb-3">Inventario di {{ personaggio.nome }}</h1>
+      <p class="text-center text-muted mb-4">Classe: {{ personaggio.classe }}</p>
+
+        {% if inventario.oggetti %}
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>Classe</th>
+                    <th>Tipo</th>
+                    <th>Valore</th>
+                    <th>Stato</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for oggetto in inventario.oggetti %}
+                    <tr>
+                    <td>{{ oggetto.nome }}</td>
+                    <td>{{ oggetto.__class__.__name__ }}</td>
+                    <td>{{ oggetto.tipo_oggetto or "N/D" }}</td>
+                    <td>{{ oggetto.valore }}</td>
+                    <td>
+                        {% if oggetto.usato==True %}
+                            <span class="badge bg-secondary">Usato</span>
+                        {% else %}
+                            <span class="badge bg-success">Non usato</span>
+                        {% endif %}
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+        <p class="text-center text-muted">Nessun oggetto presente nell'inventario.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary mt-3">
+    ← Torna alla lista
+  </a>
+</div>
 {% endblock %}

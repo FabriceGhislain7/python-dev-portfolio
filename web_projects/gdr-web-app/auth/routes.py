@@ -68,25 +68,25 @@ def register():
 
         # Validazioni input
         if not username:
-            flash('Il campo Nome è obbligatorio ❗')
+            flash('Il campo Nome è obbligatorio')
             return redirect(url_for('auth.register'))
 
         if not email:
-            flash('Il campo Email è obbligatorio ❗')
+            flash('Il campo Email è obbligatorio')
             return redirect(url_for('auth.register'))
 
         if not controllo_email(email):
-            flash('Formato email non valido ❗')
+            flash('Formato email non valido')
             return redirect(url_for('auth.register'))
 
         if not psw or not re_psw or psw != re_psw:
-            flash('Le password non coincidono ❗')
+            flash('Le password non coincidono')
             return redirect(url_for('auth.register'))
 
         # Verifica se l'utente esiste già nel DB
         utente_exist = User.query.filter_by(email=email).first()  # https://flask-sqlalchemy.palletsprojects.com/en/latest/queries/
         if utente_exist:
-            flash('Email già registrata ❗')
+            flash('Email già registrata')
             return redirect(url_for('auth.register'))
 
         # Crea nuovo utente
@@ -102,7 +102,7 @@ def register():
         db.session.add(nuovo_utente)       # https://flask-sqlalchemy.palletsprojects.com/en/latest/contexts/#using-the-session
         db.session.commit()
 
-        flash('Registrazione completata con successo ✔️ Puoi accedere ora!')
+        flash('Registrazione completata con successo. Puoi accedere ora!')
         return redirect(url_for('auth.login'))  # assicurati che questa route esista
 
     return render_template('register.html')  # https://flask.palletsprojects.com/en/latest/api/#flask.render_template
@@ -115,58 +115,107 @@ def login():
         user_email = request.form.get('email', '').strip()  # https://flask.palletsprojects.com/en/latest/api/#flask.Request.form
         user_psw = request.form.get('psw', '').strip()
 
-        # ✅ Validazione base degli input
+        # Validazione base degli input
         if not user_email:
-            flash('Il campo Email è obbligatorio ❗', 'danger')  # https://flask.palletsprojects.com/en/latest/patterns/flashing/
+            flash('Il campo Email è obbligatorio', 'danger')  # https://flask.palletsprojects.com/en/latest/patterns/flashing/
             return redirect(url_for('auth.login'))  # https://flask.palletsprojects.com/en/latest/api/#flask.url_for
 
         if not controllo_email(user_email):  # funzione personalizzata con regex
-            flash('Formato email non valido ❗', 'danger')
+            flash('Formato email non valido', 'danger')
             return redirect(url_for('auth.login'))
 
         if not user_psw:
-            flash('Il campo Password è obbligatorio ❗', 'danger')
+            flash('Il campo Password è obbligatorio', 'danger')
             return redirect(url_for('auth.login'))
 
-        # ✅ Ricerca utente nel database
+        # Ricerca utente nel database
         user = User.query.filter_by(email=user_email).first()  # https://flask-sqlalchemy.palletsprojects.com/en/latest/queries/
 
-        # ✅ Verifica della password tramite hash
+        # Verifica della password tramite hash
         if user and check_password_hash(user.password_hash, user_psw):  # https://werkzeug.palletsprojects.com/en/latest/utils/#werkzeug.security.check_password_hash
             login_user(user)  # https://flask-login.readthedocs.io/en/latest/#flask_login.login_user
-            flash('Login effettuato con successo ✔️', 'success')
+            flash('Login effettuato con successo', 'success')
             return redirect(url_for('gioco.menu'))  # redireziona al menu di gioco (modifica se diverso)
 
-        # ❌ Email o password errati
-        flash('Email o password errati ❗', 'danger')
+        # Email o password errati
+        flash('Email o password errati', 'danger')
         return redirect(url_for('auth.login'))
 
-    # ✅ Render della pagina login
+    # Render della pagina login
     return render_template('login.html')  # https://flask.palletsprojects.com/en/latest/api/#flask.render_template
 
 
 #----------------------------AREA PERSONALE----------------------------------------
 @auth_bp.route('/area_personale', methods=['GET', 'POST'])
 def area_personale():
-    pass
+    load_char()
+    message = ""
+    message1 = request.args.get('message', '')
+    if message1:
+        message = message1
+    return render_template("area_personale.html", user=current_user, message=message)
 
-#----------------------------CREAZIONE UTENTE--------------------------------------
-@auth_bp.route('/edit_user', methods=['GET', 'POST'])
+#----------------------------MODIFICA UTENTE--------------------------------------
+@auth_bp.route('/modified_user', methods=['GET', 'POST'])
 @login_required
-def edit_user():
-    pass
+def modified_user():
+    user = current_user
+    if user:
+        if request.method == 'POST':
+            # Catturo i dati inseriti nel form per la modifica dell'utente e li uso per
+            # modificare i dati dell'utente sul db, infine redirige alla pagina login
+
+            new_name = request.form['new_username']
+            new_email = request.form['new_email']
+            new_psw = request.form['new_password']
+            if user:
+                id = user.id
+                db_user = User.query.get_or_404(id)
+                db_user.nome = new_name
+                db_user.email = new_email
+                if not controllo_email(new_email):
+                    flash("Email does not match an email pattern", "error")
+                else:
+                    db_user.password_hash = psw_proteggi_hash(new_psw)
+                    db.session.commit()
+                    message = "Utente modificato con successo!"
+                    return redirect(url_for('gioco.menu', message=message))
+
+    return render_template("modified_user.html", utente=user)
 
 #----------------------------ELIMINAZIONE UTENTE-------------------------------------
-@auth_bp.route('/delete_user', methods=['GET', 'POST'])
-# @login_required
-def delete_user():
-    pass
+@auth_bp.route('/delete_user/<int:id>')
+@login_required
+def delete_user(id):
+    utente = User.query.get(id)
+    db.session.delete(utente)
+    db.session.commit()
+    return redirect(url_for('auth.signin'))
 
-#----------------------------CREAZIONE DEI CREDITI----------------------------------
+#----------------------------AGGIUNGI DEI CREDITI----------------------------------
 @auth_bp.route('/credit_refill', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def credit_refill():
-    pass
+    message = None
+
+    if request.method == 'POST':
+        try:
+            amount = int(request.form['amount'])  # controllo per vedere se inserimento è int
+        except (KeyError, ValueError):  # se non è int verrà sollevata un'eccezione
+            message = "Inserisci un numero valido."
+            return redirect(url_for('auth.credit_refill', message=message))
+
+        if amount <= 0:  # controllo numero positivo
+            message = "La quantità deve essere positiva."
+            return redirect(url_for('auth.credit_refill', message=message))
+        else:
+            current_user.crediti += amount  # aggiunta dei crediti
+            db.session.commit()  # salvataggio in database
+            message = f"Ricaricati {amount} crediti. Totale attuale: {int(current_user.crediti)}."
+            return redirect(url_for('auth.credit_refill', message=message))
+
+    message = request.args.get('message')  # estrae il parametro message dall'URL
+    return render_template('credits_refill.html', message=message)
 
 #----------------------------LOGOUT-------------------------------------------------------
 @auth_bp.route('/logout')
@@ -175,4 +224,4 @@ def logout():
     logout_user()  # https://flask-login.readthedocs.io/en/latest/#flask_login.logout_user
     session.clear()  # https://flask.palletsprojects.com/en/latest/api/#flask.session
     flash("Logout effettuato con successo", "info")  # https://flask.palletsprojects.com/en/latest/patterns/flashing/
-    return redirect(url_for('gioco.index'))  # 🔄 Migliore di render_template (previene problemi di stato)
+    return redirect(url_for('gioco.index'))  # Migliore di render_template (previene problemi di stato)
