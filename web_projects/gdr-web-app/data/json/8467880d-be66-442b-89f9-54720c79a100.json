@@ -1,8 +1,8 @@
 {
-    "classe": "Guerriero",
-    "id": "03f0b767-f820-4ea3-b50e-ef6163982c6e",
-    "nome": "Zoro",
-    "salute": 120,
+    "classe": "Mago",
+    "id": "8467880d-be66-442b-89f9-54720c79a100",
+    "nome": "Luca",
+    "salute": 80,
     "salute_max": 200,
     "attacco_min": 5,
     "attacco_max": 80,

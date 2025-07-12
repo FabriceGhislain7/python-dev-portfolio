@@ -190,7 +190,7 @@ def delete_user(id):
     utente = User.query.get(id)
     db.session.delete(utente)
     db.session.commit()
-    return redirect(url_for('auth.signin'))
+    return redirect(url_for('gioco.index'))
 
 #----------------------------AGGIUNGI DEI CREDITI----------------------------------
 @auth_bp.route('/credit_refill', methods=['GET', 'POST'])

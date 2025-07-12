@@ -305,3 +305,16 @@
 2025-07-09 00:55:57 - Inventario di Zoro selezionato.
 2025-07-09 00:56:25 - Inventario di Zoro selezionato.
 2025-07-09 00:56:54 - Inventario di Bertoldo selezionato.
+2025-07-12 14:17:20 - Creato personaggio: Zoro, Classe: Guerriero, id: e7ca06d3-37ce-4a14-ab76-c3ba68e95f26, Oggetto iniziale: BombaAcida
+2025-07-12 14:17:32 - Modificato personaggio id=03f0b767-f820-4ea3-b50e-ef6163982c6e: Nome: da 'Zoro' a 'Zoro', Nuova classe: 'Guerriero'
+2025-07-12 14:17:36 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\03f0b767-f820-4ea3-b50e-ef6163982c6e.json
+2025-07-12 14:17:36 - Errore nel rimborso: 'NoneType' object is not callable
+2025-07-12 14:24:10 - Creato personaggio: Zoro, Classe: Guerriero, id: 7c5d6c97-7dab-4939-9dc0-8190d4f96a2e, Oggetto iniziale: BombaAcida
+2025-07-12 14:24:13 - Inventario di Zoro selezionato.
+2025-07-12 14:24:20 - Inventario di Zoro selezionato.
+2025-07-12 14:25:15 - Creato personaggio: Bertoldo, Classe: Guerriero, id: 322e1707-b5b7-4d3a-a810-557895d9ad7d, Oggetto iniziale: BombaAcida
+2025-07-12 14:25:24 - Creato personaggio: Zoro-2, Classe: Ladro, id: 461b2789-2272-4c68-9bf1-8b6503feb65c, Oggetto iniziale: BombaAcida
+2025-07-12 14:25:29 - Inventario di Zoro-2 selezionato.
+2025-07-12 14:25:34 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\461b2789-2272-4c68-9bf1-8b6503feb65c.json
+2025-07-12 23:54:20 - Creato personaggio: Luca, Classe: Mago, id: 8467880d-be66-442b-89f9-54720c79a100, Oggetto iniziale: BombaAcida
+2025-07-12 23:54:23 - Inventario di Zoro selezionato.
