@@ -6,11 +6,19 @@
   <div class="card mx-auto" style="max-width: 500px;">
     <div class="card-body text-center">
       <h2 class="card-title mb-3">{{ pg.nome }}</h2>
-      <p class="card-text"><strong>Classe:</strong> {{ pg.classe }}</p>
-      <p class="card-text"><strong>Salute:</strong> {{ pg.salute }} / {{ pg.salute_max }}</p>
-      <p class="card-text"><strong>Attacco:</strong> {{ pg.attacco_min }} - {{ pg.attacco_max }}</p>
-      <p class="card-text"><strong>Livello:</strong> {{ pg.livello }}</p>
-      <p class="card-text"><strong>Danni subiti:</strong> {{ pg.storico_danni_subiti }}</p>
+      <p class="card-text"><strong>Classe:</strong> {{ pg['classe'] }}</p>
+      <p class="card-text"><strong>Salute:</strong> {{ pg['salute'] }} / {{ pg['salute_max'] }}</p>
+      <p class="card-text"><strong>Attacco:</strong> {{ pg['attacco_min'] }} - {{ pg['attacco_max'] }}</p>
+      <p class="card-text"><strong>Livello:</strong> {{ pg['livello'] }}</p>
+      <p class="card-text"><strong>Destrezza:</strong> {{ pg['destrezza'] }}</p>
+      <p class="card-text"><strong>Danni subiti:</strong></p>
+       {% if pg['storico_danni_subiti'] %}
+          {% for danno in pg['storico_danni_subiti'] %}
+            {{ danno }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endif %}
+      </p>
+      </p>
 
       <div class="d-grid gap-2 mt-4">
         <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary">← Torna alla lista</a>

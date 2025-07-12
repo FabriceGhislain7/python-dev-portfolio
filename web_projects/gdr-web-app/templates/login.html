@@ -2,14 +2,51 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 500px;">
-  <h2 class="mb-4 text-center">Login</h2>
-  <form method="POST">
-    <div class="mb-3">
-      <label for="username" class="form-label">Nome utente</label>
-      <input type="text" class="form-control" id="username" name="username" required>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg mt-5">
+      <div class="card-body">
+        <h3 class="card-title text-center mb-4">Accedi al tuo account</h3>
+
+        <form method="POST" action="{{ url_for('auth.login') }}">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Inserisci la tua email"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="psw" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="psw"
+              name="psw"
+              placeholder="Inserisci la tua password"
+              required
+            >
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">Conferma</button>
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <p class="text-center">
+          Non sei registrato?
+          <a href="{{ url_for('auth.register') }}" class="text-decoration-none fw-bold">Crea un account</a>
+        </p>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Accedi</button>
-  </form>
+  </div>
 </div>
 {% endblock %}

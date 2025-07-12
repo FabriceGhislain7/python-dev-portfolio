@@ -2,63 +2,71 @@
 {% block title %}Inventario Personaggi{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
+<div class="d-flex justify-content-center align-items-center flex-column py-5">
 
-      <!-- Card principale -->
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <h1 class="card-title text-center mb-4">Inventario Personaggi</h1>
+  {% if not id_personaggio %}
+    <form method="post" class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
+      <h1 class="h4 text-center mb-4">Seleziona un personaggio</h1>
 
-          <!-- Form selezione -->
-          <form method="post" class="text-center mb-4">
-            <div class="mb-3">
-              <label for="personaggio_id" class="form-label">Seleziona un personaggio</label>
-              <select name="personaggio_id" id="personaggio_id" class="form-select text-center">
-                <option value="" >------ Scegli un personaggio ------</option>
-                {% for personaggio in personaggi %}
-                  <option value="{{ personaggio.id }}" {% if id_selezionato == personaggio.id %}selected{% endif %}>
-                    {{ personaggio.nome }} ({{ personaggio.classe }})
-                  </option>
+      <div class="mb-3">
+        <label for="personaggio_id" class="form-label">Personaggio</label>
+        <select name="personaggio_id" id="personaggio_id" class="form-select" required>
+          <option value="">-- Scegli un personaggio --</option>
+          {% for p in personaggi %}
+            <option value="{{ p.id }}" {% if id_personaggio == p.id %}selected{% endif %}>
+              {{ p.nome }} ({{ p.classe }})
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary w-100">Mostra Inventario</button>
+    </form>
+  {% endif %}
+
+  {% if id_personaggio and inventario and personaggio %}
+    <div class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
+      <h1 class="h4 text-center mb-3">Inventario di {{ personaggio.nome }}</h1>
+      <p class="text-center text-muted mb-4">Classe: {{ personaggio.classe }}</p>
+
+        {% if inventario.oggetti %}
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>Classe</th>
+                    <th>Tipo</th>
+                    <th>Valore</th>
+                    <th>Stato</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for oggetto in inventario.oggetti %}
+                    <tr>
+                    <td>{{ oggetto.nome }}</td>
+                    <td>{{ oggetto.__class__.__name__ }}</td>
+                    <td>{{ oggetto.tipo_oggetto or "N/D" }}</td>
+                    <td>{{ oggetto.valore }}</td>
+                    <td>
+                        {% if oggetto.usato==True %}
+                            <span class="badge bg-secondary">Usato</span>
+                        {% else %}
+                            <span class="badge bg-success">Non usato</span>
+                        {% endif %}
+                    </td>
+                    </tr>
                 {% endfor %}
-              </select>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-success">Mostra Inventario</button>
-            </div>
-          </form>
+                </tbody>
+            </table>
 
-          <!-- Inventario -->
-          {% if inventario %}
-            <h4 class="text-center">Inventario di <strong>{{ nome_per_id.get(inventario.proprietario, "Sconosciuto") }}</strong></h4>
-            <ul class="list-group mt-3">
-              {% for oggetto in inventario.oggetti %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                    <strong>{{ oggetto.nome }}</strong> ({{ oggetto.classe }})
-                    {% if oggetto.offensivo %} - <span class="text-danger">Offensivo</span>{% endif %}
-                  </div>
-                  <span class="badge bg-{{ 'secondary' if oggetto.usato else 'success' }}">
-                    {% if oggetto.usato %}Usato{% else %}Non usato{% endif %}
-                  </span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% elif id_selezionato %}
-            <div class="alert alert-warning text-center mt-4">
-              Nessun inventario trovato per questo personaggio.
-            </div>
-          {% endif %}
-        </div>
-      </div>
-
-      <!-- Pulsante torna al menu -->
-      <div class="text-center mt-4">
-        <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-secondary">Torna al Menu Principale</a>
-      </div>
-
+        {% else %}
+        <p class="text-center text-muted">Nessun oggetto presente nell'inventario.</p>
+      {% endif %}
     </div>
-  </div>
+  {% endif %}
+
+  <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary mt-3">
+    ← Torna alla lista
+  </a>
 </div>
 {% endblock %}

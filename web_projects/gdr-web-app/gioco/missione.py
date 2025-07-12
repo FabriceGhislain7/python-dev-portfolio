@@ -144,7 +144,7 @@ class Missione(Basic):
                 Messaggi.add_to_messaggi(msg)
                 raise ValueError(msg)
             inventario._aggiungi(premio)
-            msg = f"Premio {premio.nome} aggiunto all'inventario di {inventario.proprietario.nome}"
+            msg = f"Premio {premio.nome} aggiunto all'inventario di {inventario.proprietario.nome                } "
             Messaggi.add_to_messaggi(msg)
             # Log.scrivi_log(msg)
             # dati_da_salvare = [self.to_dict(), inventario.to_dict()]

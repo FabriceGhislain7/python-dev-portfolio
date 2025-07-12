@@ -1,0 +1,769 @@
+<!-- Header Component -->
+<header id="header" class="header">
+    <nav class="nav" role="navigation" aria-label="Navigazione principale">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="nav-logo">
+                <a href="#home" class="logo-link" aria-label="Torna alla homepage">
+                    <div class="logo-content">
+                        <span class="logo-icon">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <span class="logo-text">Portfolio</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu" role="menubar" aria-hidden="true">
+                <li class="nav-item" role="none">
+                    <a href="#home" class="nav-link active" role="menuitem" aria-current="page">
+                        <span class="nav-link-text">Home</span>
+                        <span class="nav-link-underline"></span>
+                    </a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#about" class="nav-link" role="menuitem">
+                        <span class="nav-link-text">Chi Sono</span>
+                        <span class="nav-link-underline"></span>
+                    </a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#skills" class="nav-link" role="menuitem">
+                        <span class="nav-link-text">Competenze</span>
+                        <span class="nav-link-underline"></span>
+                    </a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#projects" class="nav-link" role="menuitem">
+                        <span class="nav-link-text">Progetti</span>
+                        <span class="nav-link-underline"></span>
+                    </a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#contact" class="nav-link" role="menuitem">
+                        <span class="nav-link-text">Contatti</span>
+                        <span class="nav-link-underline"></span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Header Controls -->
+            <div class="nav-controls">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <button class="language-btn" aria-label="Seleziona lingua" aria-expanded="false">
+                        <i class="fas fa-globe"></i>
+                        <span class="language-text">IT</span>
+                        <i class="fas fa-chevron-down language-arrow"></i>
+                    </button>
+                    <ul class="language-menu" role="menu" aria-hidden="true">
+                        <li role="none">
+                            <button class="language-option active" role="menuitem" data-lang="it">
+                                <span class="flag">🇮🇹</span>
+                                <span>Italiano</span>
+                            </button>
+                        </li>
+                        <li role="none">
+                            <button class="language-option" role="menuitem" data-lang="en">
+                                <span class="flag">🇬🇧</span>
+                                <span>English</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema scuro/chiaro">
+                    <div class="theme-toggle-track">
+                        <div class="theme-toggle-thumb">
+                            <i class="fas fa-sun theme-icon theme-icon-light"></i>
+                            <i class="fas fa-moon theme-icon theme-icon-dark"></i>
+                        </div>
+                    </div>
+                </button>
+                
+                <!-- Search Toggle (optional) -->
+                <button class="search-toggle" aria-label="Cerca nel sito" aria-expanded="false">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <!-- Mobile Menu Toggle -->
+                <button id="menu-toggle" class="menu-toggle" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="nav-menu">
+                    <div class="menu-toggle-inner">
+                        <span class="menu-line menu-line-1"></span>
+                        <span class="menu-line menu-line-2"></span>
+                        <span class="menu-line menu-line-3"></span>
+                    </div>
+                    <span class="menu-toggle-text">Menu</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="search-overlay" aria-hidden="true">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Cerca progetti, competenze..." aria-label="Campo di ricerca">
+                    <button class="search-clear" aria-label="Cancella ricerca">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results">
+                    <!-- Risultati dinamici -->
+                </div>
+                <button class="search-close" aria-label="Chiudi ricerca">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="nav-progress">
+            <div class="nav-progress-bar" id="nav-progress-bar"></div>
+        </div>
+    </nav>
+</header>
+
+<!-- Header Styles -->
+<style>
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: var(--z-sticky);
+    transition: all var(--transition-normal);
+}
+
+.header.scrolled {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg);
+    height: calc(var(--header-height) - 10px);
+}
+
+.header.header-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform var(--transition-normal);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: var(--text-lg);
+}
+
+.logo-text {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-color);
+    font-family: var(--font-family-primary);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    list-style: none;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    position: relative;
+    display: block;
+    padding: var(--spacing-3) var(--spacing-2);
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    font-size: var(--text-base);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+}
+
+.nav-link-text {
+    position: relative;
+    z-index: 2;
+}
+
+.nav-link-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width var(--transition-normal);
+    z-index: 1;
+}
+
+.nav-link:hover .nav-link-underline,
+.nav-link.active .nav-link-underline {
+    width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-color);
+}
+
+/* Navigation Controls */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+/* Language Selector */
+.language-selector {
+    position: relative;
+}
+
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-color);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.language-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-color);
+}
+
+.language-arrow {
+    font-size: var(--text-xs);
+    transition: transform var(--transition-normal);
+}
+
+.language-btn[aria-expanded="true"] .language-arrow {
+    transform: rotate(180deg);
+}
+
+.language-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 150px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+    z-index: var(--z-dropdown);
+}
+
+.language-selector[aria-expanded="true"] .language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    width: 100%;
+    padding: var(--spacing-2) var(--spacing-3);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text-color);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.language-option:hover,
+.language-option.active {
+    background: var(--accent-color);
+    color: var(--text-inverse);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.theme-toggle-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.theme-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    transition: transform var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .theme-toggle-thumb {
+    transform: translateX(28px);
+}
+
+.theme-icon {
+    position: absolute;
+    font-size: var(--text-xs);
+    color: white;
+    transition: opacity var(--transition-normal);
+}
+
+.theme-icon-light {
+    opacity: 1;
+}
+
+.theme-icon-dark {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon-light {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+    opacity: 1;
+}
+
+/* Search Toggle */
+.search-toggle {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.search-toggle:hover {
+    background: var(--accent-color);
+    color: var(--text-inverse);
+    border-color: var(--accent-color);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle-inner {
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+
+.menu-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 2px;
+    transition: all var(--transition-normal);
+}
+
+.menu-line-1 {
+    top: 0;
+}
+
+.menu-line-2 {
+    top: 8px;
+}
+
+.menu-line-3 {
+    top: 16px;
+}
+
+.menu-toggle.active .menu-line-1 {
+    top: 8px;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active .menu-line-2 {
+    opacity: 0;
+}
+
+.menu-toggle.active .menu-line-3 {
+    top: 8px;
+    transform: rotate(-45deg);
+}
+
+.menu-toggle-text {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    font-weight: var(--font-medium);
+}
+
+/* Search Overlay */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.search-overlay[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    background: var(--bg-card);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-2xl);
+}
+
+.search-input-wrapper {
+    position: relative;
+    margin-bottom: var(--spacing-6);
+}
+
+.search-input {
+    width: 100%;
+    padding: var(--spacing-4) var(--spacing-12) var(--spacing-4) var(--spacing-12);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    font-size: var(--text-lg);
+    background: transparent;
+    color: var(--text-color);
+    transition: border-color var(--transition-normal);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.search-icon {
+    position: absolute;
+    left: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+}
+
+.search-clear {
+    position: absolute;
+    right: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+}
+
+.search-clear:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+}
+
+.search-close {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    background: none;
+    border: none;
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+}
+
+.search-close:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+}
+
+/* Progress Bar */
+.nav-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+}
+
+.nav-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+    transition: width 0.1s ease-out;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .header {
+        height: var(--header-height-mobile);
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: var(--header-height-mobile);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--header-height-mobile));
+        background: var(--bg-overlay);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--spacing-6);
+        padding: var(--spacing-8) var(--spacing-4);
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal);
+    }
+    
+    .nav-menu.mobile-menu-open {
+        transform: translateX(0);
+    }
+    
+    .nav-link {
+        font-size: var(--text-lg);
+        padding: var(--spacing-4) var(--spacing-6);
+        border-radius: var(--radius-lg);
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        width: 200px;
+        text-align: center;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .language-selector,
+    .search-toggle {
+        display: none;
+    }
+    
+    .theme-toggle {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .theme-toggle-thumb {
+        width: 19px;
+        height: 19px;
+    }
+    
+    [data-theme="dark"] .theme-toggle-thumb {
+        transform: translateX(23px);
+    }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .header {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .nav-menu {
+    background: rgba(15, 23, 42, 0.98);
+}
+</style>
+
+<!-- Header JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Language selector functionality
+    const languageBtn = document.querySelector('.language-btn');
+    const languageSelector = document.querySelector('.language-selector');
+    const languageOptions = document.querySelectorAll('.language-option');
+    
+    if (languageBtn) {
+        languageBtn.addEventListener('click', () => {
+            const isExpanded = languageBtn.getAttribute('aria-expanded') === 'true';
+            languageBtn.setAttribute('aria-expanded', !isExpanded);
+            languageSelector.setAttribute('aria-expanded', !isExpanded);
+        });
+    }
+    
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            
+            // Update active language
+            languageOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            
+            // Update button text
+            const langText = languageBtn.querySelector('.language-text');
+            if (langText) {
+                langText.textContent = lang.toUpperCase();
+            }
+            
+            // Close dropdown
+            languageBtn.setAttribute('aria-expanded', 'false');
+            languageSelector.setAttribute('aria-expanded', 'false');
+            
+            // Here you can add language switching logic
+            console.log('Language switched to:', lang);
+        });
+    });
+    
+    // Search functionality
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchClose = document.querySelector('.search-close');
+    const searchInput = document.querySelector('.search-input');
+    const searchClear = document.querySelector('.search-clear');
+    
+    if (searchToggle) {
+        searchToggle.addEventListener('click', () => {
+            searchOverlay.setAttribute('aria-hidden', 'false');
+            setTimeout(() => searchInput.focus(), 100);
+        });
+    }
+    
+    if (searchClose) {
+        searchClose.addEventListener('click', () => {
+            searchOverlay.setAttribute('aria-hidden', 'true');
+        });
+    }
+    
+    if (searchClear) {
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+        });
+    }
+    
+    // Close search on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchOverlay.getAttribute('aria-hidden') === 'false') {
+            searchOverlay.setAttribute('aria-hidden', 'true');
+        }
+    });
+    
+    // Progress bar update
+    const updateProgressBar = () => {
+        const progressBar = document.getElementById('nav-progress-bar');
+        if (progressBar) {
+            const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = `${Math.min(scrollProgress, 100)}%`;
+        }
+    };
+    
+    window.addEventListener('scroll', updateProgressBar);
+    
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+        if (!languageSelector.contains(e.target)) {
+            languageBtn.setAttribute('aria-expanded', 'false');
+            languageSelector.setAttribute('aria-expanded', 'false');
+        }
+        
+        if (!searchOverlay.contains(e.target) && !searchToggle.contains(e.target)) {
+            searchOverlay.setAttribute('aria-hidden', 'true');
+        }
+    });
+});
+</script>

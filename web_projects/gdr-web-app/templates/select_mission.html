@@ -1,13 +1,4 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>Seleziona Missione</h2>
-<form method="post">
-  <select name="missione_id" class="form-select" required>
-    <option disabled selected>-- scegli missione --</option>
-    {% for id, missione in missioni %}
-      <option value="{{ missione.id }}">{{ missione.nome }}</option>
-    {% endfor %}
-  </select>
-  <button class="btn btn-primary mt-2">Vai</button>
-</form>
+
 {% endblock %}

@@ -208,5 +208,113 @@
 2025-07-02 01:55:33 - Inventario di Lucky luck selezionato.
 2025-07-02 02:02:05 - Richiesta lista personaggi. Numero personaggi: 1
 2025-07-02 02:08:32 - Richiesta lista personaggi. Numero personaggi: 1
-2025-07-06 00:12:25 - Creato personaggio: Lucky luck, Classe: Mago, id: 48db0cfa-d598-4bc6-82d8-969ce7fddd43, Oggetto iniziale: PozioneCura
-2025-07-06 00:12:26 - Richiesta lista personaggi. Numero personaggi: 1
+2025-07-07 02:05:41 - Creato personaggio: Lucky luck, Classe: Mago, id: f63406ea-ccd4-4a01-8f74-965d664f0fac, Oggetto iniziale: PozioneCura
+2025-07-07 22:04:56 - Creato personaggio: Lucky luck, Classe: Guerriero, id: cf96584e-cd2e-41de-965a-02ddf329833a, Oggetto iniziale: PozioneCura
+2025-07-07 23:22:16 - Creato personaggio: Luca, Classe: Guerriero, id: 10ef6f06-f910-4dfd-8e52-ea16f8addbbb, Oggetto iniziale: BombaAcida
+2025-07-08 00:53:45 - Creato personaggio: Zoro, Classe: Guerriero, id: 3627ae34-bfc0-4ee8-ae33-5dd5aad6b126, Oggetto iniziale: PozioneCura
+2025-07-08 02:55:11 - file JSON eliminato: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\3627ae34-bfc0-4ee8-ae33-5dd5aad6b126.json
+2025-07-08 02:55:11 - Eliminato personaggio con ID: 3627ae34-bfc0-4ee8-ae33-5dd5aad6b126, Nome: Zoro
+2025-07-08 02:55:20 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 02:56:03 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 02:56:35 - Errore durante eliminazione: ID HTML inesistente: 2
+2025-07-08 02:56:49 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:09:23 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:09:36 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 03:12:17 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 03:12:25 - Errore durante eliminazione: ID HTML inesistente: 1
+2025-07-08 03:13:03 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 15:30:41 - Creato personaggio: Lucky luck, Classe: Mago, id: c68bf7d3-ad75-4a1d-97e1-aca16639409a, Oggetto iniziale: PozioneCura
+2025-07-08 16:01:12 - file JSON eliminato: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\c68bf7d3-ad75-4a1d-97e1-aca16639409a.json
+2025-07-08 16:01:12 - Eliminato personaggio con ID: c68bf7d3-ad75-4a1d-97e1-aca16639409a, Nome: Lucky luck
+2025-07-08 16:01:37 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:01:46 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:10:45 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:10:50 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:11:30 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:11:55 - Errore durante eliminazione: ID HTML inesistente: 2
+2025-07-08 16:18:07 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:18:48 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:18:53 - Errore durante eliminazione: ID HTML inesistente: 0
+2025-07-08 16:26:56 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:28:12 - [ERRORE] Personaggio con ID cf96584e-cd2e-41de-965a-02ddf329833a non trovato nella sessione
+2025-07-08 16:28:15 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:28:17 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:28:20 - [ERRORE] Personaggio con ID cf96584e-cd2e-41de-965a-02ddf329833a non trovato nella sessione
+2025-07-08 16:28:22 - [ERRORE] Personaggio con ID 10ef6f06-f910-4dfd-8e52-ea16f8addbbb non trovato nella sessione
+2025-07-08 16:30:05 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:30:51 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:36:15 - [ERRORE] Personaggio con ID f63406ea-ccd4-4a01-8f74-965d664f0fac non trovato nella sessione
+2025-07-08 16:36:18 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\cf96584e-cd2e-41de-965a-02ddf329833a.json
+2025-07-08 16:36:22 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\f63406ea-ccd4-4a01-8f74-965d664f0fac.json
+2025-07-08 16:36:27 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\10ef6f06-f910-4dfd-8e52-ea16f8addbbb.json
+2025-07-08 16:37:04 - Creato personaggio: Lucky luck, Classe: Guerriero, id: 25d2e229-7688-4383-ad84-7cbad6b06bb9, Oggetto iniziale: PozioneCura
+2025-07-08 18:12:52 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\25d2e229-7688-4383-ad84-7cbad6b06bb9.json
+2025-07-08 18:34:40 - Creato personaggio: Zoro, Classe: Guerriero, id: 21eab7f0-8ace-4660-a642-62755164a50c, Oggetto iniziale: BombaAcida
+2025-07-08 18:36:05 - Creato personaggio: Lucky luck, Classe: Mago, id: 42ae2fe2-daf4-453f-9c49-52d2e0f365cb, Oggetto iniziale: BombaAcida
+2025-07-08 18:36:11 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\21eab7f0-8ace-4660-a642-62755164a50c.json
+2025-07-08 20:55:43 - Inventario di Lucky luck selezionato.
+2025-07-08 20:55:54 - Inventario di Lucky luck selezionato.
+2025-07-08 20:55:58 - Inventario di Lucky luck selezionato.
+2025-07-08 20:56:22 - Inventario di Lucky luck selezionato.
+2025-07-08 20:56:23 - Inventario di Lucky luck selezionato.
+2025-07-08 20:56:24 - Inventario di Lucky luck selezionato.
+2025-07-08 20:56:25 - Inventario di Lucky luck selezionato.
+2025-07-08 20:56:25 - Inventario di Lucky luck selezionato.
+2025-07-08 20:57:05 - Inventario di Lucky luck selezionato.
+2025-07-08 20:57:08 - Inventario di Lucky luck selezionato.
+2025-07-08 20:57:45 - Inventario di Lucky luck selezionato.
+2025-07-08 20:59:13 - Inventario di Lucky luck selezionato.
+2025-07-08 21:00:30 - Inventario di Lucky luck selezionato.
+2025-07-08 21:01:22 - Inventario di Lucky luck selezionato.
+2025-07-08 21:02:51 - Inventario di Lucky luck selezionato.
+2025-07-08 21:07:06 - Inventario di Lucky luck selezionato.
+2025-07-08 21:08:32 - Inventario di Lucky luck selezionato.
+2025-07-08 21:08:35 - Inventario di Lucky luck selezionato.
+2025-07-08 21:08:35 - Inventario di Lucky luck selezionato.
+2025-07-08 21:08:36 - Inventario di Lucky luck selezionato.
+2025-07-08 21:08:49 - Inventario di Lucky luck selezionato.
+2025-07-08 21:09:02 - Inventario di Lucky luck selezionato.
+2025-07-08 21:13:36 - Inventario di Lucky luck selezionato.
+2025-07-08 21:14:11 - Inventario di Lucky luck selezionato.
+2025-07-08 21:15:06 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:10 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:12 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:12 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:13 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:14 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:14 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:14 - Inventario di Lucky luck selezionato.
+2025-07-08 21:17:15 - Inventario di Lucky luck selezionato.
+2025-07-08 21:18:03 - Inventario di Lucky luck selezionato.
+2025-07-08 21:20:09 - Inventario di Lucky luck selezionato.
+2025-07-08 21:21:59 - Inventario di Lucky luck selezionato.
+2025-07-08 21:22:06 - Inventario di Lucky luck selezionato.
+2025-07-08 21:22:07 - Inventario di Lucky luck selezionato.
+2025-07-08 21:22:25 - Inventario di Lucky luck selezionato.
+2025-07-08 21:22:29 - Inventario di Lucky luck selezionato.
+2025-07-08 21:22:30 - Inventario di Lucky luck selezionato.
+2025-07-08 21:23:24 - Inventario di Lucky luck selezionato.
+2025-07-08 21:37:57 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\42ae2fe2-daf4-453f-9c49-52d2e0f365cb.json
+2025-07-08 21:38:18 - Creato personaggio: Zoro, Classe: Guerriero, id: 3fec1777-b562-4f61-8306-c55aebc6af8b, Oggetto iniziale: BombaAcida
+2025-07-08 22:06:23 - Creato personaggio: Luca, Classe: Mago, id: 64cd5a9c-4537-4b3c-bc58-6e3a85a06b66, Oggetto iniziale: BombaAcida
+2025-07-08 22:06:54 - Inventario di Zoro selezionato.
+2025-07-09 00:49:13 - Creato personaggio: Zoro, Classe: Guerriero, id: 03f0b767-f820-4ea3-b50e-ef6163982c6e, Oggetto iniziale: PozioneCura
+2025-07-09 00:49:26 - Creato personaggio: Bertoldo, Classe: Guerriero, id: b80bb647-e38d-4fea-9206-d689d0d31edb, Oggetto iniziale: BombaAcida
+2025-07-09 00:49:30 - Inventario di Zoro selezionato.
+2025-07-09 00:55:45 - Inventario di Zoro selezionato.
+2025-07-09 00:55:57 - Inventario di Zoro selezionato.
+2025-07-09 00:56:25 - Inventario di Zoro selezionato.
+2025-07-09 00:56:54 - Inventario di Bertoldo selezionato.
+2025-07-12 14:17:20 - Creato personaggio: Zoro, Classe: Guerriero, id: e7ca06d3-37ce-4a14-ab76-c3ba68e95f26, Oggetto iniziale: BombaAcida
+2025-07-12 14:17:32 - Modificato personaggio id=03f0b767-f820-4ea3-b50e-ef6163982c6e: Nome: da 'Zoro' a 'Zoro', Nuova classe: 'Guerriero'
+2025-07-12 14:17:36 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\03f0b767-f820-4ea3-b50e-ef6163982c6e.json
+2025-07-12 14:17:36 - Errore nel rimborso: 'NoneType' object is not callable
+2025-07-12 14:24:10 - Creato personaggio: Zoro, Classe: Guerriero, id: 7c5d6c97-7dab-4939-9dc0-8190d4f96a2e, Oggetto iniziale: BombaAcida
+2025-07-12 14:24:13 - Inventario di Zoro selezionato.
+2025-07-12 14:24:20 - Inventario di Zoro selezionato.
+2025-07-12 14:25:15 - Creato personaggio: Bertoldo, Classe: Guerriero, id: 322e1707-b5b7-4d3a-a810-557895d9ad7d, Oggetto iniziale: BombaAcida
+2025-07-12 14:25:24 - Creato personaggio: Zoro-2, Classe: Ladro, id: 461b2789-2272-4c68-9bf1-8b6503feb65c, Oggetto iniziale: BombaAcida
+2025-07-12 14:25:29 - Inventario di Zoro-2 selezionato.
+2025-07-12 14:25:34 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\461b2789-2272-4c68-9bf1-8b6503feb65c.json
+2025-07-12 23:54:20 - Creato personaggio: Luca, Classe: Mago, id: 8467880d-be66-442b-89f9-54720c79a100, Oggetto iniziale: BombaAcida
+2025-07-12 23:54:23 - Inventario di Zoro selezionato.

@@ -1,0 +1,196 @@
+{
+  "skills": [
+    {
+      "id": "design",
+      "name": "UI/UX Design",
+      "category": "Design",
+      "icon": "fas fa-palette",
+      "level": 70,
+      "description": "Progettazione di esperienze utente intuitive",
+      "technologies": [
+        {
+          "name": "Figma",
+          "level": 80
+        },
+        {
+          "name": "Adobe XD",
+          "level": 75
+        },
+        {
+          "name": "Photoshop",
+          "level": 70
+        },
+        {
+          "name": "Illustrator",
+          "level": 65
+        }
+      ],
+      "tags": ["Figma", "Adobe XD", "Photoshop", "Wireframing", "Prototyping"]
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile Development",
+      "category": "Development",
+      "icon": "fas fa-mobile-alt",
+      "level": 65,
+      "description": "Sviluppo di applicazioni mobile cross-platform",
+      "technologies": [
+        {
+          "name": "React Native",
+          "level": 70
+        },
+        {
+          "name": "Flutter",
+          "level": 60
+        },
+        {
+          "name": "Ionic",
+          "level": 65
+        }
+      ],
+      "tags": ["React Native", "Flutter", "Ionic", "PWA", "Cordova"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "development",
+      "name": "Development",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "color": "#10b981"
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "color": "#f59e0b"
+    }
+  ]
+}id": "frontend",
+      "name": "Frontend Development",
+      "category": "Development",
+      "icon": "fas fa-code",
+      "level": 90,
+      "description": "Creazione di interfacce utente moderne e responsive",
+      "technologies": [
+        {
+          "name": "HTML5",
+          "level": 95
+        },
+        {
+          "name": "CSS3",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "level": 88
+        },
+        {
+          "name": "React",
+          "level": 85
+        },
+        {
+          "name": "Vue.js",
+          "level": 80
+        },
+        {
+          "name": "TypeScript",
+          "level": 75
+        }
+      ],
+      "tags": ["HTML", "CSS", "JavaScript", "React", "Vue", "SASS", "Webpack"]
+    },
+    {
+      "id": "backend",
+      "name": "Backend Development",
+      "category": "Development",
+      "icon": "fas fa-server",
+      "level": 80,
+      "description": "Sviluppo di API robuste e scalabili",
+      "technologies": [
+        {
+          "name": "Node.js",
+          "level": 85
+        },
+        {
+          "name": "Python",
+          "level": 82
+        },
+        {
+          "name": "Express.js",
+          "level": 80
+        },
+        {
+          "name": "Django",
+          "level": 75
+        },
+        {
+          "name": "FastAPI",
+          "level": 70
+        }
+      ],
+      "tags": ["Node.js", "Python", "Express", "Django", "REST API", "GraphQL"]
+    },
+    {
+      "id": "database",
+      "name": "Database Management",
+      "category": "Data",
+      "icon": "fas fa-database",
+      "level": 75,
+      "description": "Progettazione e ottimizzazione di database",
+      "technologies": [
+        {
+          "name": "MongoDB",
+          "level": 80
+        },
+        {
+          "name": "PostgreSQL",
+          "level": 75
+        },
+        {
+          "name": "MySQL",
+          "level": 70
+        },
+        {
+          "name": "Redis",
+          "level": 65
+        }
+      ],
+      "tags": ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Mongoose", "Prisma"]
+    },
+    {
+      "id": "tools",
+      "name": "Development Tools",
+      "category": "Tools",
+      "icon": "fas fa-tools",
+      "level": 85,
+      "description": "Utilizzo di strumenti moderni per lo sviluppo",
+      "technologies": [
+        {
+          "name": "Git",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "level": 75
+        },
+        {
+          "name": "Webpack",
+          "level": 80
+        },
+        {
+          "name": "Vite",
+          "level": 85
+        }
+      ],
+      "tags": ["Git", "Docker", "Webpack", "Vite", "npm", "VS Code"]
+    },
+    {
+      "

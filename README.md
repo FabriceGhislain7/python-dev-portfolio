@@ -111,6 +111,7 @@ python-dev-portfolio/
 - [W3Schools Online Web Tutorials](https://www.w3schools.com/python/default.asp)
 - [Link del mio GitHub](https://github.com/FabriceGhislain7)
 - [Scorciatoie da tastiera per VS Code (Windows)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- [GitLab](https://docs.gitlab.com/?tab=Tutorials)
 
 
 ### IoT

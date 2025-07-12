@@ -1,0 +1,365 @@
+<!-- Footer Component -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Footer Left - Copyright -->
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <span class="logo-text">Portfolio</span>
+                </div>
+                <p class="footer-copyright">
+                    &copy; 2025 Portfolio. Tutti i diritti riservati.
+                </p>
+                <p class="footer-tagline">
+                    Realizzato con <span class="heart">❤️</span> e molto caffè <span class="coffee">☕</span>
+                </p>
+            </div>
+            
+            <!-- Footer Center - Navigation Links -->
+            <div class="footer-center">
+                <h4 class="footer-title">Navigazione</h4>
+                <nav class="footer-nav">
+                    <ul class="footer-nav-list">
+                        <li><a href="#home" class="footer-link">Home</a></li>
+                        <li><a href="#about" class="footer-link">Chi Sono</a></li>
+                        <li><a href="#skills" class="footer-link">Competenze</a></li>
+                        <li><a href="#projects" class="footer-link">Progetti</a></li>
+                        <li><a href="#contact" class="footer-link">Contatti</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Footer Right - Social Links & Contact -->
+            <div class="footer-right">
+                <h4 class="footer-title">Connettiti</h4>
+                <div class="footer-social">
+                    <a href="https://github.com/yourusername" class="footer-social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="footer-social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com/yourusername" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="mailto:your.email@example.com" class="footer-social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+                
+                <div class="footer-contact">
+                    <p class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Italia</span>
+                    </p>
+                    <p class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+39 123 456 7890</span>
+                    </p>
+                    <p class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>your.email@example.com</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="footer-bottom-left">
+                    <p class="footer-version">
+                        <i class="fas fa-code-branch"></i>
+                        Versione 2.0.0
+                    </p>
+                    <p class="footer-update">
+                        <i class="fas fa-sync-alt"></i>
+                        Ultimo aggiornamento: Gennaio 2025
+                    </p>
+                </div>
+                
+                <div class="footer-bottom-center">
+                    <div class="footer-tech">
+                        <span class="footer-tech-label">Realizzato con:</span>
+                        <div class="footer-tech-stack">
+                            <span class="tech-item" title="HTML5">
+                                <i class="fab fa-html5"></i>
+                            </span>
+                            <span class="tech-item" title="CSS3">
+                                <i class="fab fa-css3-alt"></i>
+                            </span>
+                            <span class="tech-item" title="JavaScript">
+                                <i class="fab fa-js-square"></i>
+                            </span>
+                            <span class="tech-item" title="Git">
+                                <i class="fab fa-git-alt"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom-right">
+                    <div class="footer-theme-info">
+                        <button id="footer-theme-toggle" class="footer-theme-btn" aria-label="Cambia tema">
+                            <i class="fas fa-palette"></i>
+                            <span class="theme-text">Cambia Tema</span>
+                        </button>
+                    </div>
+                    
+                    <div class="footer-scroll-top">
+                        <button id="footer-scroll-top" class="footer-scroll-btn" aria-label="Torna in alto">
+                            <i class="fas fa-chevron-up"></i>
+                            <span>Torna su</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Wave Animation -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                      class="footer-wave-path"></path>
+            </svg>
+        </div>
+    </div>
+</footer>
+
+<!-- Footer Styles (da aggiungere al CSS) -->
+<style>
+.footer {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border-top: 1px solid var(--border-color);
+    padding: var(--spacing-20) 0 var(--spacing-8);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-12);
+    margin-bottom: var(--spacing-8);
+}
+
+.footer-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-4);
+}
+
+.footer-logo .logo-text {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-color);
+}
+
+.footer-copyright,
+.footer-tagline {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin: var(--spacing-2) 0;
+}
+
+.heart,
+.coffee {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
+    font-size: var(--text-sm);
+}
+
+.footer-link:hover {
+    color: var(--accent-color);
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--text-secondary);
+    transition: all var(--transition-normal);
+    font-size: var(--text-sm);
+}
+
+.footer-social-link:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-6);
+}
+
+.footer-bottom-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-6);
+    align-items: center;
+}
+
+.footer-tech {
+    text-align: center;
+}
+
+.footer-tech-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: var(--spacing-2);
+}
+
+.footer-tech-stack {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2);
+}
+
+.tech-item {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    transition: all var(--transition-normal);
+}
+
+.tech-item:hover {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.footer-theme-btn,
+.footer-scroll-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    transition: all var(--transition-normal);
+    margin: var(--spacing-1) 0;
+}
+
+.footer-theme-btn:hover,
+.footer-scroll-btn:hover {
+    background: var(--accent-color);
+    color: var(--text-inverse);
+    border-color: var(--accent-color);
+}
+
+.footer-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+}
+
+.footer-wave svg {
+    width: 100%;
+    height: 100%;
+}
+
+.footer-wave-path {
+    fill: var(--bg-color);
+    opacity: 0.1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content,
+    .footer-bottom-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: var(--spacing-8);
+    }
+    
+    .footer-tech-stack {
+        justify-content: center;
+    }
+    
+    .footer-nav-list {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .footer-social {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+</style>
+
+<!-- Footer JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Footer theme toggle
+    const footerThemeBtn = document.getElementById('footer-theme-toggle');
+    if (footerThemeBtn && window.ThemeManager) {
+        footerThemeBtn.addEventListener('click', () => {
+            window.ThemeManager.toggleTheme();
+        });
+    }
+    
+    // Footer scroll to top
+    const footerScrollBtn = document.getElementById('footer-scroll-top');
+    if (footerScrollBtn && window.ScrollManager) {
+        footerScrollBtn.addEventListener('click', () => {
+            window.ScrollManager.scrollToTop();
+        });
+    }
+    
+    // Footer links smooth scroll
+    const footerLinks = document.querySelectorAll('.footer-link[href^="#"]');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            if (window.ScrollManager) {
+                window.ScrollManager.scrollToElement(targetId);
+            }
+        });
+    });
+});
+</script>

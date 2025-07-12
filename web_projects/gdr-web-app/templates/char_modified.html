@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Modifica Personaggio{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <form method="POST" class="card shadow p-4 w-100" style="max-width: 600px;">
+        <h2 class="text-center mb-4">Modifica Personaggio</h2>
+
+        <!-- Campo nome -->
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                class="form-control"
+                placeholder="Inserisci il nuovo nome"
+                value="{{ pg.nome }}"
+                required>
+        </div>
+
+        <!-- Campo classe -->
+        <div class="mb-3">
+            <label for="classe" class="form-label">Classe</label>
+            <select id="classe" name="classe" class="form-select" required>
+                {% for c in classi %}
+                    <option value="{{ c }}" {% if pg.classe == c %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Pulsanti -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Salva modifiche</button>
+            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-secondary btn-sm">Annulla</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

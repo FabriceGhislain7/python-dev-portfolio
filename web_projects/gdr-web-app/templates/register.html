@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg mt-5">
+      <div class="card-body">
+        <h3 class="card-title text-center mb-4">Crea un nuovo account</h3>
+
+        <form method="POST" action="{{ url_for('auth.register') }}">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              placeholder="Scegli un nome utente"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Inserisci la tua email"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="psw" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="psw"
+              name="psw"
+              placeholder="Crea una password sicura"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="re_psw" class="form-label">Conferma Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="re_psw"
+              name="re_psw"
+              placeholder="Ripeti la password"
+              required
+            >
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success">Conferma</button>
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <p class="text-center">
+          Hai già un account?
+          <a href="{{ url_for('auth.login') }}" class="text-decoration-none fw-bold">Accedi qui</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

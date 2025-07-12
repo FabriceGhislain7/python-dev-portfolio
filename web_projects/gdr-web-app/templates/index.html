@@ -1,55 +1,496 @@
 {% extends "layout.html" %}
 {% block title %}Benvenuto - GDR Web{% endblock %}
-
 {% block content %}
-<!-- HERO di benvenuto senza immagine -->
-<section class="py-5 text-center bg-primary text-white rounded-4 shadow-sm">
-  <div class="container">
-    <h1 class="display-4 fw-bold">Benvenuto nel GDR Web App</h1>
-    <p class="lead">Inizia la tua avventura fantasy nel nostro gioco di ruolo online.</p>
-    <a href="{{ url_for('gioco.menu') }}" class="btn btn-light btn-lg mt-4">Vai al Menu Principale</a>
+
+<!-- HERO di benvenuto con tema fantasy scuro -->
+<section class="py-5 text-center bg-dark-fantasy text-white rounded-5 shadow-lg position-relative overflow-hidden welcome-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-particles">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+  </div>
+  
+  <div class="container position-relative z-index-high">
+    <div class="hero-content">
+      <h1 class="display-4 fw-bold mb-3 welcome-title text-shadow">Benvenuto nel GDR Web App</h1>
+      <p class="lead mb-4 welcome-subtitle text-gold">Inizia la tua avventura fantasy nel nostro Gioco Di Ruolo online.</p>
+      <a href="{{ url_for('gioco.menu') }}" class="btn btn-gold btn-lg mt-3 main-cta-button shadow-lg">
+        <i class="bi bi-play-circle me-2"></i>Vai al Menu Principale
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- Sezioni opzionali -->
+<!-- Sezioni informative con tema medievale -->
 <div class="container mt-5">
   <div class="row text-center g-4">
-
     <!-- About -->
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
-          <h5 class="card-title">Chi siamo</h5>
-          <p class="card-text">Scopri chi ha creato il gioco, la filosofia dietro il progetto e i prossimi obiettivi.</p>
-          <a href="{{ url_for('gioco.about') }}" class="btn btn-outline-primary btn-sm">About</a>
+      <div class="card h-100 border-0 medieval-card about-card">
+        <div class="card-icon-wrapper">
+          <div class="card-icon bg-emerald">
+            <i class="bi bi-people-fill fs-2 text-white"></i>
+          </div>
+        </div>
+        <div class="card-body d-flex flex-column pt-4">
+          <h5 class="card-title fw-bold text-dark-blue">Chi siamo</h5>
+          <p class="card-text flex-grow-1 text-muted">Scopri chi ha creato il gioco, la filosofia dietro il progetto e i prossimi obiettivi.</p>
+          <a href="{{ url_for('gioco.about') }}" class="btn btn-outline-emerald btn-sm mt-auto medieval-button">
+            <i class="bi bi-info-circle me-2"></i>About
+          </a>
         </div>
       </div>
     </div>
-
+    
     <!-- Guida -->
     <div class="col-md-4">
-      <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
-          <h5 class="card-title">Guida al gioco</h5>
-          <p class="card-text">Leggi le regole base, comandi principali e consigli per iniziare il tuo viaggio.</p>
-          <a href="{{ url_for('gioco.guide_game') }}" class="btn btn-outline-primary btn-sm">Game guide</a>
+      <div class="card h-100 border-0 medieval-card guide-card">
+        <div class="card-icon-wrapper">
+          <div class="card-icon bg-crimson">
+            <i class="bi bi-book fs-2 text-white"></i>
+          </div>
         </div>
-    </div>
-</div>
-
-<!-- Credits -->
-<div class="col-md-4">
-    <div class="card h-100 shadow-sm border-0 bg-light">
-        <div class="card-body">
-            <h5 class="card-title">Credits</h5>
-            <p class="card-text">Ringraziamenti, fonti grafiche e contributori open source.</p>
-            <a href="{{ url_for('gioco.credits') }}" class="btn btn-outline-primary btn-sm">Credits</a>
+        <div class="card-body d-flex flex-column pt-4">
+          <h5 class="card-title fw-bold text-dark-blue">Guida al gioco</h5>
+          <p class="card-text flex-grow-1 text-muted">Leggi le regole base, comandi principali e consigli per iniziare il tuo viaggio.</p>
+          <a href="{{ url_for('gioco.guide_game') }}" class="btn btn-outline-crimson btn-sm mt-auto medieval-button">
+            <i class="bi bi-compass me-2"></i>Game guide
+          </a>
         </div>
       </div>
     </div>
-
+    
+    <!-- Credits -->
+    <div class="col-md-4">
+      <div class="card h-100 border-0 medieval-card credits-card">
+        <div class="card-icon-wrapper">
+          <div class="card-icon bg-royal-purple">
+            <i class="bi bi-star-fill fs-2 text-white"></i>
+          </div>
+        </div>
+        <div class="card-body d-flex flex-column pt-4">
+          <h5 class="card-title fw-bold text-dark-blue">Credits</h5>
+          <p class="card-text flex-grow-1 text-muted">Ringraziamenti, fonti grafiche e contributori open source.</p>
+          <a href="{{ url_for('gioco.credits') }}" class="btn btn-outline-royal-purple btn-sm mt-auto medieval-button">
+            <i class="bi bi-heart-fill me-2"></i>Credits
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Sezione features con tema pergamena -->
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="parchment-card text-center">
+        <div class="parchment-content">
+          <h4 class="fw-bold text-dark-blue mb-3">⚔️ Forgia la tua Leggenda ⚔️</h4>
+          <p class="text-muted mb-4">Immergiti in un mondo di magia e avventura, dove ogni scelta plasma il tuo destino.</p>
+          
+          <div class="features-grid">
+            <div class="feature-item">
+              <div class="feature-icon bg-emerald">🏰</div>
+              <h6 class="text-dark-blue mb-1">Regni Epici</h6>
+              <small class="text-muted">Esplora mondi fantastici</small>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon bg-crimson">⚔️</div>
+              <h6 class="text-dark-blue mb-1">Battaglie Strategiche</h6>
+              <small class="text-muted">Combatti con tattica</small>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon bg-royal-purple">🎭</div>
+              <h6 class="text-dark-blue mb-1">Personaggi Unici</h6>
+              <small class="text-muted">Crea il tuo eroe</small>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon bg-gold">📜</div>
+              <h6 class="text-dark-blue mb-1">Storie Epiche</h6>
+              <small class="text-muted">Vivi avventure indimenticabili</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Palette colori fantasy */
+  :root {
+    --emerald: #2d5a4a;
+    --crimson: #8b1538;
+    --royal-purple: #4a1a4a;
+    --gold: #b8860b;
+    --dark-blue: #1a2332;
+    --parchment: #f4f1e8;
+    --dark-fantasy: linear-gradient(135deg, #1a2332 0%, #2d3748 50%, #1a202c 100%);
+  }
+
+  .bg-emerald { background-color: var(--emerald) !important; }
+  .bg-crimson { background-color: var(--crimson) !important; }
+  .bg-royal-purple { background-color: var(--royal-purple) !important; }
+  .bg-gold { background-color: var(--gold) !important; }
+  .text-dark-blue { color: var(--dark-blue) !important; }
+  .text-gold { color: var(--gold) !important; }
+
+  /* Hero section con tema dark fantasy */
+  .bg-dark-fantasy {
+    background: var(--dark-fantasy);
+    position: relative;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(184, 134, 11, 0.1) 0%, transparent 70%);
+  }
+
+  .z-index-high { z-index: 10; }
+
+  /* Particelle magiche */
+  .hero-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: magicFloat 8s ease-in-out infinite;
+  }
+
+  .particle-1 { top: 20%; left: 10%; animation-delay: 0s; }
+  .particle-2 { top: 60%; left: 80%; animation-delay: 2s; }
+  .particle-3 { top: 30%; left: 60%; animation-delay: 4s; }
+  .particle-4 { top: 80%; left: 20%; animation-delay: 6s; }
+  .particle-5 { top: 50%; left: 40%; animation-delay: 1s; }
+
+  @keyframes magicFloat {
+    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+    25% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+    50% { transform: translateY(-10px) scale(0.8); opacity: 0.5; }
+    75% { transform: translateY(-30px) scale(1.1); opacity: 0.8; }
+  }
+
+  /* Testo hero con effetti */
+  .welcome-title {
+    animation: titleGlow 2s ease-in-out infinite alternate;
+  }
+
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  @keyframes titleGlow {
+    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    to { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(184, 134, 11, 0.3); }
+  }
+
+  .welcome-subtitle {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+
+  /* Pulsante dorato principale */
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, #daa520 100%);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    animation: fadeInUp 1s ease-out 0.6s both;
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #daa520 0%, var(--gold) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(184, 134, 11, 0.4) !important;
+    color: white;
+  }
+
+  /* Cards medievali */
+  .medieval-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .medieval-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald), var(--crimson), var(--royal-purple));
+  }
+
+  .medieval-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  .card-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: -30px;
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Pulsanti colorati delle cards */
+  .btn-outline-emerald {
+    color: var(--emerald);
+    border-color: var(--emerald);
+    border-width: 2px;
+  }
+
+  .btn-outline-emerald:hover {
+    background-color: var(--emerald);
+    border-color: var(--emerald);
+    color: white;
+  }
+
+  .btn-outline-crimson {
+    color: var(--crimson);
+    border-color: var(--crimson);
+    border-width: 2px;
+  }
+
+  .btn-outline-crimson:hover {
+    background-color: var(--crimson);
+    border-color: var(--crimson);
+    color: white;
+  }
+
+  .btn-outline-royal-purple {
+    color: var(--royal-purple);
+    border-color: var(--royal-purple);
+    border-width: 2px;
+  }
+
+  .btn-outline-royal-purple:hover {
+    background-color: var(--royal-purple);
+    border-color: var(--royal-purple);
+    color: white;
+  }
+
+  .medieval-button {
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .medieval-button:hover {
+    transform: scale(1.05);
+  }
+
+  /* Card pergamena per features */
+  .parchment-card {
+    background: var(--parchment);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    box-shadow: 
+      inset 0 0 20px rgba(184, 134, 11, 0.1),
+      0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    border: 2px solid rgba(184, 134, 11, 0.2);
+  }
+
+  .parchment-card::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--gold), var(--emerald), var(--crimson), var(--royal-purple));
+    border-radius: 1.5rem;
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  /* Grid delle features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .feature-item {
+    text-align: center;
+    animation: bounceIn 0.6s ease-out;
+  }
+
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Animazioni */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Animazioni staggered per le cards */
+  .about-card {
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+  }
+
+  .guide-card {
+    animation: slideInUp 0.8s ease-out 0.4s both;
+  }
+
+  .credits-card {
+    animation: slideInRight 0.8s ease-out 0.6s both;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-particles { display: none; }
+    .display-4 { font-size: 2rem; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .parchment-card { padding: 2rem 1rem; }
+    .card-icon-wrapper { margin-top: -20px; }
+    .card-icon { width: 50px; height: 50px; }
+  }
+</style>
+
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Effetto parallax sulle particelle
+    document.addEventListener('mousemove', function(e) {
+      const particles = document.querySelectorAll('.particle');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.3;
+        const x = (mouseX - 0.5) * speed * 10;
+        const y = (mouseY - 0.5) * speed * 10;
+        
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    // Effetto scintillio sulle icone delle features
+    const featureIcons = document.querySelectorAll('.feature-icon');
+    featureIcons.forEach(icon => {
+      setInterval(() => {
+        icon.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          icon.style.transform = 'scale(1)';
+        }, 200);
+      }, Math.random() * 5000 + 3000);
+    });
+
+    // Effetto ondulazione sui pulsanti
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        this.style.boxShadow = '0 0 20px rgba(0,0,0,0.3)';
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.boxShadow = '';
+      });
+    });
+  });
+</script>
+{% endblock %}

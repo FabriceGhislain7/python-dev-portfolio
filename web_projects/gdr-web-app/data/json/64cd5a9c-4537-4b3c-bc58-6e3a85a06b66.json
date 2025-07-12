@@ -1,0 +1,13 @@
+{
+    "classe": "Mago",
+    "id": "64cd5a9c-4537-4b3c-bc58-6e3a85a06b66",
+    "nome": "Luca",
+    "salute": 80,
+    "salute_max": 200,
+    "attacco_min": 5,
+    "attacco_max": 80,
+    "storico_danni_subiti": [],
+    "livello": 1,
+    "destrezza": 15,
+    "npc": false
+}
