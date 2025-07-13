@@ -1,5 +1,342 @@
-<footer class="footer mt-auto py-1 bg-light fixed-bottom">
-  <div class="container text-center">
-    <span class="text-muted">&copy; 2025 RPG Web. Tutti i diritti riservati.</span>
+<footer class="footer mt-auto py-4 bg-dark text-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Logo e descrizione -->
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h5 class="text-warning fw-bold mb-2">
+          <i class="bi bi-shield-fill me-2"></i>GDR Web
+        </h5>
+        <p class="small text-muted mb-0">
+          Il tuo portale per avventure fantasy epiche online.
+        </p>
+      </div>
+
+      <!-- Link rapidi -->
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h6 class="text-light fw-semibold mb-2">Link Rapidi</h6>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{{ url_for('gioco.about') }}" class="text-light-gray text-decoration-none small hover-link">
+            <i class="bi bi-info-circle me-1"></i>About
+          </a>
+          <a href="{{ url_for('gioco.guide_game') }}" class="text-light-gray text-decoration-none small hover-link">
+            <i class="bi bi-book me-1"></i>Guida
+          </a>
+          <a href="{{ url_for('gioco.credits') }}" class="text-light-gray text-decoration-none small hover-link">
+            <i class="bi bi-heart me-1"></i>Credits
+          </a>
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('gioco.menu') }}" class="text-warning text-decoration-none small hover-link">
+            <i class="bi bi-controller me-1"></i>Menu
+          </a>
+          {% else %}
+          <a href="{{ url_for('auth.login') }}" class="text-warning text-decoration-none small hover-link">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Info sviluppatore e contatti -->
+      <div class="col-md-4 text-md-end">
+        <div class="mb-2">
+          <span class="text-light-gray small">
+            <i class="bi bi-calendar3 me-1"></i>&copy; 2025 GDR Web
+          </span>
+        </div>
+        <div class="mb-2">
+          <span class="text-light-gray small">
+            <i class="bi bi-code-slash me-1"></i>Sviluppato da 
+            <span class="text-warning fw-semibold">Fabrice Ghislain Tebou</span>
+          </span>
+        </div>
+        
+        <!-- Contatti personali -->
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/fabrice-ghislain-tebou-72000b211" 
+             target="_blank" 
+             class="text-light-gray me-2" 
+             title="LinkedIn Profile" 
+             aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="mailto:ghislaintebou@gmail.com" 
+             class="text-light-gray me-2" 
+             title="ghislaintebou@gmail.com" 
+             aria-label="Email">
+            <i class="bi bi-envelope-fill"></i>
+          </a>
+          <a href="https://github.com/FabriceGhislain7" 
+             target="_blank"
+             class="text-light-gray me-2" 
+             title="GitHub Profile" 
+             aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+          <a href="tel:+393519957025" 
+             class="text-light-gray" 
+             title="+39 351 995 7025" 
+             aria-label="Telefono">
+            <i class="bi bi-telephone-fill"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Linea divisoria e info aggiuntive -->
+    <hr class="my-3 border-secondary">
+    
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <span class="text-light-gray small">
+          <i class="bi bi-shield-check me-1"></i>
+          Tutti i diritti riservati. 
+          <a href="#" class="text-light-gray text-decoration-none hover-link">Privacy Policy</a> | 
+          <a href="#" class="text-light-gray text-decoration-none hover-link">Termini di Servizio</a>
+        </span>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <span class="text-light-gray small">
+          <i class="bi bi-cpu me-1"></i>
+          Versione 1.0.0 | 
+          <span id="current-time" class="text-warning"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Sezione sviluppatore (mobile-friendly) -->
+    <div class="row mt-3 d-md-none">
+      <div class="col-12 text-center">
+        <div class="developer-card p-3 rounded bg-dark border border-secondary">
+          <h6 class="text-warning mb-2">
+            <i class="bi bi-person-badge me-1"></i>Sviluppatore
+          </h6>
+          <p class="text-light-gray small mb-2">
+            <strong>Fabrice Ghislain Tebou</strong><br>
+            Full Stack Developer specializzato in Python/Flask<br>
+            <i class="bi bi-envelope me-1"></i>ghislaintebou@gmail.com<br>
+            <i class="bi bi-telephone me-1"></i>+39 351 995 7025
+          </p>
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/fabrice-ghislain-tebou-72000b211" 
+               target="_blank" 
+               class="btn btn-outline-warning btn-sm me-2 mb-2">
+              <i class="bi bi-linkedin me-1"></i>LinkedIn
+            </a>
+            <a href="mailto:ghislaintebou@gmail.com" 
+               class="btn btn-outline-warning btn-sm me-2 mb-2">
+              <i class="bi bi-envelope me-1"></i>Email
+            </a>
+            <a href="https://github.com/FabriceGhislain7" 
+               target="_blank" 
+               class="btn btn-outline-warning btn-sm me-2 mb-2">
+              <i class="bi bi-github me-1"></i>GitHub
+            </a>
+            <a href="tel:+393519957025" 
+               class="btn btn-outline-warning btn-sm mb-2">
+              <i class="bi bi-telephone me-1"></i>Telefono
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
+
+<style>
+  /* Classe per testo grigio chiaro - più visibile */
+  .text-light-gray {
+    color: #adb5bd !important; /* Grigio chiaro invece di grigio scuro */
+  }
+
+  /* Stili per il footer migliorato */
+  .footer {
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%) !important;
+    border-top: 3px solid #ffc107;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  }
+
+  .hover-link {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .hover-link:hover {
+    color: #ffc107 !important;
+    transform: translateY(-1px);
+  }
+
+  .hover-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #ffc107;
+    transition: width 0.3s ease;
+  }
+
+  .hover-link:hover::after {
+    width: 100%;
+  }
+
+  .social-links a {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .social-links a:hover {
+    color: #ffc107 !important;
+    transform: translateY(-2px) scale(1.1);
+  }
+
+  /* Effetto speciale per LinkedIn */
+  .social-links a[href*="linkedin"]:hover {
+    color: #0077b5 !important;
+  }
+
+  /* Effetto speciale per GitHub */
+  .social-links a[href*="github"]:hover {
+    color: #f0f6fc !important;
+  }
+
+  /* Effetto speciale per Telefono */
+  .social-links a[href*="tel:"]:hover {
+    color: #28a745 !important;
+  }
+
+  /* Card sviluppatore per mobile */
+  .developer-card {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%) !important;
+    border: 1px solid #ffc107 !important;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+  }
+
+  .contact-links .btn {
+    transition: all 0.3s ease;
+  }
+
+  .contact-links .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  }
+
+  /* Effetto pulsazione per l'ora */
+  #current-time {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  /* Animazione glow per lo scudo */
+  .footer h5 i {
+    animation: shieldGlow 3s ease-in-out infinite alternate;
+    cursor: pointer;
+  }
+
+  @keyframes shieldGlow {
+    from { 
+      text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+    }
+    to { 
+      text-shadow: 0 0 15px rgba(255, 193, 7, 0.8), 0 0 25px rgba(255, 193, 7, 0.4);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer {
+      position: relative !important; /* Non fisso su mobile */
+    }
+    
+    .social-links {
+      margin-top: 10px;
+      justify-content: center;
+    }
+    
+    .col-md-6.text-md-end {
+      text-align: center !important;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      font-size: 1.4rem;
+      margin: 0 8px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .developer-card {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Aggiorna l'ora in tempo reale
+  function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('it-IT', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+    const timeElement = document.getElementById('current-time');
+    if (timeElement) {
+      timeElement.textContent = timeString;
+    }
+  }
+
+  // Aggiorna ogni minuto
+  updateTime();
+  setInterval(updateTime, 60000);
+
+  // Effetto scroll to top al click sul logo
+  document.querySelector('.footer h5')?.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Effetto feedback visivo
+    this.style.transform = 'scale(1.1)';
+    setTimeout(() => {
+      this.style.transform = 'scale(1)';
+    }, 200);
+  });
+
+  // Effetto confetti al click sui social links (Easter egg)
+  document.querySelectorAll('.social-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Crea un piccolo effetto sparkle
+      const sparkle = document.createElement('div');
+      sparkle.innerHTML = '✨';
+      sparkle.style.position = 'absolute';
+      sparkle.style.left = e.pageX + 'px';
+      sparkle.style.top = e.pageY + 'px';
+      sparkle.style.pointerEvents = 'none';
+      sparkle.style.fontSize = '20px';
+      sparkle.style.zIndex = '9999';
+      sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
+      
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    });
+  });
+
+  // CSS per l'animazione sparkle
+  const sparkleCSS = `
+    @keyframes sparkleFloat {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-30px) scale(1.5); }
+    }
+  `;
+  
+  const style = document.createElement('style');
+  style.textContent = sparkleCSS;
+  document.head.appendChild(style);
+</script>

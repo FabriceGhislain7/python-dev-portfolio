@@ -3,15 +3,11 @@
 
 {% block content %}
 
-<!-- HERO con animazione -->
-<section class="py-5 text-center bg-secondary text-white rounded-5 mb-4 shadow-lg hero-section">
+<!-- HERO -->
+<section class="py-5 text-center hero-section text-white rounded-5 mb-4 shadow-lg">
   <div class="container">
     <h1 class="display-5 fw-bold mb-3 fade-in text-white">Menu Principale</h1>
-    <p class="lead fade-in-delay text-white">Benvenuto nel gioco GDR! Scegli una sezione per proseguire.</p>
-    <div class="hero-decoration">
-      <i class="bi bi-dice-6 fs-1 opacity-25 position-absolute top-0 start-0 m-4"></i>
-      <i class="bi bi-shield-shaded fs-1 opacity-25 position-absolute top-0 end-0 m-4"></i>
-    </div>
+    <p class="lead fade-in-delay text-gold">Benvenuto nel gioco GDR! Scegli una sezione per proseguire.</p>
   </div>
 </section>
 
@@ -19,14 +15,14 @@
 <div class="container mb-4">
   <div class="row g-3">
     <div class="col-12 col-md-6 d-flex justify-content-center">
-      <button id="btn-area" class="btn btn-outline-primary btn-lg fw-bold main-button" onclick="showSection('area-personale')" style="width: 80%;">
+      <button id="btn-area" class="btn btn-outline-fantasy-blue btn-lg fw-bold main-button" onclick="showSection('area-personale')" style="width: 80%;">
         <i class="bi bi-person-circle me-2"></i>Area Personale
         <div class="button-shine"></div>
       </button>
     </div>
 
     <div class="col-12 col-md-6 d-flex justify-content-center">
-      <button id="btn-gioco" class="btn btn-outline-success btn-lg fw-bold main-button" onclick="showSection('modalita-gioco')" style="width: 80%;">
+      <button id="btn-gioco" class="btn btn-outline-fantasy-crimson btn-lg fw-bold main-button" onclick="showSection('modalita-gioco')" style="width: 80%;">
         <i class="bi bi-controller me-2"></i>Modalità di Gioco
         <div class="button-shine"></div>
       </button>
@@ -36,26 +32,26 @@
 
 <!-- Sezione: Area Personale -->
 <div class="container mt-4 section-block" id="area-personale" style="display: none;">
-  <h2 class="text-center mb-4 text-primary section-title">
+  <h2 class="text-center mb-4 text-fantasy-blue section-title">
     <i class="bi bi-person-badge me-2"></i>Area Personale
   </h2>
   <div class="row g-3">
     <div class="col-12 col-md-6">
       <div class="card h-100 text-center shadow-sm game-card" id="card-profilo">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-fantasy-blue text-white">
           <i class="bi bi-person-gear fs-4"></i>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Profilo</h5>
+          <h5 class="card-title text-dark-blue">Profilo</h5>
           <p class="card-text text-muted small">Gestisci il tuo account e i tuoi crediti</p>
           <div class="d-grid gap-2">
-            <a href="{{ url_for('auth.modified_user') }}" class="btn btn-warning">
+            <a href="{{ url_for('auth.modified_user') }}" class="btn btn-fantasy-gold">
               <i class="bi bi-pencil-square me-2"></i>Modifica utente
             </a>
-            <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-info text-white">
+            <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-fantasy-emerald text-white">
               <i class="bi bi-bank me-2"></i>Ricarica crediti
             </a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <button type="button" class="btn btn-fantasy-crimson text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">
               <i class="bi bi-trash3 me-2"></i>Elimina utente
             </button>
           </div>
@@ -65,17 +61,17 @@
     
     <div class="col-12 col-md-6">
       <div class="card h-100 text-center shadow-sm game-card" id="card-personaggi">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-fantasy-blue text-white">
           <i class="bi bi-people fs-4"></i>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Personaggi</h5>
+          <h5 class="card-title text-dark-blue">Personaggi</h5>
           <p class="card-text text-muted small">Crea e gestisci i tuoi personaggi</p>
           <div class="d-grid gap-2">
-            <a href="{{ url_for('characters.create_char') }}" class="btn btn-success">
+            <a href="{{ url_for('characters.create_char') }}" class="btn btn-fantasy-emerald text-white">
               <i class="bi bi-person-plus me-2"></i>Crea personaggio
             </a>
-            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-primary">
+            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-fantasy-blue text-white">
               <i class="bi bi-people-fill me-2"></i>Lista personaggi
             </a>
           </div>
@@ -87,26 +83,26 @@
 
 <!-- Sezione: Modalità di Gioco -->
 <div class="container mt-4 section-block" id="modalita-gioco" style="display: none;">
-  <h2 class="text-center mb-4 text-success section-title">
+  <h2 class="text-center mb-4 text-fantasy-crimson section-title">
     <i class="bi bi-joystick me-2"></i>Modalità di Gioco
   </h2>
   <div class="row g-3">
     <div class="col-12 col-md-6">
       <div class="card h-100 text-center shadow-sm game-card" id="card-gioco">
-        <div class="card-header bg-success text-white">
+        <div class="card-header bg-fantasy-crimson text-white">
           <i class="bi bi-map fs-4"></i>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Missioni & Ambienti</h5>
+          <h5 class="card-title text-dark-blue">Missioni & Ambienti</h5>
           <p class="card-text text-muted small">Esplora mondi e affronta missioni</p>
           <div class="d-grid gap-2">
-            <a href="{{ url_for('mission.select_mission') }}" class="btn btn-info text-white">
+            <a href="{{ url_for('mission.select_mission') }}" class="btn btn-fantasy-purple text-white">
               <i class="bi bi-flag me-2"></i>Seleziona missione
             </a>
-            <a href="{{ url_for('environment.select_environment') }}" class="btn btn-info">
+            <a href="{{ url_for('environment.select_environment') }}" class="btn btn-fantasy-emerald text-white">
               <i class="bi bi-globe me-2"></i>Seleziona ambiente
             </a>
-            <a href="{{ url_for('environment.show_environment') }}" class="btn btn-outline-info">
+            <a href="{{ url_for('environment.show_environment') }}" class="btn btn-outline-fantasy-emerald">
               <i class="bi bi-eye me-2"></i>Mostra ambiente
             </a>
           </div>
@@ -116,17 +112,17 @@
     
     <div class="col-12 col-md-6">
       <div class="card h-100 text-center shadow-sm game-card" id="card-inventario">
-        <div class="card-header bg-success text-white">
+        <div class="card-header bg-fantasy-crimson text-white">
           <i class="bi bi-bag fs-4"></i>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Inventario & Battaglia</h5>
+          <h5 class="card-title text-dark-blue">Inventario & Battaglia</h5>
           <p class="card-text text-muted small">Gestisci oggetti e combatti</p>
           <div class="d-grid gap-2">
-            <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-success">
+            <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-fantasy-emerald text-white">
               <i class="bi bi-backpack me-2"></i>Gestisci inventario
             </a>
-            <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-secondary">
+            <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-fantasy-dark text-white">
               <i class="bi bi-sword me-2"></i>Inizia battaglia
             </a>
           </div>
@@ -136,26 +132,26 @@
   </div>
 </div>
 
-<!-- Modal di conferma eliminazione migliorato -->
+<!-- Modal di conferma eliminazione -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center border-0 shadow-lg">
-      <div class="modal-header border-0 d-block position-relative bg-danger text-white">
+      <div class="modal-header border-0 d-block position-relative bg-fantasy-crimson text-white">
         <h5 class="modal-title">
           <i class="bi bi-exclamation-triangle me-2"></i>Conferma eliminazione
         </h5>
         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Chiudi"></button>
       </div>
       <div class="modal-body py-4">
-        <i class="bi bi-person-x fs-1 text-danger mb-3"></i>
+        <i class="bi bi-person-x fs-1 text-fantasy-crimson mb-3"></i>
         <p class="mb-2">Sei sicuro di voler eliminare il tuo account?</p>
         <p class="text-muted small">Questa operazione non può essere annullata.</p>
       </div>
       <div class="modal-footer justify-content-center border-0">
-        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-outline-fantasy-dark me-2" data-bs-dismiss="modal">
           <i class="bi bi-x-circle me-2"></i>Annulla
         </button>
-        <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-danger">
+        <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-fantasy-crimson text-white">
           <i class="bi bi-trash3 me-2"></i>Elimina definitivamente
         </a>
       </div>
@@ -164,35 +160,157 @@
 </div>
 
 <style>
-  /* Gradiente per l'hero */
-  .bg-gradient {
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  /* PALETTE COLORI FANTASY ARMONIOSA */
+  :root {
+    --fantasy-blue: #2c3e50;      /* Blu profondo elegante */
+    --fantasy-crimson: #8b2635;   /* Cremisi medievale */
+    --fantasy-emerald: #27ae60;   /* Verde smeraldo */
+    --fantasy-purple: #6c5ce7;    /* Viola magico */
+    --fantasy-gold: #d4af37;      /* Oro antico */
+    --fantasy-dark: #34495e;      /* Grigio scuro */
+    --fantasy-light: #ecf0f1;     /* Grigio chiaro */
+    --text-gold: #f4d03f;         /* Oro per testi */
+  }
+
+  /* CLASSI COLORI */
+  .bg-fantasy-blue { background-color: var(--fantasy-blue) !important; }
+  .bg-fantasy-crimson { background-color: var(--fantasy-crimson) !important; }
+  .bg-fantasy-emerald { background-color: var(--fantasy-emerald) !important; }
+  .bg-fantasy-purple { background-color: var(--fantasy-purple) !important; }
+  .bg-fantasy-gold { background-color: var(--fantasy-gold) !important; }
+  .bg-fantasy-dark { background-color: var(--fantasy-dark) !important; }
+
+  .text-fantasy-blue { color: var(--fantasy-blue) !important; }
+  .text-fantasy-crimson { color: var(--fantasy-crimson) !important; }
+  .text-fantasy-emerald { color: var(--fantasy-emerald) !important; }
+  .text-fantasy-purple { color: var(--fantasy-purple) !important; }
+  .text-gold { color: var(--text-gold) !important; }
+  .text-dark-blue { color: var(--fantasy-dark) !important; }
+
+  /* PULSANTI FANTASY */
+  .btn-fantasy-blue {
+    background-color: var(--fantasy-blue);
+    border-color: var(--fantasy-blue);
+    color: white;
+  }
+  .btn-fantasy-blue:hover {
+    background-color: #34495e;
+    border-color: #34495e;
+    color: white;
+  }
+
+  .btn-fantasy-crimson {
+    background-color: var(--fantasy-crimson);
+    border-color: var(--fantasy-crimson);
+    color: white;
+  }
+  .btn-fantasy-crimson:hover {
+    background-color: #a12d42;
+    border-color: #a12d42;
+    color: white;
+  }
+
+  .btn-fantasy-emerald {
+    background-color: var(--fantasy-emerald);
+    border-color: var(--fantasy-emerald);
+    color: white;
+  }
+  .btn-fantasy-emerald:hover {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
+  }
+
+  .btn-fantasy-purple {
+    background-color: var(--fantasy-purple);
+    border-color: var(--fantasy-purple);
+    color: white;
+  }
+  .btn-fantasy-purple:hover {
+    background-color: #7f8ff4;
+    border-color: #7f8ff4;
+    color: white;
+  }
+
+  .btn-fantasy-gold {
+    background-color: var(--fantasy-gold);
+    border-color: var(--fantasy-gold);
+    color: var(--fantasy-dark);
+    font-weight: 600;
+  }
+  .btn-fantasy-gold:hover {
+    background-color: #f1c40f;
+    border-color: #f1c40f;
+    color: var(--fantasy-dark);
+  }
+
+  .btn-fantasy-dark {
+    background-color: var(--fantasy-dark);
+    border-color: var(--fantasy-dark);
+    color: white;
+  }
+  .btn-fantasy-dark:hover {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+    color: white;
+  }
+
+  /* PULSANTI OUTLINE */
+  .btn-outline-fantasy-blue {
+    color: var(--fantasy-blue);
+    border-color: var(--fantasy-blue);
+  }
+  .btn-outline-fantasy-blue:hover {
+    background-color: var(--fantasy-blue);
+    border-color: var(--fantasy-blue);
+    color: white;
+  }
+
+  .btn-outline-fantasy-crimson {
+    color: var(--fantasy-crimson);
+    border-color: var(--fantasy-crimson);
+  }
+  .btn-outline-fantasy-crimson:hover {
+    background-color: var(--fantasy-crimson);
+    border-color: var(--fantasy-crimson);
+    color: white;
+  }
+
+  .btn-outline-fantasy-emerald {
+    color: var(--fantasy-emerald);
+    border-color: var(--fantasy-emerald);
+  }
+  .btn-outline-fantasy-emerald:hover {
+    background-color: var(--fantasy-emerald);
+    border-color: var(--fantasy-emerald);
+    color: white;
+  }
+
+  .btn-outline-fantasy-dark {
+    color: var(--fantasy-dark);
+    border-color: var(--fantasy-dark);
+  }
+  .btn-outline-fantasy-dark:hover {
+    background-color: var(--fantasy-dark);
+    border-color: var(--fantasy-dark);
+    color: white;
+  }
+
+  /* HERO SECTION */
+  .hero-section {
+    background: linear-gradient(135deg, var(--fantasy-dark) 0%, var(--fantasy-blue) 50%, var(--fantasy-dark) 100%);
     position: relative;
     overflow: hidden;
   }
 
-  .hero-section {
-    position: relative;
-  }
-
-  /* Animazioni di entrata */
-  .fade-in {
-    animation: fadeInUp 0.8s ease-out;
-  }
-
-  .fade-in-delay {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
   }
 
   /* Pulsanti principali con effetti */
@@ -245,7 +363,8 @@
     transition: all 0.3s ease;
     border: 1px solid #dee2e6;
     overflow: hidden;
-    border-radius: 1.25rem !important; /* Stesso arrotondamento di rounded-5 */
+    border-radius: 1.25rem !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
   }
 
   .game-card:hover {
@@ -259,28 +378,28 @@
   }
 
   /* Evidenziazione sezioni attive */
-  .highlight-primary {
-    border: 3px solid #0d6efd !important;
-    box-shadow: 0 0 0.5rem #0d6efd66;
+  .highlight-blue {
+    border: 3px solid var(--fantasy-blue) !important;
+    box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4);
     animation: pulseBlue 2s infinite;
   }
 
-  .highlight-success {
-    border: 3px solid #198754 !important;
-    box-shadow: 0 0 0.5rem #19875466;
-    animation: pulseGreen 2s infinite;
+  .highlight-crimson {
+    border: 3px solid var(--fantasy-crimson) !important;
+    box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4);
+    animation: pulseCrimson 2s infinite;
   }
 
   @keyframes pulseBlue {
-    0% { box-shadow: 0 0 0.5rem #0d6efd66; }
-    50% { box-shadow: 0 0 1rem #0d6efd99; }
-    100% { box-shadow: 0 0 0.5rem #0d6efd66; }
+    0% { box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4); }
+    50% { box-shadow: 0 0 1rem rgba(44, 62, 80, 0.6); }
+    100% { box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4); }
   }
 
-  @keyframes pulseGreen {
-    0% { box-shadow: 0 0 0.5rem #19875466; }
-    50% { box-shadow: 0 0 1rem #19875499; }
-    100% { box-shadow: 0 0 0.5rem #19875466; }
+  @keyframes pulseCrimson {
+    0% { box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4); }
+    50% { box-shadow: 0 0 1rem rgba(139, 38, 53, 0.6); }
+    100% { box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4); }
   }
 
   /* Animazioni per le sezioni */
@@ -299,6 +418,26 @@
     }
   }
 
+  /* Animazioni di entrata */
+  .fade-in {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .fade-in-delay {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Responsive improvements */
   @media (max-width: 768px) {
     .hero-section {
@@ -312,6 +451,11 @@
     .game-card {
       margin-bottom: 1rem;
     }
+    
+    .main-button {
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+    }
   }
 </style>
 
@@ -319,6 +463,20 @@
 
 {% block scripts %}
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inizializza la pagina del menu
+    initMenuEffects();
+    
+    // Piccolo delay per permettere il caricamento completo
+    setTimeout(() => {
+      showSection('area-personale');
+    }, 100);
+  });
+
+  /**
+   * Mostra una sezione specifica e nasconde le altre
+   * @param {string} sectionId - ID della sezione da mostrare
+   */
   function showSection(sectionId) {
     const sections = ['area-personale', 'modalita-gioco'];
     const buttons = {
@@ -345,17 +503,22 @@
         section.classList.remove('section-block');
       }
 
-      buttons[id].classList.remove('btn-primary', 'btn-success', 'text-white');
-      buttons[id].classList.add(
-        id === 'area-personale' ? 'btn-outline-primary' : 'btn-outline-success'
-      );
+      const button = buttons[id];
+      if (button) {
+        button.classList.remove('btn-fantasy-blue', 'btn-fantasy-crimson', 'text-white');
+        button.classList.add(
+          id === 'area-personale' ? 'btn-outline-fantasy-blue' : 'btn-outline-fantasy-crimson'
+        );
+      }
 
       // Rimuovi evidenziazione dalle cards
-      cardsBySection[id].forEach(card => {
-        if (card) {
-          card.classList.remove('highlight-primary', 'highlight-success');
-        }
-      });
+      if (cardsBySection[id]) {
+        cardsBySection[id].forEach(card => {
+          if (card) {
+            card.classList.remove('highlight-blue', 'highlight-crimson');
+          }
+        });
+      }
     });
 
     // Mostra la sezione selezionata con animazione
@@ -366,45 +529,85 @@
     }
 
     // Aggiorna stile del pulsante attivo
-    if (sectionId === 'area-personale') {
-      buttons[sectionId].classList.remove('btn-outline-primary');
-      buttons[sectionId].classList.add('btn-primary', 'text-white');
+    const activeButton = buttons[sectionId];
+    if (activeButton) {
+      if (sectionId === 'area-personale') {
+        activeButton.classList.remove('btn-outline-fantasy-blue');
+        activeButton.classList.add('btn-fantasy-blue', 'text-white');
 
-      // Evidenzia le cards
-      cardsBySection[sectionId].forEach(card => {
-        if (card) card.classList.add('highlight-primary');
-      });
-    } else {
-      buttons[sectionId].classList.remove('btn-outline-success');
-      buttons[sectionId].classList.add('btn-success', 'text-white');
+        // Evidenzia le cards
+        if (cardsBySection[sectionId]) {
+          cardsBySection[sectionId].forEach(card => {
+            if (card) card.classList.add('highlight-blue');
+          });
+        }
+      } else {
+        activeButton.classList.remove('btn-outline-fantasy-crimson');
+        activeButton.classList.add('btn-fantasy-crimson', 'text-white');
 
-      // Evidenzia le cards
-      cardsBySection[sectionId].forEach(card => {
-        if (card) card.classList.add('highlight-success');
-      });
+        // Evidenzia le cards
+        if (cardsBySection[sectionId]) {
+          cardsBySection[sectionId].forEach(card => {
+            if (card) card.classList.add('highlight-crimson');
+          });
+        }
+      }
     }
 
     // Scroll fluido alla sezione
-    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
-  // Inizializza la pagina
-  document.addEventListener('DOMContentLoaded', () => {
-    // Piccolo delay per permettere il caricamento completo
-    setTimeout(() => {
-      showSection('area-personale');
-    }, 100);
-  });
+  /**
+   * Inizializza gli effetti del menu
+   */
+  function initMenuEffects() {
+    // Aggiungi effetto di hover sulle cards
+    const gameCards = document.querySelectorAll('.game-card');
+    gameCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
 
-  // Aggiungi effetto di hover sulle cards
-  document.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-5px)';
+    // Effetti sui pulsanti principali
+    const mainButtons = document.querySelectorAll('.main-button');
+    mainButtons.forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        const shine = this.querySelector('.button-shine');
+        if (shine) {
+          shine.style.left = '100%';
+        }
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        const shine = this.querySelector('.button-shine');
+        if (shine) {
+          shine.style.left = '-100%';
+        }
+      });
     });
-    
-    card.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0)';
+
+    // Aggiungi effetto click con feedback visivo
+    const allButtons = document.querySelectorAll('.btn');
+    allButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Piccola animazione di feedback
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+      });
     });
-  });
+  }
+
+  // Esponi le funzioni globalmente per uso nei template
+  window.showSection = showSection;
 </script>
 {% endblock %}
