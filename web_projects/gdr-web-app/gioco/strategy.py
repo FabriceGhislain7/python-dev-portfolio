@@ -1,9 +1,12 @@
-import random
+import random, logging
 from gioco.ambiente import Ambiente
 from gioco.inventario import Inventario
-from utils.log import Log
+from dataclasses import dataclass, field
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
+@dataclass
 class Strategia ():
     '''
     La classe Strategia è una classe base per le strategie di attacco
@@ -11,10 +14,10 @@ class Strategia ():
     Ogni strategia di attacco deve derivare da questa classe e implementare il
     metodo uso_inventario_npc.
     '''
-    def __init__(self, nome: 'str' = "Strategia di attacco"):
-        self.nome = nome
+    nome: str = "Strategia di attacco"
+    def __init__(self):
         msg = "Attenzione! le classi da utilizzare sono le classi derivate!"
-        Log.scrivi_log(msg)
+        logger.warning(msg)
 
     @staticmethod
     def uso_inventario_npc(
@@ -44,30 +47,6 @@ class Strategia ():
             "Devi implementare il metodo esegui nella sottoclasse"
         )
 
-    def to_dict(self) -> dict:
-        """Restituisce uno stato serializzabile per session o JSON.
-
-        Returns:
-            dict: Dizionario del materiale serializzato
-        """
-        return {
-            "classe": self.__class__.__name__,
-            "nome": self.nome
-        }
-
-    @classmethod
-    def from_dict(cls, data: dict) -> "Strategia":
-        """Ricostruisce l’istanza a partire da un dict serializzato.
-
-        Args:
-            data (dict): Dati serializzati
-
-        Returns:
-            Strategia:Dati deserializzati
-        """
-        strat = cls(data["nome"])
-        return strat
-
 
 '''
 le classi si occuperanno di gestire le decisioni del NPC
@@ -75,24 +54,25 @@ durante il suo turno
 '''
 
 
+@dataclass
 class Aggressiva(Strategia):
     '''
     la classe Aggressiva rappresenta una strategia in cui l'NPC decide di
     focalizzarsi sul fare il maggior danno possibile alla salute del bersaglio.
     '''
+    nome: str = "Aggressiva"
     def __init__(self):
-        super().__init__(nome="Aggressiva")
         msg = (
             "Il NPC ha scelto una strategia aggressiva! "
             "Attaccherà con tutte le sue forze!"
         )
-        Log.scrivi_log(msg)
+        logger.info(msg)
 
     @staticmethod
     def uso_inventario_npc(
         salute_npc: int,
-        inventario: 'Inventario',
-        ambiente: 'Ambiente' = None
+        inventario: Inventario,
+        ambiente: Ambiente = None
     ) -> int | bool:
         '''
         Esegue l'attacco aggressivo del NPC sul bersaglio. l'unico oggetto
@@ -133,14 +113,18 @@ class Aggressiva(Strategia):
         '''
         return destrezza + 3
 
+
+@dataclass
 class Difensiva(Strategia):
     '''
     La classe Difensiva rappresenta una strategia in cui il NPC si concentra
     sulla propria salute, curandosi quando questa è sotto i 60 punti e
     attaccando il bersaglio altrimenti.
     '''
+    nome: str = "Difensiva"
     def __init__(self):
-        super().__init__(nome="Difensiva")
+        msg = "Il NPC ha scelto una strategia difensiva! "
+        logger.info(msg)
 
     @staticmethod
     def uso_inventario_npc(
@@ -192,6 +176,8 @@ class Difensiva(Strategia):
             int: la destrezza incrementata di 5 punti
         '''
         return destrezza + 2
+
+
 class Equilibrata(Strategia):
     '''
     La classe Equilibrata rappresenta una strategia in cui il NPC decide di
@@ -199,12 +185,12 @@ class Equilibrata(Strategia):
     acida e infine attaccare il bersaglio
     l'uso degli oggetti è randomico.
     '''
+    nome: str = "Equilibrata"
     def __init__(self):
-        super().__init__(nome="Equilibrata")
         msg = (
             " il NPC ha scelto una strategia equilibrata! "
         )
-        Log.scrivi_log(msg)
+        logger.info(msg)
 
     @staticmethod
     def uso_inventario_npc(
@@ -268,7 +254,7 @@ class Equilibrata(Strategia):
                     f"{result} punti ferita"
                 )
         if msg != "":
-            Log.scrivi_log(msg)
+            logger.info(msg)
         return result
 
 # ----------------------------------------------------------------------------
@@ -322,3 +308,5 @@ class StrategiaFactory:
             return Equilibrata()
         else:
             raise ValueError(f"Tipo di strategia sconosciuto: {tipo}")
+
+

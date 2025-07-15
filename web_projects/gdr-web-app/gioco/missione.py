@@ -1,61 +1,42 @@
 import random
 import uuid
-
-from gioco.basic import Basic
+import json
+import os
+import logging
+from dataclasses import dataclass, field
 from gioco.personaggio import Personaggio
-from gioco.classi import Mago, Guerriero, Ladro
-from gioco.ambiente import Ambiente, Vulcano, Foresta, Palude
-from gioco.oggetto import Oggetto, PozioneCura, BombaAcida, Medaglione
+from gioco.ambiente import Ambiente, AmbienteFactory
+from gioco.oggetto import Oggetto
 from gioco.inventario import Inventario
-
 from gioco.strategy import Strategia, StrategiaFactory
-from utils.messaggi import Messaggi
-# from utils.log import Log
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
-class Missione(Basic):
+@dataclass
+class Missione():
     """
     Si occupa di aggregare istanze di ambiente , nemici e ricompense
     Rappresenta una missione, composta da un ambiente, nemici e premi.
     """
-    def __init__(
-        self,
-        nome: str,
-        ambiente: Ambiente,
-        nemici: list[Personaggio],
-        premi: list[Oggetto],
-        strategia_nemici: Strategia = None,
-        id: uuid.UUID = None
-    ) -> None:
-        """
-    Si occupa di aggregare istanze di ambiente , nemici e ricompense
-    Rappresenta una missione, composta da un ambiente, nemici e premi.
 
-    Args:
-        nome (str): Il nome della missione
-        ambiente (Ambiente) : L'istanza di ambiente necessaria per applicare
-        gli effetti ambientali durante la missione.
-        nemici (list[Personaggio]): Lista di nemici della missione
-        premi (list[Oggetto]): Lista delle ricompense
-
-    Returns:
-        None
-    """
-        # inizializzazione attributi
-        if id is None:
-            super().__init__()
-        else:
-            self.id = id
-        self.nome = nome
-        self.ambiente = ambiente  # ereditato dal torneo corrente
-        self.nemici = nemici  # lista dei nemici di tutti i tornei
-        self.premi = premi  # supporta premio singolo o multiplo
-        self.completata = False  # flag per premio in inventario
-        self.attiva = False
-        self.strategia_nemici = strategia_nemici
+    id: uuid.UUID = field(default_factory=uuid.uuid4)
+    ambiente: Ambiente = field(
+        default_factory=lambda: AmbienteFactory.usa_ambiente("Palude")
+    )
+    nemici: list[Personaggio] = field(default_factory=list)
+    premi: list[Oggetto] = field(default_factory=list)
+    nome: str = ""
+    strategia_nemici: Strategia = field(
+        default_factory=lambda: StrategiaFactory.usa_strategia("Equilibrata")
+    )
+    completata: bool = False
+    attiva: bool = False
 
     def get_nemici(self) -> list[Personaggio]:
         """
+        Il metodo deve cercare su static
         Metodo get per ottenere la lista di nemici dentro missione
 
         Args:
@@ -78,10 +59,7 @@ class Missione(Basic):
         """
         self.nemici.remove(nemico)
         msg = f"{nemico} rimosso dalla lista nemici della missione"
-        Messaggi.add_to_messaggi(msg)
-        # Log.scrivi_log(msg)
-        # Json.scrivi_dati("data/salvataggio.json",
-        # Json.applica_patch(self.to_dict()))
+        logger.info(msg)
 
     def rimuovi_nemici_sconfitti(self) -> None:
         """
@@ -114,16 +92,20 @@ class Missione(Basic):
         Returns:
             bool: True se la missione è completata, altrimenti False
         """
+        self.rimuovi_nemici_sconfitti()
         if len(self.nemici) == 0:
             self.completata = True
             msg = f"Missione '{self.nome}' completata"
-            Messaggi.add_to_messaggi(msg)
-            # Log.scrivi_log(msg)
+            logger.info(msg)
             return True
         return False
 
     # aggiunge premio all'inventario del giocatore se la missione è completata
-    def assegna_premio(self, inventari_giocatori: list[Inventario]) -> None:
+    def assegna_premio(
+        self,
+        inventari_giocatori: list[Inventario],
+        giocatore: str
+    ) -> None:
         """
         Mette nell'inventario dei giocatori gli oggetti contenuti nella lista
         dei Premi (Proprietà di Missione) distribuendoli casualmente
@@ -138,18 +120,16 @@ class Missione(Basic):
         """
         for premio in self.premi:
             inventario = random.choice(inventari_giocatori)
-            if inventario.proprietario is None:
+            if inventario.id_proprietario is None:
                 msg = "Non è possibile assegnare un premio ad un inventario"
                 msg += "senza un personaggio"
-                Messaggi.add_to_messaggi(msg)
+                logger.warning(msg)
                 raise ValueError(msg)
             inventario._aggiungi(premio)
-            msg = f"Premio {premio.nome} aggiunto all'inventario di {inventario.proprietario.nome                } "
-            Messaggi.add_to_messaggi(msg)
-            # Log.scrivi_log(msg)
-            # dati_da_salvare = [self.to_dict(), inventario.to_dict()]
-            # for dati in dati_da_salvare:
-            #     Json.scrivi_dati("data/salvataggio.json",Json.applica_patch(dati))
+            msg = (
+                f"Premio {premio.nome} aggiunto all'inventario di {giocatore} "
+            )
+            logger.info(msg)
 
     # QUESTO METODO E' PROVVISORIO
     def check_missione(self, inventari_vincitori: list[Inventario]) -> None:
@@ -171,117 +151,44 @@ class Missione(Basic):
         if self.verifica_completamento():
             self.assegna_premio(inventari_vincitori)
 
-    def to_dict(self) -> dict:
-        """
-        Restituisce uno stato serializzabile per session o JSON.
-
-        Returns:
-            dict: Dizionario del materiale serializzato
-        """
-        return {
-            "id": str(self.id) if self.id else None,
-            "classe": self.__class__.__name__,
-            "nome": self.nome,
-            "ambiente": Ambiente.to_dict(self.ambiente),
-            "nemici": [Personaggio.to_dict(nemico) for nemico in self.nemici],
-            "premi": [Oggetto.to_dict(premio) for premio in self.premi],
-            "strategia_nemici": (
-                Strategia.to_dict(self.strategia_nemici)
-                if self.strategia_nemici else None
-            ),
-            "completata": self.completata,
-            "attiva": self.attiva
-        }
-
-    @classmethod
-    def from_dict(cls, data: dict) -> "Missione":
-        """Ricostruisce l’istanza a partire da un dict serializzato.
-
-        Args:
-            data (dict): Dati serializzati
-
-        Returns:
-            Ambiente: Dati deserializzati
-        """
-        classi = {clss.__name__: clss for clss in Personaggio.__subclasses__()}
-
-        ambiente_cls = Ambiente.from_dict(data["ambiente"])
-        nemici = []
-        for nemico in data.get("nemici", []):
-            clss = classi.get(nemico.get("classe"))
-            if clss:
-                nemico = clss.from_dict(nemico)
-
-                nemici.append(nemico)
-        premi = [Oggetto.from_dict(premio) for premio in data.get("premi", [])]
-        strategia_nemici = (
-            Strategia.from_dict(data["strategia_nemici"])
-            if data.get("strategia_nemici") else None
-        )
-        missione = cls(
-            id=uuid.UUID(data["id"]) if data.get("id") else uuid.uuid4(),
-            nome=data["nome"],
-            ambiente=ambiente_cls,
-            nemici=nemici,
-            strategia_nemici=strategia_nemici,
-            premi=premi
-        )
-        missione.completata = data.get("completata", False)
-        missione.attiva = data.get("attiva", False)
-        return missione
-
-
 # Lista delle missioni
+
 
 class GestoreMissioni():
     """
     È un gestore di istanze della classe Missione, e le gestisce con diversi
     metodi
     """
+    lista_missioni: list[Missione] = field(default_factory=list)
 
-    def __init__(self) -> None:
-        # La proprietà principale di GestoreMissioni sarà una lista
-        # di oggetti Missione
-        self.lista_missioni = self.setup()
-
-    def setup(self) -> list[Missione]:
+    def setup(self) -> None:
+        from gioco.schemas.missione import MissioniSchema
         """
         Istanzio le Missioni da fornire al GestoreMissioni,
         viene chiamato nel costruttore di GestoreMissioni
-
+        cerca dentro alla cartella static le missioni
+        e le istanzia in una lista di oggetti Missione
         Args:
             None
 
         Returns:
-            list[Missione]: Ritorna una lista di istanze di classe Missione
+            None
         """
+
         # Istanzio le missioni
-        imboscata = Missione(
-            nome="Imboscata",
-            ambiente=Foresta(),
-            nemici=[Guerriero("Robin Hood"), Guerriero("Little Jhon")],
-            premi=[PozioneCura(), PozioneCura(), BombaAcida()],
-            strategia_nemici= StrategiaFactory.usa_strategia("equilibrata")
-        )
-        salva_principessa = Missione(
-            nome="Salva la principessa",
-            ambiente=Palude(),
-            nemici=[Ladro("Megera furfante")],
-            premi=[Medaglione()],
-            strategia_nemici= StrategiaFactory.usa_strategia("difensiva")
-        )
-        culto = Missione(
-            nome="Sgomina il culto di Graz'zt sul vulcano Gheemir",
-            ambiente=Vulcano(),
-            nemici=[
-                Mago("Cultista 1"),
-                Mago("Cultista 2"),
-                Mago("Cultista 3")
-            ],
-            premi=[PozioneCura(), Medaglione()],
-            strategia_nemici= StrategiaFactory.usa_strategia("aggressiva")
-        )
-        return [imboscata, salva_principessa, culto]
+        # cerco dentro a static/mission ogni file json avrà lo stesso nome
+        # della missione, il nome della sottoclasse di ambiente, il nome
+        # della sottoclasse della strategia  e la lista dei nemici e dei premi
+        lista = []
+        schema = MissioniSchema()
+        routes = r"static\mission"
+        for files in os.listdir(routes):
+            if files.endswith(".json"):
+                with open(os.path.join(routes, files), 'r') as file:
+                    data = json.load(file)
+                    missione = schema.load(data)
+                    lista.append(missione)
+        self.lista_missioni = lista
 
     def mostra(self) -> None:
         """
@@ -294,12 +201,10 @@ class GestoreMissioni():
             None
         """
         msg = ("Missioni disponibili:")
-        Messaggi.add_to_messaggi(msg)
-        # Log.scrivi_log(msg)
+        logger.info(msg)
         for missione in self.lista_missioni:
             msg = f"-{missione.nome}"
-            # self.messaggi.add_to_messaggi(msg)
-            # Log.scrivi_log(msg)
+            logger.info(msg)
 
     def finita(self) -> bool:
         """
@@ -321,10 +226,7 @@ class GestoreMissioni():
             if esito:
                 missione.attiva = False
                 msg = f"Missione : {missione.nome} completata"
-                Messaggi.add_to_messaggi(msg)
-                # Log.scrivi_log(msg)
-        # Json.scrivi_dati("data/salvataggio.json",
-        # Json.applica_patch(self.to_dict()))
+                logger.info(msg)
         return esito
 
     def sorteggia(self) -> Missione | None:
@@ -353,36 +255,5 @@ class GestoreMissioni():
             raise ValueError(msg)
         except ValueError as e:
             msg = f"Errore: {e}"
-            Messaggi.add_to_messaggi(msg)
-            # Log.scrivi_log(msg)
+            logger(msg)
             return None
-
-    def to_dict(self) -> dict:
-        """Restituisce uno stato serializzabile per session o JSON.
-
-        Returns:
-            dict: Dizionario del materiale serializzato
-        """
-        return {
-            "classe": self.__class__.__name__,
-            "lista_missioni": [
-                missione.to_dict() for missione in self.lista_missioni
-            ]
-        }
-
-    @classmethod
-    def from_dict(cls, data: dict) -> "GestoreMissioni":
-        """Ricostruisce l’istanza a partire da un dict serializzato.
-
-        Args:
-            data (dict): Dati serializzati
-
-        Returns:
-            Ambiente: Dati deserializzati.
-        """
-        gestore = cls()
-        gestore.lista_missioni = [
-            Missione.from_dict(missione)
-            for missione in data.get("lista_missioni", [])
-        ]
-        return gestore

@@ -33,3 +33,8 @@ def credits():
 def menu():
     return render_template('menu.html')
 
+# -----------------------CLEAR THE SESION ---------------------------
+@gioco_bp.route('/clear')
+def clear():
+    session.clear()
+    return redirect(url_for('gioco.index'))

@@ -1,25 +1,26 @@
 import random
+import logging
+from typing import Dict
+from dataclasses import dataclass
+
+from marshmallow import Schema, fields, post_load
 from gioco.oggetto import BombaAcida, Oggetto, PozioneCura
 from gioco.classi import Guerriero, Ladro, Mago
 from gioco.personaggio import Personaggio
-from utils.log import Log
-from utils.messaggi import Messaggi
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
+@dataclass
 class Ambiente():
     """
     E responsabile alla gestione di variabili  globali dovuti all'ambiente
     interagisce con le classi Personaggio e Oggetto
     """
-    def __init__(
-        self,
-        nome: str,
-        modifica_attacco: int = 0,
-        modifica_cura: float = 0
-    ):
-        self.nome = nome
-        self.mod_attacco = modifica_attacco
-        self.mod_cura = modifica_cura
+    nome: str
+    mod_attacco: int = 0
+    mod_cura: float = 0.0
 
     def modifica_attacco(self, attaccante: Personaggio) -> int:
         raise NotImplementedError
@@ -39,44 +40,34 @@ class Ambiente():
         return {
             "classe": self.__class__.__name__,
             "nome": self.nome,
-            "modifica_attacco": self.modifica_attacco,
-            "modifica_cura": self.modifica_cura
+            "modifica_attacco": self.mod_attacco,
+            "modifica_cura": self.mod_cura
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Ambiente":
-        """
-        Ricostruisce un'istanza di Ambiente o di una sua sottoclasse a partire
-        da un dizionario serializzato.
-
-        Utilizza il valore associato alla chiave "classe" per determinare
-        quale sottoclasse
-        di Ambiente istanziare. Se la classe non è riconosciuta, restituisce
-        un'istanza di Foresta come default.
+    def from_dict(cls, data: dict) -> 'Ambiente':
+        """ricrea il classe corretta in base al campo "classe"
 
         Args:
-            data (dict): Dizionario contenente i dati serializzati
-            dell'ambiente.
-                Deve contenere almeno la chiave "classe" con il nome della
-                sottoclasse.
+            data (dict):
 
         Returns:
-            Ambiente: Un'istanza della sottoclasse di Ambiente indicata nel
-            dizionario.
+            Ambiente:
         """
-        classe_nome = data.get("classe", "Foresta")
-        ambiente_cls = globals().get(classe_nome, Foresta)
-        return ambiente_cls()
+        nome = data.get("classe", "")
+        return AmbienteFactory.usa_ambiente(nome)
 
 
+@dataclass
 class Foresta(Ambiente):
     """
     La classe Foresta eredita da Ambiente e rappresenta un ambiente specifico
     con modifiche agli attacchi dei guerrieri e alla cura a fine turno per i
     ladri.
     """
-    def __init__(self):
-        super().__init__(nome="Foresta", modifica_attacco=5, modifica_cura=5)
+    nome: str = "Foresta"
+    mod_attacco: int = 5
+    mod_cura: float = 5.0
 
     def modifica_attacco(self, attaccante: Personaggio) -> int:
         """
@@ -92,10 +83,10 @@ class Foresta(Ambiente):
             l'attaccante non è un guerriero
         """
         if isinstance(attaccante, Guerriero):
-            msg = f"{attaccante.nome} guadagna {self.modifica_attacco}" \
+            logger.info(
+                f"{attaccante.nome} guadagna {self.modifica_attacco}"
                 f"attacco nella Foresta!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+            )
             return self.mod_attacco
         return 0
 
@@ -124,18 +115,20 @@ class Foresta(Ambiente):
             int: L'aumento della cura se il soggetto è un ladro, altrimenti 0
         """
         if isinstance(soggetto, Ladro):
-            return self.mod_cura
+            return int(self.mod_cura)
         return 0
 
 
+@dataclass
 class Vulcano(Ambiente):
     """
     La classe Vulcano eredita da Ambiente e rappresenta un ambiente specifico
     con modifiche agli attacchi dei maghi e dei ladri, un incremento random dei
     danni delle bombe acide e alla cura a fine turno per tutti.
     """
-    def __init__(self):
-        super().__init__(nome="Vulcano", modifica_attacco=10, modifica_cura=-5)
+    nome: str = "Vulcano"
+    mod_attacco: int = 10
+    mod_cura: float = -5.0
 
     def modifica_attacco(self, attaccante: Personaggio) -> int:
         """
@@ -153,16 +146,16 @@ class Vulcano(Ambiente):
         """
 
         if isinstance(attaccante, Mago):
-            msg = f"{attaccante.nome} guadagna {self.modifica_attacco}" \
+            logger.info(
+                f"{attaccante.nome} guadagna {self.modifica_attacco}"
                 "attacco nel Vulcano!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+            )
             return self.mod_attacco
         elif isinstance(attaccante, Ladro):
-            msg = f"{attaccante.nome} perde {self.modifica_attacco}" \
+            logger.info(
+                f"{attaccante.nome} perde {self.modifica_attacco}"
                 "attacco nel Vulcano!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+            )
             return -self.mod_attacco
         return 0
 
@@ -179,10 +172,10 @@ class Vulcano(Ambiente):
         """
         if isinstance(oggetto, BombaAcida):
             variazione = random.randint(0, 15)
-            msg = f"Nella {self.nome}, la Bomba Acida guadagna {variazione}" \
+            logger.info(
+                f"Nella {self.nome}, la Bomba Acida guadagna {variazione}"
                 f" danni!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+            )
             return variazione
         return 0
 
@@ -198,17 +191,19 @@ class Vulcano(Ambiente):
             int: L'aumento della cura se il soggetto è un ladro, altrimenti 0
 
         """
-        return self.mod_cura
+        return int(self.mod_cura)
 
 
+@dataclass
 class Palude(Ambiente):
     """
     La classe Palude eredita da Ambiente e rappresenta un ambiente specifico
     con un decremento agli attacchi dei ladri e dei guerrieri, e alle cure
     delle pozioni
     """
-    def __init__(self):
-        super().__init__(nome="Palude", modifica_attacco=-5, modifica_cura=0.3)
+    nome: str = "Palude"
+    mod_attacco: int = -5
+    mod_cura: float = 0.3
 
     def modifica_attacco(self, attaccante: Personaggio) -> int:
         """
@@ -223,10 +218,9 @@ class Palude(Ambiente):
             int: La diminuzione dell'attacco massimo
         """
         if isinstance(attaccante, (Guerriero, Ladro)):
-            msg = f"{attaccante.nome} perde {-self.mod_attacco} " \
-                "attacco nella Palude!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+            logger.info(
+                f"{attaccante.nome} perde {-self.mod_attacco} "
+                "attacco nella Palude!")
             return self.mod_attacco
         return 0
 
@@ -241,10 +235,10 @@ class Palude(Ambiente):
         """
         if isinstance(oggetto, PozioneCura):
             riduzione = int(oggetto.valore * self.mod_cura)
-            msg = f"Nella {self.nome}, la Pozione Cura ha effetto ridotto di" \
+            logger.info(
+                f"Nella {self.nome}, la Pozione Cura ha effetto ridotto di"
                 f"{riduzione} punti!"
-            Messaggi.add_to_messaggi(msg)
-            Log.scrivi_log(msg)
+                )
             return -riduzione
         return 0
 
@@ -260,7 +254,7 @@ class AmbienteFactory:
     manualmente.
     """
     @staticmethod
-    def get_opzioni() -> dict[str, Ambiente]:
+    def get_opzioni() -> Dict[str, Ambiente]:
         return {
             "1": Foresta(),
             "2": Vulcano(),
@@ -281,17 +275,15 @@ class AmbienteFactory:
             ambiente: Un'istanza della sottoclasse selezionata di Ambiente, o
             Foresta come default.
         """
-        scelta = str(scelta).strip().lower()
-        if scelta == ("foresta" or "1"):
-            return Foresta()
-        elif scelta == ("vulcano" or "2"):
-            return Vulcano()
-        elif scelta == ("palude" or "3"):
-            return Palude()
-        else:
-            msg = f"Tipo di ambiente sconosciuto: {scelta}"
-            Log.scrivi_log(msg)
-            raise ValueError(msg)
+        mapping = AmbienteFactory.get_opzioni()
+        scelta = scelta.strip().lower()
+        if scelta in mapping:
+            env = mapping[scelta]
+            logger.info(f"selezionato ambiente {env.nome}")
+            return env
+        # fallback
+        logger.warning(f"scelta ambiente sconosciuta: {scelta}, uso foresta")
+        return Foresta()
 
     @staticmethod
     def ambiente_random() -> Ambiente:
@@ -305,9 +297,73 @@ class AmbienteFactory:
             ambiente: Un'istanza di una sottoclasse di Ambiente scelta
             casualmente (Foresta, Vulcano o Palude).
         """
-        random_choice = random.choice(["1", "2", "3"])
-        ambiente = AmbienteFactory.usa_ambiente(random_choice)
-        msg = f"Ambiente Casuale Selezionato: {ambiente.nome}"
-        Messaggi.add_to_messaggi(msg)
-        Log.scrivi_log(msg)
-        return ambiente
+        random_choice = random.choice(
+            list(AmbienteFactory.get_opzioni().values())
+        )
+        logger.info(f"Ambiente Casuale Selezionato: {random_choice}")
+        return random_choice
+
+
+def get_all_subclasses(cls):
+    """
+    Ottiene tutte le sottoclassi di una classe base, utilizzata per
+    la deserializzazione dinamica tramite Marshmallow.
+
+    Args:
+        cls: La classe base di cui ottenere le sottoclassi
+
+    Returns:
+        set: Un set contenente tutte le sottoclassi
+    """
+    subclasses = set()
+    for subclass in cls.__subclasses__():
+        subclasses.add(subclass)
+        # subclasses.update(get_all_subclasses(subclass))
+        # nel caso di sottoclassi indirette
+    return subclasses
+
+
+class AmbienteSchema(Schema):
+    classe = fields.String(required=True)
+    nome = fields.String(required=True)
+    mod_attacco = fields.Integer()
+    mod_cura = fields.Float()
+
+    @post_load
+    def make_obj(self, data, **kwargs):
+        # Crea la mappa dinamica: nome classe -> classe Python
+        classe_nome = data.get("classe")
+        ambienti_map = {
+            subcls.__name__: subcls
+            for subcls in get_all_subclasses(Ambiente)
+        }
+
+        # rimuovo classe dai dati per evitare conflitti
+        data_clean = {k: v for k, v in data.items() if k != 'classe'}
+
+        if classe_nome in ambienti_map:
+            ambiente_cls = ambienti_map[classe_nome]
+            return ambiente_cls(**data_clean)
+        else:
+            # Fallback alla classe base Ambiente
+            return Ambiente(**data_clean)
+
+    def dump(self, obj, *, many=None, **kwargs):
+        """
+        Override del metodo dump per aggiungere automaticamente il campo classe
+        """
+        # Ottieni i dati base dall'oggetto usando il metodo parent
+        data = super().dump(obj, many=many, **kwargs)
+
+        if many:
+            # Se stiamo serializzando una lista di oggetti
+            if isinstance(obj, (list, tuple)) and isinstance(data, list):
+                for i, item_data in enumerate(data):
+                    if i < len(obj) and hasattr(obj[i], '__class__'):
+                        item_data['classe'] = obj[i].__class__.__name__
+        else:
+            # Se stiamo serializzando un singolo oggetto
+            if isinstance(data, dict) and hasattr(obj, '__class__'):
+                data['classe'] = obj.__class__.__name__
+
+        return data

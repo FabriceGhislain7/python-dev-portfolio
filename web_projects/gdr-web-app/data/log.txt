@@ -318,3 +318,5 @@
 2025-07-12 14:25:34 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\461b2789-2272-4c68-9bf1-8b6503feb65c.json
 2025-07-12 23:54:20 - Creato personaggio: Luca, Classe: Mago, id: 8467880d-be66-442b-89f9-54720c79a100, Oggetto iniziale: BombaAcida
 2025-07-12 23:54:23 - Inventario di Zoro selezionato.
+2025-07-14 22:49:29 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\7c5d6c97-7dab-4939-9dc0-8190d4f96a2e.json
+2025-07-14 22:49:31 - Eliminato file JSON: C:\Users\ghisl\Documents\python-dev-portfolio\web_projects\gdr-web-app\data\json\322e1707-b5b7-4d3a-a810-557895d9ad7d.json

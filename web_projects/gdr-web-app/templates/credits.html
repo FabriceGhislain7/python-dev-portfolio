@@ -3,46 +3,323 @@
 
 {% block content %}
 <div class="container py-5">
+  <!-- Hero Section -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-lg-10">
+      <div class="text-center hero-credits">
+        <i class="bi bi-heart-fill text-danger display-4 mb-3"></i>
+        <h1 class="display-5 fw-bold text-primary mb-3">Credits & Ringraziamenti</h1>
+        <p class="lead text-muted">
+          Un progetto nato dalla passione per la programmazione e l'innovazione tecnologica
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
   <div class="row justify-content-center">
-    <div class="col-lg-8">
-
-      <div class="card shadow-sm border-0">
+    <div class="col-lg-10">
+      
+      <!-- Sezione Formazione -->
+      <div class="card shadow-lg border-0 mb-4 credits-card">
+        <div class="card-header bg-primary text-white border-0">
+          <h3 class="card-title mb-0">
+            <i class="bi bi-mortarboard me-2"></i>
+            Percorso Formativo
+          </h3>
+        </div>
         <div class="card-body p-4">
-
-          <h1 class="h3 mb-4 text-center"> Credits & Ringraziamenti</h1>
-
-          <p>
-            Questo progetto è stato realizzato durante il corso di formazione
-            <strong>"Programmatore e Sviluppatore Python"</strong>, organizzato da
-            <strong>Ente F.I.RE</strong> e co-finanziato dal programma <strong>FSE+</strong>
-            della <strong>Regione Liguria</strong>. Ringrazio anche l'ufficio F.I.RE per la
-            disponibilità e la gentilezza dimostrate durante tutto il percorso formativo.
-          </p>
-
-          <p>
-            Desidero ringraziare il nostro docente <strong>[Nome del Docente]</strong> per la disponibilità, la guida tecnica e l’entusiasmo trasmesso durante le lezioni.
-          </p>
-
-          <p>
-            Un grande grazie anche a tutti i miei colleghi di corso, con cui ho condiviso sfide, risate e tante righe di codice!
-            Il gioco è nato dalla collaborazione, ma ha anche accolto idee, modifiche e ristrutturazioni personali in alcune sezioni.
-          </p>
-
-          <hr>
-
-          <p>
-            Le risorse grafiche utilizzate (immagini di sfondo, icone, e design) sono state tratte da fonti open source, 
-            generatori AI e librerie gratuite come <strong>Bootstrap 5</strong> e <strong>FontAwesome</strong>.
-          </p>
-
-          <div class="text-center mt-4">
-            <a href="{{ url_for('gioco.menu') }}" class="btn btn-outline-primary">Torna al Menu Principale</a>
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <p class="mb-3">
+                Questo progetto rappresenta il culmine del corso di formazione professionale
+                <strong class="text-primary">"Programmatore e Sviluppatore Python"</strong>, 
+                un percorso di eccellenza organizzato dall'<strong>Ente F.I.RE</strong> e 
+                co-finanziato dal programma <strong>FSE+ della Regione Liguria</strong>.
+              </p>
+              <p class="mb-0 text-muted">
+                Un'esperienza formativa che ha unito teoria e pratica, permettendo lo sviluppo 
+                di competenze tecniche avanzate nel campo dello sviluppo web e della programmazione Python.
+              </p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="institution-badge">
+                <i class="bi bi-building display-6 text-primary mb-2"></i>
+                <div class="fw-semibold">Ente F.I.RE</div>
+                <div class="small text-muted">FSE+ Regione Liguria</div>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
 
+      <!-- Sezione Ringraziamenti -->
+      <div class="card shadow-lg border-0 mb-4 credits-card">
+        <div class="card-header bg-success text-white border-0">
+          <h3 class="card-title mb-0">
+            <i class="bi bi-people-fill me-2"></i>
+            Ringraziamenti Speciali
+          </h3>
+        </div>
+        <div class="card-body p-4">
+          <div class="row">
+            <!-- Docente -->
+            <div class="col-md-6 mb-4">
+              <div class="appreciation-card h-100">
+                <div class="text-center mb-3">
+                  <i class="bi bi-person-workspace display-6 text-success"></i>
+                </div>
+                <h5 class="text-center mb-3">Corpo Docenti</h5>
+                <p class="text-center text-muted">
+                  Un sentito ringraziamento ai nostri docenti per la dedizione, 
+                  la competenza tecnica e l'entusiasmo trasmesso durante tutto il percorso formativo. 
+                  La loro guida è stata fondamentale per la realizzazione di questo progetto.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Colleghi -->
+            <div class="col-md-6 mb-4">
+              <div class="appreciation-card h-100">
+                <div class="text-center mb-3">
+                  <i class="bi bi-people display-6 text-info"></i>
+                </div>
+                <h5 class="text-center mb-3">Colleghi di Corso</h5>
+                <p class="text-center text-muted">
+                  Un grande riconoscimento ai compagni di corso, con cui sono state condivise 
+                  sfide tecniche, sessioni di debugging e momenti di crescita professionale. 
+                  La collaborazione è stata essenziale per il successo di questo progetto.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Staff F.I.RE -->
+          <div class="mt-4 p-3 bg-light rounded">
+            <div class="text-center">
+              <i class="bi bi-hands-clapping text-warning me-2"></i>
+              <span class="fw-semibold">Staff Amministrativo F.I.RE</span>
+            </div>
+            <p class="text-center text-muted mb-0 mt-2">
+              Particolare apprezzamento per la professionalità e la disponibilità 
+              dimostrate dall'ufficio amministrativo durante tutto il percorso formativo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sezione Sviluppo -->
+      <div class="card shadow-lg border-0 mb-4 credits-card">
+        <div class="card-header bg-info text-white border-0">
+          <h3 class="card-title mb-0">
+            <i class="bi bi-code-slash me-2"></i>
+            Sviluppo e Implementazione
+          </h3>
+        </div>
+        <div class="card-body p-4">
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="text-info mb-3">
+                <i class="bi bi-gear-fill me-2"></i>Metodologia di Sviluppo
+              </h5>
+              <p class="mb-3">
+                Il progetto è stato sviluppato seguendo le best practices dell'ingegneria del software, 
+                integrando metodologie agili e principi di clean code. Ogni componente è stato 
+                progettato per garantire scalabilità, manutenibilità e performance ottimali.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h5 class="text-info mb-3">
+                <i class="bi bi-puzzle-fill me-2"></i>Approccio Collaborativo
+              </h5>
+              <p class="mb-3">
+                Pur mantenendo una forte componente di sviluppo individuale, il progetto ha beneficiato 
+                di feedback collaborativi, code review e sessioni di brainstorming che hanno 
+                contribuito significativamente alla qualità del prodotto finale.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sezione Tecnologie -->
+      <div class="card shadow-lg border-0 mb-4 credits-card">
+        <div class="card-header bg-dark text-white border-0">
+          <h3 class="card-title mb-0">
+            <i class="bi bi-tools me-2"></i>
+            Stack Tecnologico & Risorse
+          </h3>
+        </div>
+        <div class="card-body p-4">
+          <div class="row">
+            <!-- Framework e Librerie -->
+            <div class="col-md-6 mb-4">
+              <h5 class="text-dark mb-3">
+                <i class="bi bi-layers me-2"></i>Framework & Librerie
+              </h5>
+              <div class="tech-stack">
+                <span class="badge bg-primary me-2 mb-2">Python Flask</span>
+                <span class="badge bg-info me-2 mb-2">Bootstrap 5</span>
+                <span class="badge bg-success me-2 mb-2">SQLAlchemy</span>
+                <span class="badge bg-warning me-2 mb-2">Jinja2</span>
+                <span class="badge bg-secondary me-2 mb-2">JavaScript ES6+</span>
+              </div>
+            </div>
+            
+            <!-- Risorse Grafiche -->
+            <div class="col-md-6 mb-4">
+              <h5 class="text-dark mb-3">
+                <i class="bi bi-palette me-2"></i>Risorse Grafiche
+              </h5>
+              <div class="tech-stack">
+                <span class="badge bg-outline-primary me-2 mb-2">Bootstrap Icons</span>
+                <span class="badge bg-outline-success me-2 mb-2">Open Source Assets</span>
+                <span class="badge bg-outline-info me-2 mb-2">AI Generated Content</span>
+                <span class="badge bg-outline-warning me-2 mb-2">Custom CSS Animations</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-3 p-3 bg-light rounded">
+            <p class="text-muted mb-0 text-center">
+              <i class="bi bi-cc-circle me-2"></i>
+              Tutte le risorse utilizzate rispettano le licenze open source e sono state 
+              selezionate per garantire la compatibilità con progetti educativi e dimostrativi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="text-center">
+        <div class="card border-primary shadow-lg">
+          <div class="card-body p-4">
+            <i class="bi bi-arrow-return-left text-primary display-6 mb-3"></i>
+            <h4 class="text-primary mb-3">Continua l'Avventura</h4>
+            <p class="text-muted mb-4">
+              Esplora le funzionalità del GDR Web e scopri tutto il potenziale 
+              di questo progetto sviluppato con passione e dedizione.
+            </p>
+            <a href="{{ url_for('gioco.menu') }}" class="btn btn-primary btn-lg px-5">
+              <i class="bi bi-house-door me-2"></i>Torna al Menu Principale
+            </a>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 </div>
+
+<!-- Custom Styles -->
+<style>
+  .hero-credits {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .credits-card {
+    border-radius: 1rem !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .credits-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+  }
+
+  .credits-card .card-header {
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 1.5rem;
+  }
+
+  .appreciation-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+  }
+
+  .appreciation-card:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-color: #dee2e6;
+    transform: translateY(-2px);
+  }
+
+  .institution-badge {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid #dee2e6;
+  }
+
+  .tech-stack .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .bg-outline-primary {
+    background-color: transparent;
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+  }
+
+  .bg-outline-success {
+    background-color: transparent;
+    color: #198754;
+    border: 1px solid #198754;
+  }
+
+  .bg-outline-info {
+    background-color: transparent;
+    color: #0dcaf0;
+    border: 1px solid #0dcaf0;
+  }
+
+  .bg-outline-warning {
+    background-color: transparent;
+    color: #ffc107;
+    border: 1px solid #ffc107;
+  }
+
+  /* Animazioni */
+  .credits-card {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .credits-card:nth-child(1) { animation-delay: 0.1s; }
+  .credits-card:nth-child(2) { animation-delay: 0.2s; }
+  .credits-card:nth-child(3) { animation-delay: 0.3s; }
+  .credits-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-credits {
+      padding: 2rem 1rem;
+    }
+    
+    .appreciation-card {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .institution-badge {
+      padding: 1.5rem;
+    }
+  }
+</style>
 {% endblock %}

@@ -1,78 +1,170 @@
 {% extends "layout.html" %}
+
+<!-- BLOCCO TITLE -->
 {% block title %}Menu iniziale{% endblock %}
 
+<!-- BLOCCO CONTENUTO PRINCIPALE -->
 {% block content %}
 
-<!-- HERO -->
-<section class="py-5 text-center hero-section text-white rounded-5 mb-4 shadow-lg">
-  <div class="container">
-    <h1 class="display-5 fw-bold mb-3 fade-in text-white">Menu Principale</h1>
-    <p class="lead fade-in-delay text-gold">Benvenuto nel gioco GDR! Scegli una sezione per proseguire.</p>
+<!-- HERO SECTION CON SPAZIO DAL NAVBAR -->
+<section class="py-5 text-center hero-section rounded-5 mb-5 shadow-lg mt-4">
+  <div class="container py-3">
+    <h1 class="display-4 fw-bold mb-3 fade-in hero-title">
+      <i class="bi bi-joystick me-3"></i>
+      Menu Principale
+    </h1>
+    <p class="lead fade-in-delay hero-subtitle mb-4">
+      Benvenuto nel mondo del GDR! Scegli una sezione per iniziare la tua avventura.
+    </p>
+    <!-- Badge informativo -->
+    <div class="mt-4">
+      <span class="badge bg-white text-primary px-4 py-3 fs-5 border border-warning">
+        <i class="bi bi-person-circle me-2"></i>
+        Benvenuto, {{ current_user.nome }}!
+      </span>
+    </div>
   </div>
 </section>
+<!-- FINE HERO SECTION -->
 
-<!-- Pulsanti di scelta con animazioni -->
-<div class="container mb-4">
-  <div class="row g-3">
-    <div class="col-12 col-md-6 d-flex justify-content-center">
-      <button id="btn-area" class="btn btn-outline-fantasy-blue btn-lg fw-bold main-button" onclick="showSection('area-personale')" style="width: 80%;">
-        <i class="bi bi-person-circle me-2"></i>Area Personale
+<!-- PULSANTI PRINCIPALI DI NAVIGAZIONE -->
+<div class="container mb-5">
+  <div class="row g-4">
+    <!-- Pulsante Area Personale -->
+    <div class="col-12 col-md-6">
+      <button 
+        id="btn-area" 
+        class="btn btn-outline-fantasy-blue btn-lg fw-bold main-button w-100 py-4" 
+        onclick="showSection('area-personale')"
+      >
+        <i class="bi bi-person-circle me-2 h4 mb-0"></i>
+        <div class="d-flex flex-column">
+          <span class="fw-bold h5 mb-1">Area Personale</span>
+          <small class="opacity-75">Gestisci profilo e personaggi</small>
+        </div>
         <div class="button-shine"></div>
       </button>
     </div>
 
-    <div class="col-12 col-md-6 d-flex justify-content-center">
-      <button id="btn-gioco" class="btn btn-outline-fantasy-crimson btn-lg fw-bold main-button" onclick="showSection('modalita-gioco')" style="width: 80%;">
-        <i class="bi bi-controller me-2"></i>Modalità di Gioco
+    <!-- Pulsante Modalità di Gioco -->
+    <div class="col-12 col-md-6">
+      <button 
+        id="btn-gioco" 
+        class="btn btn-outline-fantasy-crimson btn-lg fw-bold main-button w-100 py-4" 
+        onclick="showSection('modalita-gioco')"
+      >
+        <i class="bi bi-controller me-2 h4 mb-0"></i>
+        <div class="d-flex flex-column">
+          <span class="fw-bold h5 mb-1">Modalità di Gioco</span>
+          <small class="opacity-75">Missioni, battaglie e avventure</small>
+        </div>
         <div class="button-shine"></div>
       </button>
     </div>
   </div>
 </div>
+<!-- FINE PULSANTI PRINCIPALI -->
 
-<!-- Sezione: Area Personale -->
-<div class="container mt-4 section-block" id="area-personale" style="display: none;">
-  <h2 class="text-center mb-4 text-fantasy-blue section-title">
-    <i class="bi bi-person-badge me-2"></i>Area Personale
-  </h2>
-  <div class="row g-3">
+<!-- SEZIONE: AREA PERSONALE -->
+<div class="container mt-5 section-block" id="area-personale" style="display: none;">
+  <div class="text-center mb-5">
+    <h2 class="text-fantasy-blue section-title mb-3">
+      <i class="bi bi-person-badge me-2"></i>
+      Area Personale
+    </h2>
+    <p class="text-muted">Gestisci il tuo account, i crediti e i personaggi</p>
+  </div>
+  
+  <div class="row g-4">
+    <!-- Card Profilo -->
     <div class="col-12 col-md-6">
-      <div class="card h-100 text-center shadow-sm game-card" id="card-profilo">
-        <div class="card-header bg-fantasy-blue text-white">
-          <i class="bi bi-person-gear fs-4"></i>
+      <div class="card h-100 text-center shadow-sm game-card rounded-5" id="card-profilo">
+        <div class="card-header bg-fantasy-blue text-white border-0">
+          <i class="bi bi-person-gear h2 mb-0"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title text-dark-blue">Profilo</h5>
-          <p class="card-text text-muted small">Gestisci il tuo account e i tuoi crediti</p>
+        <div class="card-body p-4">
+          <h5 class="card-title text-dark-blue mb-3">Gestione Profilo</h5>
+          <p class="card-text text-muted small mb-4">
+            Modifica i tuoi dati personali e gestisci i crediti del tuo account
+          </p>
+          
+          <!-- Info utente rapida -->
+          <div class="alert alert-light border-0 mb-4">
+            <div class="row text-center">
+              <div class="col-6">
+                <div class="fw-semibold text-primary">Crediti</div>
+                <div class="h5 mb-0 text-success">{{ current_user.crediti|int }}</div>
+              </div>
+              <div class="col-6">
+                <div class="fw-semibold text-primary">Personaggi</div>
+                <div class="h5 mb-0 text-info">{{ current_user.character_ids|length }}</div>
+              </div>
+            </div>
+          </div>
+          
           <div class="d-grid gap-2">
-            <a href="{{ url_for('auth.modified_user') }}" class="btn btn-fantasy-gold">
-              <i class="bi bi-pencil-square me-2"></i>Modifica utente
+            <a href="{{ url_for('auth.modified_user') }}" class="btn btn-fantasy-blue">
+              <i class="bi bi-pencil-square me-2"></i>Modifica Profilo
             </a>
-            <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-fantasy-emerald text-white">
-              <i class="bi bi-bank me-2"></i>Ricarica crediti
+            <a href="{{ url_for('auth.credit_refill') }}" class="btn btn-fantasy-gold">
+              <i class="bi bi-coin me-2"></i>Ricarica Crediti
             </a>
-            <button type="button" class="btn btn-fantasy-crimson text-white" data-bs-toggle="modal" data-bs-target="#deleteModal">
-              <i class="bi bi-trash3 me-2"></i>Elimina utente
+            <button 
+              type="button" 
+              class="btn btn-outline-fantasy-crimson" 
+              data-bs-toggle="modal" 
+              data-bs-target="#deleteModal"
+            >
+              <i class="bi bi-trash3 me-2"></i>Elimina Account
             </button>
           </div>
         </div>
       </div>
     </div>
     
+    <!-- Card Personaggi -->
     <div class="col-12 col-md-6">
-      <div class="card h-100 text-center shadow-sm game-card" id="card-personaggi">
-        <div class="card-header bg-fantasy-blue text-white">
-          <i class="bi bi-people fs-4"></i>
+      <div class="card h-100 text-center shadow-sm game-card rounded-5" id="card-personaggi">
+        <div class="card-header bg-fantasy-blue text-white border-0">
+          <i class="bi bi-people h2 mb-0"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title text-dark-blue">Personaggi</h5>
-          <p class="card-text text-muted small">Crea e gestisci i tuoi personaggi</p>
+        <div class="card-body p-4">
+          <h5 class="card-title text-dark-blue mb-3">I Tuoi Eroi</h5>
+          <p class="card-text text-muted small mb-4">
+            Crea nuovi personaggi e gestisci il tuo party di avventurieri
+          </p>
+          
+          <!-- Statistiche personaggi -->
+          <div class="row text-center mb-4">
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-shield text-danger"></i>
+                <div class="small fw-semibold">Guerrieri</div>
+                <div class="small text-muted">0</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-magic text-primary"></i>
+                <div class="small fw-semibold">Maghi</div>
+                <div class="small text-muted">0</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-mask text-dark"></i>
+                <div class="small fw-semibold">Ladri</div>
+                <div class="small text-muted">0</div>
+              </div>
+            </div>
+          </div>
+          
           <div class="d-grid gap-2">
-            <a href="{{ url_for('characters.create_char') }}" class="btn btn-fantasy-emerald text-white">
-              <i class="bi bi-person-plus me-2"></i>Crea personaggio
+            <a href="{{ url_for('characters.create_char') }}" class="btn btn-fantasy-emerald">
+              <i class="bi bi-person-plus me-2"></i>Crea Personaggio
             </a>
-            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-fantasy-blue text-white">
-              <i class="bi bi-people-fill me-2"></i>Lista personaggi
+            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-fantasy-blue">
+              <i class="bi bi-people-fill me-2"></i>Gestisci Party
             </a>
           </div>
         </div>
@@ -80,50 +172,114 @@
     </div>
   </div>
 </div>
+<!-- FINE AREA PERSONALE -->
 
-<!-- Sezione: Modalità di Gioco -->
-<div class="container mt-4 section-block" id="modalita-gioco" style="display: none;">
-  <h2 class="text-center mb-4 text-fantasy-crimson section-title">
-    <i class="bi bi-joystick me-2"></i>Modalità di Gioco
-  </h2>
-  <div class="row g-3">
+<!-- SEZIONE: MODALITÀ DI GIOCO -->
+<div class="container mt-5 section-block" id="modalita-gioco" style="display: none;">
+  <div class="text-center mb-5">
+    <h2 class="text-fantasy-crimson section-title mb-3">
+      <i class="bi bi-dice-6 me-2"></i>
+      Modalità di Gioco
+    </h2>
+    <p class="text-muted">Esplora mondi fantastici, affronta missioni epiche e combatti nemici leggendari</p>
+  </div>
+  
+  <div class="row g-4">
+    <!-- Card Missioni & Ambienti -->
     <div class="col-12 col-md-6">
-      <div class="card h-100 text-center shadow-sm game-card" id="card-gioco">
-        <div class="card-header bg-fantasy-crimson text-white">
-          <i class="bi bi-map fs-4"></i>
+      <div class="card h-100 text-center shadow-sm game-card rounded-5" id="card-gioco">
+        <div class="card-header bg-fantasy-crimson text-white border-0">
+          <i class="bi bi-map h2 mb-0"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title text-dark-blue">Missioni & Ambienti</h5>
-          <p class="card-text text-muted small">Esplora mondi e affronta missioni</p>
+        <div class="card-body p-4">
+          <h5 class="card-title text-dark-blue mb-3">Esplorazione</h5>
+          <p class="card-text text-muted small mb-4">
+            Scegli le tue missioni e esplora ambienti pieni di pericoli e tesori
+          </p>
+          
+          <!-- Ambienti disponibili -->
+          <div class="row text-center mb-4">
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-tree text-success"></i>
+                <div class="small fw-semibold">Foresta</div>
+                <div class="small text-muted">Equilibrato</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-fire text-danger"></i>
+                <div class="small fw-semibold">Vulcano</div>
+                <div class="small text-muted">Estremo</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-droplet text-secondary"></i>
+                <div class="small fw-semibold">Palude</div>
+                <div class="small text-muted">Ostile</div>
+              </div>
+            </div>
+          </div>
+          
           <div class="d-grid gap-2">
-            <a href="{{ url_for('mission.select_mission') }}" class="btn btn-fantasy-purple text-white">
-              <i class="bi bi-flag me-2"></i>Seleziona missione
+            <a href="{{ url_for('mission.select_mission') }}" class="btn btn-fantasy-purple">
+              <i class="bi bi-flag me-2"></i>Inizia Missione
             </a>
-            <a href="{{ url_for('environment.select_environment') }}" class="btn btn-fantasy-emerald text-white">
-              <i class="bi bi-globe me-2"></i>Seleziona ambiente
+            <a href="{{ url_for('environment.select_environment') }}" class="btn btn-fantasy-emerald">
+              <i class="bi bi-globe me-2"></i>Scegli Ambiente
             </a>
             <a href="{{ url_for('environment.show_environment') }}" class="btn btn-outline-fantasy-emerald">
-              <i class="bi bi-eye me-2"></i>Mostra ambiente
+              <i class="bi bi-eye me-2"></i>Esplora Ambiente
             </a>
           </div>
         </div>
       </div>
     </div>
     
+    <!-- Card Inventario & Battaglia -->
     <div class="col-12 col-md-6">
-      <div class="card h-100 text-center shadow-sm game-card" id="card-inventario">
-        <div class="card-header bg-fantasy-crimson text-white">
-          <i class="bi bi-bag fs-4"></i>
+      <div class="card h-100 text-center shadow-sm game-card rounded-5" id="card-inventario">
+        <div class="card-header bg-fantasy-crimson text-white border-0">
+          <i class="bi bi-bag h2 mb-0"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title text-dark-blue">Inventario & Battaglia</h5>
-          <p class="card-text text-muted small">Gestisci oggetti e combatti</p>
+        <div class="card-body p-4">
+          <h5 class="card-title text-dark-blue mb-3">Combattimento</h5>
+          <p class="card-text text-muted small mb-4">
+            Gestisci il tuo inventario e preparati per battaglie epiche
+          </p>
+          
+          <!-- Oggetti disponibili -->
+          <div class="row text-center mb-4">
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-heart-pulse text-success"></i>
+                <div class="small fw-semibold">Pozioni</div>
+                <div class="small text-muted">Cura</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-fire text-danger"></i>
+                <div class="small fw-semibold">Bombe</div>
+                <div class="small text-muted">Attacco</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-light rounded">
+                <i class="bi bi-gem text-warning"></i>
+                <div class="small fw-semibold">Artefatti</div>
+                <div class="small text-muted">Buff</div>
+              </div>
+            </div>
+          </div>
+          
           <div class="d-grid gap-2">
-            <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-fantasy-emerald text-white">
-              <i class="bi bi-backpack me-2"></i>Gestisci inventario
+            <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-fantasy-emerald">
+              <i class="bi bi-backpack me-2"></i>Gestisci Inventario
             </a>
-            <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-fantasy-dark text-white">
-              <i class="bi bi-sword me-2"></i>Inizia battaglia
+            <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-fantasy-dark">
+              <i class="bi bi-sword me-2"></i>Inizia Battaglia
             </a>
           </div>
         </div>
@@ -131,36 +287,58 @@
     </div>
   </div>
 </div>
+<!-- FINE MODALITÀ GIOCO -->
 
-<!-- Modal di conferma eliminazione -->
+<!-- MODAL DI CONFERMA ELIMINAZIONE -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center border-0 shadow-lg">
       <div class="modal-header border-0 d-block position-relative bg-fantasy-crimson text-white">
         <h5 class="modal-title">
-          <i class="bi bi-exclamation-triangle me-2"></i>Conferma eliminazione
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          Conferma Eliminazione Account
         </h5>
         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Chiudi"></button>
       </div>
       <div class="modal-body py-4">
-        <i class="bi bi-person-x fs-1 text-fantasy-crimson mb-3"></i>
-        <p class="mb-2">Sei sicuro di voler eliminare il tuo account?</p>
-        <p class="text-muted small">Questa operazione non può essere annullata.</p>
+        <i class="bi bi-person-x display-1 text-fantasy-crimson mb-3"></i>
+        <h6 class="fw-bold mb-3">Sei sicuro di voler eliminare il tuo account?</h6>
+        <div class="alert alert-warning border-0">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-exclamation-triangle text-warning me-2 mt-1"></i>
+            <div class="text-start">
+              <strong>Attenzione:</strong> Questa operazione eliminerà:
+              <ul class="mb-0 mt-2">
+                <li>Il tuo profilo utente</li>
+                <li>Tutti i tuoi personaggi</li>
+                <li>I progressi e i crediti</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted small mb-0">Questa operazione <strong>non può essere annullata</strong>.</p>
       </div>
       <div class="modal-footer justify-content-center border-0">
-        <button type="button" class="btn btn-outline-fantasy-dark me-2" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
           <i class="bi bi-x-circle me-2"></i>Annulla
         </button>
-        <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-fantasy-crimson text-white">
-          <i class="bi bi-trash3 me-2"></i>Elimina definitivamente
+        <a href="{{ url_for('auth.delete_user', id=current_user.id) }}" class="btn btn-fantasy-crimson">
+          <i class="bi bi-trash3 me-2"></i>Elimina Definitivamente
         </a>
       </div>
     </div>
   </div>
 </div>
+<!-- FINE MODAL -->
 
+{% endblock %}
+
+<!-- BLOCCO CSS PERSONALIZZATO -->
+{% block head %}
 <style>
-  /* PALETTE COLORI FANTASY ARMONIOSA */
+  /* ========================================================================
+     PALETTE COLORI FANTASY COORDINATA
+     ======================================================================== */
   :root {
     --fantasy-blue: #2c3e50;      /* Blu profondo elegante */
     --fantasy-crimson: #8b2635;   /* Cremisi medievale */
@@ -172,7 +350,9 @@
     --text-gold: #f4d03f;         /* Oro per testi */
   }
 
-  /* CLASSI COLORI */
+  /* ========================================================================
+     CLASSI COLORI DI BASE
+     ======================================================================== */
   .bg-fantasy-blue { background-color: var(--fantasy-blue) !important; }
   .bg-fantasy-crimson { background-color: var(--fantasy-crimson) !important; }
   .bg-fantasy-emerald { background-color: var(--fantasy-emerald) !important; }
@@ -187,7 +367,9 @@
   .text-gold { color: var(--text-gold) !important; }
   .text-dark-blue { color: var(--fantasy-dark) !important; }
 
-  /* PULSANTI FANTASY */
+  /* ========================================================================
+     PULSANTI FANTASY
+     ======================================================================== */
   .btn-fantasy-blue {
     background-color: var(--fantasy-blue);
     border-color: var(--fantasy-blue);
@@ -197,6 +379,8 @@
     background-color: #34495e;
     border-color: #34495e;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 73, 94, 0.3);
   }
 
   .btn-fantasy-crimson {
@@ -208,6 +392,8 @@
     background-color: #a12d42;
     border-color: #a12d42;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(161, 45, 66, 0.3);
   }
 
   .btn-fantasy-emerald {
@@ -219,6 +405,8 @@
     background-color: #2ecc71;
     border-color: #2ecc71;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
   }
 
   .btn-fantasy-purple {
@@ -230,6 +418,8 @@
     background-color: #7f8ff4;
     border-color: #7f8ff4;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(127, 143, 244, 0.3);
   }
 
   .btn-fantasy-gold {
@@ -242,6 +432,8 @@
     background-color: #f1c40f;
     border-color: #f1c40f;
     color: var(--fantasy-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(241, 196, 15, 0.4);
   }
 
   .btn-fantasy-dark {
@@ -253,54 +445,60 @@
     background-color: #2c3e50;
     border-color: #2c3e50;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
   }
 
-  /* PULSANTI OUTLINE */
+  /* ========================================================================
+     PULSANTI OUTLINE CON EFFETTI HOVER
+     ======================================================================== */
   .btn-outline-fantasy-blue {
     color: var(--fantasy-blue);
     border-color: var(--fantasy-blue);
+    transition: all 0.3s ease;
   }
   .btn-outline-fantasy-blue:hover {
     background-color: var(--fantasy-blue);
     border-color: var(--fantasy-blue);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
   }
 
   .btn-outline-fantasy-crimson {
     color: var(--fantasy-crimson);
     border-color: var(--fantasy-crimson);
+    transition: all 0.3s ease;
   }
   .btn-outline-fantasy-crimson:hover {
     background-color: var(--fantasy-crimson);
     border-color: var(--fantasy-crimson);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 38, 53, 0.3);
   }
 
   .btn-outline-fantasy-emerald {
     color: var(--fantasy-emerald);
     border-color: var(--fantasy-emerald);
+    transition: all 0.3s ease;
   }
   .btn-outline-fantasy-emerald:hover {
     background-color: var(--fantasy-emerald);
     border-color: var(--fantasy-emerald);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
   }
 
-  .btn-outline-fantasy-dark {
-    color: var(--fantasy-dark);
-    border-color: var(--fantasy-dark);
-  }
-  .btn-outline-fantasy-dark:hover {
-    background-color: var(--fantasy-dark);
-    border-color: var(--fantasy-dark);
-    color: white;
-  }
-
-  /* HERO SECTION */
+  /* ========================================================================
+     HERO SECTION - FIXATO IL PROBLEMA COLORI
+     ======================================================================== */
   .hero-section {
-    background: linear-gradient(135deg, var(--fantasy-dark) 0%, var(--fantasy-blue) 50%, var(--fantasy-dark) 100%);
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
     position: relative;
     overflow: hidden;
+    border: 2px solid var(--fantasy-gold);
   }
 
   .hero-section::before {
@@ -310,20 +508,47 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
   }
 
-  /* Pulsanti principali con effetti */
+  /* Testi Hero Section - CONTRASTO GARANTITO */
+  .hero-title {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-subtitle {
+    color: var(--text-gold) !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    background-color: rgba(255,255,255,0.9) !important;
+    color: var(--fantasy-blue) !important;
+    border: 2px solid var(--fantasy-gold);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ========================================================================
+     PULSANTI PRINCIPALI CON EFFETTI
+     ======================================================================== */
   .main-button {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
     border: 2px solid;
+    min-height: 100px;
+    border-radius: 1.25rem !important;
   }
 
   .main-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
   }
 
   .button-shine {
@@ -333,14 +558,16 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
+    transition: left 0.6s ease;
   }
 
   .main-button:hover .button-shine {
     left: 100%;
   }
 
-  /* Titoli delle sezioni */
+  /* ========================================================================
+     TITOLI E SEZIONI
+     ======================================================================== */
   .section-title {
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
@@ -358,73 +585,80 @@
     }
   }
 
-  /* Cards migliorati */
+  /* ========================================================================
+     CARDS MIGLIORATI
+     ======================================================================== */
   .game-card {
     transition: all 0.3s ease;
     border: 1px solid #dee2e6;
     overflow: hidden;
-    border-radius: 1.25rem !important;
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
   }
 
   .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   }
 
   .game-card .card-header {
     border-bottom: none;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
-  /* Evidenziazione sezioni attive */
+  /* ========================================================================
+     EVIDENZIAZIONE SEZIONI ATTIVE
+     ======================================================================== */
   .highlight-blue {
     border: 3px solid var(--fantasy-blue) !important;
-    box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4);
-    animation: pulseBlue 2s infinite;
+    box-shadow: 0 0 0.8rem rgba(44, 62, 80, 0.5);
+    animation: pulseBlue 3s infinite;
   }
 
   .highlight-crimson {
     border: 3px solid var(--fantasy-crimson) !important;
-    box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4);
-    animation: pulseCrimson 2s infinite;
+    box-shadow: 0 0 0.8rem rgba(139, 38, 53, 0.5);
+    animation: pulseCrimson 3s infinite;
   }
 
   @keyframes pulseBlue {
     0% { box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4); }
-    50% { box-shadow: 0 0 1rem rgba(44, 62, 80, 0.6); }
+    50% { box-shadow: 0 0 1.2rem rgba(44, 62, 80, 0.7); }
     100% { box-shadow: 0 0 0.5rem rgba(44, 62, 80, 0.4); }
   }
 
   @keyframes pulseCrimson {
     0% { box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4); }
-    50% { box-shadow: 0 0 1rem rgba(139, 38, 53, 0.6); }
+    50% { box-shadow: 0 0 1.2rem rgba(139, 38, 53, 0.7); }
     100% { box-shadow: 0 0 0.5rem rgba(139, 38, 53, 0.4); }
   }
 
-  /* Animazioni per le sezioni */
+  /* ========================================================================
+     ANIMAZIONI SEZIONI
+     ======================================================================== */
   .section-block {
-    animation: slideIn 0.5s ease-out;
+    animation: slideIn 0.6s ease-out;
   }
 
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translateX(20px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 
-  /* Animazioni di entrata */
+  /* ========================================================================
+     ANIMAZIONI DI ENTRATA
+     ======================================================================== */
   .fade-in {
     animation: fadeInUp 0.8s ease-out;
   }
 
   .fade-in-delay {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
   }
 
   @keyframes fadeInUp {
@@ -438,176 +672,331 @@
     }
   }
 
-  /* Responsive improvements */
+  /* ========================================================================
+     RESPONSIVE DESIGN
+     ======================================================================== */
   @media (max-width: 768px) {
     .hero-section {
       padding: 2rem 0;
+      margin-top: 1rem;
     }
     
-    .display-5 {
+    .display-4 {
       font-size: 2rem;
+    }
+    
+    .main-button {
+      font-size: 0.95rem;
+      min-height: 70px;
     }
     
     .game-card {
       margin-bottom: 1rem;
     }
-    
+
+    .section-block {
+      margin-top: 2rem !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-section {
+      margin-top: 0.5rem;
+      padding: 1.5rem 0;
+    }
+
     .main-button {
+      min-height: 60px;
       font-size: 0.9rem;
-      padding: 0.75rem 1rem;
     }
   }
 </style>
-
 {% endblock %}
 
+<!-- BLOCCO SCRIPTS PERSONALIZZATI -->
 {% block scripts %}
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Inizializza la pagina del menu
-    initMenuEffects();
-    
-    // Piccolo delay per permettere il caricamento completo
-    setTimeout(() => {
-      showSection('area-personale');
-    }, 100);
-  });
+// ============================================================================
+// MENU PAGE - ENHANCED FUNCTIONALITY
+// ============================================================================
 
-  /**
-   * Mostra una sezione specifica e nasconde le altre
-   * @param {string} sectionId - ID della sezione da mostrare
-   */
-  function showSection(sectionId) {
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎮 Menu inizializzato'); 
+    initMenuEffects();
+    console.log('✅ Menu pronto per l\'interazione utente');
+});
+
+/**
+ * Mostra una sezione specifica e nasconde le altre
+ * @param {string} sectionId - ID della sezione da mostrare
+ */
+function showSection(sectionId) {
+    console.log(`🎯 Mostrando sezione: ${sectionId}`);
+    
     const sections = ['area-personale', 'modalita-gioco'];
     const buttons = {
-      'area-personale': document.getElementById('btn-area'),
-      'modalita-gioco': document.getElementById('btn-gioco')
+        'area-personale': document.getElementById('btn-area'),
+        'modalita-gioco': document.getElementById('btn-gioco')
     };
 
     const cardsBySection = {
-      'area-personale': [
-        document.getElementById('card-profilo'),
-        document.getElementById('card-personaggi')
-      ],
-      'modalita-gioco': [
-        document.getElementById('card-gioco'),
-        document.getElementById('card-inventario')
-      ]
+        'area-personale': [
+            document.getElementById('card-profilo'),
+            document.getElementById('card-personaggi')
+        ],
+        'modalita-gioco': [
+            document.getElementById('card-gioco'),
+            document.getElementById('card-inventario')
+        ]
     };
 
     // Nascondi tutte le sezioni e resetta i pulsanti
     sections.forEach(id => {
-      const section = document.getElementById(id);
-      if (section) {
-        section.style.display = 'none';
-        section.classList.remove('section-block');
-      }
+        const section = document.getElementById(id);
+        if (section) {
+            section.style.display = 'none';
+            section.classList.remove('section-block');
+        }
 
-      const button = buttons[id];
-      if (button) {
-        button.classList.remove('btn-fantasy-blue', 'btn-fantasy-crimson', 'text-white');
-        button.classList.add(
-          id === 'area-personale' ? 'btn-outline-fantasy-blue' : 'btn-outline-fantasy-crimson'
-        );
-      }
+        const button = buttons[id];
+        if (button) {
+            // Reset button styles
+            button.classList.remove('btn-fantasy-blue', 'btn-fantasy-crimson', 'text-white');
+            button.classList.add(
+                id === 'area-personale' ? 'btn-outline-fantasy-blue' : 'btn-outline-fantasy-crimson'
+            );
+        }
 
-      // Rimuovi evidenziazione dalle cards
-      if (cardsBySection[id]) {
-        cardsBySection[id].forEach(card => {
-          if (card) {
-            card.classList.remove('highlight-blue', 'highlight-crimson');
-          }
-        });
-      }
+        // Rimuovi evidenziazione dalle cards
+        if (cardsBySection[id]) {
+            cardsBySection[id].forEach(card => {
+                if (card) {
+                    card.classList.remove('highlight-blue', 'highlight-crimson');
+                }
+            });
+        }
     });
 
     // Mostra la sezione selezionata con animazione
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
-      targetSection.style.display = 'block';
-      targetSection.classList.add('section-block');
+        targetSection.style.display = 'block';
+        
+        // Piccolo delay per far funzionare l'animazione CSS
+        setTimeout(() => {
+            targetSection.classList.add('section-block');
+        }, 50);
     }
 
     // Aggiorna stile del pulsante attivo
     const activeButton = buttons[sectionId];
     if (activeButton) {
-      if (sectionId === 'area-personale') {
-        activeButton.classList.remove('btn-outline-fantasy-blue');
-        activeButton.classList.add('btn-fantasy-blue', 'text-white');
+        if (sectionId === 'area-personale') {
+            activeButton.classList.remove('btn-outline-fantasy-blue');
+            activeButton.classList.add('btn-fantasy-blue', 'text-white');
 
-        // Evidenzia le cards
-        if (cardsBySection[sectionId]) {
-          cardsBySection[sectionId].forEach(card => {
-            if (card) card.classList.add('highlight-blue');
-          });
-        }
-      } else {
-        activeButton.classList.remove('btn-outline-fantasy-crimson');
-        activeButton.classList.add('btn-fantasy-crimson', 'text-white');
+            // Evidenzia le cards con animazione ritardata
+            if (cardsBySection[sectionId]) {
+                cardsBySection[sectionId].forEach((card, index) => {
+                    if (card) {
+                        setTimeout(() => {
+                            card.classList.add('highlight-blue');
+                        }, 200 + (index * 100));
+                    }
+                });
+            }
+        } else {
+            activeButton.classList.remove('btn-outline-fantasy-crimson');
+            activeButton.classList.add('btn-fantasy-crimson', 'text-white');
 
-        // Evidenzia le cards
-        if (cardsBySection[sectionId]) {
-          cardsBySection[sectionId].forEach(card => {
-            if (card) card.classList.add('highlight-crimson');
-          });
+            // Evidenzia le cards con animazione ritardata
+            if (cardsBySection[sectionId]) {
+                cardsBySection[sectionId].forEach((card, index) => {
+                    if (card) {
+                        setTimeout(() => {
+                            card.classList.add('highlight-crimson');
+                        }, 200 + (index * 100));
+                    }
+                });
+            }
         }
-      }
     }
 
     // Scroll fluido alla sezione
     if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const offsetTop = targetSection.offsetTop - 100;
+        
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
     }
-  }
 
-  /**
-   * Inizializza gli effetti del menu
-   */
-  function initMenuEffects() {
-    // Aggiungi effetto di hover sulle cards
+    console.log(`✅ Sezione ${sectionId} mostrata con successo`);
+}
+
+/**
+ * Inizializza gli effetti e interazioni del menu
+ */
+function initMenuEffects() {
+    console.log('🎨 Inizializzando effetti menu...');
+
+    // Effetti hover sulle game cards
     const gameCards = document.querySelectorAll('.game-card');
-    gameCards.forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-5px)';
-      });
-      
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-      });
+    gameCards.forEach((card, index) => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+
+        // Animazione di entrata scaglionata
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
     });
 
     // Effetti sui pulsanti principali
     const mainButtons = document.querySelectorAll('.main-button');
-    mainButtons.forEach(button => {
-      button.addEventListener('mouseenter', function() {
-        const shine = this.querySelector('.button-shine');
-        if (shine) {
-          shine.style.left = '100%';
-        }
-      });
-      
-      button.addEventListener('mouseleave', function() {
-        const shine = this.querySelector('.button-shine');
-        if (shine) {
-          shine.style.left = '-100%';
-        }
-      });
+    mainButtons.forEach((button, index) => {
+        // Animazione shine on hover
+        button.addEventListener('mouseenter', function() {
+            const shine = this.querySelector('.button-shine');
+            if (shine) {
+                shine.style.left = '100%';
+            }
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            const shine = this.querySelector('.button-shine');
+            if (shine) {
+                // Reset con delay per evitare loop
+                setTimeout(() => {
+                    shine.style.left = '-100%';
+                }, 200);
+            }
+        });
+
+        // Animazione di entrata
+        button.style.opacity = '0';
+        button.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            button.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            button.style.opacity = '1';
+            button.style.transform = 'translateY(0)';
+        }, 300 + (index * 150));
     });
 
-    // Aggiungi effetto click con feedback visivo
+    // Effetto click con feedback visivo su tutti i pulsanti
     const allButtons = document.querySelectorAll('.btn');
     allButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        // Piccola animazione di feedback
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 150);
-      });
+        button.addEventListener('click', function(e) {
+            // Piccola animazione di feedback
+            const originalTransform = this.style.transform || '';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.style.transform = originalTransform;
+            }, 150);
+        });
     });
-  }
 
-  // Esponi le funzioni globalmente per uso nei template
-  window.showSection = showSection;
+    // Animazione contatori
+    animateCounters();
+
+    console.log('✅ Effetti menu inizializzati');
+}
+
+/**
+ * Anima i contatori numerici nelle card
+ */
+function animateCounters() {
+    const creditElement = document.querySelector('.text-success.h5');
+    const charElement = document.querySelector('.text-info.h5');
+    
+    if (creditElement) {
+        const finalValue = parseInt(creditElement.textContent) || 0;
+        animateNumber(creditElement, 0, finalValue, 1500);
+    }
+    
+    if (charElement) {
+        const finalValue = parseInt(charElement.textContent) || 0;
+        animateNumber(charElement, 0, finalValue, 1000);
+    }
+}
+
+/**
+ * Anima un numero da start a end
+ * @param {Element} element - Elemento da animare
+ * @param {number} start - Valore iniziale
+ * @param {number} end - Valore finale
+ * @param {number} duration - Durata in millisecondi
+ */
+function animateNumber(element, start, end, duration) {
+    if (start === end) return;
+    
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+        element.textContent = current;
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    
+    window.requestAnimationFrame(step);
+}
+
+/**
+ * Gestione notifiche di sistema (se necessarie)
+ */
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = `
+        top: 20px; 
+        right: 20px; 
+        z-index: 9999; 
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    `;
+    
+    notification.innerHTML = `
+        <strong>${message}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-rimozione dopo 5 secondi
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 500);
+        }
+    }, 5000);
+}
+
+// Esponi funzioni globalmente per uso nei template
+window.showSection = showSection;
+window.showNotification = showNotification;
+
+console.log('🚀 Menu JavaScript caricato completamente');
+
+// ============================================================================
+// FINE JAVASCRIPT
+// ============================================================================
 </script>
 {% endblock %}
