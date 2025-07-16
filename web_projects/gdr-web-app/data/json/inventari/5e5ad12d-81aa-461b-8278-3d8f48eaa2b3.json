@@ -25,6 +25,14 @@
             "valore": 10,
             "tipo_oggetto": "Buff",
             "classe": "Medaglione"
+        },
+        {
+            "id": "b95b4638-efa7-4272-906b-d33f3166eefa",
+            "nome": "Pozione Rossa",
+            "usato": false,
+            "valore": 30,
+            "tipo_oggetto": "Ristorativo",
+            "classe": "PozioneCura"
         }
     ]
 }
