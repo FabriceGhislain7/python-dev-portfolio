@@ -24,23 +24,23 @@
                 <div class="d-flex gap-2 flex-wrap">
 
                     <!-- Vai a Inventario -->
-                    <form method="get" action="{{ url_for('inventory.mostra_inventario') }}">
+                    <form method="get" action="{{ url_for('inventory.inventory') }}">
                         <input type="hidden" name="personaggio_id" value="{{ personaggio['id'] }}">
                         <button type="submit" class="btn btn-outline-primary btn-sm">Inventario</button>
                     </form>
 
                     <!-- Dettagli del personaggio -->
-                    <form method="get" action="{{ url_for('characters.dettaglio_personaggio', id_pers=personaggio['id']) }}">
+                    <form method="get" action="{{ url_for('characters.char_details', char_id=personaggio['id']) }}">
                         <button type="submit" class="btn btn-outline-secondary btn-sm">Dettagli</button>
                     </form>
 
                     <!-- Modifica il personaggio -->
-                    <form method="get" action="{{ url_for('characters.modifica_personaggio', id_pers=personaggio['id']) }}">
+                    <form method="get" action="{{ url_for('characters.edit_char', char_id=personaggio['id']) }}">
                         <button type="submit" class="btn btn-outline-info btn-sm">Modifica</button>
                     </form>
 
                     <!-- Elimina il personaggio -->
-                    <form method="post" action="{{ url_for('characters.elimina_personaggio', id_pers=personaggio['id']) }}">
+                    <form method="post" action="{{ url_for('characters.char_delete', char_id=personaggio['id']) }}">
                         <button type="submit" class="btn btn-outline-danger btn-sm"
                                 onclick="return confirm('Eliminare {{ personaggio['nome'] }}?')">
                             <i class="fas fa-trash-alt"></i> Elimina

@@ -163,7 +163,7 @@
             <a href="{{ url_for('characters.create_char') }}" class="btn btn-fantasy-emerald">
               <i class="bi bi-person-plus me-2"></i>Crea Personaggio
             </a>
-            <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-fantasy-blue">
+            <a href="{{ url_for('characters.show_chars') }}" class="btn btn-outline-fantasy-blue">
               <i class="bi bi-people-fill me-2"></i>Gestisci Party
             </a>
           </div>
@@ -275,7 +275,7 @@
           </div>
           
           <div class="d-grid gap-2">
-            <a href="{{ url_for('inventory.mostra_inventario') }}" class="btn btn-fantasy-emerald">
+            <a href="{{ url_for('inventory.inventory') }}" class="btn btn-fantasy-emerald">
               <i class="bi bi-backpack me-2"></i>Gestisci Inventario
             </a>
             <a href="{{ url_for('battle.begin_battle') }}" class="btn btn-fantasy-dark">

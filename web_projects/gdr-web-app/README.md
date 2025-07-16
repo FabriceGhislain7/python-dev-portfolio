@@ -248,3 +248,7 @@ python app.py
 * Persistenza con Flask-SQLAlchemy
 * Scrittura di test automatizzati
 
+user_name : developer
+password: ^z%mWE7!v^8q
+
+

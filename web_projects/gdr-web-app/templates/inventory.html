@@ -1,72 +1,112 @@
 {% extends "layout.html" %}
 {% block title %}Inventario Personaggi{% endblock %}
-
 {% block content %}
-<div class="d-flex justify-content-center align-items-center flex-column py-5">
-
-  {% if not id_personaggio %}
+  <div class="d-flex justify-content-center align-items-center flex-column py-5">
+    {% if id_passato is none %}
     <form method="post" class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
       <h1 class="h4 text-center mb-4">Seleziona un personaggio</h1>
-
       <div class="mb-3">
         <label for="personaggio_id" class="form-label">Personaggio</label>
         <select name="personaggio_id" id="personaggio_id" class="form-select" required>
           <option value="">-- Scegli un personaggio --</option>
           {% for p in personaggi %}
-            <option value="{{ p.id }}" {% if id_personaggio == p.id %}selected{% endif %}>
+            <option value="{{ p.id }}" {% if id_selezionato == p.id %}selected{% endif %}>
               {{ p.nome }} ({{ p.classe }})
             </option>
           {% endfor %}
         </select>
       </div>
-
       <button type="submit" class="btn btn-outline-primary w-100">Mostra Inventario</button>
     </form>
-  {% endif %}
+    {% endif %}
 
-  {% if id_personaggio and inventario and personaggio %}
-    <div class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
-      <h1 class="h4 text-center mb-3">Inventario di {{ personaggio.nome }}</h1>
-      <p class="text-center text-muted mb-4">Classe: {{ personaggio.classe }}</p>
-
+    {% if (id_selezionato or id_passato) and inventario and personaggio %}
+      <div class="card shadow-sm p-4 mb-4" style="max-width: 800px; width: 100%;">
+        <h1 class="h4 text-center mb-4">Inventario di {{ personaggio.nome }}</h1>
+        <p class="text-center text-muted">Classe: {{ personaggio.classe }}</p>
+        
         {% if inventario.oggetti %}
-            <table class="table table-bordered table-striped">
-                <thead class="table-light">
-                <tr>
-                    <th>Nome</th>
-                    <th>Classe</th>
-                    <th>Tipo</th>
-                    <th>Valore</th>
-                    <th>Stato</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for oggetto in inventario.oggetti %}
-                    <tr>
-                    <td>{{ oggetto.nome }}</td>
-                    <td>{{ oggetto.__class__.__name__ }}</td>
-                    <td>{{ oggetto.tipo_oggetto or "N/D" }}</td>
-                    <td>{{ oggetto.valore }}</td>
-                    <td>
-                        {% if oggetto.usato==True %}
-                            <span class="badge bg-secondary">Usato</span>
-                        {% else %}
-                            <span class="badge bg-success">Non usato</span>
-                        {% endif %}
-                    </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
+        <ul class="list-unstyled">
+          {% for oggetto in inventario.oggetti %}
+            <li class="mb-3">
+              <div class="d-flex justify-content-between align-items-start border rounded p-3">
+                <div class="flex-grow-1">
+                  <strong>{{ oggetto.nome }}</strong> 
+                  <span class="badge bg-secondary ms-2">{{ oggetto.classe }}</span>
+                  <br>
+                  <small class="text-muted">
+                    {% if oggetto.valore %}Valore: {{ oggetto.valore }} crediti{% endif %}
+                    {% if oggetto.usato %} • Usato{% else %} • Non usato{% endif %}
+                  </small>
+                </div>
+                
+                <!-- Pulsante elimina oggetto -->
+                <form method="post" action="{{ url_for('inventory.delete_object', oggetto_id=oggetto.id) }}" class="ms-2">
+                  <input type="hidden" name="personaggio_id" value="{{ personaggio.id }}">
+                  <button type="submit" class="btn btn-outline-danger btn-sm"
+                          onclick="return confirm('Eliminare {{ oggetto.nome }}?')">
+                    <i class="fas fa-trash"></i> Elimina
+                  </button>
+                </form>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
         {% else %}
-        <p class="text-center text-muted">Nessun oggetto presente nell'inventario.</p>
+        <div class="text-center py-4">
+          <p class="text-muted">L'inventario è vuoto</p>
+        </div>
+        {% endif %}
+
+        <!-- Pulsante per aggiungere un oggetto -->
+        <div class="text-center mt-3">
+          <a href="{{ url_for('inventory.add_object', personaggio_id=personaggio.id) }}" 
+             class="btn btn-outline-success">
+            <i class="fas fa-plus"></i> Aggiungi Oggetto
+          </a>
+        </div>
+
+        <!-- Statistiche inventario -->
+        <div class="mt-4 pt-3 border-top">
+          <div class="row text-center">
+            <div class="col-4">
+              <small class="text-muted">Oggetti totali</small>
+              <br>
+              <strong>{{ inventario.oggetti|length }}</strong>
+            </div>
+            <div class="col-4">
+              <small class="text-muted">Valore totale</small>
+              <br>
+              <strong>{{ inventario.oggetti|sum(attribute='valore') }} crediti</strong>
+            </div>
+            <div class="col-4">
+              <small class="text-muted">Oggetti usati</small>
+              <br>
+              <strong>{{ inventario.oggetti|selectattr('usato')|list|length }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Link statistiche dettagliate -->
+        <div class="text-center mt-3">
+          <a href="{{ url_for('inventory.inventory_stats', personaggio_id=personaggio.id) }}" 
+             class="btn btn-outline-info btn-sm">
+            <i class="fas fa-chart-bar"></i> Statistiche Dettagliate
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Bottoni navigazione -->
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('characters.show_chars') }}" class="btn btn-outline-primary">
+        <i class="fas fa-arrow-left"></i> Torna alla lista
+      </a>
+      {% if personaggio %}
+      <a href="{{ url_for('characters.char_details', char_id=personaggio.id) }}" class="btn btn-outline-secondary">
+        <i class="fas fa-user"></i> Dettagli Personaggio
+      </a>
       {% endif %}
     </div>
-  {% endif %}
-
-  <a href="{{ url_for('characters.mostra_personaggi') }}" class="btn btn-outline-primary mt-3">
-    ← Torna alla lista
-  </a>
-</div>
+  </div>
 {% endblock %}

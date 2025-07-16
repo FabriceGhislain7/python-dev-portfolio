@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+{% block title %}Aggiungi Oggetto{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <form method="POST" class="card shadow-sm p-4 w-100" style="max-width: 600px;">
+    <h1 class="h4 text-center mb-4">
+      <i class="fas fa-plus-circle me-2 text-success"></i>
+      Aggiungi oggetto a <strong class="text-primary">{{ personaggio.nome }}</strong>
+    </h1>
+
+    <input type="hidden" name="personaggio_id" value="{{ personaggio_id }}">
+
+    <!-- Selezione tipo oggetto -->
+    <div class="mb-4">
+      <label for="oggetto" class="form-label fw-bold">
+        <i class="fas fa-box me-1"></i> Tipo Oggetto
+      </label>
+      <select id="oggetto" name="oggetto" class="form-select" required onchange="showObjectInfo()">
+        <option value="">-- Seleziona tipo oggetto --</option>
+        {% for o in oggetti %}
+          <option value="{{ o }}">{{ o }}</option>
+        {% endfor %}
+      </select>
+      <div class="form-text">Scegli il tipo di oggetto da aggiungere all'inventario</div>
+    </div>
+
+    <!-- Informazioni oggetto selezionato -->
+    <div id="object-info" class="alert alert-info d-none">
+      <h6 class="alert-heading">
+        <i class="fas fa-info-circle me-1"></i> Informazioni Oggetto
+      </h6>
+      <div id="info-content"></div>
+    </div>
+
+    <!-- Bottoni azione -->
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-success btn-lg">
+        <i class="fas fa-plus-circle me-2"></i>Aggiungi all'Inventario
+      </button>
+      <a href="{{ url_for('inventory.inventory', personaggio_id=personaggio_id) }}"
+         class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Torna all'Inventario
+      </a>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript per informazioni oggetti -->
+<script>
+function showObjectInfo() {
+    const select = document.getElementById('oggetto');
+    const infoDiv = document.getElementById('object-info');
+    const infoContent = document.getElementById('info-content');
+
+    if (select.value) {
+        const descriptions = {
+            'Arma': {
+                description: 'Oggetti per aumentare il danno in combattimento',
+                icon: 'fas fa-sword',
+                color: '#dc3545'
+            },
+            'Pozione': {
+                description: 'Consumabili per recuperare salute o energie',
+                icon: 'fas fa-flask',
+                color: '#28a745'
+            },
+            'Armatura': {
+                description: 'Protezioni per ridurre i danni subiti',
+                icon: 'fas fa-shield-alt',
+                color: '#6c757d'
+            },
+            'Accessorio': {
+                description: 'Oggetti speciali con effetti unici',
+                icon: 'fas fa-ring',
+                color: '#ffc107'
+            },
+            'Strumento': {
+                description: 'Utilità varie per esplorazioni e crafting',
+                icon: 'fas fa-tools',
+                color: '#17a2b8'
+            },
+            'Consumabile': {
+                description: 'Oggetti usa e getta con effetti immediati',
+                icon: 'fas fa-apple-alt',
+                color: '#fd7e14'
+            }
+        };
+
+        const objInfo = descriptions[select.value];
+        if (objInfo) {
+            infoContent.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="${objInfo.icon} me-2" style="color: ${objInfo.color}; font-size: 1.5rem;"></i>
+                    <div>
+                        <strong>${select.value}</strong><br>
+                        <small class="text-muted">${objInfo.description}</small>
+                    </div>
+                </div>
+            `;
+        } else {
+            infoContent.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-box me-2" style="color: #6c757d; font-size: 1.5rem;"></i>
+                    <div>
+                        <strong>${select.value}</strong><br>
+                        <small class="text-muted">Oggetto generico del gioco</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        infoDiv.classList.remove('d-none');
+    } else {
+        infoDiv.classList.add('d-none');
+    }
+}
+
+// Validazione form semplice
+document.querySelector('form').addEventListener('submit', function(e) {
+    const oggetto = document.getElementById('oggetto').value;
+
+    if (!oggetto) {
+        e.preventDefault();
+        alert('Seleziona un tipo di oggetto!');
+        return;
+    }
+});
+</script>
+
+<style>
+.form-label {
+    font-weight: 600;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(45deg, #218838, #1ca085);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.alert-info {
+    border-left: 4px solid #17a2b8;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-outline-secondary:hover {
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+</style>
+{% endblock %}
