@@ -1,0 +1,13 @@
+{
+    "classe": "Guerriero",
+    "id": "9f04b9ee-3f61-48e4-9995-2cb7bd6f0ada",
+    "nome": "Zoro",
+    "npc": false,
+    "salute_max": 130,
+    "salute": 130,
+    "attacco_min": 20,
+    "attacco_max": 100,
+    "livello": 1,
+    "destrezza": 15,
+    "storico_danni_subiti": []
+}

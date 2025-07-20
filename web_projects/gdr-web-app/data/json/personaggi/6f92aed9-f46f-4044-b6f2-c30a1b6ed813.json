@@ -1,0 +1,13 @@
+{
+    "classe": "Guerriero",
+    "id": "6f92aed9-f46f-4044-b6f2-c30a1b6ed813",
+    "nome": "Luca",
+    "npc": false,
+    "salute_max": 130,
+    "salute": 130,
+    "attacco_min": 20,
+    "attacco_max": 100,
+    "livello": 1,
+    "destrezza": 15,
+    "storico_danni_subiti": []
+}

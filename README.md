@@ -93,49 +93,81 @@ python-dev-portfolio/
 
 ## 📚 Learning Resources
 
-### Core Python
+### 🐍 Core Python
 - [Python Docs](https://docs.python.org/3/)
 - [PyPI - Python Package Index](https://pypi.org/)
-- [Python for Beginners](https://wiki.python.org/moin/BeginnersGuide)
+- [Python for Beginners – Wiki](https://wiki.python.org/moin/BeginnersGuide)
+- [W3Schools – Python Tutorial](https://www.w3schools.com/python/default.asp)
+- [TpointTech – Python Guide](https://www.tpointtech.com/python-tutorial)
+- [Real Python – Tutorials & Projects](https://realpython.com/)
+- [Automate the Boring Stuff](https://automatetheboringstuff.com/)
 
-### Web Dev
+### 🌐 Web Development
 - [Django Documentation](https://docs.djangoproject.com/)
+- [Django Cheat Sheet – dev.to](https://dev.to/saeidjavadi/django-cheat-sheet-2o11)
+- [CodeWithHarry: Django Cheatsheet](https://www.codewithharry.com/blogpost/django-cheatsheet)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Flask Docs](https://flask.palletsprojects.com/)
-- [cheatography](https://cheatography.com/)
-- [Django Cheat Sheet](https://dev.to/saeidjavadi/django-cheat-sheet-2o11)
-- [</> CodeWithHarry: Django Cheatsheet](https://www.codewithharry.com/blogpost/django-cheatsheet)
-- [TpointTech](https://www.tpointtech.com/python-tutorial)
-- [Alt-Codes for specials characters on the keybord](https://www.alt-codes.net/)
-- [Sito internet di rich](http://rich.readthedocs.io/en/stable/)
-- [W3Schools Online Web Tutorials](https://www.w3schools.com/python/default.asp)
-- [Link del mio GitHub](https://github.com/FabriceGhislain7)
-- [Scorciatoie da tastiera per VS Code (Windows)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
-- [GitLab](https://docs.gitlab.com/?tab=Tutorials)
-
-
-### IoT
-- [MicroPython](https://micropython.org/)
-- [Raspberry Pi + Python](https://www.raspberrypi.com/documentation/computers/python.html)
-
-### Project Starters
+- [Jinja Template Docs](https://jinja.palletsprojects.com/en/stable/templates/)
+- [Bootstrap](https://getbootstrap.com/)
 - [Cookiecutter Django Template](https://github.com/cookiecutter/cookiecutter-django)
-- [Python Project Template](https://github.com/rochacbruno/python-project-template)
+
+### 📊 Data Science & Visualization
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+- [Matplotlib](https://matplotlib.org/stable/)
+- [Seaborn](https://seaborn.pydata.org/)
+- [Scikit-learn](https://scikit-learn.org/)
+- [Plotly Dash](https://dash.plotly.com/)
+- [Streamlit](https://docs.streamlit.io/)
+- [Kaggle Datasets](https://www.kaggle.com/datasets)
+
+### 🤖 IoT & Embedded
+- [MicroPython](https://micropython.org/)
+- [Raspberry Pi + Python Guide](https://www.raspberrypi.com/documentation/computers/python.html)
+- [GPIO Zero (Python Library)](https://gpiozero.readthedocs.io/en/stable/)
+
+### 🔁 Automation & DevOps
+- [Git Docs](https://git-scm.com/doc)
+- [GitHub Docs](https://docs.github.com/)
+- [GitLab Tutorials](https://docs.gitlab.com/?tab=Tutorials)
+- [Docker Official Docs](https://docs.docker.com/)
+- [CI/CD – GitHub Actions](https://docs.github.com/en/actions)
+- [Schedule (Python Library)](https://schedule.readthedocs.io/en/stable/)
+- [OS Module Docs](https://docs.python.org/3/library/os.html)
+
+### 💡 Utility, Markdown & VS Code
+- [Rich – Terminal Formatting](http://rich.readthedocs.io/en/stable/)
+- [Alt-Codes (caratteri speciali)](https://www.alt-codes.net/)
+- [Cheatography – Code Cheatsheets](https://cheatography.com/)
+- [VS Code Keyboard Shortcuts (PDF)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- [VS Code Extensions Marketplace](https://marketplace.visualstudio.com/VSCode)
+
+### 📦 Project Templates & Boilerplates
+- [Cookiecutter Django Template](https://github.com/cookiecutter/cookiecutter-django)
+- [Python Project Template – Rochacbruno](https://github.com/rochacbruno/python-project-template)
+- [Awesome Python Repos](https://github.com/vinta/awesome-python)
+
+### 🧾 Serialization & Validation
+- [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) – Python object serialization/deserialization & validation
+- [Pydantic](https://pydantic.dev/) – Data validation and settings management using Python type annotations
+- [DRF Serializers (Django REST Framework)](https://www.django-rest-framework.org/api-guide/serializers/)
+- [Cerberus](https://docs.python-cerberus.org/en/stable/) – Lightweight and extensible data validation library
+- [Voluptuous](https://alecthomas.github.io/voluptuous/) – Python data validation library
 
 ---
 
 ## Author
 
-**Fabrice Ghislain Tebou**  
-Python Developer | Data Enthusiast | Creative Problem Solver  
-Based in [Italy] | ✉️ `ghislaintebou@gmail.com`  
+**Fabrice Ghislain Tebou**
+Python Developer | Data Enthusiast | Creative Problem Solver
+Based in [Italy] | ✉️ `ghislaintebou@gmail.com`
 [GitHub Profile](https://github.com/FabriceGhislain7)
 
 ---
 
 ## 🤝 Contribute / Collaborate
 
-This is a learning-first, growth-driven portfolio.  
+This is a learning-first, growth-driven portfolio.
 Pull requests, suggestions, or collaboration ideas are warmly welcome!
 
 ---
