@@ -9,91 +9,6 @@
 
 ---
 
-## 🌐 Step 6: Django REST Framework Setup
-
-### 6.1 Installa Django REST Framework
-```powershell
-py -m pip install djangorestframework==3.14.0
-```
-
-**📋 Cosa installa:**
-- `djangorestframework==3.14.0` → Framework API REST
-- `pytz` → Gestione timezone (dipendenza DRF)
-
-### 6.2 Configura DRF in settings.py
-**Apri `src/pizzamama/settings.py` e modifica:**
-
-**Aggiungi a `INSTALLED_APPS`:**
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    # Third party apps
-    'rest_framework',          # ← AGGIUNGI QUESTA RIGA
-]
-```
-
-**Aggiungi alla fine del file:**
-```python
-# Django REST Framework
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
-}
-```
-
-### 6.3 Configura URL API
-**Modifica `src/pizzamama/urls.py`:**
-```python
-from django.contrib import admin
-from django.urls import path, include
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
-@api_view(['GET'])
-def api_root(request):
-    return Response({
-        'message': 'Benvenuto alle API di PizzaMama!',
-        'version': '1.0',
-        'endpoints': {
-            'admin': '/admin/',
-            'api-auth': '/api/auth/login/',
-        }
-    })
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', api_root, name='api-root'),           # ← Homepage API
-    path('api/auth/', include('rest_framework.urls')), # ← Login/logout DRF
-]
-```
-
-### 6.4 Test API
-```powershell
-py manage.py runserver
-```
-
-**🔗 URL da testare:**
-- `http://127.0.0.1:8000/api/` → Vista benvenuto API (JSON)
-- `http://127.0.0.1:8000/api/auth/login/` → Login DRF
-- `http://127.0.0.1:8000/admin/` → Admin Django
-
-**🎯 Risultato atteso:** Interfaccia API browsable di DRF con messaggio di benvenuto
-
----
-
 ## 📁 Step 1: Creazione Ambiente e Struttura
 
 ### 1.1 Crea la directory del progetto
@@ -236,6 +151,206 @@ py manage.py runserver
 
 ---
 
+## 🌐 Step 6: Django REST Framework Setup
+
+### 6.1 Installa Django REST Framework
+```powershell
+py -m pip install djangorestframework==3.14.0
+```
+
+**📋 Cosa installa:**
+- `djangorestframework==3.14.0` → Framework API REST
+- `pytz` → Gestione timezone (dipendenza DRF)
+
+### 6.2 Configura DRF in settings.py
+**Apri `src/pizzamama/settings.py` e modifica:**
+
+**Aggiungi a `INSTALLED_APPS`:**
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    
+    # Third party apps
+    'rest_framework',          # ← AGGIUNGI QUESTA RIGA
+]
+```
+
+**Aggiungi alla fine del file:**
+```python
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20
+}
+```
+
+### 6.3 Configura URL API
+**Modifica `src/pizzamama/urls.py`:**
+```python
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['GET'])
+def api_root(request):
+    return Response({
+        'message': 'Benvenuto alle API di PizzaMama!',
+        'version': '1.0',
+        'endpoints': {
+            'admin': '/admin/',
+            'api-auth': '/api/auth/login/',
+        }
+    })
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', api_root, name='api-root'),           # ← Homepage API
+    path('api/auth/', include('rest_framework.urls')), # ← Login/logout DRF
+]
+```
+
+### 6.4 Test API
+```powershell
+py manage.py runserver
+```
+
+**🔗 URL da testare:**
+- `http://127.0.0.1:8000/api/` → Vista benvenuto API (JSON)
+- `http://127.0.0.1:8000/api/auth/login/` → Login DRF
+- `http://127.0.0.1:8000/admin/` → Admin Django
+
+**🎯 Risultato atteso:** Interfaccia API browsable di DRF con messaggio di benvenuto
+
+---
+
+## 🏗️ Step 7: Creazione Apps Enterprise
+
+### 7.1 Crea cartella apps/ (devi essere in src/)
+```powershell
+mkdir apps
+cd apps
+```
+
+### 7.2 Crea file __init__.py per package Python
+```powershell
+# Windows PowerShell
+New-Item -Path "__init__.py" -ItemType File -Force
+```
+
+### 7.3 Crea le app Django una alla volta
+```powershell
+# Crea app accounts (gestione utenti)
+py ../manage.py startapp accounts
+
+# Crea app products (catalogo pizze)
+py ../manage.py startapp products
+
+# Crea app orders (gestione ordini)
+py ../manage.py startapp orders
+```
+
+### 7.4 Verifica struttura creata
+```powershell
+ls
+```
+
+**📁 Dovresti vedere:**
+```
+apps/
+├── __init__.py
+├── accounts/
+├── products/
+└── orders/
+```
+
+### 7.5 Configura apps nei Django settings
+**Torna in src/ e modifica settings.py:**
+```powershell
+cd ..
+code pizzamama/settings.py
+```
+
+**Aggiorna `INSTALLED_APPS`:**
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    
+    # Third party apps
+    'rest_framework',
+    
+    # Local apps
+    'apps.accounts',    # ← AGGIUNGI
+    'apps.products',    # ← AGGIUNGI
+    'apps.orders',      # ← AGGIUNGI
+]
+```
+
+### 7.6 Fix configurazione app (IMPORTANTE!)
+**Per ogni app creata, modifica il file `apps.py`:**
+
+**`apps/accounts/apps.py`:**
+```python
+from django.apps import AppConfig
+
+class AccountsConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.accounts'  # ← Cambia da 'accounts' a 'apps.accounts'
+```
+
+**`apps/products/apps.py`:**
+```python
+from django.apps import AppConfig
+
+class ProductsConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.products'  # ← Cambia da 'products' a 'apps.products'
+```
+
+**`apps/orders/apps.py`:**
+```python
+from django.apps import AppConfig
+
+class OrdersConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.orders'  # ← Cambia da 'orders' a 'apps.orders'
+```
+
+### 7.7 Test configurazione
+```powershell
+py manage.py check
+```
+
+**✅ Output atteso:** `System check identified no issues (0 silenced).`
+
+### 7.8 Crea migrazioni iniziali (opzionale)
+```powershell
+py manage.py makemigrations accounts
+py manage.py makemigrations products
+py manage.py makemigrations orders
+```
+
+**📋 Output atteso:** `No changes detected` (normale, non ci sono ancora modelli custom)
+
+---
+
 ## 📂 Struttura Attuale del Progetto
 
 ```
@@ -244,10 +359,15 @@ pizzamama-enreprise/
 ├── src/                     ← Codice sorgente (approccio enterprise)
 │   ├── manage.py           ← Comando principale Django
 │   ├── db.sqlite3          ← Database SQLite (creato dopo migrate)
+│   ├── apps/               ← Apps business logic (NUOVO!)
+│   │   ├── __init__.py
+│   │   ├── accounts/       ← Gestione utenti
+│   │   ├── products/       ← Catalogo pizze
+│   │   └── orders/         ← Gestione ordini
 │   └── pizzamama/          ← Configurazioni progetto Django
 │       ├── __init__.py
 │       ├── settings.py     ← Tutte le configurazioni
-│       ├── urls.py         ← URL routing
+│       ├── urls.py         ← URL routing con API
 │       ├── wsgi.py         ← Server produzione
 │       └── asgi.py         ← Server asincrono
 └── structure.py            ← File di esempio (da rimuovere)
@@ -266,14 +386,16 @@ pizzamama-enreprise/
 - [x] Server di sviluppo testato
 - [x] Django REST Framework installato
 - [x] API endpoint di benvenuto configurato
+- [x] Apps enterprise create (accounts, products, orders)
+- [x] Struttura moduli configurata
 
 ### 🔄 Prossimi Step (da completare)
 - [x] Django REST Framework (API)
-- [ ] PostgreSQL setup (database produzione)
-- [ ] Struttura apps (accounts, products, orders, etc.)
+- [x] Struttura apps (accounts, products, orders, etc.)
 - [ ] Models e database design
+- [ ] PostgreSQL setup (database produzione)
 - [ ] Frontend templates
-- [ ] Sistema autenticazione
+- [ ] Sistema autenticazione custom
 - [ ] File statici e media
 - [ ] Docker setup
 - [ ] Testing framework
@@ -370,13 +492,33 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## 🎉 Congratulazioni!
 
-Finora, abbiamo completato il setup base di **PizzaMama Enterprise**!
+Finora, abbiamo completato il setup enterprise di **PizzaMama**! 
+
+### 🏗️ **Architettura Enterprise Creata:**
+- ✅ **Ambiente isolato** con virtual environment
+- ✅ **Django 5.0.1** con best practices
+- ✅ **API REST** con Django REST Framework
+- ✅ **Struttura modulare** con apps separate
+- ✅ **Database** SQLite per development
+- ✅ **Admin panel** funzionante con superuser
+
+### 📦 **Apps Business Logic:**
+- ✅ **`apps.accounts`** → Gestione utenti e autenticazione
+- ✅ **`apps.products`** → Catalogo pizze e ingredienti
+- ✅ **`apps.orders`** → Carrello e gestione ordini
+
+### 🔗 **API Endpoints Attivi:**
+- **`/admin/`** → Panel amministrazione Django
+- **`/api/`** → Homepage API con informazioni
+- **`/api/auth/login/`** → Interfaccia login DRF
+- **`/api/auth/logout/`** → Interfaccia logout DRF
 
 Il progetto è ora pronto per:
-1. **Sviluppo delle apps** (products, orders, etc.)
-2. **API development** con Django REST Framework
-3. **Database modeling** professionale
-4. **Frontend integration**
-5. **Testing e deployment**
+1. **📊 Database modeling** → Creare modelli User, Pizza, Order
+2. **🎨 Frontend development** → Templates e interfacce
+3. **🔐 Authentication system** → Login, registrazione, profili
+4. **💳 Payment integration** → Stripe, PayPal
+5. **🤖 ML features** → Raccomandazioni, analytics
+6. **🚀 Production deployment** → Docker, PostgreSQL
 
-**Prossimo step:** Installazione Django REST Framework e creazione struttura apps enterprise!
+**Prossimo step:** Creazione modelli database enterprise per gestire utenti, prodotti e ordini!
