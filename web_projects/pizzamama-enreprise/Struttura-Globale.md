@@ -59,20 +59,20 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                    PIZZAMAMA ENTERPRISE                     │
 ├─────────────────────────────────────────────────────────────┤
-│  Frontend Layer    │  API Layer      │  ML/Analytics Layer │
-│  - React/Vue.js    │  - Django REST  │  - Recommendation   │
-│  - Admin Dashboard │  - OpenAPI      │  - Demand Forecast  │
+│  Frontend Layer    │  API Layer      │  ML/Analytics Layer  │
+│  - React/Vue.js    │  - Django REST  │  - Recommendation    │
+│  - Admin Dashboard │  - OpenAPI      │  - Demand Forecast   │
 │  - Mobile Ready    │  - Versioning   │  - Sentiment Analysis│
 ├─────────────────────────────────────────────────────────────┤
 │              Backend Business Logic (Django)                │
-│  Accounts | Products | Orders | Payments | Delivery | etc. │
+│  Accounts | Products | Orders | Payments | Delivery | etc.  │
 ├─────────────────────────────────────────────────────────────┤
-│  Database Layer    │  Cache Layer    │  Task Queue Layer   │
-│  - PostgreSQL      │  - Redis        │  - Celery           │
-│  - Migrations      │  - Sessions     │  - Email/SMS        │
+│  Database Layer    │  Cache Layer    │  Task Queue Layer    │
+│  - PostgreSQL      │  - Redis        │  - Celery            │
+│  - Migrations      │  - Sessions     │  - Email/SMS         │
 ├─────────────────────────────────────────────────────────────┤
 │              Infrastructure & DevOps                        │
-│  Docker | Kubernetes | CI/CD | Monitoring | Logging        │
+│  Docker | Kubernetes | CI/CD | Monitoring | Logging         │
 └─────────────────────────────────────────────────────────────┘
 ```
 

@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # We add this line <- Aggiunta manuale di questa riga
-    'rest_framework'
+    'rest_framework',
+
+    # Local apps  AGGIUNGIAMO QUESTE APPS LOCALI
+    'apps.accounts',
+    'apps.products',
+    'apps.orders',
 ]
 
 MIDDLEWARE = [
