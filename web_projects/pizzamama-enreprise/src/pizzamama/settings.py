@@ -45,7 +45,15 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.products',
     'apps.orders',
+
+    # Questa parte è per la gestione dell API, aggiunta manuale
+    'django_filters',
+    'corsheaders',
+    'drf_spectacular',
+
 ]
+
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,8 +148,36 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': [  # Questa parte è stata aggiunta manualmente
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# API Documentation
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'PizzaMama Enterprise API',
+    'DESCRIPTION': 'Complete REST API for PizzaMama e-commerce platform',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+}
+
+# CORS Configuration (for frontend development)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",  # Vue dev server
+    "http://127.0.0.1:8080",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+# Token Authentication
+REST_USE_JWT = False  # Per ora usiamo Token standard
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.CustomUser'  # Aggiunto per configurare manualmente CustomUserpy manage.py makemigrations orders

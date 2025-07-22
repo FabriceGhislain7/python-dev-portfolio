@@ -4,16 +4,16 @@ from django.core.validators import RegexValidator
 
 class CustomUser(AbstractUser):
     """
-    Custom User model esteso per PizzaMama
+    Custom User model esteso per PizzaMama Enterprise
     """
-    # Contact info
+    # Contact information
     phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,15}$', 
+        regex=r'^\+?1?\d{9,15}$',
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
     )
     phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     
-    # Personal info
+    # Personal information
     date_of_birth = models.DateField(null=True, blank=True)
     
     # Preferences
@@ -51,7 +51,7 @@ class Address(models.Model):
     province = models.CharField(max_length=50)
     country = models.CharField(max_length=50, default='Italia')
     
-    # Coordinate per delivery (opzionale)
+    # Coordinate per delivery tracking (opzionale)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     
@@ -69,7 +69,7 @@ class Address(models.Model):
 
 class Profile(models.Model):
     """
-    Profilo utente esteso con preferenze e loyalty
+    Profilo utente esteso con loyalty system e preferences
     """
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(upload_to='avatars/', blank=True)
