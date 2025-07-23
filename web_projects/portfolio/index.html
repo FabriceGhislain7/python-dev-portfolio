@@ -1,51 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
     <title>Fabrice Ghislain Tebou - Python Developer | AI/ML Enthusiast</title>
-    <meta name="description" content="Python Developer and AI/ML enthusiast with Master's in Applied Physics. Specialized in Django, IoT systems, and machine learning applications.">
-    <meta name="keywords" content="Python Developer, AI/ML, Django, IoT, Machine Learning, Applied Physics, Full Stack Developer">
+    <meta name="description" content="Python Developer e AI/ML enthusiast con Master in Applied Physics. Specializzato in Django, sistemi IoT e applicazioni di machine learning.">
+    <meta name="keywords" content="Python Developer, AI/ML, Django, IoT, Machine Learning, Applied Physics, Full Stack Developer, Genova">
+    <meta name="author" content="Fabrice Ghislain Tebou">
     
-    <!-- Browser Icons & PWA -->
+    <!-- Browser Icons -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
-    
-    <!-- CSS Stylesheets - Ordered by Dependency -->
-    <link rel="stylesheet" href="assets/css/reset.css">         <!-- CSS Reset -->
-    <link rel="stylesheet" href="assets/css/variables.css">     <!-- CSS Variables -->
-    <link rel="stylesheet" href="assets/css/main.css">          <!-- Main Styles -->
-    <link rel="stylesheet" href="assets/css/components.css">    <!-- Component Styles -->
-    <link rel="stylesheet" href="assets/css/animations.css">    <!-- Animations -->
-    <link rel="stylesheet" href="assets/css/responsive.css">    <!-- Media Queries -->
-    <link rel="stylesheet" href="assets/css/dark-theme.css">    <!-- Dark Theme -->
+    <meta name="theme-color" content="#3b82f6">
     
     <!-- External Libraries -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files - Verremo aggiunti gradualmente -->
+    <!-- <link rel="stylesheet" href="assets/css/reset.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/variables.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/layout.css"> -->
 </head>
 <body>
-    <!-- ================================ -->
-    <!-- LOADING SCREEN                  -->
-    <!-- ================================ -->
+    
+    <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
         <div class="loader">
-            <div class="loader-inner"></div>
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Caricamento...</div>
         </div>
     </div>
 
-    <!-- ================================ -->
-    <!-- HEADER NAVIGATION                -->
-    <!-- ================================ -->
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="scroll-progress"></div>
+
+    <!-- Header Navigation -->
     <header id="header" class="header">
         <nav class="nav">
             <div class="nav-container">
-                <!-- Logo/Brand -->
+                <!-- Logo -->
                 <div class="nav-logo">
                     <a href="#home" class="logo-link">
                         <span class="logo-text">Fabrice Tebou</span>
+                        <span class="logo-subtitle">Python Developer</span>
                     </a>
                 </div>
 
@@ -55,30 +57,28 @@
                         <a href="#home" class="nav-link active">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
+                        <a href="#about" class="nav-link">Chi Sono</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#skills" class="nav-link">Skills</a>
+                        <a href="#skills" class="nav-link">Competenze</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="#projects" class="nav-link">Progetti</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#education" class="nav-link">Education</a>
+                        <a href="#education" class="nav-link">Formazione</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="#contact" class="nav-link">Contatti</a>
                     </li>
                 </ul>
 
                 <!-- Navigation Controls -->
                 <div class="nav-controls">
-                    <!-- Theme Toggle Button -->
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <!-- Mobile Menu Toggle -->
-                    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                    <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
                         <span class="menu-line"></span>
                         <span class="menu-line"></span>
                         <span class="menu-line"></span>
@@ -88,161 +88,150 @@
         </nav>
     </header>
 
-    <!-- ================================ -->
-    <!-- MAIN CONTENT CONTAINER           -->
-    <!-- ================================ -->
+    <!-- Main Content -->
     <main id="main">
         
-        <!-- ================================ -->
-        <!-- HERO/HOME SECTION                -->
-        <!-- ================================ -->
+        <!-- Hero Section -->
         <section id="home" class="hero">
-            <!-- Background Elements -->
-            <div class="hero-background">
-                <div class="hero-particles"></div>
-                <div class="hero-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                </div>
-            </div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-greeting">Ciao, sono</div>
+                        <h1 class="hero-name">Fabrice Ghislain Tebou</h1>
+                        <div class="hero-profession">
+                            <span class="typewriter">Python Developer</span>
+                        </div>
+                        <p class="hero-description">
+                            Master in Applied Physics con esperienza in sviluppo Python, backend Django, 
+                            sistemi IoT e machine learning. Attualmente in formazione avanzata attraverso 
+                            programmi di sviluppo Python e AI mentre costruisco progetti innovativi.
+                        </p>
+                        
+                        <div class="hero-buttons">
+                            <a href="#projects" class="btn btn-primary">
+                                <span>Vedi i Progetti</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="#contact" class="btn btn-secondary">
+                                <span>Contattami</span>
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="assets/files/CV_Fabrice_Tebou.pdf" class="btn btn-outline" target="_blank">
+                                <span>Scarica CV</span>
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
 
-            <!-- Hero Content -->
-            <div class="hero-content">
-                <!-- Text Content -->
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="hero-greeting">Hi, I'm</span>
-                        <span class="hero-name">Fabrice Ghislain Tebou</span>
-                        <span class="hero-profession">Python Developer | AI/ML Enthusiast</span>
-                    </h1>
-                    <p class="hero-description">
-                        Master's in Applied Physics with expertise in Python development, Django backend, IoT systems, and machine learning. 
-                        Currently advancing through comprehensive Python and AI training programs while building innovative projects.
-                    </p>
-                    <!-- Call-to-Action Buttons -->
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <span>View My Projects</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <span>Contact Me</span>
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                    <div class="hero-image">
+                        <div class="hero-avatar">
+                            <img src="assets/images/hero/profile.jpg" alt="Fabrice Ghislain Tebou" class="avatar-img">
+                            <div class="avatar-border"></div>
+                            <div class="avatar-status">
+                                <span class="status-dot"></span>
+                                <span class="status-text">Disponibile per lavoro</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Profile Image -->
-                <div class="hero-image">
-                    <div class="hero-avatar">
-                        <img src="assets/images/hero/profile.jpg" alt="Fabrice Ghislain Tebou Profile" class="avatar-img">
-                        <div class="avatar-border"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="hero-scroll">
-                <div class="scroll-indicator">
-                    <span class="scroll-text">Scroll</span>
-                    <div class="scroll-arrow">
-                        <i class="fas fa-arrow-down"></i>
+                <div class="hero-scroll">
+                    <div class="scroll-indicator">
+                        <span class="scroll-text">Scorri</span>
+                        <div class="scroll-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================================ -->
-        <!-- ABOUT SECTION                    -->
-        <!-- ================================ -->
+        <!-- About Section -->
         <section id="about" class="about">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">About Me</h2>
-                    <p class="section-subtitle">Python Developer passionate about AI/ML and innovative technology solutions</p>
+                    <h2 class="section-title">Chi Sono</h2>
+                    <p class="section-subtitle">Python Developer appassionato di AI/ML e soluzioni tecnologiche innovative</p>
                 </div>
 
                 <div class="about-content">
-                    <!-- Text Content -->
                     <div class="about-text">
-                        <!-- Description Paragraphs -->
-                        <p class="about-paragraph">
-                            With a master's degree in applied physics from the University of Genoa and ongoing Python Developer training, 
-                            I've built strong foundations in OOP, backend development with Django, and cross-platform apps with Kivy. 
-                            Currently advancing through two complementary programs focused on full-stack development and Python for IoT and AI.
-                        </p>
-                        <p class="about-paragraph">
-                            I'm continuously strengthening my technical and problem-solving skills. Passionate about technology, 
-                            I'm eager to contribute to innovative projects while growing within a dynamic development team. 
-                            My approach combines scientific rigor from my physics background with practical programming expertise.
-                        </p>
+                        <div class="about-intro">
+                            <p class="about-paragraph">
+                                Con un master in fisica applicata presso l'Università di Genova e formazione continua come Python Developer, 
+                                ho costruito solide basi in OOP, sviluppo backend con Django e applicazioni cross-platform con Kivy.
+                            </p>
+                            <p class="about-paragraph">
+                                Attualmente sto approfondendo le mie competenze attraverso due programmi complementari focalizzati 
+                                sullo sviluppo full-stack e Python per IoT e AI. Combino il rigore scientifico del mio background 
+                                in fisica con competenze pratiche di programmazione.
+                            </p>
+                        </div>
 
-                        <!-- Statistics Counter -->
+                        <!-- Statistics -->
                         <div class="about-stats">
                             <div class="stat">
                                 <span class="stat-number" data-count="600">0</span>
-                                <span class="stat-label">Training Hours</span>
+                                <span class="stat-label">Ore di Formazione</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-number" data-count="4">0</span>
-                                <span class="stat-label">Languages Spoken</span>
+                                <span class="stat-label">Lingue Parlate</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-count="10">0</span>
+                                <span class="stat-label">Progetti Completati</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-number" data-count="2">0</span>
-                                <span class="stat-label">Active Programs</span>
+                                <span class="stat-label">Programmi Attivi</span>
                             </div>
                         </div>
 
-                        <!-- Languages Section -->
+                        <!-- Languages -->
                         <div class="languages-section">
-                            <h3 class="section-subtitle">Languages</h3>
+                            <h3 class="languages-title">Lingue</h3>
                             <div class="language-skills">
                                 <div class="language-item">
-                                    <span class="language-name">French</span>
-                                    <span class="language-level">Native</span>
+                                    <span class="language-name">Francese</span>
+                                    <span class="language-level">Madrelingua</span>
                                 </div>
                                 <div class="language-item">
-                                    <span class="language-name">Italian</span>
+                                    <span class="language-name">Italiano</span>
                                     <span class="language-level">C1</span>
                                 </div>
                                 <div class="language-item">
-                                    <span class="language-name">English</span>
+                                    <span class="language-name">Inglese</span>
                                     <span class="language-level">B1</span>
                                 </div>
                                 <div class="language-item">
-                                    <span class="language-name">German</span>
+                                    <span class="language-name">Tedesco</span>
                                     <span class="language-level">A1</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Image and Skills -->
-                    <div class="about-image">
-                        <!-- Workspace Image -->
-                        <div class="about-img-wrapper">
-                            <img src="assets/images/about/workspace.jpg" alt="Development Workspace" class="about-img">
-                            <div class="about-img-overlay">
+
+                    <div class="about-visual">
+                        <div class="about-image">
+                            <img src="assets/images/about/workspace.jpg" alt="Workspace di sviluppo" class="about-img">
+                            <div class="about-overlay">
                                 <div class="overlay-content">
                                     <i class="fab fa-python"></i>
-                                    <span>Python is my passion</span>
+                                    <span>Python è la mia passione</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Soft Skills List -->
                         <div class="soft-skills">
-                            <h3>Soft Skills</h3>
+                            <h3 class="skills-title">Soft Skills</h3>
                             <ul class="skills-list">
-                                <li><i class="fas fa-check"></i> Quick learner</li>
-                                <li><i class="fas fa-check"></i> Strong communication</li>
-                                <li><i class="fas fa-check"></i> Collaboration skills</li>
-                                <li><i class="fas fa-check"></i> Suitable for teamwork</li>
-                                <li><i class="fas fa-check"></i> Excellent observation</li>
-                                <li><i class="fas fa-check"></i> Problem solving abilities</li>
-                                <li><i class="fas fa-check"></i> Curious and determined</li>
+                                <li><i class="fas fa-check"></i> Apprendimento rapido</li>
+                                <li><i class="fas fa-check"></i> Comunicazione efficace</li>
+                                <li><i class="fas fa-check"></i> Lavoro di squadra</li>
+                                <li><i class="fas fa-check"></i> Problem solving</li>
+                                <li><i class="fas fa-check"></i> Curiosità e determinazione</li>
+                                <li><i class="fas fa-check"></i> Capacità di osservazione</li>
                             </ul>
                         </div>
                     </div>
@@ -250,361 +239,247 @@
             </div>
         </section>
 
-        <!-- ================================ -->
-        <!-- SKILLS SECTION                   -->
-        <!-- ================================ -->
+        <!-- Skills Section -->
         <section id="skills" class="skills">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">Technical Skills</h2>
-                    <p class="section-subtitle">Technologies and tools I work with daily</p>
+                    <h2 class="section-title">Competenze Tecniche</h2>
+                    <p class="section-subtitle">Tecnologie e strumenti che utilizzo quotidianamente</p>
                 </div>
 
-                <!-- Skills Grid (Dynamic Content) -->
+                <div class="skills-filter">
+                    <button class="filter-btn active" data-category="all">Tutte</button>
+                    <button class="filter-btn" data-category="development">Sviluppo</button>
+                    <button class="filter-btn" data-category="data">Dati</button>
+                    <button class="filter-btn" data-category="tools">Strumenti</button>
+                </div>
+
+                <!-- Skills Grid - caricato dinamicamente da skills.json -->
                 <div class="skills-grid" id="skills-grid">
-                    <!-- Skills will be loaded dynamically from skills.json -->
+                    <!-- Le competenze verranno caricate da JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- ================================ -->
-        <!-- EDUCATION SECTION                -->
-        <!-- ================================ -->
+        <!-- Education Section -->
         <section id="education" class="education">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">Education & Training</h2>
-                    <p class="section-subtitle">Academic background and professional development</p>
+                    <h2 class="section-title">Formazione</h2>
+                    <p class="section-subtitle">Percorso accademico e sviluppo professionale</p>
                 </div>
 
-                <!-- Education Timeline -->
                 <div class="education-timeline">
-                    <!-- Current Training -->
-                    <div class="timeline-item">
-                        <div class="timeline-date">March 2025 - Ongoing</div>
+                    <div class="timeline-item current">
+                        <div class="timeline-date">Marzo 2025 - In corso</div>
                         <div class="timeline-content">
                             <h3>Python Programmer & Developer</h3>
-                            <h4>Ente F.IRE - Liguria Region (FSE + funded)</h4>
-                            <p>600-hour in-person program (including 180-hour internship), focused on Python development, IoT systems, and AI applications.</p>
-                            <ul class="education-skills">
-                                <li>Python programming and task automation</li>
-                                <li>IoT systems design with Raspberry Pi</li>
-                                <li>Software development with Visual Studio</li>
-                                <li>Cloud computing, SQL, data processing</li>
-                                <li>AI applications in Industry 4.0</li>
-                            </ul>
+                            <h4>Ente F.IRE - Regione Liguria (Finanziato FSE+)</h4>
+                            <p>Programma in presenza di 600 ore (inclusi 180 ore di stage), focalizzato su sviluppo Python, sistemi IoT e applicazioni AI.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">IoT</span>
+                                <span class="skill-tag">Raspberry Pi</span>
+                                <span class="skill-tag">AI</span>
+                                <span class="skill-tag">Cloud</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Online Course -->
                     <div class="timeline-item">
-                        <div class="timeline-date">August 2024 - Present</div>
+                        <div class="timeline-date">Agosto 2024 - Presente</div>
                         <div class="timeline-content">
-                            <h3>Python Developer - Full Course</h3>
+                            <h3>Python Developer - Corso Completo</h3>
                             <h4>Udemy</h4>
-                            <p>Comprehensive online training in modern Python development and software engineering.</p>
-                            <ul class="education-skills">
-                                <li>Python: OOP, algorithms, automation, web scraping</li>
-                                <li>Web development: Django, HTML, CSS</li>
-                                <li>API integration and AI applications</li>
-                                <li>Cross-platform development with Kivy</li>
-                            </ul>
+                            <p>Formazione online completa in sviluppo Python moderno e ingegneria del software.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Django</span>
+                                <span class="skill-tag">API</span>
+                                <span class="skill-tag">Kivy</span>
+                                <span class="skill-tag">Web Scraping</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Master's Degree -->
                     <div class="timeline-item">
-                        <div class="timeline-date">2020 - March 2024</div>
+                        <div class="timeline-date">2020 - Marzo 2024</div>
                         <div class="timeline-content">
-                            <h3>Master's Degree in Applied Physics</h3>
-                            <h4>University of Genoa</h4>
-                            <p><strong>Thesis:</strong> "Relationship and Dimensionality Reduction in Heterogeneous Datasets"</p>
-                            <ul class="education-skills">
-                                <li>Applied machine learning (Random Forest, Bootstrap)</li>
-                                <li>Statistical techniques (P-value, hypothesis testing)</li>
-                                <li>MATLAB programming and data analysis</li>
-                                <li>Research methodology and scientific writing</li>
-                            </ul>
+                            <h3>Master in Fisica Applicata</h3>
+                            <h4>Università di Genova</h4>
+                            <p><strong>Tesi:</strong> "Relationship and Dimensionality Reduction in Heterogeneous Datasets"</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Machine Learning</span>
+                                <span class="skill-tag">MATLAB</span>
+                                <span class="skill-tag">Analisi Dati</span>
+                                <span class="skill-tag">Ricerca</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Bachelor's Degree -->
                     <div class="timeline-item">
                         <div class="timeline-date">2007 - 2017</div>
                         <div class="timeline-content">
-                            <h3>Bachelor's Degree in Physics</h3>
-                            <h4>University of Yaoundé I</h4>
-                            <p>Foundation in theoretical and experimental physics, mathematics, and scientific methodology.</p>
+                            <h3>Laurea in Fisica</h3>
+                            <h4>Università di Yaoundé I</h4>
+                            <p>Fondamenti in fisica teorica e sperimentale, matematica e metodologia scientifica.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================================ -->
-        <!-- PROJECTS SECTION                 -->
-        <!-- ================================ -->
+        <!-- Projects Section -->
         <section id="projects" class="projects">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">My Projects</h2>
-                    <p class="section-subtitle">Portfolio of development work and learning projects</p>
+                    <h2 class="section-title">I Miei Progetti</h2>
+                    <p class="section-subtitle">Portfolio di lavori di sviluppo e progetti di apprendimento</p>
                 </div>
 
-                <!-- Project Filter Buttons -->
                 <div class="projects-filter">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn active" data-filter="web">Web Development</button>
-                    <button class="filter-btn" data-filter="ai">Data Analytics & AI/ML</button>
+                    <button class="filter-btn active" data-filter="all">Tutti</button>
+                    <button class="filter-btn" data-filter="web">Web Development</button>
+                    <button class="filter-btn" data-filter="python">Python</button>
+                    <button class="filter-btn" data-filter="data">Data & AI</button>
                     <button class="filter-btn" data-filter="iot">IoT</button>
-                    <button class="filter-btn" data-filter="python">Game</button>
                 </div>
 
-                <!-- Projects Grid -->
+                <!-- Projects Grid - caricato dinamicamente da projects.json -->
                 <div class="projects-grid" id="projects-grid">
-                    <!-- Django Project Card -->
-                    <div class="project-card web" data-category="web">
-                        <div class="project-image">
-                            <img src="assets/images/projects/demo-web.jpg" alt="PizzaMama Django Project" loading="lazy">
-                            <div class="project-overlay">
-                                <a href="https://github.com/FabriceGhislain7/python-dev-portfolio/tree/main/web_projects/PizzaMamaDjango/pizzamama"
-                                class="project-link" target="_blank" rel="noopener">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title">PizzaMama Django</h3>
-                            <p class="project-description">Full-stack web application built with Django framework, featuring user authentication, order management, and responsive design.</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Django</span>
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">HTML/CSS</span>
-                                <span class="tech-tag">SQLite</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Project Card -->
-                    <div class="project-card python" data-category="python">
-                        <div class="project-image">
-                            <img src="assets/images/projects/portfolio.jpg" alt="Python Portfolio" loading="lazy">
-                            <div class="project-overlay">
-                                <a href="https://github.com/FabriceGhislain7" class="project-link" target="_blank" rel="noopener">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title">Python Developer Portfolio</h3>
-                            <p class="project-description">Comprehensive collection of Python projects and exercises from training programs, showcasing progression from v1.0 to v12.0.</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Git</span>
-                                <span class="tech-tag">Documentation</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- I progetti verranno caricati da JavaScript -->
                 </div>
 
-                <!-- GitHub Link Section -->
                 <div class="github-section">
-                    <h3>All Projects on GitHub</h3>
+                    <h3>Tutti i Progetti su GitHub</h3>
+                    <p>Esplora la mia raccolta completa di progetti e contributi</p>
                     <a href="https://github.com/FabriceGhislain7" class="btn btn-primary" target="_blank" rel="noopener">
                         <i class="fab fa-github"></i>
-                        <span>Visit My GitHub</span>
+                        <span>Visita il mio GitHub</span>
                     </a>
                 </div>
-
             </div>
         </section>
 
-        <!-- ================================ -->
-        <!-- INTERESTS SECTION                -->
-        <!-- ================================ -->
-        <section id="interests" class="interests">
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h2 class="section-title">Interests & Hobbies</h2>
-                    <p class="section-subtitle">What I'm passionate about beyond coding</p>
-                </div>
-
-                <!-- Interests Grid -->
-                <div class="interests-grid">
-                    <!-- Music Interest -->
-                    <div class="interest-card">
-                        <div class="interest-icon">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3>Music Education</h3>
-                        <p>Organizing free music training sessions for guitar, piano, and flute, sharing the joy of music with the community.</p>
-                    </div>
-
-                    <!-- Leadership Interest -->
-                    <div class="interest-card">
-                        <div class="interest-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Community Leadership</h3>
-                        <p>Taking leadership roles in Christian youth movements, promoting community development and social engagement.</p>
-                    </div>
-
-                    <!-- Charity Interest -->
-                    <div class="interest-card">
-                        <div class="interest-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h3>Charitable Activities</h3>
-                        <p>Actively involved in charitable activities, contributing to social causes and community welfare initiatives.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================================ -->
-        <!-- CONTACT SECTION                  -->
-        <!-- ================================ -->
+        <!-- Contact Section -->
         <section id="contact" class="contact">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">Contact Me</h2>
-                    <p class="section-subtitle">Ready to collaborate on your next project?</p>
+                    <h2 class="section-title">Contattami</h2>
+                    <p class="section-subtitle">Pronto a collaborare al tuo prossimo progetto?</p>
                 </div>
 
                 <div class="contact-content">
-                    <!-- Contact Information -->
                     <div class="contact-info">
-                        <!-- Email Contact -->
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
                                 <h3>Email</h3>
-                                <p>ghislaintebou@gmail.com</p>
+                                <a href="mailto:ghislaintebou@gmail.com">ghislaintebou@gmail.com</a>
                             </div>
                         </div>
 
-                        <!-- Phone Contact -->
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>Phone</h3>
-                                <p>+39 351 995 7025</p>
+                                <h3>Telefono</h3>
+                                <a href="tel:+393519957025">+39 351 995 7025</a>
                             </div>
                         </div>
 
-                        <!-- Location Contact -->
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>Location</h3>
-                                <p>Genova, Italy</p>
+                                <h3>Posizione</h3>
+                                <span>Genova, Italia</span>
                             </div>
                         </div>
 
-                        <!-- Social Media Links -->
                         <div class="contact-social">
-                            <a href="https://github.com/FabriceGhislain7" class="social-link" target="_blank" rel="noopener">
+                            <a href="https://github.com/FabriceGhislain7" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#" class="social-link" target="_blank" rel="noopener">
+                            <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="mailto:ghislaintebou@gmail.com" class="social-link">
+                            <a href="mailto:ghislaintebou@gmail.com" class="social-link" aria-label="Email">
                                 <i class="fas fa-envelope"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
-                    <form class="contact-form" id="contact-form">
-                        <!-- Name Field -->
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" class="form-input" required>
-                            <label for="name" class="form-label">Name</label>
-                        </div>
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" class="form-input" required>
+                                <label for="name" class="form-label">Nome</label>
+                                <span class="form-error"></span>
+                            </div>
 
-                        <!-- Email Field -->
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" class="form-input" required>
-                            <label for="email" class="form-label">Email</label>
-                        </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" class="form-input" required>
+                                <label for="email" class="form-label">Email</label>
+                                <span class="form-error"></span>
+                            </div>
 
-                        <!-- Subject Field -->
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" class="form-input" required>
-                            <label for="subject" class="form-label">Subject</label>
-                        </div>
+                            <div class="form-group">
+                                <input type="text" id="subject" name="subject" class="form-input" required>
+                                <label for="subject" class="form-label">Oggetto</label>
+                                <span class="form-error"></span>
+                            </div>
 
-                        <!-- Message Field -->
-                        <div class="form-group">
-                            <textarea id="message" name="message" class="form-input" rows="5" required></textarea>
-                            <label for="message" class="form-label">Message</label>
-                        </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" class="form-input" rows="5" required></textarea>
+                                <label for="message" class="form-label">Messaggio</label>
+                                <span class="form-error"></span>
+                            </div>
 
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <span>Invia Messaggio</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ================================ -->
-    <!-- FOOTER                           -->
-    <!-- ================================ -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <!-- Left Footer Content -->
                 <div class="footer-left">
-                    <p>&copy; 2025 Fabrice Ghislain Tebou. All rights reserved.</p>
-                    <p class="privacy-notice">I authorize the processing of personal data contained in my portfolio based on Article 13 of Legislative Decree 196/2003 and Article 13 GDPR 679/16.</p>
+                    <p>&copy; 2025 Fabrice Ghislain Tebou. Tutti i diritti riservati.</p>
+                    <p class="privacy-notice">
+                        Autorizzo il trattamento dei dati personali contenuti nel mio portfolio ai sensi dell'art. 13 del D.Lgs. 196/2003 e dell'art. 13 GDPR 679/16.
+                    </p>
                 </div>
-                <!-- Right Footer Content -->
                 <div class="footer-right">
-                    <p>Made with ❤️ and lots of coffee ☕</p>
+                    <p>Realizzato con passione e tanto caffè</p>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">Chi Sono</a>
+                        <a href="#contact">Contatti</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- ================================ -->
-    <!-- BACK TO TOP BUTTON               -->
-    <!-- ================================ -->
-    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Torna in alto">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- ================================ -->
-    <!-- JAVASCRIPT FILES                 -->
-    <!-- ================================ -->
-    <!-- Core Configuration -->
-    <script src="assets/js/config.js"></script>
-    <!-- Utility Functions -->
-    <script src="assets/js/utils.js"></script>
-    <!-- Module Scripts -->
-    <script src="assets/js/modules/theme.js"></script>
-    <script src="assets/js/modules/navigation.js"></script>
-    <script src="assets/js/modules/scroll.js"></script>
-    <script src="assets/js/modules/animations.js"></script>
-    <script src="assets/js/modules/projects.js"></script>
-    <script src="assets/js/modules/filters.js"></script>
-    <script src="assets/js/modules/contact.js"></script>
-    <!-- Main Application Script -->
-    <script src="assets/js/main.js"></script>
+    <!-- JavaScript Files - Verranno aggiunti gradualmente -->
+    <!-- <script src="assets/js/config.js"></script> -->
+    <!-- <script src="assets/js/utils.js"></script> -->
+    <!-- <script src="assets/js/main.js"></script> -->
 </body>
 </html>
