@@ -1,5 +1,8 @@
 import json
 from typing import Any
+import logging
+from config import LOG_JSON_PATH
+
 
 class Json:
 
@@ -7,16 +10,16 @@ class Json:
     def scrivi_dati(file_path: str, dati_da_salvare: dict) -> None:
         """
         Scrive i dati in un file JSON.
-        
+
         Args:
             file_path (str): Percorso del file in cui salvare i dati.
             dati_da_salvare (dict): Dati da salvare nel file JSON.
             encoder (function): Funzione di codifica per convertire oggetti in JSON.
-        
+
         Return:
             None
         """
-        
+
         try:
             with open(file_path, 'w') as file:
                 json.dump(dati_da_salvare, file, indent=4)
@@ -34,7 +37,7 @@ class Json:
         Returns:
             dict: Dati caricati dal file JSON.
         """
-        
+
         try:
             with open(file_path, 'r') as file:
                 dati = json.load(file)
@@ -42,6 +45,7 @@ class Json:
         except Exception as e:
             print(f"Errore nella lettura del file JSON: {e}")
             return None
+
     @staticmethod
     def applica_patch(patch_element: dict) -> None:
         """
@@ -94,7 +98,7 @@ class Json:
 
                 Args:
                     obj (Union[dict, list]): Oggetto da esplorare.
-                
+
                 Returns:
                     None
             """
@@ -109,3 +113,42 @@ class Json:
         salvataggio = Json.carica_dati("data/salvataggio.json")
         cerca_e_aggiorna(salvataggio)
         return salvataggio
+
+class JsonLogHandler(logging.Handler):
+    """
+    Handler per scrivere i log in un file JSON.
+    I messaggi sono salvati come lista sotto la chiave "messaggio".
+    """
+    def emit(self, record):
+        log_path = LOG_JSON_PATH
+        messaggio = self.format(record)
+        print(f"Log ----------------->: {messaggio}")
+
+        try:
+            dati = Json.carica_dati(log_path)
+
+            if not dati or not isinstance(dati, dict):
+                dati = {"log": []}
+            elif "log" not in dati or not isinstance(dati["log"], list):
+                dati["log"] = []
+
+            dati["log"].append(messaggio)
+            Json.scrivi_dati(log_path, dati)
+
+        except Exception as e:
+            logging.error(f"Errore durante la scrittura del log in JSON: {e}")
+
+def setup_logger():
+    """
+    Configura il logger per scrivere i messaggi in un file JSON.
+    la funzione viene chiamata all'avvio dell'applicazione.
+
+    """
+    logger = logging.getLogger('json_logger')
+    logger.setLevel(logging.INFO)
+
+    if not any(isinstance(handler, JsonLogHandler) for handler in logger.handlers):
+        json_handler = JsonLogHandler()
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        json_handler.setFormatter(formatter)
+        logger.addHandler(json_handler)

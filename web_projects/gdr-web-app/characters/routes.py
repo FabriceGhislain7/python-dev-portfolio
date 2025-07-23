@@ -35,10 +35,11 @@ from inventory.routes import salva_inventario_su_json
 from gioco.schemas.personaggio import PersonaggioSchema
 from auth.models import User, db
 from config import CreateDirs
+from utils.salvataggio import setup_logger
 
 # Setup logging
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+setup_logger()
+logger = logging.getLogger('json_logger')
 
 # Schema initialization
 schema = PersonaggioSchema()
@@ -53,10 +54,10 @@ def load_char():
     """
     # Ottieni tutti i file JSON dei personaggi
     all_char_files = get_user_character_files()
-    
+
     # Filtra solo quelli posseduti dall'utente
     owned_chars = filter_owned_characters(current_user.character_ids or [])
-    
+
     # Gestione caso utente senza personaggi
     if not owned_chars:
         return []

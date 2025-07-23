@@ -1,9 +1,9 @@
 {
-    "id": "34bf1174-f14a-47cb-aaf7-bf02687a5200",
-    "id_proprietario": "6f92aed9-f46f-4044-b6f2-c30a1b6ed813",
+    "id": "6c98248c-79d2-4d10-8c53-f95ec774f116",
+    "id_proprietario": "96abc215-c40b-46cd-851d-426e1d86202a",
     "oggetti": [
         {
-            "id": "5e35d9fe-3b27-424f-b52b-3d8a6be4fa01",
+            "id": "38b2d8dd-6cbe-4130-b760-e3b97082de17",
             "nome": "Bomba Acida",
             "usato": false,
             "valore": 30,

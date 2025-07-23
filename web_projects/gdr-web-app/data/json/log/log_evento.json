@@ -1,0 +1,14 @@
+{
+    "log": [
+        "2025-07-23 14:06:17,418 - INFO - Caricati 4 personaggi per utente developer@gmail.com",
+        "2025-07-23 14:06:17,487 - INFO - Lista personaggi richiesta - Count: 4",
+        "2025-07-23 14:06:49,425 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-23 14:06:49,459 - INFO - Lista personaggi richiesta - Count: 3",
+        "2025-07-23 14:06:53,573 - INFO - Caricati 2 personaggi per utente developer@gmail.com",
+        "2025-07-23 14:06:53,595 - INFO - Lista personaggi richiesta - Count: 2",
+        "2025-07-23 14:06:58,858 - INFO - Caricati 1 personaggi per utente developer@gmail.com",
+        "2025-07-23 14:06:58,886 - INFO - Lista personaggi richiesta - Count: 1",
+        "2025-07-23 14:15:34,205 - INFO - Caricati 2 personaggi per utente developer@gmail.com",
+        "2025-07-23 14:15:34,228 - INFO - Lista personaggi richiesta - Count: 2"
+    ]
+}

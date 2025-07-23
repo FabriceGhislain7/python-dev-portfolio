@@ -1,172 +1,119 @@
 {
   "projects": [
     {
-      "id": "ecommerce-platform",
-      "title": "E-commerce Platform",
-      "description": "Piattaforma e-commerce completa con gestione prodotti, carrello, pagamenti e dashboard amministrativa. Sviluppata con React e Node.js.",
-      "image": "assets/images/projects/ecommerce.jpg",
+      "id": "demo-project-1",
+      "title": "Web App Example",
+      "description": "A modern responsive web application built with HTML, CSS, and JavaScript.",
+      "image": "assets/images/projects/demo-web.jpg",
       "category": "web",
-      "technologies": ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
       "features": [
-        "Autenticazione utenti",
-        "Gestione prodotti",
-        "Sistema di pagamenti",
-        "Dashboard admin",
-        "Responsive design"
+        "Demo feature 1",
+        "Demo feature 2",
+        "Demo feature 3"
       ],
       "links": {
-        "live": "https://example-ecommerce.com",
-        "github": "https://github.com/username/ecommerce",
-        "demo": "https://demo.example-ecommerce.com"
+        "github": "https://github.com/FabriceGhislain7/python-dev-portfolio/tree/main/web_projects/PizzaMamaDjango"
       },
-      "status": "completed",
-      "date": "2024-03-15",
-      "duration": "3 mesi",
-      "team": "Solo project",
-      "highlights": [
-        "Aumentato le conversioni del 35%",
-        "Tempo di caricamento < 2 secondi",
-        "100% responsive design"
-      ]
-    },
-    {
-      "id": "task-management-app",
-      "title": "Task Management App",
-      "description": "Applicazione per la gestione delle attività con funzionalità di collaborazione in tempo reale, notifiche push e sincronizzazione cloud.",
-      "image": "assets/images/projects/taskapp.jpg",
-      "category": "web",
-      "technologies": ["Vue.js", "Firebase", "PWA", "Vuetify"],
-      "features": [
-        "Real-time collaboration",
-        "Offline support",
-        "Push notifications",
-        "Drag & drop interface",
-        "Dark/Light theme"
-      ],
-      "links": {
-        "live": "https://taskapp-demo.com",
-        "github": "https://github.com/username/taskapp"
-      },
-      "status": "completed",
-      "date": "2024-01-20",
-      "duration": "2 mesi",
-      "team": "2 sviluppatori",
-      "highlights": [
-        "10k+ utenti attivi",
-        "PWA con supporto offline",
-        "Architettura scalabile"
-      ]
-    },
-    {
-      "id": "fitness-tracker",
-      "title": "Fitness Tracker Mobile",
-      "description": "App mobile per il tracking degli allenamenti con integrazione sensori, statistiche dettagliate e programmi di allenamento personalizzati.",
-      "image": "assets/images/projects/fitness.jpg",
-      "category": "mobile",
-      "technologies": ["React Native", "SQLite", "Chart.js", "AsyncStorage"],
-      "features": [
-        "Tracking workout",
-        "Statistiche avanzate",
-        "Programmi personalizzati",
-        "Integrazione sensori",
-        "Social sharing"
-      ],
-      "links": {
-        "github": "https://github.com/username/fitness-tracker",
-        "playstore": "https://play.google.com/store/apps/details?id=com.fitness"
-      },
-      "status": "in-progress",
-      "date": "2024-06-01",
-      "duration": "4 mesi",
-      "team": "3 sviluppatori",
-      "highlights": [
-        "Cross-platform compatibility",
-        "Machine learning per suggerimenti",
-        "Integrazione con wearables"
-      ]
-    },
-    {
-      "id": "portfolio-website",
-      "title": "Portfolio Website",
-      "description": "Sito portfolio moderno e interattivo con animazioni fluide, tema scuro/chiaro e design responsive. Ottimizzato per performance e SEO.",
-      "image": "assets/images/projects/portfolio.jpg",
-      "category": "design",
-      "technologies": ["HTML5", "CSS3", "JavaScript", "GSAP", "Webpack"],
-      "features": [
-        "Animazioni fluide",
-        "Tema dark/light",
-        "Design responsive",
-        "SEO ottimizzato",
-        "Performance elevate"
-      ],
-      "links": {
-        "live": "https://myportfolio.dev",
-        "github": "https://github.com/username/portfolio"
-      },
-      "status": "completed",
-      "date": "2024-02-10",
+      "status": "demo",
+      "date": "2025-07-23",
       "duration": "1 mese",
       "team": "Solo project",
       "highlights": [
-        "Lighthouse score 100/100",
-        "Animazioni con GSAP",
-        "Design system modulare"
+        "Progetto di esempio",
+        "Perfetto per presentazione",
+        "Facilmente sostituibile"
       ]
     },
     {
-      "id": "weather-dashboard",
-      "title": "Weather Dashboard",
-      "description": "Dashboard meteo interattiva con previsioni dettagliate, mappe radar, grafici e sistema di notifiche per condizioni meteo avverse.",
-      "image": "assets/images/projects/weather.jpg",
-      "category": "web",
-      "technologies": ["React", "D3.js", "OpenWeather API", "Mapbox"],
+      "id": "demo-project-2",
+      "title": "IoT Smart Sensor",
+      "description": "An IoT solution that monitors environmental data in real-time.",
+      "image": "assets/images/projects/demo-iot.jpg",
+      "category": "iot",
+      "technologies": [
+        "Arduino",
+        "MQTT",
+        "Python"
+      ],
       "features": [
-        "Previsioni dettagliate",
-        "Mappe interattive",
-        "Grafici dinamici",
-        "Notifiche push",
-        "Geolocalizzazione"
+        "Demo feature 1",
+        "Demo feature 2",
+        "Demo feature 3"
       ],
       "links": {
-        "live": "https://weather-dashboard-demo.com",
-        "github": "https://github.com/username/weather-dashboard"
+        "github": "https://github.com/your-iot-project"
       },
-      "status": "completed",
-      "date": "2023-12-05",
-      "duration": "6 settimane",
+      "status": "demo",
+      "date": "2025-07-23",
+      "duration": "1 mese",
       "team": "Solo project",
       "highlights": [
-        "Visualizzazioni con D3.js",
-        "Real-time data updates",
-        "Mobile-first design"
+        "Progetto di esempio",
+        "Perfetto per presentazione",
+        "Facilmente sostituibile"
       ]
     },
     {
-      "id": "chat-application",
-      "title": "Real-time Chat App",
-      "description": "Applicazione di chat in tempo reale con rooms, condivisione file, videochiamate e crittografia end-to-end per la privacy.",
-      "image": "assets/images/projects/chat.jpg",
-      "category": "web",
-      "technologies": ["Socket.io", "Express", "MongoDB", "WebRTC", "JWT"],
+      "id": "demo-project-3",
+      "title": "Data Dashboard",
+      "description": "Interactive dashboard for visualizing analytics with machine learning insights.",
+      "image": "assets/images/projects/demo-data.jpg",
+      "category": "data",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "Plotly"
+      ],
       "features": [
-        "Chat in tempo reale",
-        "Rooms private/pubbliche",
-        "Condivisione file",
-        "Video chiamate",
-        "Crittografia E2E"
+        "Demo feature 1",
+        "Demo feature 2",
+        "Demo feature 3"
       ],
       "links": {
-        "github": "https://github.com/username/chat-app",
-        "demo": "https://chat-demo.herokuapp.com"
+        "github": "https://github.com/your-data-project"
       },
-      "status": "in-progress",
-      "date": "2024-04-20",
-      "duration": "3 mesi",
-      "team": "2 sviluppatori",
+      "status": "demo",
+      "date": "2025-07-23",
+      "duration": "1 mese",
+      "team": "Solo project",
       "highlights": [
-        "WebRTC per video calls",
-        "Scalabilità con Socket.io",
-        "Security-first approach"
+        "Progetto di esempio",
+        "Perfetto per presentazione",
+        "Facilmente sostituibile"
+      ]
+    },
+    {
+      "id": "demo-project-4",
+      "title": "Retro Platformer Game",
+      "description": "A pixel-art 2D platformer game built with love and JavaScript.",
+      "image": "assets/images/projects/demo-game.jpg",
+      "category": "game",
+      "technologies": [
+        "JavaScript",
+        "Canvas",
+        "Tiled"
+      ],
+      "features": [
+        "Demo feature 1",
+        "Demo feature 2",
+        "Demo feature 3"
+      ],
+      "links": {
+        "github": "https://github.com/your-game-project"
+      },
+      "status": "demo",
+      "date": "2025-07-23",
+      "duration": "1 mese",
+      "team": "Solo project",
+      "highlights": [
+        "Progetto di esempio",
+        "Perfetto per presentazione",
+        "Facilmente sostituibile"
       ]
     }
   ],
@@ -174,27 +121,39 @@
     {
       "id": "all",
       "name": "Tutti",
-      "count": 6
+      "count": 4
     },
     {
       "id": "web",
       "name": "Web App",
-      "count": 4
-    },
-    {
-      "id": "mobile",
-      "name": "Mobile",
       "count": 1
     },
     {
-      "id": "design",
-      "name": "Design",
+      "id": "iot",
+      "name": "IoT",
+      "count": 1
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "count": 1
+    },
+    {
+      "id": "game",
+      "name": "Game",
       "count": 1
     }
   ],
   "technologies": [
-    "React", "Vue.js", "Node.js", "MongoDB", "React Native", 
-    "JavaScript", "HTML5", "CSS3", "Firebase", "Socket.io",
-    "Express", "PWA", "WebRTC", "D3.js", "GSAP"
+    "Arduino",
+    "CSS",
+    "Canvas",
+    "HTML",
+    "JavaScript",
+    "MQTT",
+    "Pandas",
+    "Plotly",
+    "Python",
+    "Tiled"
   ]
 }
