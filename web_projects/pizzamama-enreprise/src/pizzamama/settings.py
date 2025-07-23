@@ -38,24 +38,43 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # We add this line <- Aggiunta manuale di questa riga
+    # ========================================
+    # THIRD PARTY APPS - MANUALMENTE AGGIUNTE
+    # ========================================
+    # Django REST Framework - Step 6: API framework principale
     'rest_framework',
+    'rest_framework.authtoken',
 
-    # Local apps  AGGIUNGIAMO QUESTE APPS LOCALI
-    'apps.accounts',
-    'apps.products',
-    'apps.orders',
-
-    # Questa parte è per la gestione dell API, aggiunta manuale
+    # django-filter - Step 11: Filtering avanzato per API
     'django_filters',
+    
+    # corsheaders - Step 11: CORS per frontend separation
     'corsheaders',
+    
+    # drf-spectacular - Step 11: Documentazione OpenAPI automatica
     'drf_spectacular',
 
+    # ========================================
+    # LOCAL APPS - ARCHITETTURA ENTERPRISE
+    # ========================================
+    # Step 7-8: App accounts - User management enterprise con CustomUser
+    'apps.accounts',
+    
+    # Step 9: App products - Catalogo pizze con inventory management
+    'apps.products',
+    
+    # Step 10: App orders - E-commerce workflow completo
+    'apps.orders',
 ]
 
-MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
-
 MIDDLEWARE = [
+    # ========================================
+    # CORS MIDDLEWARE - STEP 11 API ENTERPRISE
+    # ========================================
+    # corsheaders middleware deve essere il primo per gestire CORS correttamente
+    'corsheaders.middleware.CorsMiddleware',
+    
+    # Django middleware standard
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,26 +157,49 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Django REST Framework
+# ========================================
+# CUSTOM USER MODEL - STEP 8 ENTERPRISE
+# ========================================
+# Configurazione CustomUser per sistema utenti enterprise
+# IMPORTANTE: Deve essere configurato prima delle prime migrazioni
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# ========================================
+# DJANGO REST FRAMEWORK - STEP 6 & 11
+# ========================================
+# Configurazione API REST enterprise con security-first approach
 REST_FRAMEWORK = {
+    # Authentication: Token + Session per compatibilità
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',  # Step 11: Token per API
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    
+    # Permissions: IsAuthenticated come default per sicurezza
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ],
+    
+    # Pagination: Performance optimization per large datasets
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
-    'DEFAULT_FILTER_BACKENDS': [  # Questa parte è stata aggiunta manualmente
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter',
+    
+    # Step 11: Filter backends avanzati per API enterprise
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',  # Filtering complesso
+        'rest_framework.filters.SearchFilter',               # Text search
+        'rest_framework.filters.OrderingFilter',             # Sorting
     ],
+    
+    # Step 11: Schema generation per documentazione automatica
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
-# API Documentation
+# ========================================
+# API DOCUMENTATION - STEP 11 ENTERPRISE
+# ========================================
+# Configurazione documentazione OpenAPI automatica con Swagger/ReDoc
 SPECTACULAR_SETTINGS = {
     'TITLE': 'PizzaMama Enterprise API',
     'DESCRIPTION': 'Complete REST API for PizzaMama e-commerce platform',
@@ -166,7 +208,10 @@ SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
 }
 
-# CORS Configuration (for frontend development)
+# ========================================
+# CORS CONFIGURATION - STEP 11 FRONTEND
+# ========================================
+# Configurazione CORS per supportare frontend separati (React, Vue, etc.)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React dev server
     "http://127.0.0.1:3000",
@@ -174,10 +219,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8080",
 ]
 
+# Permetti credentials (cookies, auth headers) nelle richieste CORS
 CORS_ALLOW_CREDENTIALS = True
 
-# Token Authentication
-REST_USE_JWT = False  # Per ora usiamo Token standard
-
-# Custom User Model
-AUTH_USER_MODEL = 'accounts.CustomUser'  # Aggiunto per configurare manualmente CustomUserpy manage.py makemigrations orders
+# ========================================
+# TOKEN AUTHENTICATION - STEP 11
+# ========================================
+# Per ora usiamo Token standard DRF (futuro: JWT per production)
+REST_USE_JWT = False

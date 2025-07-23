@@ -14,35 +14,48 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-def home_view(request):
-    return HttpResponse("""
-    <h1>🍕 PizzaMama Enterprise</h1>
-    <p><a href="/admin/">Admin Panel</a></p>
-    <p><a href="/api/">API Root</a></p>
-    <p><a href="/api/auth/login/">API Login</a></p>
-    """)
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 @api_view(['GET'])
 def api_root(request):
     return Response({
-        'message': 'Benvenuto alle API di PizzaMama!',
-        'version': '1.0',
+        'message': 'Benvenuto alle API di PizzaMama Enterprise!',
+        'version': '2.0',
+        'documentation': {
+            'swagger': '/api/docs/swagger/',
+            'redoc': '/api/docs/redoc/',
+            'schema': '/api/docs/schema/'
+        },
         'endpoints': {
             'admin': '/admin/',
-            'api-auth': '/api/auth/login/',
+            'api-auth': '/api/auth/',
+            'accounts': '/api/accounts/',
+            'products': '/api/products/',
+            'orders': '/api/orders/'
         }
     })
 
 urlpatterns = [
-    path('', home_view, name='home'),                  # ← AGGIUNGI QUESTA
+    # Admin
     path('admin/', admin.site.urls),
+    
+    # API Documentation
+    path('api/docs/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    
+    # API Root
     path('api/', api_root, name='api-root'),
+    
+    # DRF Auth
     path('api/auth/', include('rest_framework.urls')),
+    
+    # App APIs
+    path('api/accounts/', include('apps.accounts.api.urls')),
+    path('api/products/', include('apps.products.api.urls')),
+    path('api/orders/', include('apps.orders.api.urls')),
 ]

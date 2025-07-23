@@ -1451,7 +1451,7 @@ python manage.py shell
 >>> User = get_user_model()
 >>> user = User.objects.get(username='admin')  # Il tuo superuser
 >>> token, created = Token.objects.get_or_create(user=user)
->>> print(f"Token: {token.key}")
+>>> print(f"Token: {token.key}")  # The result will have this form: Token: 010dc24a5f9ebe7e73bce9818b19d3c0ab80b4dd
 >>> exit()
 
 # Avvia server
