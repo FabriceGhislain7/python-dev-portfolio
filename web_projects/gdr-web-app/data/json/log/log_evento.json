@@ -9,6 +9,16 @@
         "2025-07-23 14:06:58,858 - INFO - Caricati 1 personaggi per utente developer@gmail.com",
         "2025-07-23 14:06:58,886 - INFO - Lista personaggi richiesta - Count: 1",
         "2025-07-23 14:15:34,205 - INFO - Caricati 2 personaggi per utente developer@gmail.com",
-        "2025-07-23 14:15:34,228 - INFO - Lista personaggi richiesta - Count: 2"
+        "2025-07-23 14:15:34,228 - INFO - Lista personaggi richiesta - Count: 2",
+        "2025-07-24 13:22:02,087 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-24 13:22:02,182 - INFO - Lista personaggi richiesta - Count: 3",
+        "2025-07-24 13:22:22,212 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-24 13:22:22,248 - INFO - Lista personaggi richiesta - Count: 3",
+        "2025-07-24 13:22:24,762 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-24 13:22:24,817 - INFO - Dettagli personaggio visualizzati - ID: 0e6bdb43-6e00-4af9-be85-0a265dc28208, Nome: Zoro",
+        "2025-07-24 13:22:29,147 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-24 13:22:29,209 - INFO - Lista personaggi richiesta - Count: 3",
+        "2025-07-24 13:22:39,736 - INFO - Caricati 3 personaggi per utente developer@gmail.com",
+        "2025-07-24 13:22:39,819 - INFO - Lista personaggi richiesta - Count: 3"
     ]
 }

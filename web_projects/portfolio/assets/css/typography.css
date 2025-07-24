@@ -1,0 +1,768 @@
+/*
+===========================================
+TYPOGRAPHY CSS - Portfolio Statico
+===========================================
+Sistema tipografico completo con font, scale e stili
+*/
+
+/* ================================ */
+/* FONT IMPORTS & LOADING           */
+/* ================================ */
+
+/* Font loading optimization */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap');
+}
+
+/* ================================ */
+/* BASE TYPOGRAPHY                  */
+/* ================================ */
+
+html {
+    font-size: 16px; /* Base font size */
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================ */
+/* HEADINGS                         */
+/* ================================ */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+    margin: 0;
+    letter-spacing: -0.025em;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+h1 {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+h3 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+h4 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+h5 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+}
+
+h6 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ================================ */
+/* PARAGRAPH STYLES                 */
+/* ================================ */
+
+p {
+    margin: 0 0 var(--space-4) 0;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lead paragraph */
+.lead {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-6);
+}
+
+/* Large paragraph */
+.text-large {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Small paragraph */
+.text-small {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+}
+
+/* Subtitle styles */
+.subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+}
+
+/* ================================ */
+/* INLINE TEXT ELEMENTS             */
+/* ================================ */
+
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-fast);
+    cursor: pointer;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+a:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* External links */
+a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+/* Email links */
+a[href^="mailto:"]::before {
+    content: "✉ ";
+    opacity: 0.7;
+}
+
+/* Phone links */
+a[href^="tel:"]::before {
+    content: "📞 ";
+    opacity: 0.7;
+}
+
+/* Strong and bold */
+strong, b {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+}
+
+/* Emphasis and italic */
+em, i {
+    font-style: italic;
+    font-variation-settings: 'slnt' -10;
+}
+
+/* Mark and highlight */
+mark {
+    background: linear-gradient(120deg, var(--color-accent) 0%, var(--color-accent) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    padding: 0 0.1em;
+    color: inherit;
+}
+
+/* Code elements */
+code {
+    font-family: var(--font-family-secondary);
+    font-size: 0.9em;
+    background: var(--color-bg-tertiary);
+    color: var(--color-primary-dark);
+    padding: 0.1em 0.4em;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border-light);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Keyboard keys */
+kbd {
+    font-family: var(--font-family-secondary);
+    font-size: 0.8em;
+    background: var(--color-gray-800);
+    color: var(--color-white);
+    padding: 0.2em 0.5em;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    font-weight: var(--font-weight-bold);
+}
+
+/* Variables */
+var {
+    font-family: var(--font-family-secondary);
+    font-style: italic;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-secondary);
+}
+
+/* Sample output */
+samp {
+    font-family: var(--font-family-secondary);
+    background: var(--color-bg-tertiary);
+    padding: 0.1em 0.4em;
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-secondary);
+}
+
+/* Small text */
+small {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    line-height: var(--line-height-normal);
+}
+
+/* Subscript and superscript */
+sub, sup {
+    font-size: 0.75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/* ================================ */
+/* QUOTES AND CITATIONS             */
+/* ================================ */
+
+/* Blockquotes */
+blockquote {
+    margin: var(--space-6) 0;
+    padding: var(--space-4) var(--space-6);
+    border-left: 4px solid var(--color-primary);
+    background: var(--color-bg-secondary);
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary);
+    position: relative;
+}
+
+blockquote::before {
+    content: """;
+    font-size: 4em;
+    color: var(--color-primary);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.3;
+}
+
+blockquote p {
+    margin: 0;
+    color: inherit;
+}
+
+blockquote footer {
+    margin-top: var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-style: normal;
+}
+
+blockquote footer::before {
+    content: "— ";
+    font-weight: var(--font-weight-bold);
+}
+
+/* Inline quotes */
+q {
+    font-style: italic;
+    quotes: '"' '"' "'" "'";
+}
+
+q::before {
+    content: open-quote;
+}
+
+q::after {
+    content: close-quote;
+}
+
+/* Citations */
+cite {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ================================ */
+/* LISTS                            */
+/* ================================ */
+
+ul, ol {
+    margin: 0 0 var(--space-4) 0;
+    padding-left: var(--space-6);
+    line-height: var(--line-height-relaxed);
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    position: relative;
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+}
+
+ul li::before {
+    content: "•";
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    position: absolute;
+    left: -var(--space-5);
+    font-size: 1.2em;
+}
+
+ol {
+    list-style-type: decimal;
+    counter-reset: list-counter;
+}
+
+ol li {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+    counter-increment: list-counter;
+}
+
+/* Nested lists */
+ul ul, ol ol, ul ol, ol ul {
+    margin: var(--space-2) 0 0 0;
+    padding-left: var(--space-5);
+}
+
+ul ul li::before {
+    content: "◦";
+    font-size: 1em;
+}
+
+/* Description lists */
+dl {
+    margin: 0 0 var(--space-4) 0;
+}
+
+dt {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-1);
+}
+
+dd {
+    margin: 0 0 var(--space-3) var(--space-4);
+    color: var(--color-text-secondary);
+}
+
+/* ================================ */
+/* SPECIALIZED TEXT STYLES          */
+/* ================================ */
+
+/* Hero text styles */
+.hero-greeting {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.hero-name {
+    font-size: clamp(var(--font-size-4xl), 8vw, var(--font-size-7xl));
+    font-weight: var(--font-weight-bold);
+    line-height: 0.9;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-text-primary), var(--color-primary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+.hero-profession {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    font-family: var(--font-family-secondary);
+}
+
+.hero-description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+}
+
+/* Section titles */
+.section-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    margin-bottom: var(--space-4);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -var(--space-3);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: var(--line-height-relaxed);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ================================ */
+/* MONOSPACE TEXT                   */
+/* ================================ */
+
+.text-mono {
+    font-family: var(--font-family-secondary);
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+pre {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-4);
+    overflow-x: auto;
+    margin: var(--space-4) 0;
+}
+
+pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* ================================ */
+/* TEXT UTILITIES                   */
+/* ================================ */
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Text transform */
+.text-uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+/* Font weights */
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* Font styles */
+.italic { font-style: italic; }
+.not-italic { font-style: normal; }
+
+/* Text decoration */
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* Letter spacing */
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-normal { letter-spacing: 0em; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+
+/* Line height */
+.leading-none { line-height: 1; }
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+/* Word spacing */
+.word-spacing-normal { word-spacing: normal; }
+.word-spacing-wide { word-spacing: 0.1em; }
+
+/* Text overflow */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+}
+
+.text-clip {
+    text-overflow: clip;
+}
+
+/* White space */
+.whitespace-normal { white-space: normal; }
+.whitespace-nowrap { white-space: nowrap; }
+.whitespace-pre { white-space: pre; }
+.whitespace-pre-line { white-space: pre-line; }
+.whitespace-pre-wrap { white-space: pre-wrap; }
+
+/* Word break */
+.break-normal { word-break: normal; overflow-wrap: normal; }
+.break-words { overflow-wrap: break-word; }
+.break-all { word-break: break-all; }
+
+/* ================================ */
+/* RESPONSIVE TYPOGRAPHY            */
+/* ================================ */
+
+@media (max-width: 640px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .hero-name {
+        font-size: var(--font-size-4xl);
+        line-height: 1;
+    }
+    
+    .hero-profession {
+        font-size: var(--font-size-lg);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-base);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .section-subtitle {
+        font-size: var(--font-size-base);
+    }
+    
+    h1 { font-size: var(--font-size-4xl); }
+    h2 { font-size: var(--font-size-3xl); }
+    h3 { font-size: var(--font-size-2xl); }
+    h4 { font-size: var(--font-size-xl); }
+    
+    .lead {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (min-width: 1536px) {
+    html {
+        font-size: 18px;
+    }
+    
+    .hero-name {
+        font-size: var(--font-size-7xl);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-5xl);
+    }
+}
+
+/* ================================ */
+/* PRINT TYPOGRAPHY                 */
+/* ================================ */
+
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #000;
+        page-break-after: avoid;
+    }
+    
+    p, li {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    blockquote {
+        page-break-inside: avoid;
+    }
+    
+    .hero-name {
+        background: none;
+        -webkit-text-fill-color: unset;
+        color: #000;
+    }
+}
+
+/* ================================ */
+/* DARK THEME TYPOGRAPHY            */
+/* ================================ */
+
+[data-theme="dark"] blockquote {
+    background: var(--color-bg-tertiary);
+    border-left-color: var(--color-primary);
+}
+
+[data-theme="dark"] code {
+    background: var(--color-bg-primary);
+    color: var(--color-primary-light);
+    border-color: var(--color-border-light);
+}
+
+[data-theme="dark"] pre {
+    background: var(--color-bg-primary);
+    border-color: var(--color-border-light);
+}
+
+[data-theme="dark"] kbd {
+    background: var(--color-gray-600);
+    color: var(--color-white);
+}
+
+[data-theme="dark"] mark {
+    background: var(--color-accent-dark);
+    color: var(--color-white);
+}
+
+/* ================================ */
+/* ACCESSIBILITY                    */
+/* ================================ */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .hero-name {
+        background: none;
+        -webkit-text-fill-color: unset;
+        color: var(--color-text-primary);
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+    
+    code, kbd, samp {
+        border: 1px solid currentColor;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-name {
+        animation: none;
+    }
+}
+
+/* ================================ */
+/* SELECTION STYLES                 */
+/* ================================ */
+
+::selection {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--color-text-primary);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--color-text-primary);
+    text-shadow: none;
+}
+
+[data-theme="dark"] ::selection {
+    background: rgba(96, 165, 250, 0.3);
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] ::-moz-selection {
+    background: rgba(96, 165, 250, 0.3);
+    color: var(--color-text-primary);
+}
