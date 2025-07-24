@@ -1,0 +1,370 @@
+{
+  "projects": [
+    {
+      "id": "pizzamama-django",
+      "title": "PizzaMama Django",
+      "description": "Applicazione web full-stack per la gestione di un ristorante pizzeria, sviluppata con Django framework. Include sistema di autenticazione utenti, gestione ordini, interfaccia admin e design responsive.",
+      "image": "assets/images/projects/pizzamama/pizzamama.jpg",
+      "category": "web",
+      "status": "completed",
+      "featured": true,
+      "technologies": [
+        "Django",
+        "Python",
+        "HTML5",
+        "CSS3",
+        "SQLite",
+        "JavaScript"
+      ],
+      "features": [
+        "Sistema di autenticazione completo",
+        "Gestione ordini e menu",
+        "Interfaccia admin per gestione contenuti",
+        "Design responsive e mobile-friendly",
+        "Integrazione database SQLite",
+        "Sistema di validazione form"
+      ],
+      "links": {
+        "github": "https://github.com/FabriceGhislain7/python-dev-portfolio/tree/main/web_projects/PizzaMamaDjango/pizzamama",
+        "live": "#",
+        "demo": "#"
+      },
+      "date_created": "2024-07-01",
+      "date_updated": "2024-07-23",
+      "duration": "3 settimane",
+      "team_size": 1,
+      "role": "Full Stack Developer",
+      "challenges": [
+        "Implementazione sistema autenticazione Django",
+        "Design responsive per tutti i dispositivi",
+        "Ottimizzazione performance database"
+      ],
+      "learnings": [
+        "Approfondimento framework Django",
+        "Best practices per web development",
+        "Gestione stato applicazioni web"
+      ],
+      "tags": ["Web Development", "Full Stack", "Django", "Python", "Responsive Design"],
+      "priority": 1
+    },
+    {
+      "id": "portfolio-website",
+      "title": "Portfolio Website",
+      "description": "Portfolio personale moderno e responsive sviluppato con HTML, CSS e JavaScript vanilla. Include sezioni dinamiche, tema scuro/chiaro, animazioni smooth e caricamento dati da JSON.",
+      "image": "assets/images/projects/demo-web.jpg",
+      "category": "web",
+      "status": "in_progress",
+      "featured": true,
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "JSON",
+        "Git"
+      ],
+      "features": [
+        "Design moderno e responsive",
+        "Switch tema scuro/chiaro",
+        "Animazioni CSS e JavaScript",
+        "Caricamento dinamico contenuti",
+        "Navigazione smooth scroll",
+        "Ottimizzato per SEO"
+      ],
+      "links": {
+        "github": "https://github.com/FabriceGhislain7/portfolio-website",
+        "live": "#",
+        "demo": "#"
+      },
+      "date_created": "2025-01-15",
+      "date_updated": "2025-01-24",
+      "duration": "2 settimane",
+      "team_size": 1,
+      "role": "Frontend Developer",
+      "challenges": [
+        "Architettura CSS modulare",
+        "JavaScript vanilla senza framework",
+        "Ottimizzazione performance"
+      ],
+      "learnings": [
+        "CSS Grid e Flexbox avanzato",
+        "JavaScript ES6+ moderno",
+        "Web performance optimization"
+      ],
+      "tags": ["Frontend", "Portfolio", "Responsive", "JavaScript", "CSS"],
+      "priority": 2
+    },
+    {
+      "id": "thesis-ml-project",
+      "title": "Analisi Dimensionalità Dataset Eterogenei",
+      "description": "Progetto di tesi magistrale focalizzato sull'applicazione di tecniche di machine learning per l'analisi delle relazioni e riduzione dimensionalità in dataset complessi ed eterogenei.",
+      "image": "assets/images/projects/demo-data.jpg",
+      "category": "data",
+      "status": "completed",
+      "featured": true,
+      "technologies": [
+        "MATLAB",
+        "Machine Learning",
+        "Random Forest",
+        "Bootstrap",
+        "Statistical Analysis",
+        "Data Visualization"
+      ],
+      "features": [
+        "Algoritmi Random Forest personalizzati",
+        "Metodi Bootstrap per validazione",
+        "Analisi statistica avanzata (P-value, test ipotesi)",
+        "Visualizzazioni dati interattive",
+        "Riduzione dimensionalità PCA",
+        "Documentazione scientifica completa"
+      ],
+      "links": {
+        "github": "#",
+        "paper": "#",
+        "presentation": "#"
+      },
+      "date_created": "2023-09-01",
+      "date_updated": "2024-03-15",
+      "duration": "6 mesi",
+      "team_size": 1,
+      "role": "Researcher & Data Scientist",
+      "challenges": [
+        "Gestione dataset complessi e eterogenei",
+        "Implementazione algoritmi ML da zero",
+        "Validazione statistica rigorosa"
+      ],
+      "learnings": [
+        "Machine Learning teorico e pratico",
+        "Metodologie di ricerca scientifica",
+        "Analisi statistica avanzata"
+      ],
+      "tags": ["Machine Learning", "Research", "MATLAB", "Statistics", "Data Science"],
+      "priority": 3
+    },
+    {
+      "id": "iot-monitoring-system",
+      "title": "Sistema Monitoraggio IoT",
+      "description": "Sistema IoT per monitoraggio ambientale sviluppato con Raspberry Pi e sensori. Include raccolta dati in tempo reale, dashboard web per visualizzazione e allerte automatiche.",
+      "image": "assets/images/projects/demo-iot.jpg",
+      "category": "iot",
+      "status": "in_progress",
+      "featured": false,
+      "technologies": [
+        "Raspberry Pi",
+        "Python",
+        "MQTT",
+        "Sensors",
+        "SQLite",
+        "Flask"
+      ],
+      "features": [
+        "Monitoraggio temperatura e umidità",
+        "Comunicazione MQTT real-time",
+        "Dashboard web responsive",
+        "Sistema allerte email/SMS",
+        "Storico dati con grafici",
+        "API REST per integrazione"
+      ],
+      "links": {
+        "github": "#",
+        "documentation": "#"
+      },
+      "date_created": "2025-03-01",
+      "date_updated": "2025-01-24",
+      "duration": "In corso",
+      "team_size": 1,
+      "role": "IoT Developer",
+      "challenges": [
+        "Integrazione hardware-software",
+        "Gestione connettività di rete",
+        "Ottimizzazione consumo energetico"
+      ],
+      "learnings": [
+        "Programmazione embedded",
+        "Protocolli IoT (MQTT)",
+        "Integrazione sensori"
+      ],
+      "tags": ["IoT", "Raspberry Pi", "Python", "MQTT", "Sensors", "Real-time"],
+      "priority": 4
+    },
+    {
+      "id": "python-learning-journey",
+      "title": "Python Learning Journey",
+      "description": "Raccolta completa di progetti e esercizi Python dal corso Udemy, evoluzione da v1.0 a v12.0. Include automazione, web scraping, GUI applications e API integration.",
+      "image": "assets/images/projects/demo-game.jpg",
+      "category": "python",
+      "status": "ongoing",
+      "featured": false,
+      "technologies": [
+        "Python",
+        "Tkinter",
+        "Kivy",
+        "Requests",
+        "BeautifulSoup",
+        "Pandas"
+      ],
+      "features": [
+        "12+ versioni progressive di progetti",
+        "Automazione task ripetitivi",
+        "Web scraping applicazioni",
+        "GUI desktop con Tkinter/Kivy",
+        "Integrazione API esterne",
+        "Documentazione dettagliata evoluzione"
+      ],
+      "links": {
+        "github": "https://github.com/FabriceGhislain7/python-dev-portfolio",
+        "course": "#"
+      },
+      "date_created": "2024-08-01",
+      "date_updated": "2025-01-24",
+      "duration": "6+ mesi",
+      "team_size": 1,
+      "role": "Python Developer",
+      "challenges": [
+        "Mantenere coerenza tra versioni",
+        "Documentare processo di apprendimento",
+        "Implementare best practices progressive"
+      ],
+      "learnings": [
+        "Python da principiante a intermedio",
+        "Version control con Git",
+        "Clean code principles"
+      ],
+      "tags": ["Python", "Learning", "Portfolio", "Automation", "GUI"],
+      "priority": 5
+    },
+    {
+      "id": "data-visualization-dashboard",
+      "title": "Dashboard Visualizzazione Dati",
+      "description": "Dashboard interattiva per analisi e visualizzazione dati sviluppata con Python e Streamlit. Include grafici dinamici, filtri interattivi e export report automatici.",
+      "image": "assets/images/projects/demo-data.jpg",
+      "category": "data",
+      "status": "completed",
+      "featured": false,
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "Plotly",
+        "Pandas",
+        "NumPy",
+        "Matplotlib"
+      ],
+      "features": [
+        "Grafici interattivi con Plotly",
+        "Filtri dinamici multi-criterio",
+        "Upload file CSV/Excel",
+        "Export PDF/Excel automatico",
+        "Statistiche descriptive automatiche",
+        "Interface user-friendly"
+      ],
+      "links": {
+        "github": "#",
+        "demo": "#"
+      },
+      "date_created": "2024-10-01",
+      "date_updated": "2024-11-15",
+      "duration": "6 settimane",
+      "team_size": 1,
+      "role": "Data Analyst",
+      "challenges": [
+        "Performance con dataset grandi",
+        "UI/UX intuitiva per non-tecnici",
+        "Gestione formati file diversi"
+      ],
+      "learnings": [
+        "Streamlit per web apps",
+        "Plotly per visualizzazioni avanzate",
+        "Data processing ottimizzato"
+      ],
+      "tags": ["Data Science", "Streamlit", "Visualization", "Python", "Analytics"],
+      "priority": 6
+    }
+  ],
+  
+  "categories": [
+    {
+      "id": "all",
+      "name": "Tutti i Progetti",
+      "count": 6,
+      "color": "#6b7280"
+    },
+    {
+      "id": "web",
+      "name": "Web Development",
+      "count": 2,
+      "color": "#3b82f6"
+    },
+    {
+      "id": "data",
+      "name": "Data & AI",
+      "count": 2,
+      "color": "#f59e0b"
+    },
+    {
+      "id": "python",
+      "name": "Python Projects",
+      "count": 1,
+      "color": "#10b981"
+    },
+    {
+      "id": "iot",
+      "name": "IoT Systems",
+      "count": 1,
+      "color": "#8b5cf6"
+    }
+  ],
+  
+  "project_status": {
+    "completed": {
+      "label": "Completato",
+      "color": "#10b981",
+      "icon": "fas fa-check-circle"
+    },
+    "in_progress": {
+      "label": "In Corso",
+      "color": "#f59e0b",
+      "icon": "fas fa-clock"
+    },
+    "ongoing": {
+      "label": "Continuo",
+      "color": "#3b82f6",
+      "icon": "fas fa-sync"
+    },
+    "planned": {
+      "label": "Pianificato",
+      "color": "#6b7280",
+      "icon": "fas fa-calendar"
+    }
+  },
+  
+  "featured_projects": [
+    "pizzamama-django",
+    "portfolio-website",
+    "thesis-ml-project"
+  ],
+  
+  "technologies": [
+    "Python",
+    "Django",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "SQLite",
+    "MATLAB",
+    "Machine Learning",
+    "Raspberry Pi",
+    "IoT",
+    "Streamlit",
+    "Plotly",
+    "Git"
+  ],
+  
+  "meta": {
+    "last_updated": "2025-01-24",
+    "total_projects": 6,
+    "completed_projects": 3,
+    "in_progress_projects": 2,
+    "ongoing_projects": 1,
+    "total_technologies": 13,
+    "version": "1.0"
+  }
+}
