@@ -1,0 +1,130 @@
+{
+  "name": "Fabrice Ghislain - Portfolio",
+  "short_name": "Fabrice Portfolio",
+  "description": "Portfolio personale di Fabrice Ghislain - Python Developer & AI/ML Enthusiast",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "it",
+  "categories": ["portfolio", "developer", "technology"],
+  "screenshots": [
+    {
+      "src": "assets/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Portfolio Desktop View"
+    },
+    {
+      "src": "assets/images/screenshot-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Portfolio Mobile View"
+    }
+  ],
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Progetti",
+      "short_name": "Progetti",
+      "description": "Visualizza i miei progetti",
+      "url": "/#projects",
+      "icons": [
+        {
+          "src": "assets/images/icons/projects-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Competenze",
+      "short_name": "Skills",
+      "description": "Le mie competenze tecniche",
+      "url": "/#skills",
+      "icons": [
+        {
+          "src": "assets/images/icons/skills-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contatti",
+      "short_name": "Contatti",
+      "description": "Contattami",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "assets/images/icons/contact-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://fabriceghislain7.github.io/portfolio/"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

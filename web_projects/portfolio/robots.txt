@@ -1,0 +1,50 @@
+# robots.txt per Portfolio Fabrice Ghislain
+
+# Consenti a tutti i crawler di accedere
+User-agent: *
+Allow: /
+
+# Blocca cartelle sensibili (se presenti)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /temp/
+
+# Consenti specificamente file importanti
+Allow: /assets/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /assets/data/
+
+# Sitemap (aggiorna con il tuo dominio)
+Sitemap: https://fabriceghislain7.github.io/portfolio/sitemap.xml
+
+# Crawl-delay per essere gentili con i server
+Crawl-delay: 1
+
+# Direttive specifiche per motori di ricerca
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Blocca bot spam e scraper
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Informazioni aggiuntive
+# Portfolio: Fabrice Ghislain - Python Developer & AI/ML Enthusiast
+# Contatto: [inserisci la tua email]
+# Ultimo aggiornamento: 2025-01-24

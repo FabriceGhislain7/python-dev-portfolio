@@ -36,6 +36,11 @@
     <link rel="stylesheet" href="assets/css/components/about.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="assets/css/components/contact.css">
+    <link rel="stylesheet" href="assets/css/components/education.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/components/hero.css">
 
 
 </head>
@@ -106,57 +111,52 @@
         
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-container">
+            <div class="hero-shapes">
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+            </div>
+            
+            <div class="hero-social">
+                <a href="#" class="hero-social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="hero-social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hero-social-link"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <div class="hero-greeting">Ciao, sono</div>
-                        <h1 class="hero-name">Fabrice Ghislain Tebou</h1>
-                        <div class="hero-profession">
-                            <span class="typewriter">Python Developer</span>
-                        </div>
+                        <p class="hero-greeting">Ciao, sono</p>
+                        <h1 class="hero-name">Fabrice Ghislain</h1>
+                        <h2 class="hero-profession">Python Developer & AI/ML Enthusiast</h2>
                         <p class="hero-description">
-                            Master in Applied Physics con esperienza in sviluppo Python, backend Django, 
-                            sistemi IoT e machine learning. Attualmente in formazione avanzata attraverso 
-                            programmi di sviluppo Python e AI mentre costruisco progetti innovativi.
+                            Sviluppatore Python appassionato di intelligenza artificiale e tecnologie innovative...
                         </p>
-                        
                         <div class="hero-buttons">
-                            <a href="#projects" class="btn btn-primary">
-                                <span>Vedi i Progetti</span>
+                            <a href="#projects" class="hero-btn hero-btn-primary">
+                                <span>Vedi Progetti</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
-                            <a href="#contact" class="btn btn-secondary">
+                            <a href="#contact" class="hero-btn hero-btn-secondary">
                                 <span>Contattami</span>
                                 <i class="fas fa-envelope"></i>
                             </a>
-                            <a href="assets/files/CV_Fabrice_Tebou.pdf" class="btn btn-outline" target="_blank">
-                                <span>Scarica CV</span>
-                                <i class="fas fa-download"></i>
-                            </a>
                         </div>
                     </div>
-
+                    
                     <div class="hero-image">
                         <div class="hero-avatar">
-                            <img src="assets/images/hero/profile.jpg" alt="Fabrice Ghislain Tebou" class="avatar-img">
-                            <div class="avatar-border"></div>
-                            <div class="avatar-status">
-                                <span class="status-dot"></span>
-                                <span class="status-text">Disponibile per lavoro</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-scroll">
-                    <div class="scroll-indicator">
-                        <span class="scroll-text">Scorri</span>
-                        <div class="scroll-arrow">
-                            <i class="fas fa-chevron-down"></i>
+                            <img src="assets/images/hero-avatar.jpg" alt="Fabrice Ghislain">
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <a href="#about" class="hero-scroll">
+                <span class="scroll-text">Scroll</span>
+                <div class="scroll-indicator"></div>
+            </a>
         </section>
 
         <!-- About Section -->
@@ -274,7 +274,7 @@
             </div>
         </section>
 
-        <!-- Education Section -->
+       <!-- Education Section -->
         <section id="education" class="education">
             <div class="container">
                 <div class="section-header">
@@ -282,59 +282,321 @@
                     <p class="section-subtitle">Percorso accademico e sviluppo professionale</p>
                 </div>
 
-                <div class="education-timeline">
-                    <div class="timeline-item current">
-                        <div class="timeline-date">Marzo 2025 - In corso</div>
-                        <div class="timeline-content">
-                            <h3>Python Programmer & Developer</h3>
-                            <h4>Ente F.IRE - Regione Liguria (Finanziato FSE+)</h4>
-                            <p>Programma in presenza di 600 ore (inclusi 180 ore di stage), focalizzato su sviluppo Python, sistemi IoT e applicazioni AI.</p>
-                            <div class="timeline-skills">
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">IoT</span>
-                                <span class="skill-tag">Raspberry Pi</span>
-                                <span class="skill-tag">AI</span>
-                                <span class="skill-tag">Cloud</span>
+                <div class="education-content">
+                    <div class="education-timeline">
+
+                        <!-- Corso Python in corso -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="education-card">
+                                <div class="education-header">
+                                    <div class="education-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="education-meta">
+                                        <h3 class="education-degree">Python Programmer & Developer</h3>
+                                        <h4 class="education-school">Ente F.IRE - Regione Liguria</h4>
+                                        <div class="education-period">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>Marzo 2025 - In corso</span>
+                                        </div>
+                                    </div>
+                                    <div class="education-grade">IN CORSO</div>
+                                </div>
+
+                                <div class="education-description">
+                                    Programma intensivo in presenza di 600 ore (inclusi 180 ore di stage), finanziato FSE+, focalizzato su sviluppo Python avanzato, sistemi IoT e applicazioni AI per l'industria 4.0.
+                                </div>
+
+                                <div class="education-details">
+                                    <div class="education-detail">
+                                        <i class="fas fa-clock"></i>
+                                        <span class="education-detail-label">Durata:</span>
+                                        <span class="education-detail-value">600 ore (420h formazione + 180h stage)</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-euro-sign"></i>
+                                        <span class="education-detail-label">Finanziamento:</span>
+                                        <span class="education-detail-value">FSE+ Regione Liguria</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span class="education-detail-label">Modalità:</span>
+                                        <span class="education-detail-value">In presenza, Genova</span>
+                                    </div>
+                                </div>
+
+                                <div class="education-achievements">
+                                    <span class="achievement-tag">
+                                        <i class="fab fa-python"></i>
+                                        Python
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-microchip"></i>
+                                        IoT
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fab fa-raspberry-pi"></i>
+                                        Raspberry Pi
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-brain"></i>
+                                        AI
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-cloud"></i>
+                                        Cloud
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-industry"></i>
+                                        Industry 4.0
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-date">Agosto 2024 - Presente</div>
-                        <div class="timeline-content">
-                            <h3>Python Developer - Corso Completo</h3>
-                            <h4>Udemy</h4>
-                            <p>Formazione online completa in sviluppo Python moderno e ingegneria del software.</p>
-                            <div class="timeline-skills">
-                                <span class="skill-tag">Django</span>
-                                <span class="skill-tag">API</span>
-                                <span class="skill-tag">Kivy</span>
-                                <span class="skill-tag">Web Scraping</span>
+                        <!-- Corso Udemy -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="education-card">
+                                <div class="education-header">
+                                    <div class="education-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="education-meta">
+                                        <h3 class="education-degree">Python Developer - Corso Completo</h3>
+                                        <h4 class="education-school">Udemy</h4>
+                                        <div class="education-period">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>Agosto 2024 - Presente</span>
+                                        </div>
+                                    </div>
+                                    <div class="education-grade">ATTIVO</div>
+                                </div>
+
+                                <div class="education-description">
+                                    Formazione online completa e pratica in sviluppo Python moderno, dai fondamenti alle applicazioni avanzate con focus su ingegneria del software e sviluppo web.
+                                </div>
+
+                                <div class="education-details">
+                                    <div class="education-detail">
+                                        <i class="fas fa-play-circle"></i>
+                                        <span class="education-detail-label">Modalità:</span>
+                                        <span class="education-detail-value">Online, self-paced</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-tasks"></i>
+                                        <span class="education-detail-label">Progetti:</span>
+                                        <span class="education-detail-value">12+ applicazioni pratiche</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span class="education-detail-label">Repository:</span>
+                                        <span class="education-detail-value">GitHub portfolio attivo</span>
+                                    </div>
+                                </div>
+
+                                <div class="education-achievements">
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-globe"></i>
+                                        Django
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-plug"></i>
+                                        REST API
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        Kivy
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-spider"></i>
+                                        Web Scraping
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-database"></i>
+                                        Database
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-date">2020 - Marzo 2024</div>
-                        <div class="timeline-content">
-                            <h3>Master in Fisica Applicata</h3>
-                            <h4>Università di Genova</h4>
-                            <p><strong>Tesi:</strong> "Relationship and Dimensionality Reduction in Heterogeneous Datasets"</p>
-                            <div class="timeline-skills">
-                                <span class="skill-tag">Machine Learning</span>
-                                <span class="skill-tag">MATLAB</span>
-                                <span class="skill-tag">Analisi Dati</span>
-                                <span class="skill-tag">Ricerca</span>
+                        <!-- Master Università di Genova -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="education-card">
+                                <div class="education-header">
+                                    <div class="education-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="education-meta">
+                                        <h3 class="education-degree">Master in Fisica Applicata</h3>
+                                        <h4 class="education-school">Università di Genova</h4>
+                                        <div class="education-period">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>2020 - Marzo 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="education-grade">COMPLETATO</div>
+                                </div>
+
+                                <div class="education-description">
+                                    <strong>Tesi di Laurea:</strong> "Relationship and Dimensionality Reduction in Heterogeneous Datasets"<br>
+                                    Ricerca avanzata su tecniche di machine learning per l'analisi di dataset complessi ed eterogenei, con focus su riduzione dimensionalità e analisi delle relazioni.
+                                </div>
+
+                                <div class="education-details">
+                                    <div class="education-detail">
+                                        <i class="fas fa-microscope"></i>
+                                        <span class="education-detail-label">Specializzazione:</span>
+                                        <span class="education-detail-value">Data Science & Machine Learning</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span class="education-detail-label">Tesi:</span>
+                                        <span class="education-detail-value">Analisi dimensionalità con ML</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-award"></i>
+                                        <span class="education-detail-label">Focus:</span>
+                                        <span class="education-detail-value">Ricerca scientifica applicata</span>
+                                    </div>
+                                </div>
+
+                                <div class="education-achievements">
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-chart-line"></i>
+                                        Machine Learning
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-calculator"></i>
+                                        MATLAB
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-database"></i>
+                                        Analisi Dati
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-search"></i>
+                                        Ricerca
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-chart-bar"></i>
+                                        Statistica
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Laurea Università Yaoundé -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="education-card">
+                                <div class="education-header">
+                                    <div class="education-icon">
+                                        <i class="fas fa-atom"></i>
+                                    </div>
+                                    <div class="education-meta">
+                                        <h3 class="education-degree">Laurea in Fisica</h3>
+                                        <h4 class="education-school">Università di Yaoundé I</h4>
+                                        <div class="education-period">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>2007 - 2017</span>
+                                        </div>
+                                    </div>
+                                    <div class="education-grade">CONSEGUITA</div>
+                                </div>
+
+                                <div class="education-description">
+                                    Solida formazione in fisica teorica e sperimentale con basi matematiche avanzate. Focus su metodologia scientifica, problem-solving analitico e pensiero logico-deduttivo.
+                                </div>
+
+                                <div class="education-details">
+                                    <div class="education-detail">
+                                        <i class="fas fa-flask"></i>
+                                        <span class="education-detail-label">Discipline:</span>
+                                        <span class="education-detail-value">Fisica teorica e sperimentale</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-infinity"></i>
+                                        <span class="education-detail-label">Matematica:</span>
+                                        <span class="education-detail-value">Analisi, algebra, geometria</span>
+                                    </div>
+                                    <div class="education-detail">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span class="education-detail-label">Competenze:</span>
+                                        <span class="education-detail-value">Problem-solving, pensiero analitico</span>
+                                    </div>
+                                </div>
+
+                                <div class="education-achievements">
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-atom"></i>
+                                        Fisica Teorica
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-vial"></i>
+                                        Fisica Sperimentale
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-square-root-alt"></i>
+                                        Matematica
+                                    </span>
+                                    <span class="achievement-tag">
+                                        <i class="fas fa-brain"></i>
+                                        Logica
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-date">2007 - 2017</div>
-                        <div class="timeline-content">
-                            <h3>Laurea in Fisica</h3>
-                            <h4>Università di Yaoundé I</h4>
-                            <p>Fondamenti in fisica teorica e sperimentale, matematica e metodologia scientifica.</p>
+                    <!-- Sezione Certificazioni -->
+                    <div class="certifications-section">
+                        <h3 class="section-title" style="font-size: var(--font-size-2xl); margin-bottom: var(--space-6);">
+                            Certificazioni & Riconoscimenti
+                        </h3>
+
+                        <div class="certifications-grid">
+                            <div class="certification-card">
+                                <div class="certification-header">
+                                    <div class="certification-icon">
+                                        <i class="fab fa-python"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="certification-title">Python Developer Certification</h4>
+                                        <p class="certification-issuer">Udemy - Jose Portilla</p>
+                                    </div>
+                                </div>
+                                <p class="certification-date">In completamento - 2024</p>
+                            </div>
+
+                            <div class="certification-card">
+                                <div class="certification-header">
+                                    <div class="certification-icon">
+                                        <i class="fas fa-industry"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="certification-title">IoT & Industry 4.0 Specialist</h4>
+                                        <p class="certification-issuer">Ente F.IRE - Regione Liguria</p>
+                                    </div>
+                                </div>
+                                <p class="certification-date">In corso - 2025</p>
+                            </div>
+
+                            <div class="certification-card">
+                                <div class="certification-header">
+                                    <div class="certification-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="certification-title">Master's Degree in Applied Physics</h4>
+                                        <p class="certification-issuer">Università di Genova</p>
+                                    </div>
+                                </div>
+                                <p class="certification-date">Marzo 2024</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -467,26 +729,92 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-left">
-                    <p>&copy; 2025 Fabrice Ghislain Tebou. Tutti i diritti riservati.</p>
-                    <p class="privacy-notice">
-                        Autorizzo il trattamento dei dati personali contenuti nel mio portfolio ai sensi dell'art. 13 del D.Lgs. 196/2003 e dell'art. 13 GDPR 679/16.
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <div class="footer-logo-icon">FG</div>
+                        <span class="footer-logo-text">Fabrice Ghislain</span>
+                    </a>
+                    <p class="footer-tagline">
+                        Python Developer & AI/ML Enthusiast appassionato di tecnologie innovative e soluzioni creative.
                     </p>
                 </div>
-                <div class="footer-right">
-                    <p>Realizzato con passione e tanto caffè</p>
-                    <div class="footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#about">Chi Sono</a>
-                        <a href="#contact">Contatti</a>
+
+                <div class="footer-section">
+                    <h3 class="footer-section-title">Navigazione</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link"><i class="fas fa-home"></i>Home</a></li>
+                        <li><a href="#about" class="footer-link"><i class="fas fa-user"></i>About</a></li>
+                        <li><a href="#skills" class="footer-link"><i class="fas fa-cogs"></i>Skills</a></li>
+                        <li><a href="#projects" class="footer-link"><i class="fas fa-briefcase"></i>Projects</a></li>
+                        <li><a href="#contact" class="footer-link"><i class="fas fa-envelope"></i>Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-section-title">Progetti</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link"><i class="fab fa-python"></i>PizzaMama Django</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-globe"></i>Portfolio Website</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-brain"></i>ML Research</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-microchip"></i>IoT Systems</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h3 class="footer-section-title">Seguimi</h3>
+                    <div class="footer-social-links">
+                        <a href="https://github.com/FabriceGhislain7" class="footer-social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/fabrice-ghislain" class="footer-social-link" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:tua-email@esempio.com" class="footer-social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <span>Genova, Liguria, Italia</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+                            <a href="mailto:tua-email@esempio.com">tua-email@esempio.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <span>&copy; 2025 Fabrice Ghislain. Made with</span>
+                    <i class="fas fa-heart"></i>
+                    <span>in Genova</span>
+                </div>
+                <div class="footer-meta">
+                    <div class="footer-meta-item">
+                        <i class="fas fa-code"></i>
+                        <span>HTML, CSS, JS</span>
+                    </div>
+                    <div class="footer-meta-item">
+                        <i class="fas fa-palette"></i>
+                        <span>Custom Design</span>
+                    </div>
+                    <div class="footer-meta-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Responsive</span>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" aria-label="Torna in alto">
+    <button class="back-to-top" id="backToTop">
         <i class="fas fa-chevron-up"></i>
     </button>
 
