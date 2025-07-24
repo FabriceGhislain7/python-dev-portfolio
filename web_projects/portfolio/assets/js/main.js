@@ -5,6 +5,19 @@ MAIN APPLICATION SCRIPT
 Coordinatore principale di tutti i moduli del portfolio
 */
 
+// Hide loading screen when page is fully loaded
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 1000);
+        }, 500); // Minimum loading time
+    }
+});
+
 (function() {
     'use strict';
 
@@ -88,6 +101,12 @@ Coordinatore principale di tutti i moduli del portfolio
                 instance: window.ContactModule,
                 required: false,
                 priority: 5
+            },
+            {
+                name: 'Animations',
+                instance: window.AnimationsModule,
+                required: false,
+                priority: 6
             }
         ];
 

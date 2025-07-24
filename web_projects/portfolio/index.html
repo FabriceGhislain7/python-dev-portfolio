@@ -21,37 +21,65 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- CSS Files - Verremo aggiunti gradualmente -->
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <!-- CSS Files - Ordine corretto -->
     <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
     <link rel="stylesheet" href="assets/css/components/buttons.css">
     <link rel="stylesheet" href="assets/css/components/header.css">
-    <link rel="stylesheet" href="assets/css/components/skills.css">
-    <link rel="stylesheet" href="assets/css/components/projects.css">
-    <link rel="stylesheet" href="assets/css/dark-theme.css">
-    <link rel="stylesheet" href="assets/css/components/forms.css">
-    <link rel="stylesheet" href="assets/css/utilities.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
-    <link rel="stylesheet" href="assets/css/components/about.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="assets/css/components/contact.css">
-    <link rel="stylesheet" href="assets/css/components/education.css">
-    <link rel="stylesheet" href="assets/css/components/footer.css">
     <link rel="stylesheet" href="assets/css/components/hero.css">
-
-
+    <link rel="stylesheet" href="assets/css/components/about.css">
+    <link rel="stylesheet" href="assets/css/components/skills.css">
+    <link rel="stylesheet" href="assets/css/components/education.css">
+    <link rel="stylesheet" href="assets/css/components/projects.css">
+    <link rel="stylesheet" href="assets/css/components/contact.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/components/loading.css">
+    <link rel="stylesheet" href="assets/css/components/forms.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/dark-theme.css">
 </head>
 <body>
-
     <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loader">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">Caricamento...</div>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-logo-icon">FG</div>
+                <h1 class="loading-logo-text">Fabrice Ghislain</h1>
+                <p class="loading-tagline">Python Developer & AI/ML Enthusiast</p>
+            </div>
+            
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            
+            <div class="loading-text">Caricamento in corso</div>
+            
+            <div class="loading-progress">
+                <div class="loading-progress-bar"></div>
+            </div>
+            
+            <div class="loading-percentage" id="loading-percentage">0%</div>
         </div>
+        
+        <div class="loading-particles">
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+            <div class="loading-particle"></div>
+        </div>
+        
+        <span class="loading-sr-only">Caricamento del portfolio in corso, attendere prego.</span>
     </div>
 
     <!-- Scroll Progress Bar -->
@@ -119,9 +147,9 @@
             </div>
             
             <div class="hero-social">
-                <a href="#" class="hero-social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="hero-social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="hero-social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/FabriceGhislain7" class="hero-social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                <a href="#" class="hero-social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:ghislaintebou@gmail.com" class="hero-social-link"><i class="fas fa-envelope"></i></a>
             </div>
             
             <div class="container">
@@ -131,7 +159,9 @@
                         <h1 class="hero-name">Fabrice Ghislain</h1>
                         <h2 class="hero-profession">Python Developer & AI/ML Enthusiast</h2>
                         <p class="hero-description">
-                            Sviluppatore Python appassionato di intelligenza artificiale e tecnologie innovative...
+                            Sviluppatore Python appassionato di intelligenza artificiale e tecnologie innovative. 
+                            Con un background in fisica applicata e esperienza nello sviluppo full-stack, 
+                            creo soluzioni innovative che uniscono teoria scientifica e applicazioni pratiche.
                         </p>
                         <div class="hero-buttons">
                             <a href="#projects" class="hero-btn hero-btn-primary">
@@ -147,7 +177,7 @@
                     
                     <div class="hero-image">
                         <div class="hero-avatar">
-                            <img src="assets/images/hero-avatar.jpg" alt="Fabrice Ghislain">
+                            <img src="https://via.placeholder.com/350x350/3B82F6/FFFFFF?text=FG" alt="Fabrice Ghislain">
                         </div>
                     </div>
                 </div>
@@ -227,7 +257,7 @@
 
                     <div class="about-visual">
                         <div class="about-image">
-                            <img src="assets/images/about/workspace.jpg" alt="Workspace di sviluppo" class="about-img">
+                            <img src="https://via.placeholder.com/400x300/10B981/FFFFFF?text=Workspace" alt="Workspace di sviluppo" class="about-img">
                             <div class="about-overlay">
                                 <div class="overlay-content">
                                     <i class="fab fa-python"></i>
@@ -274,7 +304,7 @@
             </div>
         </section>
 
-       <!-- Education Section -->
+        <!-- Education Section -->
         <section id="education" class="education">
             <div class="container">
                 <div class="section-header">
@@ -827,6 +857,7 @@
     <script src="assets/js/modules/projects.js"></script>
     <script src="assets/js/modules/contact.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/modules/animations.js"></script>
 
 </body>
 </html>
