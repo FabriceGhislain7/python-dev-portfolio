@@ -2,11 +2,11 @@
 ===========================================
 FOOTER CSS - Portfolio Statico
 ===========================================
-Stili per il footer del portfolio
+Stili per il footer del portfolio - Versione completa e corretta
 */
 
 /* ================================ */
-/* FOOTER SECTION                   */
+/* FOOTER PRINCIPALE                */
 /* ================================ */
 .footer {
     background: var(--color-bg-tertiary);
@@ -16,6 +16,7 @@ Stili per il footer del portfolio
     margin-top: auto;
 }
 
+/* Gradiente decorativo di sfondo */
 .footer::before {
     content: '';
     position: absolute;
@@ -27,21 +28,24 @@ Stili per il footer del portfolio
     pointer-events: none;
 }
 
+/* Container del footer sopra il gradiente */
 .footer .container {
     position: relative;
     z-index: 2;
 }
 
 /* ================================ */
-/* FOOTER CONTENT                   */
+/* LAYOUT GRIGLIA FOOTER            */
 /* ================================ */
 .footer-content {
+    /* Griglia responsive: minimo 250px per colonna, massimo 4 colonne */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-8);
     padding: var(--space-12) 0 var(--space-8);
 }
 
+/* Layout mobile: singola colonna centrata */
 @media (max-width: 768px) {
     .footer-content {
         grid-template-columns: 1fr;
@@ -52,7 +56,7 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* FOOTER BRAND                     */
+/* SEZIONE BRAND (Prima colonna)    */
 /* ================================ */
 .footer-brand {
     display: flex;
@@ -60,6 +64,7 @@ Stili per il footer del portfolio
     gap: var(--space-4);
 }
 
+/* Logo del footer (icona + testo) */
 .footer-logo {
     display: flex;
     align-items: center;
@@ -68,10 +73,12 @@ Stili per il footer del portfolio
     transition: transform var(--transition-normal);
 }
 
+/* Effetto hover sul logo */
 .footer-logo:hover {
     transform: translateY(-2px);
 }
 
+/* Icona del logo (FG) */
 .footer-logo-icon {
     width: 40px;
     height: 40px;
@@ -83,9 +90,10 @@ Stili per il footer del portfolio
     justify-content: center;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
-    flex-shrink: 0;
+    flex-shrink: 0; /* Non si riduce mai */
 }
 
+/* Testo del logo (nome) */
 .footer-logo-text {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-bold);
@@ -93,12 +101,14 @@ Stili per il footer del portfolio
     font-family: var(--font-family-heading);
 }
 
+/* Descrizione sotto il logo */
 .footer-tagline {
     color: var(--color-text-secondary);
     line-height: var(--line-height-relaxed);
     max-width: 300px;
 }
 
+/* Adattamento mobile per brand */
 @media (max-width: 768px) {
     .footer-brand {
         align-items: center;
@@ -110,7 +120,7 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* FOOTER LINKS                     */
+/* SEZIONI GENERICHE (Navigazione, Progetti) */
 /* ================================ */
 .footer-section {
     display: flex;
@@ -118,6 +128,7 @@ Stili per il footer del portfolio
     gap: var(--space-4);
 }
 
+/* Titoli delle sezioni */
 .footer-section-title {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
@@ -126,6 +137,7 @@ Stili per il footer del portfolio
     position: relative;
 }
 
+/* Linea decorativa sotto i titoli */
 .footer-section-title::after {
     content: '';
     position: absolute;
@@ -137,6 +149,7 @@ Stili per il footer del portfolio
     border-radius: 1px;
 }
 
+/* Mobile: centra la linea decorativa */
 @media (max-width: 768px) {
     .footer-section-title::after {
         left: 50%;
@@ -144,6 +157,9 @@ Stili per il footer del portfolio
     }
 }
 
+/* ================================ */
+/* LISTA LINK DEL FOOTER           */
+/* ================================ */
 .footer-links {
     display: flex;
     flex-direction: column;
@@ -153,6 +169,7 @@ Stili per il footer del portfolio
     margin: 0;
 }
 
+/* Singolo link del footer */
 .footer-link {
     color: var(--color-text-secondary);
     text-decoration: none;
@@ -164,6 +181,7 @@ Stili per il footer del portfolio
     position: relative;
 }
 
+/* Linea animata sotto i link */
 .footer-link::before {
     content: '';
     position: absolute;
@@ -175,33 +193,36 @@ Stili per il footer del portfolio
     transition: width var(--transition-normal);
 }
 
+/* Effetti hover sui link */
 .footer-link:hover::before {
-    width: 100%;
+    width: 100%; /* Linea si espande */
 }
 
 .footer-link:hover {
     color: var(--color-primary);
-    transform: translateX(5px);
+    transform: translateX(5px); /* Scorre a destra */
 }
 
+/* Icone nei link (larghezza fissa per allineamento) */
 .footer-link i {
     width: 16px;
     text-align: center;
     flex-shrink: 0;
 }
 
+/* Mobile: adattamento link */
 @media (max-width: 768px) {
     .footer-links {
         align-items: center;
     }
     
     .footer-link:hover {
-        transform: translateY(-2px);
+        transform: translateY(-2px); /* Su mobile scorre verso l'alto */
     }
 }
 
 /* ================================ */
-/* FOOTER SOCIAL                    */
+/* SEZIONE SOCIAL (Quarta colonna) */
 /* ================================ */
 .footer-social {
     display: flex;
@@ -209,35 +230,58 @@ Stili per il footer del portfolio
     gap: var(--space-4);
 }
 
+/* Container dei link social */
 .footer-social-links {
     display: flex;
     gap: var(--space-3);
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Vai a capo se necessario */
 }
 
+/* Mobile: centra i social */
 @media (max-width: 768px) {
     .footer-social-links {
         justify-content: center;
     }
 }
 
+/* ================================ */
+/* BOTTONI SOCIAL - DESIGN FISSO   */
+/* ================================ */
 .footer-social-link {
+    /* Dimensioni fisse */
     width: 44px;
     height: 44px;
+    
+    /* Stile di base */
     background: var(--color-bg-primary);
     color: var(--color-text-secondary);
     border: 1px solid var(--color-border-light);
     border-radius: var(--border-radius-lg);
+    
+    /* Layout centrato */
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    
+    /* Typography */
     font-size: var(--font-size-lg);
+    
+    /* Transizioni smooth */
     transition: all var(--transition-normal);
+    
+    /* Per l'effetto gradiente */
     position: relative;
     overflow: hidden;
+    
+    /* ✅ VISIBILITÀ GARANTITA */
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    visibility: visible !important;
 }
 
+/* Gradiente animato al hover */
 .footer-social-link::before {
     content: '';
     position: absolute;
@@ -246,54 +290,66 @@ Stili per il footer del portfolio
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    transform: scale(0);
+    transform: scale(0); /* Inizia nascosto */
     transition: transform var(--transition-normal);
     border-radius: var(--border-radius-lg);
 }
 
+/* Effetti hover sui social */
 .footer-social-link:hover::before {
-    transform: scale(1);
+    transform: scale(1); /* Gradiente appare */
 }
 
 .footer-social-link i {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Sopra il gradiente */
     transition: color var(--transition-normal);
+    display: block !important;
+    font-size: 18px !important;
+    opacity: 1 !important;
+    color: inherit !important;
 }
 
 .footer-social-link:hover {
     border-color: var(--color-primary);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Sollevamento */
     box-shadow: var(--shadow-md);
 }
 
 .footer-social-link:hover i {
-    color: var(--color-white);
+    color: var(--color-white); /* Icona diventa bianca */
 }
 
-/* Specific social colors on hover */
+/* ================================ */
+/* COLORI SPECIFICI SOCIAL         */
+/* ================================ */
+/* GitHub */
 .footer-social-link[href*="github"]:hover::before {
     background: #333;
 }
 
+/* LinkedIn */
 .footer-social-link[href*="linkedin"]:hover::before {
     background: #0077b5;
 }
 
+/* Twitter */
 .footer-social-link[href*="twitter"]:hover::before {
     background: #1da1f2;
 }
 
+/* Instagram */
 .footer-social-link[href*="instagram"]:hover::before {
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
+/* Email */
 .footer-social-link[href*="mailto"]:hover::before {
     background: #ea4335;
 }
 
 /* ================================ */
-/* FOOTER CONTACT INFO              */
+/* INFORMAZIONI CONTATTO           */
 /* ================================ */
 .footer-contact {
     display: flex;
@@ -301,6 +357,7 @@ Stili per il footer del portfolio
     gap: var(--space-3);
 }
 
+/* Singola informazione di contatto */
 .footer-contact-item {
     display: flex;
     align-items: center;
@@ -309,6 +366,7 @@ Stili per il footer del portfolio
     font-size: var(--font-size-sm);
 }
 
+/* Icona del contatto */
 .footer-contact-icon {
     width: 20px;
     height: 20px;
@@ -322,6 +380,7 @@ Stili per il footer del portfolio
     flex-shrink: 0;
 }
 
+/* Link nei contatti */
 .footer-contact-item a {
     color: inherit;
     text-decoration: none;
@@ -332,6 +391,7 @@ Stili per il footer del portfolio
     color: var(--color-primary);
 }
 
+/* Mobile: centra i contatti */
 @media (max-width: 768px) {
     .footer-contact {
         align-items: center;
@@ -339,7 +399,7 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* FOOTER BOTTOM                    */
+/* FOOTER BOTTOM (Copyright)        */
 /* ================================ */
 .footer-bottom {
     border-top: 1px solid var(--color-border-light);
@@ -351,6 +411,7 @@ Stili per il footer del portfolio
     gap: var(--space-4);
 }
 
+/* Mobile: stack verticalmente */
 @media (max-width: 768px) {
     .footer-bottom {
         flex-direction: column;
@@ -359,6 +420,7 @@ Stili per il footer del portfolio
     }
 }
 
+/* Copyright con cuore animato */
 .footer-copyright {
     color: var(--color-text-tertiary);
     font-size: var(--font-size-sm);
@@ -367,16 +429,19 @@ Stili per il footer del portfolio
     gap: var(--space-1);
 }
 
+/* Cuore rosso animato */
 .footer-copyright i {
     color: var(--color-error);
     animation: heartbeat 1.5s ease-in-out infinite;
 }
 
+/* Animazione battito cardiaco */
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
 }
 
+/* Metadata tecniche */
 .footer-meta {
     display: flex;
     align-items: center;
@@ -395,6 +460,7 @@ Stili per il footer del portfolio
     font-size: var(--font-size-xs);
 }
 
+/* Mobile: metadata wrap */
 @media (max-width: 768px) {
     .footer-meta {
         flex-wrap: wrap;
@@ -404,58 +470,107 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* BACK TO TOP BUTTON               */
+/* BACK TO TOP BUTTON - SPECIFICO  */
 /* ================================ */
-.back-to-top {
-    position: fixed;
-    bottom: var(--space-6);
-    right: var(--space-6);
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    color: var(--color-white);
-    border: none;
-    border-radius: 50%;
-    font-size: var(--font-size-lg);
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all var(--transition-normal);
-    z-index: 1000;
-    box-shadow: var(--shadow-lg);
+
+/* Selettore super specifico per evitare conflitti */
+button#backToTop.back-to-top {
+    /* Posizionamento fisso */
+    position: fixed !important;
+    bottom: var(--space-6) !important;
+    right: var(--space-6) !important;
+    
+    /* Dimensioni */
+    width: 50px !important;
+    height: 50px !important;
+    
+    /* Stile */
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+    color: var(--color-white) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    
+    /* Flexbox per centrare icona */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Stati di visibilità */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(20px) !important;
+    
+    /* Transizioni */
+    transition: all var(--transition-normal) !important;
+    
+    /* Z-index alto */
+    z-index: 1000 !important;
+    
+    /* Ombra */
+    box-shadow: var(--shadow-lg) !important;
+    
+    /* Reset per evitare conflitti */
+    margin: 0 !important;
+    padding: 0 !important;
+    text-decoration: none !important;
 }
 
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+/* Icona dentro il button - selettore specifico */
+button#backToTop.back-to-top i {
+    font-size: 18px !important;
+    color: white !important;
+    line-height: 1 !important;
+    display: block !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.back-to-top:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: var(--shadow-xl);
+/* Stato visibile - selettore specifico */
+button#backToTop.back-to-top.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
 }
 
-.back-to-top:active {
-    transform: translateY(0) scale(0.95);
+/* Hover solo per il button specifico */
+button#backToTop.back-to-top:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: var(--shadow-xl) !important;
 }
 
+/* Click solo per il button specifico */
+button#backToTop.back-to-top:active {
+    transform: translateY(-1px) scale(0.95) !important;
+}
+
+/* Mobile responsive - selettore specifico */
 @media (max-width: 768px) {
-    .back-to-top {
-        bottom: var(--space-4);
-        right: var(--space-4);
-        width: 45px;
-        height: 45px;
-        font-size: var(--font-size-base);
+    button#backToTop.back-to-top {
+        bottom: var(--space-4) !important;
+        right: var(--space-4) !important;
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    button#backToTop.back-to-top i {
+        font-size: 16px !important;
     }
 }
 
 /* ================================ */
-/* ANIMATIONS                       */
+/* ANIMAZIONI OPZIONALI            */
 /* ================================ */
 
-/* Footer sections staggered animation */
+/* 
+NOTA: Le animazioni sono state semplificate e rese opzionali.
+Se vuoi riabilitarle, decommentale una per volta e testa.
+*/
+
+/*
+// Animazione sezioni footer (opzionale)
 .footer-brand,
 .footer-section,
 .footer-social {
@@ -468,44 +583,28 @@ Stili per il footer del portfolio
 .footer-section:nth-child(2) { animation-delay: 0.2s; }
 .footer-section:nth-child(3) { animation-delay: 0.3s; }
 .footer-social { animation-delay: 0.4s; }
+*/
 
-/* Footer links staggered animation */
-.footer-link {
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInLeft 0.6s ease-out forwards;
+/* Keyframe per animazioni (se le riabiliti) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.footer-link:nth-child(1) { animation-delay: 0.5s; }
-.footer-link:nth-child(2) { animation-delay: 0.6s; }
-.footer-link:nth-child(3) { animation-delay: 0.7s; }
-.footer-link:nth-child(4) { animation-delay: 0.8s; }
-.footer-link:nth-child(5) { animation-delay: 0.9s; }
-
-/* Social links animation */
-.footer-social-link {
-    opacity: 0;
-    transform: scale(0);
-    animation: bounceIn 0.6s ease-out forwards;
-}
-
-.footer-social-link:nth-child(1) { animation-delay: 1.0s; }
-.footer-social-link:nth-child(2) { animation-delay: 1.1s; }
-.footer-social-link:nth-child(3) { animation-delay: 1.2s; }
-.footer-social-link:nth-child(4) { animation-delay: 1.3s; }
-.footer-social-link:nth-child(5) { animation-delay: 1.4s; }
-
-/* Footer bottom animation */
-.footer-bottom {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 1.5s;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* ================================ */
-/* DARK THEME ADJUSTMENTS           */
+/* TEMA SCURO                      */
 /* ================================ */
-
 [data-theme="dark"] .footer {
     background: var(--color-bg-tertiary);
     border-top-color: var(--color-border-light);
@@ -534,9 +633,95 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* PRINT STYLES                     */
+/* ACCESSIBILITÀ                   */
 /* ================================ */
 
+/* Riduci animazioni se richiesto */
+@media (prefers-reduced-motion: reduce) {
+    .footer-brand,
+    .footer-section,
+    .footer-social,
+    .footer-link,
+    .footer-social-link,
+    .footer-bottom,
+    .back-to-top {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .footer-link,
+    .footer-social-link,
+    .back-to-top {
+        transition: none;
+    }
+    
+    .footer-copyright i {
+        animation: none;
+    }
+}
+
+/* Focus per navigazione keyboard */
+.footer-link:focus,
+.footer-social-link:focus,
+.back-to-top:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Alto contrasto */
+@media (prefers-contrast: high) {
+    .footer {
+        border-top-width: 2px;
+    }
+    
+    .footer-social-link,
+    .back-to-top {
+        border-width: 2px;
+    }
+    
+    .footer-section-title::after,
+    .footer-link::before {
+        display: none;
+    }
+    
+    .footer-social-link::before {
+        display: none;
+    }
+}
+
+/* ================================ */
+/* RESPONSIVE FINALE               */
+/* ================================ */
+
+/* Schermi molto piccoli */
+@media (max-width: 480px) {
+    .footer-content {
+        padding: var(--space-6) 0 var(--space-4);
+    }
+    
+    .footer-logo-text {
+        font-size: var(--font-size-lg);
+    }
+    
+    .footer-section-title {
+        font-size: var(--font-size-base);
+    }
+    
+    .footer-social-link {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-base);
+    }
+    
+    .footer-bottom {
+        padding: var(--space-4) 0;
+    }
+}
+
+/* ================================ */
+/* PRINT STYLES                    */
+/* ================================ */
 @media print {
     .footer {
         background: #fff;
@@ -566,86 +751,34 @@ Stili per il footer del portfolio
 }
 
 /* ================================ */
-/* ACCESSIBILITY ENHANCEMENTS       */
+/* FIX FINALI FONT AWESOME         */
 /* ================================ */
 
-@media (prefers-reduced-motion: reduce) {
-    .footer-brand,
-    .footer-section,
-    .footer-social,
-    .footer-link,
-    .footer-social-link,
-    .footer-bottom,
-    .back-to-top {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
-    
-    .footer-link,
-    .footer-social-link,
-    .back-to-top {
-        transition: none;
-    }
-    
-    .footer-copyright i {
-        animation: none;
-    }
+/* Forza visibilità Font Awesome 6 */
+.fab, .fas, .fa-brands, .fa-solid {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
 }
 
-/* Focus states for accessibility */
-.footer-link:focus,
-.footer-social-link:focus,
-.back-to-top:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+/* Specifico per brands */
+.fa-brands {
+    font-family: "Font Awesome 6 Brands" !important;
+    font-weight: 400 !important;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .footer {
-        border-top-width: 2px;
-    }
-    
-    .footer-social-link,
-    .back-to-top {
-        border-width: 2px;
-    }
-    
-    .footer-section-title::after,
-    .footer-link::before {
-        display: none;
-    }
-    
-    .footer-social-link::before {
-        display: none;
-    }
+/* Backup per icone social */
+.footer-social-link .fa-brands,
+.footer-social-link .fab {
+    font-family: "Font Awesome 6 Brands" !important;
+    font-weight: 400 !important;
 }
 
-/* ================================ */
-/* FOOTER RESPONSIVE BREAKPOINTS    */
-/* ================================ */
-
-@media (max-width: 480px) {
-    .footer-content {
-        padding: var(--space-6) 0 var(--space-4);
-    }
-    
-    .footer-logo-text {
-        font-size: var(--font-size-lg);
-    }
-    
-    .footer-section-title {
-        font-size: var(--font-size-base);
-    }
-    
-    .footer-social-link {
-        width: 40px;
-        height: 40px;
-        font-size: var(--font-size-base);
-    }
-    
-    .footer-bottom {
-        padding: var(--space-4) 0;
-    }
+/* Backup per icone solide */
+.footer-social-link .fa-solid,
+.footer-social-link .fas,
+.back-to-top .fa-solid,
+.back-to-top .fas {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
 }

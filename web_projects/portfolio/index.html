@@ -16,17 +16,18 @@
     <meta name="theme-color" content="#3b82f6">
     
     <!-- External Libraries -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- CSS Files - Ordine corretto -->
+
+    <!-- CSS Files - Ordine CORRETTO -->
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/animations.css"> <!-- 🔥 SPOSTATO QUI -->
     <link rel="stylesheet" href="assets/css/components/buttons.css">
     <link rel="stylesheet" href="assets/css/components/header.css">
     <link rel="stylesheet" href="assets/css/components/hero.css">
@@ -35,10 +36,9 @@
     <link rel="stylesheet" href="assets/css/components/education.css">
     <link rel="stylesheet" href="assets/css/components/projects.css">
     <link rel="stylesheet" href="assets/css/components/contact.css">
-    <link rel="stylesheet" href="assets/css/components/footer.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css"> <!-- Ora viene DOPO animations -->
     <link rel="stylesheet" href="assets/css/components/loading.css">
     <link rel="stylesheet" href="assets/css/components/forms.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/utilities.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/dark-theme.css">
@@ -92,7 +92,7 @@
                 <!-- Logo -->
                 <div class="nav-logo">
                     <a href="#home" class="logo-link">
-                        <span class="logo-text">Fabrice Tebou</span>
+                        <span class="logo-text">Fabrice Ghislain Tebou</span>
                         <span class="logo-subtitle">Python Developer</span>
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                 <!-- Navigation Controls -->
                 <div class="nav-controls">
                     <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema">
-                        <i class="fas fa-moon"></i>
+                        <i class="fa-solid fa-moon"></i>
                     </button>
                     <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
                         <span class="menu-line"></span>
@@ -147,16 +147,16 @@
             </div>
             
             <div class="hero-social">
-                <a href="https://github.com/FabriceGhislain7" class="hero-social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                <a href="#" class="hero-social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:ghislaintebou@gmail.com" class="hero-social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/FabriceGhislain7" class="hero-social-link" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hero-social-link" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:ghislaintebou@gmail.com" class="hero-social-link"><i class="fa-solid fa-envelope"></i></a>
             </div>
             
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
                         <p class="hero-greeting">Ciao, sono</p>
-                        <h1 class="hero-name">Fabrice Ghislain</h1>
+                        <h2 class="hero-name">Fabrice Ghislain Tebou</h2>
                         <h2 class="hero-profession">Python Developer & AI/ML Enthusiast</h2>
                         <p class="hero-description">
                             Sviluppatore Python appassionato di intelligenza artificiale e tecnologie innovative. 
@@ -166,18 +166,18 @@
                         <div class="hero-buttons">
                             <a href="#projects" class="hero-btn hero-btn-primary">
                                 <span>Vedi Progetti</span>
-                                <i class="fas fa-arrow-right"></i>
+                                <i class="fa-solid fa-arrow-right"></i>
                             </a>
                             <a href="#contact" class="hero-btn hero-btn-secondary">
                                 <span>Contattami</span>
-                                <i class="fas fa-envelope"></i>
+                                <i class="fa-solid fa-envelope"></i>
                             </a>
                         </div>
                     </div>
                     
                     <div class="hero-image">
                         <div class="hero-avatar">
-                            <img src="https://via.placeholder.com/350x350/3B82F6/FFFFFF?text=FG" alt="Fabrice Ghislain">
+                            <img src="assets\images\home\21.jpg" alt="Fabrice Ghislain">
                         </div>
                     </div>
                 </div>
@@ -199,6 +199,8 @@
 
                 <div class="about-content">
                     <div class="about-text">
+
+                        <!--Description of profil-->
                         <div class="about-intro">
                             <p class="about-paragraph">
                                 Con un master in fisica applicata presso l'Università di Genova e formazione continua come Python Developer, 
@@ -255,26 +257,30 @@
                         </div>
                     </div>
 
+                    <!--Blocco Destra in large screen-->
                     <div class="about-visual">
+
+                        <!--Illustrative image-->
                         <div class="about-image">
-                            <img src="https://via.placeholder.com/400x300/10B981/FFFFFF?text=Workspace" alt="Workspace di sviluppo" class="about-img">
+                            <img src="assets\images\about\about4.jpg" alt="Workspace di sviluppo" class="about-img">
                             <div class="about-overlay">
                                 <div class="overlay-content">
-                                    <i class="fab fa-python"></i>
-                                    <span>Python è la mia passione</span>
+                                    <i class="fa-brands fa-python"></i>
+                                    <div><span>Python è la mia passione</span></div>
                                 </div>
                             </div>
                         </div>
 
+                        <!--Soft Skills-->
                         <div class="soft-skills">
                             <h3 class="skills-title">Soft Skills</h3>
                             <ul class="skills-list">
-                                <li><i class="fas fa-check"></i> Apprendimento rapido</li>
-                                <li><i class="fas fa-check"></i> Comunicazione efficace</li>
-                                <li><i class="fas fa-check"></i> Lavoro di squadra</li>
-                                <li><i class="fas fa-check"></i> Problem solving</li>
-                                <li><i class="fas fa-check"></i> Curiosità e determinazione</li>
-                                <li><i class="fas fa-check"></i> Capacità di osservazione</li>
+                                <li><i class="fa-solid fa-check"></i> Apprendimento rapido</li>
+                                <li><i class="fa-solid fa-check"></i> Comunicazione efficace</li>
+                                <li><i class="fa-solid fa-check"></i> Lavoro di squadra</li>
+                                <li><i class="fa-solid fa-check"></i> Problem solving</li>
+                                <li><i class="fa-solid fa-check"></i> Curiosità e determinazione</li>
+                                <li><i class="fa-solid fa-check"></i> Capacità di osservazione</li>
                             </ul>
                         </div>
                     </div>
@@ -321,13 +327,13 @@
                             <div class="education-card">
                                 <div class="education-header">
                                     <div class="education-icon">
-                                        <i class="fas fa-code"></i>
+                                        <i class="fa-solid fa-code"></i>
                                     </div>
                                     <div class="education-meta">
                                         <h3 class="education-degree">Python Programmer & Developer</h3>
                                         <h4 class="education-school">Ente F.IRE - Regione Liguria</h4>
                                         <div class="education-period">
-                                            <i class="fas fa-calendar"></i>
+                                            <i class="fa-solid fa-calendar"></i>
                                             <span>Marzo 2025 - In corso</span>
                                         </div>
                                     </div>
@@ -340,17 +346,17 @@
 
                                 <div class="education-details">
                                     <div class="education-detail">
-                                        <i class="fas fa-clock"></i>
+                                        <i class="fa-solid fa-clock"></i>
                                         <span class="education-detail-label">Durata:</span>
                                         <span class="education-detail-value">600 ore (420h formazione + 180h stage)</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-euro-sign"></i>
+                                        <i class="fa-solid fa-euro-sign"></i>
                                         <span class="education-detail-label">Finanziamento:</span>
                                         <span class="education-detail-value">FSE+ Regione Liguria</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                        <i class="fa-solid fa-map-marker-alt"></i>
                                         <span class="education-detail-label">Modalità:</span>
                                         <span class="education-detail-value">In presenza, Genova</span>
                                     </div>
@@ -358,27 +364,27 @@
 
                                 <div class="education-achievements">
                                     <span class="achievement-tag">
-                                        <i class="fab fa-python"></i>
+                                        <i class="fa-brands fa-python"></i>
                                         Python
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-microchip"></i>
+                                        <i class="fa-solid fa-microchip"></i>
                                         IoT
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fab fa-raspberry-pi"></i>
+                                        <i class="fa-brands fa-raspberry-pi"></i>
                                         Raspberry Pi
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-brain"></i>
+                                        <i class="fa-solid fa-brain"></i>
                                         AI
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-cloud"></i>
+                                        <i class="fa-solid fa-cloud"></i>
                                         Cloud
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-industry"></i>
+                                        <i class="fa-solid fa-industry"></i>
                                         Industry 4.0
                                     </span>
                                 </div>
@@ -391,13 +397,13 @@
                             <div class="education-card">
                                 <div class="education-header">
                                     <div class="education-icon">
-                                        <i class="fas fa-laptop-code"></i>
+                                        <i class="fa-solid fa-laptop-code"></i>
                                     </div>
                                     <div class="education-meta">
                                         <h3 class="education-degree">Python Developer - Corso Completo</h3>
                                         <h4 class="education-school">Udemy</h4>
                                         <div class="education-period">
-                                            <i class="fas fa-calendar"></i>
+                                            <i class="fa-solid fa-calendar"></i>
                                             <span>Agosto 2024 - Presente</span>
                                         </div>
                                     </div>
@@ -410,17 +416,17 @@
 
                                 <div class="education-details">
                                     <div class="education-detail">
-                                        <i class="fas fa-play-circle"></i>
+                                        <i class="fa-solid fa-play-circle"></i>
                                         <span class="education-detail-label">Modalità:</span>
                                         <span class="education-detail-value">Online, self-paced</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-tasks"></i>
+                                        <i class="fa-solid fa-tasks"></i>
                                         <span class="education-detail-label">Progetti:</span>
                                         <span class="education-detail-value">12+ applicazioni pratiche</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-code-branch"></i>
+                                        <i class="fa-solid fa-code-branch"></i>
                                         <span class="education-detail-label">Repository:</span>
                                         <span class="education-detail-value">GitHub portfolio attivo</span>
                                     </div>
@@ -428,23 +434,23 @@
 
                                 <div class="education-achievements">
                                     <span class="achievement-tag">
-                                        <i class="fas fa-globe"></i>
+                                        <i class="fa-solid fa-globe"></i>
                                         Django
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-plug"></i>
+                                        <i class="fa-solid fa-plug"></i>
                                         REST API
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-mobile-alt"></i>
+                                        <i class="fa-solid fa-mobile-alt"></i>
                                         Kivy
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-spider"></i>
+                                        <i class="fa-solid fa-spider"></i>
                                         Web Scraping
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-database"></i>
+                                        <i class="fa-solid fa-database"></i>
                                         Database
                                     </span>
                                 </div>
@@ -457,13 +463,13 @@
                             <div class="education-card">
                                 <div class="education-header">
                                     <div class="education-icon">
-                                        <i class="fas fa-graduation-cap"></i>
+                                        <i class="fa-solid fa-graduation-cap"></i>
                                     </div>
                                     <div class="education-meta">
                                         <h3 class="education-degree">Master in Fisica Applicata</h3>
                                         <h4 class="education-school">Università di Genova</h4>
                                         <div class="education-period">
-                                            <i class="fas fa-calendar"></i>
+                                            <i class="fa-solid fa-calendar"></i>
                                             <span>2020 - Marzo 2024</span>
                                         </div>
                                     </div>
@@ -477,17 +483,17 @@
 
                                 <div class="education-details">
                                     <div class="education-detail">
-                                        <i class="fas fa-microscope"></i>
+                                        <i class="fa-solid fa-microscope"></i>
                                         <span class="education-detail-label">Specializzazione:</span>
                                         <span class="education-detail-value">Data Science & Machine Learning</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-file-alt"></i>
+                                        <i class="fa-solid fa-file-alt"></i>
                                         <span class="education-detail-label">Tesi:</span>
                                         <span class="education-detail-value">Analisi dimensionalità con ML</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-award"></i>
+                                        <i class="fa-solid fa-award"></i>
                                         <span class="education-detail-label">Focus:</span>
                                         <span class="education-detail-value">Ricerca scientifica applicata</span>
                                     </div>
@@ -495,23 +501,23 @@
 
                                 <div class="education-achievements">
                                     <span class="achievement-tag">
-                                        <i class="fas fa-chart-line"></i>
+                                        <i class="fa-solid fa-chart-line"></i>
                                         Machine Learning
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-calculator"></i>
+                                        <i class="fa-solid fa-calculator"></i>
                                         MATLAB
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-database"></i>
+                                        <i class="fa-solid fa-database"></i>
                                         Analisi Dati
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-search"></i>
+                                        <i class="fa-solid fa-search"></i>
                                         Ricerca
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-chart-bar"></i>
+                                        <i class="fa-solid fa-chart-bar"></i>
                                         Statistica
                                     </span>
                                 </div>
@@ -524,13 +530,13 @@
                             <div class="education-card">
                                 <div class="education-header">
                                     <div class="education-icon">
-                                        <i class="fas fa-atom"></i>
+                                        <i class="fa-solid fa-atom"></i>
                                     </div>
                                     <div class="education-meta">
                                         <h3 class="education-degree">Laurea in Fisica</h3>
                                         <h4 class="education-school">Università di Yaoundé I</h4>
                                         <div class="education-period">
-                                            <i class="fas fa-calendar"></i>
+                                            <i class="fa-solid fa-calendar"></i>
                                             <span>2007 - 2017</span>
                                         </div>
                                     </div>
@@ -543,17 +549,17 @@
 
                                 <div class="education-details">
                                     <div class="education-detail">
-                                        <i class="fas fa-flask"></i>
+                                        <i class="fa-solid fa-flask"></i>
                                         <span class="education-detail-label">Discipline:</span>
                                         <span class="education-detail-value">Fisica teorica e sperimentale</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-infinity"></i>
+                                        <i class="fa-solid fa-infinity"></i>
                                         <span class="education-detail-label">Matematica:</span>
                                         <span class="education-detail-value">Analisi, algebra, geometria</span>
                                     </div>
                                     <div class="education-detail">
-                                        <i class="fas fa-lightbulb"></i>
+                                        <i class="fa-solid fa-lightbulb"></i>
                                         <span class="education-detail-label">Competenze:</span>
                                         <span class="education-detail-value">Problem-solving, pensiero analitico</span>
                                     </div>
@@ -561,19 +567,19 @@
 
                                 <div class="education-achievements">
                                     <span class="achievement-tag">
-                                        <i class="fas fa-atom"></i>
+                                        <i class="fa-solid fa-atom"></i>
                                         Fisica Teorica
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-vial"></i>
+                                        <i class="fa-solid fa-vial"></i>
                                         Fisica Sperimentale
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-square-root-alt"></i>
+                                        <i class="fa-solid fa-square-root-alt"></i>
                                         Matematica
                                     </span>
                                     <span class="achievement-tag">
-                                        <i class="fas fa-brain"></i>
+                                        <i class="fa-solid fa-brain"></i>
                                         Logica
                                     </span>
                                 </div>
@@ -592,7 +598,7 @@
                             <div class="certification-card">
                                 <div class="certification-header">
                                     <div class="certification-icon">
-                                        <i class="fab fa-python"></i>
+                                        <i class="fa-brands fa-python"></i>
                                     </div>
                                     <div>
                                         <h4 class="certification-title">Python Developer Certification</h4>
@@ -605,7 +611,7 @@
                             <div class="certification-card">
                                 <div class="certification-header">
                                     <div class="certification-icon">
-                                        <i class="fas fa-industry"></i>
+                                        <i class="fa-solid fa-industry"></i>
                                     </div>
                                     <div>
                                         <h4 class="certification-title">IoT & Industry 4.0 Specialist</h4>
@@ -618,7 +624,7 @@
                             <div class="certification-card">
                                 <div class="certification-header">
                                     <div class="certification-icon">
-                                        <i class="fas fa-graduation-cap"></i>
+                                        <i class="fa-solid fa-graduation-cap"></i>
                                     </div>
                                     <div>
                                         <h4 class="certification-title">Master's Degree in Applied Physics</h4>
@@ -658,7 +664,7 @@
                     <h3>Tutti i Progetti su GitHub</h3>
                     <p>Esplora la mia raccolta completa di progetti e contributi</p>
                     <a href="https://github.com/FabriceGhislain7" class="btn btn-primary" target="_blank" rel="noopener">
-                        <i class="fab fa-github"></i>
+                        <i class="fa-brands fa-github"></i>
                         <span>Visita il mio GitHub</span>
                     </a>
                 </div>
@@ -677,7 +683,7 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div class="contact-details">
                                 <h3>Email</h3>
@@ -687,7 +693,7 @@
 
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
+                                <i class="fa-solid fa-phone"></i>
                             </div>
                             <div class="contact-details">
                                 <h3>Telefono</h3>
@@ -697,7 +703,7 @@
 
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="fa-solid fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-details">
                                 <h3>Posizione</h3>
@@ -707,13 +713,13 @@
 
                         <div class="contact-social">
                             <a href="https://github.com/FabriceGhislain7" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
-                                <i class="fab fa-github"></i>
+                                <i class="fa-brands fa-github"></i>
                             </a>
                             <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
+                                <i class="fa-brands fa-linkedin"></i>
                             </a>
                             <a href="mailto:ghislaintebou@gmail.com" class="social-link" aria-label="Email">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fa-solid fa-envelope"></i>
                             </a>
                         </div>
                     </div>
@@ -746,7 +752,7 @@
 
                             <button type="submit" class="btn btn-primary btn-full">
                                 <span>Invia Messaggio</span>
-                                <i class="fas fa-paper-plane"></i>
+                                <i class="fa-solid fa-paper-plane"></i>
                             </button>
                         </form>
                     </div>
@@ -760,7 +766,7 @@
         <div class="container">
             <div class="footer-content">
 
-                <!-- Brevessima pesentazione -->
+                <!-- Brevessima presentazione -->
                 <div class="footer-brand">
                     <a href="#" class="footer-logo">
                         <div class="footer-logo-icon">FG</div>
@@ -771,54 +777,54 @@
                     </p>
                 </div>
 
-                <!--Seconda colonna per la naviazione veloce-->
+                <!-- Seconda colonna per la navigazione veloce -->
                 <div class="footer-section">
                     <h3 class="footer-section-title">Navigazione</h3>
                     <ul class="footer-links">
-                        <li><a href="#home" class="footer-link"><i class="fas fa-home"></i>Home</a></li>
-                        <li><a href="#about" class="footer-link"><i class="fas fa-user"></i>About</a></li>
-                        <li><a href="#skills" class="footer-link"><i class="fas fa-cogs"></i>Skills</a></li>
-                        <li><a href="#projects" class="footer-link"><i class="fas fa-briefcase"></i>Projects</a></li>
-                        <li><a href="#contact" class="footer-link"><i class="fas fa-envelope"></i>Contact</a></li>
+                        <li><a href="#home" class="footer-link"><i class="fa-solid fa-home"></i>Home</a></li>
+                        <li><a href="#about" class="footer-link"><i class="fa-solid fa-user"></i>About</a></li>
+                        <li><a href="#skills" class="footer-link"><i class="fa-solid fa-cogs"></i>Skills</a></li>
+                        <li><a href="#projects" class="footer-link"><i class="fa-solid fa-briefcase"></i>Projects</a></li>
+                        <li><a href="#contact" class="footer-link"><i class="fa-solid fa-envelope"></i>Contact</a></li>
                     </ul>
                 </div>
 
-                <!--Terza colonna per la visualizzazione veloce dei progetti-->
+                <!-- Terza colonna per la visualizzazione veloce dei progetti -->
                 <div class="footer-section">
                     <h3 class="footer-section-title">Progetti</h3>
                     <ul class="footer-links">
-                        <li><a href="#" class="footer-link"><i class="fab fa-python"></i>PizzaMama Django</a></li>
-                        <li><a href="#" class="footer-link"><i class="fas fa-globe"></i>Portfolio Website</a></li>
-                        <li><a href="#" class="footer-link"><i class="fas fa-brain"></i>ML Research</a></li>
-                        <li><a href="#" class="footer-link"><i class="fas fa-microchip"></i>IoT Systems</a></li>
+                        <li><a href="#" class="footer-link"><i class="fa-brands fa-python"></i>PizzaMama Django</a></li>
+                        <li><a href="#" class="footer-link"><i class="fa-solid fa-globe"></i>Portfolio Website</a></li>
+                        <li><a href="#" class="footer-link"><i class="fa-solid fa-brain"></i>ML Research</a></li>
+                        <li><a href="#" class="footer-link"><i class="fa-solid fa-microchip"></i>IoT Systems</a></li>
                     </ul>
                 </div>
 
-                <!--Quarta colonna dedicata ai conttati e social-->
+                <!-- Quarta colonna dedicata ai contatti e social -->
                 <div class="footer-social">
                     <h3 class="footer-section-title">Seguimi</h3>
                     <div class="footer-social-links">
                         <a href="https://github.com/FabriceGhislain7" class="footer-social-link" target="_blank">
-                            <i class="fab fa-github"></i>
+                            <i class="fa-brands fa-github"></i>
                         </a>
                         <a href="https://linkedin.com/in/fabrice-ghislain" class="footer-social-link" target="_blank">
-                            <i class="fab fa-linkedin"></i>
+                            <i class="fa-brands fa-linkedin"></i>
                         </a>
-                        <a href="mailto:tua-email@esempio.com" class="footer-social-link">
-                            <i class="fas fa-envelope"></i>
+                        <a href="mailto:ghislaintebou@gmail.com" class="footer-social-link">
+                            <i class="fa-solid fa-envelope"></i>
                         </a>
                         <a href="#" class="footer-social-link" target="_blank">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
 
                     <div class="footer-contact">
                         <div class="footer-contact-item">
-                            <div class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="footer-contact-icon"><i class="fa-solid fa-map-marker-alt"></i></div>
                             <span>Genova, Liguria, Italia</span>
                         </div>
                         <div class="footer-contact-item">
-                            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div>
                             <a href="mailto:ghislaintebou@gmail.com">ghislaintebou@gmail.com</a>
                         </div>
                     </div>
@@ -828,20 +834,20 @@
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     <span>&copy; 2025 Fabrice Ghislain. Made with</span>
-                    <i class="fas fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
                     <span>in Genova</span>
                 </div>
                 <div class="footer-meta">
                     <div class="footer-meta-item">
-                        <i class="fas fa-code"></i>
+                        <i class="fa-solid fa-code"></i>
                         <span>HTML, CSS, JS</span>
                     </div>
                     <div class="footer-meta-item">
-                        <i class="fas fa-palette"></i>
+                        <i class="fa-solid fa-palette"></i>
                         <span>Custom Design</span>
                     </div>
                     <div class="footer-meta-item">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fa-solid fa-mobile-alt"></i>
                         <span>Responsive</span>
                     </div>
                 </div>
@@ -850,14 +856,14 @@
     </footer>
 
     <button class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
+        <i class="fa-solid fa-chevron-up"></i>
     </button>
 
     <!-- JavaScript Files - Verranno aggiunti gradualmente -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/modules/animations.js"></script>
+    <!-- <script src="assets/js/modules/animations.js"></script> -->
     <script src="assets/js/modules/contact.js"></script>
     <script src="assets/js/modules/counters.js"></script>
     <script src="assets/js/modules/filters.js"></script>
