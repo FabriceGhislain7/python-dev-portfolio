@@ -1034,3 +1034,29 @@ Rimuovere in produzione
     animation-duration: 5s !important;
     transition-duration: 5s !important;
 }
+
+/* ================================ */
+/* FIX PROGETTI TREMOLANTI          */
+/* ================================ */
+
+/* Disabilita animazioni problematiche sui progetti */
+.project-card,
+.project-card *,
+.project-title,
+.projects-grid {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: flat;
+}
+
+/* Force GPU acceleration senza tremolii */
+.project-card {
+    transform: translateZ(0);
+    will-change: auto; /* Rimuovi will-change se era impostato */
+}
+
+/* Rimuovi transizioni su elementi problematici */
+.project-title {
+    transition: color var(--transition-fast) !important;
+    /* Rimuovi tutte le altre transizioni */
+}

@@ -1,16 +1,9 @@
-/*
-===========================================
-PROJECTS CSS - Portfolio Statico
-===========================================
-Stili per la sezione progetti e project cards
-*/
-
-/* ================================ */
 /* PROJECTS SECTION                 */
 /* ================================ */
 .projects {
     background: var(--color-bg-primary);
     position: relative;
+    padding: var(--space-16) 0;
 }
 
 .projects .container {
@@ -19,7 +12,7 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
-/* PROJECTS FILTER                  */
+/* PROJECTS FILTER BUTTONS          */
 /* ================================ */
 .projects-filter {
     display: flex;
@@ -29,6 +22,7 @@ Stili per la sezione progetti e project cards
     flex-wrap: wrap;
 }
 
+/* Singolo bottone filtro */
 .projects-filter .filter-btn {
     padding: var(--space-3) var(--space-6);
     background: var(--color-bg-secondary);
@@ -42,6 +36,7 @@ Stili per la sezione progetti e project cards
     white-space: nowrap;
 }
 
+/* Stato hover del filtro */
 .projects-filter .filter-btn:hover {
     background: var(--color-primary-50);
     color: var(--color-primary);
@@ -49,6 +44,7 @@ Stili per la sezione progetti e project cards
     transform: translateY(-1px);
 }
 
+/* Stato attivo del filtro */
 .projects-filter .filter-btn.active {
     background: var(--color-primary);
     color: var(--color-white);
@@ -57,7 +53,7 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
-/* PROJECTS GRID                    */
+/* PROJECTS GRID LAYOUT             */
 /* ================================ */
 .projects-grid {
     display: grid;
@@ -66,6 +62,7 @@ Stili per la sezione progetti e project cards
     align-items: start;
 }
 
+/* Layout mobile per la griglia */
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: 1fr;
@@ -74,32 +71,46 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
-/* PROJECT CARD                     */
+/* PROJECT CARD CONTAINER           */
 /* ================================ */
 .project-card {
-    background: var(--color-bg-primary);
-    border-radius: var(--border-radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--color-border-light);
-    transition: all var(--transition-normal);
-    height: 100%;
+    /* Layout base */
     display: flex;
     flex-direction: column;
+    height: 100%;
+    
+    /* Styling */
+    background: var(--color-bg-primary);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-md);
+    
+    /* Comportamento */
+    overflow: hidden;
     position: relative;
+    isolation: isolate; /* Crea nuovo stacking context per prevenire conflitti */
+    
+    /* Transizioni */
+    transition: all var(--transition-normal);
+    
+    /* FIX: Prevenzione elementi fluttuanti */
+    contain: layout style paint;
 }
 
+/* Effetto hover sulla card */
 .project-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-xl);
     border-color: var(--color-primary-200);
 }
 
+/* Card evidenziata (featured) */
 .project-card.featured {
     border: 2px solid var(--color-primary);
     position: relative;
 }
 
+/* Indicatore top per progetti featured */
 .project-card.featured::before {
     content: '';
     position: absolute;
@@ -112,27 +123,33 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
-/* PROJECT IMAGE                    */
+/* PROJECT IMAGE SECTION            */
 /* ================================ */
 .project-image {
     position: relative;
     height: 240px;
     overflow: hidden;
     background: var(--color-gray-100);
+    flex-shrink: 0; /* Non si riduce mai */
 }
 
+/* Immagine del progetto */
 .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform var(--transition-slow);
 }
 
+/* Effetto zoom immagine al hover */
 .project-card:hover .project-image img {
     transform: scale(1.05);
 }
 
-/* Project Overlay */
+/* ================================ */
+/* PROJECT OVERLAY (su immagine)    */
+/* ================================ */
 .project-overlay {
     position: absolute;
     top: 0;
@@ -147,58 +164,17 @@ Stili per la sezione progetti e project cards
     gap: var(--space-4);
     opacity: 0;
     transition: opacity var(--transition-normal);
+    z-index: 3; /* Sopra l'immagine ma sotto i badge */
 }
 
+/* Mostra overlay al hover */
 .project-card:hover .project-overlay {
     opacity: 1;
 }
 
-.project-links {
-    display: flex;
-    gap: var(--space-3);
-}
-
-.project-link {
-    width: 44px;
-    height: 44px;
-    background: var(--color-white);
-    color: var(--color-gray-800);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-size-lg);
-    transition: all var(--transition-fast);
-    text-decoration: none;
-}
-
-.project-link:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
-    transform: translateY(-2px);
-}
-
-.project-details-btn {
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--border-radius-lg);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-}
-
-.project-details-btn:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-1px);
-}
-
-/* Project Status Badge */
+/* ================================ */
+/* PROJECT STATUS BADGE            */
+/* ================================ */
 .project-status {
     position: absolute;
     top: var(--space-3);
@@ -212,9 +188,10 @@ Stili per la sezione progetti e project cards
     align-items: center;
     gap: var(--space-1);
     backdrop-filter: blur(10px);
+    z-index: 4; /* Sopra tutto */
 }
 
-/* Featured Badge */
+/* Badge featured */
 .project-featured-badge {
     position: absolute;
     top: var(--space-3);
@@ -227,57 +204,80 @@ Stili per la sezione progetti e project cards
     border-radius: var(--border-radius-full);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    z-index: 2;
+    z-index: 4; /* Sopra tutto */
 }
 
 /* ================================ */
-/* PROJECT CONTENT                  */
+/* PROJECT CONTENT AREA             */
 /* ================================ */
 .project-content {
     padding: var(--space-6);
-    flex: 1;
+    flex: 1; /* Prende tutto lo spazio disponibile */
     display: flex;
     flex-direction: column;
+    gap: var(--space-3);
 }
 
+/* Header del contenuto */
 .project-header {
-    margin-bottom: var(--space-4);
-}
-
-.project-title {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
     margin-bottom: var(--space-2);
-    line-height: var(--line-height-tight);
-}
-
-.project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--font-size-xs);
-    color: var(--color-text-tertiary);
-}
-
-.project-description {
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-5);
-    font-size: var(--font-size-sm);
-    flex: 1;
 }
 
 /* ================================ */
-/* PROJECT TECHNOLOGIES             */
+/* PROJECT TITLE - FIX PRINCIPALE   */
+/* ================================ */
+.project-title {
+    /* Typography */
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-tight);
+    
+    /* Layout - IMPORTANTE: Reset completo */
+    position: static !important;
+    margin: 0 0 var(--space-2) 0 !important;
+    padding: 0 !important;
+    
+    /* FIX: Eliminazione tremolii */
+    transform: none !important;
+    animation: none !important;
+    transition: color var(--transition-fast) !important;
+    
+    /* FIX: Reset posizionamento assoluto */
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: auto !important;
+    
+    /* FIX: Stabilizzazione rendering */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: auto;
+}
+
+/* ================================ */
+/* PROJECT DESCRIPTION              */
+/* ================================ */
+.project-description {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    font-size: var(--font-size-sm);
+    flex: 1; /* Prende spazio disponibile */
+    margin-bottom: var(--space-4);
+}
+
+/* ================================ */
+/* PROJECT TECHNOLOGIES TAGS        */
 /* ================================ */
 .project-technologies {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-4);
 }
 
+/* Singolo tag tecnologia */
 .tech-tag {
     padding: var(--space-1) var(--space-3);
     background: var(--color-primary-100);
@@ -288,11 +288,13 @@ Stili per la sezione progetti e project cards
     transition: all var(--transition-fast);
 }
 
+/* Effetto hover sui tag (tramite card hover) */
 .project-card:hover .tech-tag {
     background: var(--color-primary);
     color: var(--color-white);
 }
 
+/* Tag per indicare tecnologie aggiuntive */
 .tech-more {
     padding: var(--space-1) var(--space-3);
     background: var(--color-gray-200);
@@ -303,14 +305,108 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
-/* PROJECT FOOTER                   */
+/* PROJECT FOOTER - FIX LAYOUT      */
 /* ================================ */
 .project-footer {
-    margin-top: auto;
+    /* Layout fix - posizionamento corretto */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Spinge verso il basso */
+    
+    /* Styling */
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border-light);
+    
+    /* FIX: Posizionamento stabile */
+    position: relative;
+    flex-wrap: wrap;
+    gap: var(--space-2);
 }
 
+/* ================================ */
+/* PROJECT LINKS - SINISTRA         */
+/* ================================ */
+.project-links {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    order: 1; /* Prima posizione a sinistra */
+}
+
+/* Singolo link progetto */
+.project-link {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    
+    /* Styling */
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    
+    /* FIX: Reset posizionamento problematico */
+    position: static !important;
+    float: none !important;
+    transform: none !important;
+    
+    /* Transizioni */
+    transition: all var(--transition-fast);
+}
+
+/* Hover sui link */
+.project-link:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px) !important; /* Solo questo transform è permesso */
+}
+
+/* Link nell'overlay (diverso stile) */
+.project-overlay .project-link {
+    width: 44px;
+    height: 44px;
+    background: var(--color-white);
+    color: var(--color-gray-800);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    padding: 0;
+}
+
+.project-overlay .project-link:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px) !important;
+}
+
+/* ================================ */
+/* PROJECT META - DESTRA            */
+/* ================================ */
+.project-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    order: 2; /* Seconda posizione a destra */
+}
+
+/* Elemento meta (durata, team size, etc.) */
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+/* ================================ */
+/* PROJECT STATS (footer completo)  */
+/* ================================ */
 .project-stats {
     display: flex;
     justify-content: space-between;
@@ -321,14 +417,8 @@ Stili per la sezione progetti e project cards
     gap: var(--space-2);
 }
 
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-}
-
 /* ================================ */
-/* PROJECT MODAL                    */
+/* PROJECT MODAL (popup dettagli)   */
 /* ================================ */
 .project-modal {
     position: fixed;
@@ -342,11 +432,13 @@ Stili per la sezione progetti e project cards
     transition: all var(--transition-normal);
 }
 
+/* Modal attivo */
 .project-modal.active {
     opacity: 1;
     visibility: visible;
 }
 
+/* Sfondo del modal */
 .modal-backdrop {
     position: absolute;
     top: 0;
@@ -357,6 +449,7 @@ Stili per la sezione progetti e project cards
     backdrop-filter: blur(5px);
 }
 
+/* Contenuto del modal */
 .modal-content {
     position: absolute;
     top: 50%;
@@ -372,10 +465,12 @@ Stili per la sezione progetti e project cards
     transition: transform var(--transition-normal);
 }
 
+/* Modal content quando attivo */
 .project-modal.active .modal-content {
     transform: translate(-50%, -50%) scale(1);
 }
 
+/* Header del modal */
 .modal-header {
     padding: var(--space-6);
     border-bottom: 1px solid var(--color-border-light);
@@ -391,6 +486,7 @@ Stili per la sezione progetti e project cards
     color: var(--color-text-primary);
 }
 
+/* Bottone chiusura modal */
 .modal-close {
     width: 40px;
     height: 40px;
@@ -408,12 +504,16 @@ Stili per la sezione progetti e project cards
     color: var(--color-white);
 }
 
+/* Body del modal */
 .modal-body {
     padding: var(--space-6);
     max-height: calc(90vh - 120px);
     overflow-y: auto;
 }
 
+/* ================================ */
+/* MODAL CONTENT DETAILS            */
+/* ================================ */
 .project-detail-image {
     position: relative;
     margin-bottom: var(--space-6);
@@ -475,6 +575,9 @@ Stili per la sezione progetti e project cards
     font-weight: var(--font-weight-bold);
 }
 
+/* ================================ */
+/* MODAL TECHNOLOGIES SECTION       */
+/* ================================ */
 .project-technologies-full .tech-tags {
     display: flex;
     flex-wrap: wrap;
@@ -489,6 +592,9 @@ Stili per la sezione progetti e project cards
     border-radius: var(--border-radius-lg);
 }
 
+/* ================================ */
+/* MODAL META INFORMATION           */
+/* ================================ */
 .project-meta-full {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -507,14 +613,38 @@ Stili per la sezione progetti e project cards
     color: var(--color-text-primary);
 }
 
+/* ================================ */
+/* MODAL LINKS SECTION              */
+/* ================================ */
 .project-links-full {
     display: flex;
     gap: var(--space-4);
     flex-wrap: wrap;
 }
 
+/* Bottone dettagli progetto */
+.project-details-btn {
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.project-details-btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
 /* ================================ */
-/* STATES - LOADING, ERROR, EMPTY   */
+/* LOADING STATES                   */
 /* ================================ */
 .projects-loading {
     display: grid;
@@ -522,6 +652,7 @@ Stili per la sezione progetti e project cards
     gap: var(--space-8);
 }
 
+/* Skeleton card per caricamento */
 .project-skeleton {
     background: var(--color-bg-primary);
     border-radius: var(--border-radius-xl);
@@ -567,6 +698,9 @@ Stili per la sezione progetti e project cards
     border-radius: var(--border-radius-full);
 }
 
+/* ================================ */
+/* ERROR AND EMPTY STATES           */
+/* ================================ */
 .projects-error,
 .projects-empty {
     grid-column: 1 / -1;
@@ -630,8 +764,40 @@ Stili per la sezione progetti e project cards
 }
 
 /* ================================ */
+/* FIX ANTI-TREMOLII GLOBALI        */
+/* ================================ */
+
+/* Rimuovi qualsiasi elemento pseudo problematico */
+.projects-grid::before,
+.projects-grid::after,
+.project-card::before:not(.project-card.featured::before) {
+    display: none !important;
+}
+
+/* Force reset per titoli duplicati */
+.project-card > h3:not(.project-content .project-title),
+.project-card > .project-title:not(.project-content .project-title) {
+    display: none !important;
+}
+
+/* Stabilizzazione rendering per tutti gli elementi della card */
+.project-card * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ================================ */
 /* RESPONSIVE DESIGN                */
 /* ================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* Mobile */
 @media (max-width: 640px) {
     .projects-filter {
         gap: var(--space-2);
@@ -650,14 +816,17 @@ Stili per la sezione progetti e project cards
         padding: var(--space-5);
     }
     
-    .project-meta {
+    .project-footer {
         flex-direction: column;
-        gap: var(--space-1);
+        gap: var(--space-3);
         align-items: flex-start;
     }
     
-    .project-stats {
-        justify-content: center;
+    .project-links,
+    .project-meta {
+        order: 0;
+        width: 100%;
+        justify-content: space-between;
     }
     
     .modal-content {
@@ -723,11 +892,14 @@ Stili per la sezione progetti e project cards
 /* ================================ */
 /* ANIMATIONS                       */
 /* ================================ */
+
+/* Animazione pulse per skeleton */
 @keyframes pulse {
     0% { opacity: 0.6; }
     100% { opacity: 1; }
 }
 
+/* Animazione entrata card */
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -739,6 +911,67 @@ Stili per la sezione progetti e project cards
     }
 }
 
+/* Applica animazione entrata alle card */
 .project-card {
     animation: slideInUp 0.6s ease-out;
+}
+
+/* ================================ */
+/* ACCESSIBILITY ENHANCEMENTS       */
+/* ================================ */
+
+/* Rispetta preferenze di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-card *,
+    .project-image img,
+    .project-link,
+    .modal-content {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+    
+    .project-card:hover {
+        transform: none !important;
+    }
+    
+    .project-card:hover .project-image img {
+        transform: none !important;
+    }
+}
+
+/* Focus states per accessibilità */
+.project-link:focus,
+.filter-btn:focus,
+.project-details-btn:focus,
+.modal-close:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ================================ */
+/* PRINT STYLES                     */
+/* ================================ */
+@media print {
+    .projects-filter {
+        display: none;
+    }
+    
+    .project-overlay,
+    .project-modal {
+        display: none;
+    }
+    
+    .project-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .project-link {
+        color: #000;
+        background: #fff;
+        border: 1px solid #000;
+    }
 }

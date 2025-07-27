@@ -476,3 +476,26 @@ Utility classes per ottimizzazione e helper styles
     border-color: var(--color-success) !important;
     color: var(--color-success) !important;
 }
+
+/* ================================ */
+/* RESET UTILITY PER PROGETTI       */
+/* ================================ */
+
+/* Reset posizionamento assoluto indesiderato */
+.reset-position {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    z-index: auto !important;
+}
+
+/* Anti-tremolo utility */
+.no-shake {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: auto;
+}

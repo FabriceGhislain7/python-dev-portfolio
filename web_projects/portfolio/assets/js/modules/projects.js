@@ -533,4 +533,52 @@ Carica e gestisce la sezione progetti
         init();
     }
 
+    // Cerca questa funzione e sostituiscila COMPLETAMENTE
+function createProjectHTML(project) {
+    return `
+        <div class="project-card" data-category="${project.category}">
+            <div class="project-image">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="project-overlay">
+                    <div class="project-status ${project.status}">
+                        ${getStatusLabel(project.status)}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-content">
+                <h3 class="project-title">${project.title}</h3>
+                <p class="project-description">${project.description}</p>
+                
+                <div class="project-technologies">
+                    ${project.technologies.map(tech => `
+                        <span class="tech-tag">${tech}</span>
+                    `).join('')}
+                </div>
+                
+                <div class="project-footer">
+                    <div class="project-links">
+                        ${project.links.github ? `
+                            <a href="${project.links.github}" class="project-link" target="_blank" rel="noopener">
+                                <i class="fa-brands fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        ` : ''}
+                        ${project.links.live ? `
+                            <a href="${project.links.live}" class="project-link" target="_blank" rel="noopener">
+                                <i class="fa-solid fa-external-link-alt"></i>
+                                <span>Demo</span>
+                            </a>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="project-meta">
+                        <span>${project.duration || 'N/A'}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 })();
