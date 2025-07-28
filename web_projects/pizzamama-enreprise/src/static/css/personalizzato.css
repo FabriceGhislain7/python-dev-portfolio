@@ -1,0 +1,663 @@
+/**
+ * 🍕 PIZZAMAMA ENTERPRISE - Stili Personalizzati
+ * Design italiano moderno per e-commerce pizze
+ */
+
+/* ====== VARIABILI COLORI BRAND ====== */
+:root {
+    --colore-primario: #d32f2f;
+    --colore-primario-scuro: #b71c1c;
+    --colore-primario-chiaro: #ffcdd2;
+    --colore-secondario: #ff6f00;
+    --colore-secondario-scuro: #e65100;
+    --colore-successo: #2e7d32;
+    --colore-avviso: #f57c00;
+    --colore-errore: #c62828;
+    --colore-info: #1976d2;
+    
+    --colore-sfondo: #fafafa;
+    --colore-carta: #ffffff;
+    --colore-testo: #212121;
+    --colore-testo-secondario: #757575;
+    --colore-bordo: #e0e0e0;
+    
+    --ombra-card: 0 2px 8px rgba(0,0,0,0.1);
+    --ombra-card-hover: 0 4px 16px rgba(0,0,0,0.15);
+    --ombra-bottone: 0 2px 4px rgba(0,0,0,0.1);
+    
+    --raggio-bordo: 8px;
+    --raggio-bordo-piccolo: 4px;
+    --raggio-bordo-grande: 12px;
+    
+    --transizione-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transizione-veloce: all 0.15s ease-in-out;
+}
+
+/* ====== RESET E BASE ====== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--colore-sfondo);
+    color: var(--colore-testo);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ====== TIPOGRAFIA ITALIANA ====== */
+.titolo-principale {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--colore-primario);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.sottotitolo {
+    font-size: 1.25rem;
+    color: var(--colore-testo-secondario);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.testo-brand {
+    color: var(--colore-primario);
+    font-weight: 600;
+}
+
+.testo-grande {
+    font-size: 1.125rem;
+}
+
+.testo-piccolo {
+    font-size: 0.875rem;
+}
+
+/* ====== NAVBAR PERSONALIZZATA ====== */
+.navbar-pizzamama {
+    background: linear-gradient(135deg, var(--colore-primario) 0%, var(--colore-primario-scuro) 100%);
+    box-shadow: var(--ombra-card);
+    transition: var(--transizione-standard);
+    padding: 1rem 0;
+}
+
+.navbar-pizzamama.navbar-scrolled {
+    padding: 0.5rem 0;
+    box-shadow: var(--ombra-card-hover);
+}
+
+.navbar-pizzamama .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white !important;
+    text-decoration: none;
+    transition: var(--transizione-veloce);
+}
+
+.navbar-pizzamama .navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.navbar-pizzamama .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--raggio-bordo-piccolo);
+    transition: var(--transizione-veloce);
+}
+
+.navbar-pizzamama .nav-link:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.navbar-pizzamama .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white !important;
+}
+
+/* Badge carrello */
+.badge-carrello {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--colore-secondario);
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    line-height: 20px;
+    text-align: center;
+    animation: pulsa 2s infinite;
+}
+
+@keyframes pulsa {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* ====== HERO SECTION ====== */
+.sezione-hero {
+    background: linear-gradient(
+        135deg,
+        var(--colore-primario) 0%,
+        var(--colore-primario-scuro) 50%,
+        var(--colore-secondario-scuro) 100%
+    );
+    color: white;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.sezione-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+    background-size: 50px 50px;
+    animation: galleggia 20s ease-in-out infinite;
+}
+
+@keyframes galleggia {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.sezione-hero .contenuto {
+    position: relative;
+    z-index: 2;
+}
+
+.sezione-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.sezione-hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* ====== CARDS PRODOTTI ====== */
+.prodotto-card {
+    border: none;
+    border-radius: var(--raggio-bordo);
+    box-shadow: var(--ombra-card);
+    transition: var(--transizione-standard);
+    overflow: hidden;
+    background: var(--colore-carta);
+}
+
+.prodotto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ombra-card-hover);
+}
+
+.prodotto-card .card-img-top {
+    transition: var(--transizione-standard);
+    border-radius: 0;
+}
+
+.prodotto-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.prodotto-card .badge {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.prodotto-card .prezzo {
+    color: var(--colore-primario);
+    font-weight: 700;
+}
+
+.prodotto-card .ingredienti {
+    color: var(--colore-testo-secondario);
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* ====== BOTTONI PERSONALIZZATI ====== */
+.btn-pizzamama {
+    border-radius: var(--raggio-bordo);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    transition: var(--transizione-veloce);
+    box-shadow: var(--ombra-bottone);
+    text-transform: none;
+}
+
+.btn-pizzamama:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--colore-primario) 0%, var(--colore-primario-scuro) 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--colore-primario-scuro) 0%, #8b0000 100%);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--colore-secondario) 0%, var(--colore-secondario-scuro) 100%);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--colore-successo) 0%, #1b5e20 100%);
+    border: none;
+}
+
+.btn-aggiungi-carrello {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-aggiungi-carrello::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.btn-aggiungi-carrello:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ====== FILTRI E RICERCA ====== */
+.barra-filtri {
+    background: var(--colore-carta);
+    padding: 1.5rem;
+    border-radius: var(--raggio-bordo);
+    box-shadow: var(--ombra-card);
+    margin-bottom: 2rem;
+}
+
+.input-ricerca {
+    border: 2px solid var(--colore-bordo);
+    border-radius: var(--raggio-bordo);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: var(--transizione-veloce);
+}
+
+.input-ricerca:focus {
+    border-color: var(--colore-primario);
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}
+
+.select-filtro {
+    border: 2px solid var(--colore-bordo);
+    border-radius: var(--raggio-bordo);
+    padding: 0.75rem 1rem;
+    transition: var(--transizione-veloce);
+}
+
+.select-filtro:focus {
+    border-color: var(--colore-primario);
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}
+
+/* ====== CARRELLO ====== */
+.elemento-carrello {
+    background: var(--colore-carta);
+    border-radius: var(--raggio-bordo);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: var(--transizione-veloce);
+}
+
+.elemento-carrello:hover {
+    box-shadow: var(--ombra-card);
+}
+
+.input-quantita {
+    max-width: 80px;
+    text-align: center;
+    border: 1px solid var(--colore-bordo);
+}
+
+.btn-diminuisci,
+.btn-aumenta {
+    border: 1px solid var(--colore-bordo);
+    background: var(--colore-sfondo);
+    color: var(--colore-testo);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transizione-veloce);
+}
+
+.btn-diminuisci:hover,
+.btn-aumenta:hover {
+    background: var(--colore-primario-chiaro);
+    border-color: var(--colore-primario);
+}
+
+/* ====== RIEPILOGO ORDINE ====== */
+.riepilogo-ordine {
+    background: var(--colore-carta);
+    border-radius: var(--raggio-bordo);
+    box-shadow: var(--ombra-card);
+    position: sticky;
+    top: 100px;
+}
+
+.riepilogo-ordine .card-header {
+    background: linear-gradient(135deg, var(--colore-primario) 0%, var(--colore-primario-scuro) 100%);
+    color: white;
+    border-radius: var(--raggio-bordo) var(--raggio-bordo) 0 0;
+    padding: 1rem 1.5rem;
+}
+
+.riepilogo-ordine .riga-totale {
+    font-size: 1.125rem;
+    font-weight: 600;
+    padding: 1rem 0;
+    border-top: 2px solid var(--colore-bordo);
+}
+
+/* ====== MESSAGGI E NOTIFICHE ====== */
+.alert-personalizzato {
+    border: none;
+    border-radius: var(--raggio-bordo);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--ombra-card);
+}
+
+.toast {
+    border-radius: var(--raggio-bordo);
+    box-shadow: var(--ombra-card-hover);
+}
+
+/* ====== ANIMAZIONI CARICAMENTO ====== */
+.spinner-pizzamama {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--colore-primario-chiaro);
+    border-top: 4px solid var(--colore-primario);
+    border-radius: 50%;
+    animation: gira 1s linear infinite;
+}
+
+@keyframes gira {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.caricamento-prodotti {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+
+/* ====== SEZIONI CONTENUTO ====== */
+.sezione-chi-siamo {
+    padding: 4rem 0;
+    background: var(--colore-carta);
+}
+
+.sezione-chi-siamo .icona-caratteristica {
+    font-size: 3rem;
+    color: var(--colore-primario);
+    margin-bottom: 1rem;
+}
+
+.sezione-valori {
+    padding: 4rem 0;
+    background: var(--colore-sfondo);
+}
+
+.carta-valore {
+    background: var(--colore-carta);
+    border-radius: var(--raggio-bordo);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--ombra-card);
+    transition: var(--transizione-standard);
+    height: 100%;
+}
+
+.carta-valore:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ombra-card-hover);
+}
+
+.carta-valore .icona {
+    font-size: 2.5rem;
+    color: var(--colore-primario);
+    margin-bottom: 1rem;
+}
+
+/* ====== FORM CONTATTI ====== */
+.form-contatto {
+    background: var(--colore-carta);
+    border-radius: var(--raggio-bordo);
+    padding: 2rem;
+    box-shadow: var(--ombra-card);
+}
+
+.form-contatto .form-control {
+    border: 2px solid var(--colore-bordo);
+    border-radius: var(--raggio-bordo-piccolo);
+    padding: 0.75rem 1rem;
+    transition: var(--transizione-veloce);
+}
+
+.form-contatto .form-control:focus {
+    border-color: var(--colore-primario);
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}
+
+.form-contatto textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ====== FOOTER ====== */
+.footer-pizzamama {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-pizzamama h5 {
+    color: var(--colore-primario-chiaro);
+    margin-bottom: 1rem;
+}
+
+.footer-pizzamama .list-unstyled a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transizione-veloce);
+}
+
+.footer-pizzamama .list-unstyled a:hover {
+    color: var(--colore-primario-chiaro);
+    text-decoration: underline;
+}
+
+.footer-pizzamama .social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: var(--colore-primario);
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    transition: var(--transizione-veloce);
+}
+
+.footer-pizzamama .social-links a:hover {
+    background: var(--colore-primario-scuro);
+    transform: translateY(-2px);
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+@media (max-width: 768px) {
+    .titolo-principale {
+        font-size: 2rem;
+    }
+    
+    .sezione-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .sezione-hero {
+        padding: 4rem 0;
+    }
+    
+    .prodotto-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .barra-filtri {
+        padding: 1rem;
+    }
+    
+    .elemento-carrello {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .elemento-carrello > div {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-pizzamama .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .btn-pizzamama {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .input-quantita {
+        max-width: 60px;
+    }
+}
+
+/* ====== UTILITY CLASSES ====== */
+.posizione-relativa { position: relative; }
+.posizione-assoluta { position: absolute; }
+.posizione-fissa { position: fixed; }
+
+.testo-centro { text-align: center; }
+.testo-sinistra { text-align: left; }
+.testo-destra { text-align: right; }
+
+.margine-top-1 { margin-top: 0.5rem; }
+.margine-top-2 { margin-top: 1rem; }
+.margine-top-3 { margin-top: 1.5rem; }
+.margine-top-4 { margin-top: 2rem; }
+
+.padding-1 { padding: 0.5rem; }
+.padding-2 { padding: 1rem; }
+.padding-3 { padding: 1.5rem; }
+.padding-4 { padding: 2rem; }
+
+.bordo-arrotondato { border-radius: var(--raggio-bordo); }
+.bordo-arrotondato-piccolo { border-radius: var(--raggio-bordo-piccolo); }
+.bordo-arrotondato-grande { border-radius: var(--raggio-bordo-grande); }
+
+.ombra-leggera { box-shadow: var(--ombra-card); }
+.ombra-media { box-shadow: var(--ombra-card-hover); }
+
+.transizione-veloce { transition: var(--transizione-veloce); }
+.transizione-standard { transition: var(--transizione-standard); }
+
+/* ====== ACCESSIBILITÀ ====== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus per accessibilità */
+*:focus {
+    outline: 2px solid var(--colore-primario);
+    outline-offset: 2px;
+}
+
+/* ====== ANIMAZIONI AVANZATE ====== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animazione-entrata {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.animazione-entrata-ritardata {
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* ====== PRINT STYLES ====== */
+@media print {
+    .navbar-pizzamama,
+    .footer-pizzamama,
+    .btn,
+    .barra-filtri {
+        display: none !important;
+    }
+    
+    .prodotto-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

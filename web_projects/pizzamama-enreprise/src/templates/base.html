@@ -6,22 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- SEO Meta Tags -->
-    <title>{% block title %}{{ page_title|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Ordina la migliore pizza a domicilio. Ingredienti freschi, consegna veloce, prezzi imbattibili." }}{% endblock %}">
+    <!-- SEO Meta Tags Italianizzati -->
+    <title>{% block title %}{{ titolo_pagina|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ descrizione_meta|default:"Ordina la migliore pizza a domicilio. Ingredienti freschi, consegna veloce, prezzi imbattibili." }}{% endblock %}">
     <meta name="keywords" content="pizza, domicilio, consegna, Genova, ingredienti freschi, pizzeria">
     <meta name="author" content="PizzaMama Enterprise">
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{% block og_title %}{{ page_title|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"Ordina la migliore pizza a domicilio." }}{% endblock %}">
+    <!-- Open Graph per Social Media -->
+    <meta property="og:title" content="{% block og_title %}{{ titolo_pagina|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ descrizione_meta|default:"Ordina la migliore pizza a domicilio" }}{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <meta property="og:image" content="{% static 'images/logo-og.png' %}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <meta property="og:image" content="{% static 'images/pizza-social-share.jpg' %}">
+    <meta property="og:locale" content="it_IT">
     
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -29,108 +26,290 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- CSS Personalizzato -->
+    <link rel="stylesheet" href="{% static 'css/personalizzato.css' %}">
+    
+    <!-- Google Fonts per Typography Italiana -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
     
     <!-- Extra CSS Block -->
     {% block extra_css %}{% endblock %}
-</head>
-<body class="{% block body_class %}{% endblock %}">
     
-    <!-- Navigation -->
+    <!-- Structured Data per SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "PizzaMama",
+        "description": "La migliore pizza a domicilio con ingredienti freschi",
+        "url": "{{ request.build_absolute_uri }}",
+        "telephone": "+39 010 123 4567",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Roma 123",
+            "addressLocality": "Genova",
+            "postalCode": "16121",
+            "addressCountry": "IT"
+        },
+        "servesCuisine": "Italian",
+        "priceRange": "€€"
+    }
+    </script>
+</head>
+<body class="{% block body_class %}{% endblock %}" data-pagina="{% block pagina_corrente %}default{% endblock %}">
+    
+    <!-- Navigation Italiana -->
     {% include 'partials/navbar.html' %}
     
-    <!-- Messages Framework -->
+    <!-- Messages Framework Italianizzato -->
     {% include 'partials/messages.html' %}
     
+    <!-- Breadcrumb Dinamico -->
+    {% block breadcrumb %}
+    {% if show_breadcrumb %}
+    <nav aria-label="breadcrumb" class="bg-light py-2">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/" class="text-decoration-none">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                </li>
+                {% block breadcrumb_items %}{% endblock %}
+            </ol>
+        </div>
+    </nav>
+    {% endif %}
+    {% endblock %}
+    
     <!-- Main Content -->
-    <main class="{% block main_class %}{% endblock %}">
+    <main class="{% block main_class %}{% endblock %}" role="main">
         {% block content %}
         {% endblock %}
     </main>
     
-    <!-- Footer -->
+    <!-- Footer Italiano -->
     {% include 'partials/footer.html' %}
     
-    <!-- Cart Sidebar (sempre presente per AJAX updates) -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="cartSidebarLabel">
+    <!-- Sidebar Carrello Migliorato -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarCarrello" aria-labelledby="titoloSidebarCarrello">
+        <div class="offcanvas-header bg-primary text-white">
+            <h5 class="offcanvas-title" id="titoloSidebarCarrello">
                 <i class="bi bi-cart3"></i> Il Tuo Carrello
+                <span id="badgeConteggiCarrello" class="badge bg-light text-primary ms-2">0</span>
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Chiudi"></button>
         </div>
-        <div class="offcanvas-body" id="cart-content">
-            <!-- Cart content loaded via JavaScript -->
-            <div class="text-center text-muted">
-                <i class="bi bi-cart-x fs-1"></i>
-                <p>Il tuo carrello è vuoto</p>
-                <a href="{% url 'products:catalog' %}" class="btn btn-primary">
-                    Inizia a ordinare
+        <div class="offcanvas-body p-0" id="contenutoCarrello">
+            <!-- Carrello Vuoto -->
+            <div class="text-center p-4 text-muted" id="carrelloVuoto">
+                <i class="bi bi-cart-x display-4 mb-3"></i>
+                <h6>Il tuo carrello è vuoto</h6>
+                <p class="small">Aggiungi delle deliziose pizze per iniziare!</p>
+                <a href="/catalogo/" class="btn btn-primary">
+                    <i class="bi bi-pizza"></i> Sfoglia il Menu
                 </a>
             </div>
-        </div>
-    </div>
-    
-    <!-- Loading Spinner (global) -->
-    <div id="loading-spinner" class="d-none">
-        <div class="spinner-overlay">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Caricamento...</span>
+            
+            <!-- Lista Elementi Carrello -->
+            <div id="listaElementiCarrello" class="d-none">
+                <!-- Elementi verranno inseriti via JavaScript -->
+            </div>
+            
+            <!-- Footer Carrello con Totale -->
+            <div id="footerCarrello" class="d-none border-top p-3 bg-light">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <strong>Totale:</strong>
+                    <strong class="text-primary fs-5" id="totaleCarrello">€0.00</strong>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="/carrello/" class="btn btn-outline-primary">
+                        <i class="bi bi-eye"></i> Visualizza Carrello
+                    </a>
+                    <a href="/carrello/checkout/" class="btn btn-primary">
+                        <i class="bi bi-credit-card"></i> Procedi al Checkout
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- Toast Container per notifiche -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container">
-        <!-- Toasts will be inserted here -->
+    <!-- Modal Ricerca Avanzata -->
+    <div class="modal fade" id="modalRicercaAvanzata" tabindex="-1" aria-labelledby="titoloModalRicerca" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titoloModalRicerca">
+                        <i class="bi bi-search"></i> Ricerca Avanzata
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formRicercaAvanzata">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="ricercaTesto" class="form-label">Cerca per nome</label>
+                                <input type="text" class="form-control" id="ricercaTesto" placeholder="Nome pizza...">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ricercaCategoria" class="form-label">Categoria</label>
+                                <select class="form-select" id="ricercaCategoria">
+                                    <option value="">Tutte le categorie</option>
+                                    <option value="classiche">Pizze Classiche</option>
+                                    <option value="speciali">Pizze Speciali</option>
+                                    <option value="vegetariane">Pizze Vegetariane</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ricercaPrezzoMin" class="form-label">Prezzo minimo</label>
+                                <input type="number" class="form-control" id="ricercaPrezzoMin" placeholder="€0.00" step="0.50">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ricercaPrezzoMax" class="form-label">Prezzo massimo</label>
+                                <input type="number" class="form-control" id="ricercaPrezzoMax" placeholder="€50.00" step="0.50">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Preferenze alimentari</label>
+                                <div class="form-check-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="filtroVegetariana">
+                                        <label class="form-check-label" for="filtroVegetariana">Vegetariana</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="filtroVegana">
+                                        <label class="form-check-label" for="filtroVegana">Vegana</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="filtroSenzaGlutine">
+                                        <label class="form-check-label" for="filtroSenzaGlutine">Senza Glutine</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="button" class="btn btn-primary" id="pulsanteRicercaAvanzata">
+                        <i class="bi bi-search"></i> Cerca
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <!-- Spinner Caricamento Migliorato -->
+    <div id="spinnerCaricamento" class="d-none">
+        <div class="spinner-overlay position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center" style="z-index: 10000;">
+            <div class="text-center text-white">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Caricamento...</span>
+                </div>
+                <p class="mb-0">Caricamento in corso...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contenitore Toast per Notifiche -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="contenitoreToast" style="z-index: 11000;">
+        <!-- I toast verranno inseriti qui via JavaScript -->
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button type="button" class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle d-none" id="pulsanteTornaInAlto" style="z-index: 1000; width: 50px; height: 50px;">
+        <i class="bi bi-arrow-up"></i>
+    </button>
     
     <!-- Bootstrap 5 JavaScript CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
-    <!-- CSRF Token for AJAX -->
+    <!-- Variabili Globali JavaScript Italianizzate -->
     <script>
-        // Global CSRF token for all AJAX requests
-        const csrfToken = '{{ csrf_token }}';
+        // Token CSRF per tutte le richieste AJAX
+        const tokenCsrf = '{{ csrf_token }}';
         
-        // Global API base URL
-        const apiBaseUrl = '/api/';
+        // URL base per le API
+        const urlApiBase = '/api/';
         
-        // User authentication status
-        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+        // Stato autenticazione utente
+        const eAutenticato = {% if user.is_authenticated %}true{% else %}false{% endif %};
         
-        // User info if authenticated
+        // Informazioni utente corrente italianizzate
         {% if user.is_authenticated %}
-        const currentUser = {
+        const utenteCorrente = {
             id: {{ user.id }},
             username: '{{ user.username }}',
             email: '{{ user.email }}',
-            firstName: '{{ user.first_name }}',
-            lastName: '{{ user.last_name }}'
+            nomeCompleto: '{{ user.get_full_name|default:user.username }}',
+            {% if user.profile %}
+            puntiLoyalty: {{ user.profile.loyalty_points|default:0 }},
+            totaleOrdini: {{ user.profile.total_orders|default:0 }},
+            totalSpeso: {{ user.profile.total_spent|default:0 }}
+            {% endif %}
         };
         {% else %}
-        const currentUser = null;
+        const utenteCorrente = null;
         {% endif %}
+        
+        // Configurazione globale italiana
+        const configurazione = {
+            tempoDebounceRicerca: 300,
+            numeroElementiPerPagina: 20,
+            tempoToast: 3000,
+            tempoAutoHideCarrello: 5000,
+            urlCatalogo: '/catalogo/',
+            urlCarrello: '/carrello/',
+            urlCheckout: '/carrello/checkout/',
+            urlProfilo: '/utenti/profilo/',
+            formatoValuta: 'it-IT',
+            simboloValuta: '€'
+        };
+        
+        // Informazioni business dal context Django
+        const informazioniBusiness = {
+            {% if informazioni_contatto %}
+            telefono: '{{ informazioni_contatto.telefono }}',
+            email: '{{ informazioni_contatto.email }}',
+            indirizzo: '{{ informazioni_contatto.indirizzo }}',
+            {% endif %}
+            costoConsegnaBase: {{ settings.IMPOSTAZIONI_BUSINESS.costo_consegna_base|default:3.00 }},
+            ordineMinimo: {{ settings.IMPOSTAZIONI_BUSINESS.ordine_minimo_gratuito|default:25.00 }},
+            tempoPreparazione: {{ settings.IMPOSTAZIONI_BUSINESS.tempo_preparazione_base|default:15 }}
+        };
+        
+        // Debug mode
+        const modalitaDebug = {% if debug %}true{% else %}false{% endif %};
+        
+        // Pagina corrente per JavaScript condizionale
+        const paginaCorrente = document.body.dataset.pagina || 'default';
     </script>
     
-    <!-- Core JavaScript -->
-    <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/cart.js' %}"></script>
+    <!-- JavaScript Principale Italianizzato -->
+    <script src="{% static 'js/principale.js' %}"></script>
+    <script src="{% static 'js/carrello.js' %}"></script>
+    <script src="{% static 'js/ricerca.js' %}"></script>
     
-    <!-- Page-specific JavaScript -->
+    <!-- JavaScript Condizionale per Pagina -->
+    {% if 'catalogo' in request.resolver_match.url_name or 'prodotti' in request.resolver_match.url_name %}
+    <script src="{% static 'js/prodotti.js' %}"></script>
+    {% endif %}
+    
+    {% if 'utenti' in request.resolver_match.url_name or 'accounts' in request.resolver_match.url_name %}
+    <script src="{% static 'js/autenticazione.js' %}"></script>
+    {% endif %}
+    
+    <!-- JavaScript Specifico per Pagina -->
     {% block extra_js %}{% endblock %}
     
-    <!-- Google Analytics (placeholder) -->
-    {% comment %}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    {% endcomment %}
+    <!-- Analytics e Tracking (Solo in produzione) -->
+    {% if not debug %}
+    <!-- Google Analytics o altri tracking scripts -->
+    {% endif %}
 </body>
 </html>

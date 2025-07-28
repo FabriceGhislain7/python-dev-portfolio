@@ -1,0 +1,446 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ titolo_pagina|default:"Chi Siamo - PizzaMama" }}{% endblock %}
+
+{% block body_class %}chi-siamo{% endblock %}
+
+{% block pagina_corrente %}chi-siamo{% endblock %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb" class="bg-light py-2">
+    <div class="container">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+                <a href="/" class="text-decoration-none">
+                    <i class="bi bi-house-door"></i> Home
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Chi Siamo</li>
+        </ol>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<!-- Sezione Hero -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-3">Chi Siamo</h1>
+                <p class="lead">La storia di PizzaMama e la nostra passione per la pizza autentica italiana</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                {% if immagine_azienda %}
+                    <img src="{{ immagine_azienda }}" alt="PizzaMama Team" class="img-fluid rounded-circle shadow-lg" style="width: 200px; height: 200px; object-fit: cover;">
+                {% else %}
+                <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" 
+                     style="width: 200px; height: 200px;">
+                    <i class="bi bi-heart-fill display-1 text-white"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Storia dell'Azienda -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="fw-bold mb-4">La Nostra Storia</h2>
+                <p class="lead text-muted mb-4">
+                    Fondata nel {{ storia_azienda.anno_fondazione|default:"2020" }}, PizzaMama nasce dal sogno di portare 
+                    l'autentica pizza italiana direttamente a casa vostra.
+                </p>
+                <p class="mb-4">
+                    Con oltre <strong>{{ storia_azienda.pizze_consegnate|default:"50.000+" }}</strong> pizze consegnate e 
+                    <strong>{{ storia_azienda.clienti_felici|default:"15.000+" }}</strong> clienti soddisfatti, siamo diventati 
+                    il punto di riferimento per la pizza a domicilio nella nostra città.
+                </p>
+                <p class="mb-4">
+                    Oggi siamo presenti in <strong>{{ storia_azienda.citta_servite|default:"5 città" }}</strong> e continuiamo 
+                    a crescere mantenendo sempre la stessa qualità e passione dei primi giorni.
+                </p>
+                <p class="text-muted">
+                    <em>"La nostra missione è semplice: portare il sapore autentico della pizza italiana 
+                    nella vostra casa, con ingredienti freschi e un servizio impeccabile."</em>
+                    <br><small>- Giuseppe Rossi, Fondatore</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Valori Aziendali -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">I Nostri Valori</h2>
+            <p class="text-muted">I principi che guidano ogni nostra azione</p>
+        </div>
+        <div class="row">
+            {% if valori_aziendali %}
+                {% for valore in valori_aziendali %}
+                <div class="col-lg-4 mb-4">
+                    <div class="text-center h-100">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 80px; height: 80px;">
+                            <span class="fs-1">{{ valore.icona }}</span>
+                        </div>
+                        <h5 class="fw-bold">{{ valore.titolo }}</h5>
+                        <p class="text-muted">{{ valore.descrizione }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <!-- Valori di default se non presenti nel context -->
+            <div class="col-lg-4 mb-4">
+                <div class="text-center h-100">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="bi bi-shield-check fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold">Qualità Superiore</h5>
+                    <p class="text-muted">Solo ingredienti freschi e di prima qualità per le nostre pizze</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="text-center h-100">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="bi bi-clock fs-1 text-success"></i>
+                    </div>
+                    <h5 class="fw-bold">Consegna Veloce</h5>
+                    <p class="text-muted">Consegne rapide per garantire pizza sempre calda e fresca</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="text-center h-100">
+                    <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px;">
+                        <i class="bi bi-heart fs-1 text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">Passione Autentica</h5>
+                    <p class="text-muted">Amore per la pizza italiana e per la soddisfazione dei nostri clienti</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Numeri Azienda -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">PizzaMama in Numeri</h2>
+            <p class="text-muted">I risultati che ci rendono orgogliosi</p>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="display-4 fw-bold text-primary mb-2">
+                            {{ storia_azienda.pizze_consegnate|default:"50k+" }}
+                        </div>
+                        <h6 class="fw-bold">Pizze Consegnate</h6>
+                        <p class="text-muted small mb-0">Dal giorno della fondazione</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="display-4 fw-bold text-success mb-2">
+                            {{ storia_azienda.clienti_felici|default:"15k+" }}
+                        </div>
+                        <h6 class="fw-bold">Clienti Soddisfatti</h6>
+                        <p class="text-muted small mb-0">Con recensioni positive</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="display-4 fw-bold text-warning mb-2">
+                            {{ storia_azienda.anni_esperienza|default:"5" }}
+                        </div>
+                        <h6 class="fw-bold">Anni di Esperienza</h6>
+                        <p class="text-muted small mb-0">Nel settore della pizza</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="display-4 fw-bold text-info mb-2">
+                            {{ storia_azienda.citta_servite|default:"5" }}
+                        </div>
+                        <h6 class="fw-bold">Città Servite</h6>
+                        <p class="text-muted small mb-0">In continua espansione</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Team -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Il Nostro Team</h2>
+            <p class="text-muted">Le persone che rendono possibile l'esperienza PizzaMama</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body p-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-fill fs-1 text-primary"></i>
+                        </div>
+                        <h5 class="fw-bold">Giuseppe Rossi</h5>
+                        <p class="text-primary mb-2">Fondatore & Chef Principale</p>
+                        <small class="text-muted">
+                            Oltre 20 anni di esperienza nella tradizione della pizza napoletana. 
+                            Formatosi nelle migliori pizzerie di Napoli.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body p-4">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-fill fs-1 text-success"></i>
+                        </div>
+                        <h5 class="fw-bold">Maria Bianchi</h5>
+                        <p class="text-success mb-2">Operations Manager</p>
+                        <small class="text-muted">
+                            Esperta in logistica e customer service. Si occupa di garantire 
+                            consegne puntuali e clienti sempre soddisfatti.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body p-4">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-fill fs-1 text-info"></i>
+                        </div>
+                        <h5 class="fw-bold">Luca Verdi</h5>
+                        <p class="text-info mb-2">Tech Lead</p>
+                        <small class="text-muted">
+                            Sviluppatore dell'app e della piattaforma digitale. 
+                            Rende possibile ordinare online con facilità.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Impegno Qualità -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="fw-bold mb-4">Il Nostro Impegno per la Qualità</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-1">Ingredienti Locali</h6>
+                                <small class="text-muted">Selezionati dai migliori fornitori</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-1">Impasto Quotidiano</h6>
+                                <small class="text-muted">Preparato fresco ogni giorno</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-1">Consegna Tracciata</h6>
+                                <small class="text-muted">Sempre calda e puntuale</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-1">Standard Igienici</h6>
+                                <small class="text-muted">Certificazioni HACCP</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="bg-light rounded p-4">
+                    <i class="bi bi-award display-1 text-primary mb-3"></i>
+                    <h4 class="fw-bold text-primary">Certificazioni Qualità</h4>
+                    <p class="text-muted mb-0">
+                        Siamo orgogliosi dei nostri standard elevati e delle certificazioni 
+                        che garantiscono sicurezza e qualità in ogni pizza.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Contact CTA -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Vuoi Saperne di Più?</h2>
+        <p class="lead mb-4">Contattaci per qualsiasi domanda, suggerimento o per condividere la tua esperienza</p>
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a href="{% url 'contatti' %}" class="btn btn-light btn-lg">
+                <i class="bi bi-envelope"></i>
+                Contattaci
+            </a>
+            <a href="{% url 'homepage' %}" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-house-door"></i>
+                Torna alla Home
+            </a>
+            <a href="/catalogo/" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-pizza"></i>
+                Ordina Ora
+            </a>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h5 class="mb-3">Seguici sui Social</h5>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="#" class="btn btn-outline-light rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="bi bi-telephone"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📖 Pagina Chi Siamo - Inizializzazione...');
+    
+    // Animazione contatori numeri
+    animaContatori();
+    
+    // Smooth scroll per eventuali link ancore
+    document.querySelectorAll('a[href^="#"]').forEach(collegamento => {
+        collegamento.addEventListener('click', function (evento) {
+            evento.preventDefault();
+            const destinazione = document.querySelector(this.getAttribute('href'));
+            if (destinazione) {
+                destinazione.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Tracking click sui pulsanti CTA
+    document.querySelectorAll('a[href*="contatti"], a[href*="catalogo"]').forEach(pulsante => {
+        pulsante.addEventListener('click', function() {
+            const destinazione = this.href.includes('contatti') ? 'Contatti' : 'Catalogo';
+            console.log(`🎯 Click: Navigazione verso ${destinazione} da Chi Siamo`);
+            // Qui si può aggiungere tracking analytics
+        });
+    });
+});
+
+/**
+ * Anima i contatori numerici quando sono visibili
+ */
+function animaContatori() {
+    const contatori = document.querySelectorAll('.display-4');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const contatore = entry.target;
+                const testoFinale = contatore.textContent;
+                
+                // Estrai il numero dal testo (es. "50k+" -> 50)
+                const numeroMatch = testoFinale.match(/(\d+)/);
+                if (numeroMatch) {
+                    const numeroFinale = parseInt(numeroMatch[1]);
+                    animaNumero(contatore, numeroFinale, testoFinale);
+                }
+                
+                observer.unobserve(contatore);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    contatori.forEach(contatore => observer.observe(contatore));
+}
+
+/**
+ * Anima un singolo numero
+ */
+function animaNumero(elemento, numeroFinale, testoOriginale) {
+    const durata = 2000; // 2 secondi
+    const passi = 60;
+    const incremento = numeroFinale / passi;
+    let numeroCorrente = 0;
+    
+    const timer = setInterval(() => {
+        numeroCorrente += incremento;
+        
+        if (numeroCorrente >= numeroFinale) {
+            elemento.textContent = testoOriginale;
+            clearInterval(timer);
+        } else {
+            // Mantieni il suffisso originale (k+, etc.)
+            const suffisso = testoOriginale.replace(/^\d+/, '');
+            elemento.textContent = Math.floor(numeroCorrente) + suffisso;
+        }
+    }, durata / passi);
+}
+</script>
+{% endblock %}

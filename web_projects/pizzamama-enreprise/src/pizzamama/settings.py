@@ -252,6 +252,57 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ========================================
+# CONFIGURAZIONI PERSONALIZZATE ITALIANE - STEP 12
+# ========================================
+# Configurazioni custom per il progetto PizzaMama con nomi italiani
+
+# Step 12: Configurazione cartelle media organizzate in italiano
+CARTELLE_MEDIA_ITALIANE = {
+    'pizze': 'pizze/',
+    'categorie': 'categorie/',
+    'avatar_utenti': 'avatar/',
+    'ingredienti': 'ingredienti/',
+    'documenti': 'documenti/',
+}
+
+# Step 12: Impostazioni upload immagini con nomi italiani
+DIMENSIONI_IMMAGINI = {
+    'pizza_principale': (800, 600),      # Immagine principale pizza
+    'pizza_galleria': (400, 300),       # Immagini galleria
+    'avatar_utente': (150, 150),        # Avatar profilo utente
+    'categoria_icona': (100, 100),      # Icone categorie
+    'ingrediente_foto': (200, 200),     # Foto ingredienti
+}
+
+# Step 12: Configurazione notifiche sistema
+CONFIGURAZIONE_NOTIFICHE = {
+    'email_ordini': True,               # Email conferma ordini
+    'sms_consegna': False,              # SMS tracking consegna (da implementare)
+    'push_browser': True,               # Notifiche push browser
+    'timeout_notifica': 5000,          # Timeout notifiche in ms
+}
+
+# Step 12: Impostazioni business PizzaMama
+IMPOSTAZIONI_BUSINESS = {
+    'costo_consegna_base': 3.00,       # Costo base consegna in euro
+    'ordine_minimo_gratuito': 25.00,   # Soglia ordine minimo per consegna gratuita
+    'tempo_preparazione_base': 15,     # Tempo base preparazione in minuti
+    'raggio_consegna_km': 10,          # Raggio massimo consegna in km
+    'iva_percentuale': 22,             # IVA in percentuale
+}
+
+# Step 12: Configurazione loyalty program
+LOYALTY_PROGRAM = {
+    'punti_per_euro': 1,               # Punti guadagnati per euro speso
+    'punti_tier_bronze': 100,          # Punti per tier Bronze
+    'punti_tier_silver': 500,          # Punti per tier Silver  
+    'punti_tier_gold': 1000,           # Punti per tier Gold
+    'sconto_bronze': 5,                # Sconto Bronze in percentuale
+    'sconto_silver': 10,               # Sconto Silver in percentuale
+    'sconto_gold': 15,                 # Sconto Gold in percentuale
+}
+
+# ========================================
 # SECURITY SETTINGS - STEP 12 FRONTEND
 # ========================================
 # Impostazioni sicurezza per upload file
@@ -260,9 +311,17 @@ MEDIA_ROOT = BASE_DIR / 'media'
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = FILE_UPLOAD_MAX_MEMORY_SIZE
 
-# Step 12: Formati immagine consentiti per upload
-ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
-MAX_IMAGE_SIZE = 5 * 1024 * 1024  # 5MB
+# Step 12: Formati immagine consentiti per upload (nomi italiani)
+ESTENSIONI_IMMAGINI_CONSENTITE = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+DIMENSIONE_MASSIMA_IMMAGINE = 5 * 1024 * 1024  # 5MB
+
+# Step 12: Validazione upload con nomi italiani
+VALIDAZIONI_UPLOAD = {
+    'verifica_formato': True,          # Verifica formato file
+    'scansione_virus': False,          # Scansione antivirus (da implementare)
+    'ridimensiona_automatico': True,   # Ridimensionamento automatico
+    'watermark_aziendale': False,      # Watermark PizzaMama (futuro)
+}
 
 # ========================================
 # LOGIN/LOGOUT URLS - STEP 12 AUTH
@@ -270,10 +329,150 @@ MAX_IMAGE_SIZE = 5 * 1024 * 1024  # 5MB
 # URL redirect dopo login/logout per frontend
 
 # Step 12: URL per login form
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/utenti/accesso/'
 
-# Step 12: Redirect dopo login successful
-LOGIN_REDIRECT_URL = '/'
+# Step 12: Redirect dopo login successful  
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 # Step 12: Redirect dopo logout
 LOGOUT_REDIRECT_URL = '/'
+
+# ========================================
+# CONFIGURAZIONE EMAIL - STEP 12 COMUNICAZIONI
+# ========================================
+# Configurazione email per notifiche sistema (development)
+
+# Step 12: Backend email per development (console)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Step 12: Impostazioni email mittente
+EMAIL_MITTENTE_PREDEFINITO = 'noreply@pizzamama.it'
+EMAIL_NOME_AZIENDA = 'PizzaMama Enterprise'
+
+# Step 12: Template email personalizzati
+TEMPLATE_EMAIL_PERSONALIZZATI = {
+    'conferma_ordine': 'emails/conferma_ordine.html',
+    'stato_ordine': 'emails/aggiornamento_stato.html', 
+    'benvenuto_utente': 'emails/benvenuto.html',
+    'reset_password': 'emails/reset_password.html',
+}
+
+# ========================================
+# CACHE CONFIGURATION - STEP 12 PERFORMANCE  
+# ========================================
+# Configurazione cache per migliorare performance (development)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'pizzamama-cache-locale',
+        'TIMEOUT': 300,  # 5 minuti
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000,
+        }
+    }
+}
+
+# Step 12: Timeout cache per diversi contenuti
+TIMEOUT_CACHE_CONTENUTI = {
+    'lista_pizze': 600,        # 10 minuti
+    'categorie': 1800,         # 30 minuti  
+    'ingredienti': 3600,       # 1 ora
+    'profilo_utente': 300,     # 5 minuti
+}
+
+# ========================================
+# LOGGING CONFIGURATION - STEP 12 DEBUG (FIXED)
+# ========================================
+# Configurazione logging per development e debug
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'dettagliato': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'semplice': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'semplice',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'pizzamama.log',  # ← FIX: File nella root invece di logs/
+            'formatter': 'dettagliato',
+        },
+    },
+    'root': {
+        'handlers': ['console'],  # ← Solo console per ora
+        'level': 'INFO',
+    },
+    'loggers': {
+        'pizzamama': {
+            'handlers': ['console'],  # ← Solo console, rimuovo 'file'
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'apps.orders': {
+            'handlers': ['console'],  # ← Solo console, rimuovo 'file'
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+# ========================================
+# SESSION CONFIGURATION - STEP 12 UTENTI
+# ========================================
+# Configurazione sessioni utente
+
+# Step 12: Durata sessione (2 settimane)
+SESSION_COOKIE_AGE = 1209600  # 2 settimane in secondi
+
+# Step 12: Nome cookie sessione personalizzato
+SESSION_COOKIE_NAME = 'pizzamama_sessione'
+
+# Step 12: Sicurezza cookie
+SESSION_COOKIE_SECURE = False  # True in production con HTTPS
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+
+# ========================================
+# VARIABILI AMBIENTE LOCALI - STEP 12
+# ========================================
+# Variabili per environment specifico (development)
+
+# Step 12: Flag per features in sviluppo
+FUNZIONALITA_SPERIMENTALI = {
+    'chat_assistenza': False,          # Chat assistenza clienti
+    'pagamento_paypal': False,         # Integrazione PayPal
+    'delivery_tracking_gps': False,    # Tracking GPS real-time
+    'raccomandazioni_ai': False,       # Raccomandazioni AI
+    'programma_referral': False,       # Programma referral
+}
+
+# Step 12: Debug toolbar per development
+if DEBUG:
+    try:
+        import debug_toolbar
+        INSTALLED_APPS.append('debug_toolbar')
+        MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+        INTERNAL_IPS = ['127.0.0.1']
+    except ImportError:
+        pass
+
+# Step 12: Configurazione development finale
+AMBIENTE_SVILUPPO = {
+    'versione_api': '1.0.0',
+    'modalita_debug': DEBUG,
+    'database_type': 'SQLite',
+    'cache_abilitata': True,
+    'logging_dettagliato': True,
+}

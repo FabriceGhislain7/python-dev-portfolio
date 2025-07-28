@@ -1,0 +1,474 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titolo_pagina %}Catalogo Pizze - PizzaMama{% endblock %}
+
+{% block meta_descrizione %}Scopri il nostro catalogo di pizze artigianali. Pizze tradizionali e gourmet preparate con ingredienti freschi e di qualità.{% endblock %}
+
+{% block contenuto_extra_head %}
+<style>
+    /* Stili specifici per il catalogo */
+    .hero-catalogo {
+        background: linear-gradient(135deg, rgba(211, 47, 47, 0.9), rgba(183, 28, 28, 0.9)), 
+                    url('{% static "images/hero-pizza.jpg" %}') center/cover;
+        color: white;
+        padding: 4rem 0;
+        text-align: center;
+    }
+    
+    .contatore-risultati {
+        color: #757575;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .categoria-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: #e3f2fd;
+        color: #1976d2;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block contenuto %}
+<!-- Hero Section Catalogo -->
+<section class="hero-catalogo">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="fas fa-pizza-slice me-3"></i>
+                    Il Nostro Catalogo
+                </h1>
+                <p class="lead mb-4">
+                    Scopri le nostre pizze artigianali preparate con ingredienti freschi e di prima qualità. 
+                    Dalla tradizione napoletana alle creazioni gourmet più innovative.
+                </p>
+                <div class="d-flex justify-content-center">
+                    <div class="me-4">
+                        <i class="fas fa-clock text-warning"></i>
+                        <span class="ms-2">Consegna in 30 min</span>
+                    </div>
+                    <div class="me-4">
+                        <i class="fas fa-leaf text-success"></i>
+                        <span class="ms-2">Ingredienti freschi</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-award text-info"></i>
+                        <span class="ms-2">Qualità garantita</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Barra Filtri e Ricerca -->
+<section class="py-4">
+    <div class="container">
+        <div class="barra-filtri">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text" 
+                               class="form-control input-ricerca border-start-0" 
+                               id="input-ricerca-prodotti"
+                               placeholder="Cerca pizza per nome o ingredienti...">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3 mb-md-0">
+                    <select class="form-select select-filtro" id="filtro-categoria">
+                        <option value="">Tutte le categorie</option>
+                        <option value="classiche">Pizze Classiche</option>
+                        <option value="gourmet">Pizze Gourmet</option>
+                        <option value="vegetariane">Vegetariane</option>
+                        <option value="vegane">Vegane</option>
+                        <option value="senza-glutine">Senza Glutine</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <select class="form-select select-filtro" id="filtro-ordinamento">
+                        <option value="nome">Ordina per nome</option>
+                        <option value="prezzo-crescente">Prezzo: crescente</option>
+                        <option value="prezzo-decrescente">Prezzo: decrescente</option>
+                        <option value="popolarita">Più popolari</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Catalogo Prodotti -->
+<section class="py-5">
+    <div class="container">
+        <!-- Contatore risultati -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="contatore-risultati" id="contatore-risultati">
+                    Caricamento prodotti...
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Prodotti -->
+        <div class="row" id="container-prodotti">
+            <!-- I prodotti verranno caricati dinamicamente tramite JavaScript -->
+            <div class="col-12 text-center py-5">
+                <div class="spinner-pizzamama"></div>
+                <p class="mt-3 text-muted">Caricamento del catalogo in corso...</p>
+            </div>
+        </div>
+
+        <!-- Paginazione -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav aria-label="Navigazione pagine catalogo">
+                    <ul class="pagination justify-content-center" id="paginazione-catalogo">
+                        <!-- Paginazione dinamica -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sezione Informazioni Aggiuntive -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 text-center mb-4">
+                <div class="carta-valore">
+                    <i class="fas fa-truck icona"></i>
+                    <h5>Consegna Rapida</h5>
+                    <p class="text-muted">
+                        Consegniamo le tue pizze preferite direttamente a casa tua 
+                        in massimo 30 minuti dall'ordine.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center mb-4">
+                <div class="carta-valore">
+                    <i class="fas fa-hand-holding-heart icona"></i>
+                    <h5>Ingredienti Selezionati</h5>
+                    <p class="text-muted">
+                        Utilizziamo solo ingredienti freschi e di prima qualità, 
+                        selezionati dai migliori fornitori italiani.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center mb-4">
+                <div class="carta-valore">
+                    <i class="fas fa-medal icona"></i>
+                    <h5>Maestri Pizzaioli</h5>
+                    <p class="text-muted">
+                        Le nostre pizze sono preparate da maestri pizzaioli con 
+                        esperienza pluriennale nella tradizione napoletana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modale Dettaglio Prodotto -->
+<div class="modal fade" id="modale-dettaglio-prodotto" tabindex="-1" aria-labelledby="titoloModaleDettaglio">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="titoloModaleDettaglio">Dettagli Pizza</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+            </div>
+            <div class="modal-body" id="contenuto-modale-dettaglio">
+                <!-- Contenuto dinamico del prodotto -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container per messaggi sistema -->
+<div id="messaggi-sistema" class="container mt-3"></div>
+
+<!-- Container per toast notifications -->
+<div id="container-toast"></div>
+{% endblock %}
+
+{% block script_extra %}
+<script src="{% static 'js/principale.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Configurazione specifica per pagina catalogo
+    
+    // Gestione filtri avanzati
+    const filtroOrdinamento = document.getElementById('filtro-ordinamento');
+    if (filtroOrdinamento) {
+        filtroOrdinamento.addEventListener('change', function() {
+            ordinaProdotti(this.value);
+        });
+    }
+    
+    // Gestione modale dettaglio prodotto
+    document.addEventListener('click', function(evento) {
+        if (evento.target.closest('.btn-dettaglio')) {
+            const idProdotto = evento.target.closest('.btn-dettaglio').dataset.prodottoId;
+            mostraDettaglioProdotto(idProdotto);
+        }
+    });
+    
+    // Aggiorna contatore risultati quando cambiano i prodotti
+    window.pizzaMamaApp.catalogo.aggiungiListenerCambiamenti = function(callback) {
+        const originalMethod = this.aggiungiListenerCambiamenti;
+        if (originalMethod) {
+            originalMethod.call(this, callback);
+        }
+        
+        // Aggiungi listener per aggiornare contatore
+        this.aggiungiListenerCambiamenti(function(prodotti) {
+            aggiornaContatoreRisultati(prodotti.length);
+        });
+    };
+    
+    // Funzioni di utilità per la pagina
+    function ordinaProdotti(criterio) {
+        let prodotti = [...window.pizzaMamaApp.catalogo.prodotti];
+        
+        switch(criterio) {
+            case 'prezzo-crescente':
+                prodotti.sort((a, b) => a.prezzo - b.prezzo);
+                break;
+            case 'prezzo-decrescente':
+                prodotti.sort((a, b) => b.prezzo - a.prezzo);
+                break;
+            case 'popolarita':
+                prodotti.sort((a, b) => (b.popolare ? 1 : 0) - (a.popolare ? 1 : 0));
+                break;
+            case 'nome':
+            default:
+                prodotti.sort((a, b) => a.nome.localeCompare(b.nome));
+                break;
+        }
+        
+        window.pizzaMamaApp.catalogo.renderizzaCatalogo(prodotti);
+    }
+    
+    function aggiornaContatoreRisultati(numeroProdotti) {
+        const contatore = document.getElementById('contatore-risultati');
+        if (contatore) {
+            contatore.textContent = `${numeroProdotti} ${numeroProdotti === 1 ? 'prodotto trovato' : 'prodotti trovati'}`;
+        }
+    }
+    
+    async function mostraDettaglioProdotto(idProdotto) {
+        try {
+            const prodotto = window.pizzaMamaApp.catalogo.prodotti.find(p => p.id == idProdotto);
+            if (!prodotto) return;
+            
+            const contenutoModale = document.getElementById('contenuto-modale-dettaglio');
+            const titoloModale = document.getElementById('titoloModaleDettaglio');
+            
+            titoloModale.textContent = prodotto.nome;
+            
+            contenutoModale.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="${prodotto.immagine || '/static/images/pizza-default.jpg'}" 
+                             class="img-fluid rounded" alt="${prodotto.nome}">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-primary mb-3">${prodotto.nome}</h4>
+                        <p class="text-muted mb-3">${prodotto.descrizione}</p>
+                        
+                        <div class="mb-3">
+                            <h6>Ingredienti:</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                ${(prodotto.ingredienti || []).map(ing => 
+                                    `<span class="badge bg-light text-dark">${ing}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <span class="categoria-badge">${prodotto.categoria || 'Classica'}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="text-primary mb-0">€${prodotto.prezzo}</h3>
+                            ${prodotto.popolare ? '<span class="badge bg-warning">🔥 Popolare</span>' : ''}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="quantita-modale" class="form-label">Quantità:</label>
+                            <div class="input-group" style="max-width: 150px;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="diminuisciQuantitaModale()">-</button>
+                                <input type="number" class="form-control text-center" id="quantita-modale" value="1" min="1">
+                                <button class="btn btn-outline-secondary" type="button" onclick="aumentaQuantitaModale()">+</button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-lg w-100" onclick="aggiungiDaModale(${prodotto.id})">
+                            <i class="fas fa-cart-plus me-2"></i>
+                            Aggiungi al Carrello
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Mostra il modale
+            const modale = new bootstrap.Modal(document.getElementById('modale-dettaglio-prodotto'));
+            modale.show();
+            
+        } catch (errore) {
+            console.error('Errore nel caricamento dettagli prodotto:', errore);
+            window.pizzaMamaApp.api.mostraMessaggioErrore('Errore nel caricamento dei dettagli del prodotto');
+        }
+    }
+    
+    // Funzioni globali per il modale
+    window.diminuisciQuantitaModale = function() {
+        const input = document.getElementById('quantita-modale');
+        if (input && input.value > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    };
+    
+    window.aumentaQuantitaModale = function() {
+        const input = document.getElementById('quantita-modale');
+        if (input) {
+            input.value = parseInt(input.value) + 1;
+        }
+    };
+    
+    window.aggiungiDaModale = function(idProdotto) {
+        const quantita = parseInt(document.getElementById('quantita-modale').value) || 1;
+        const prodotto = window.pizzaMamaApp.catalogo.prodotti.find(p => p.id == idProdotto);
+        
+        if (prodotto) {
+            window.pizzaMamaApp.carrello.aggiungiProdotto(prodotto, quantita);
+            
+            // Chiudi il modale
+            const modale = bootstrap.Modal.getInstance(document.getElementById('modale-dettaglio-prodotto'));
+            if (modale) {
+                modale.hide();
+            }
+        }
+    };
+    
+    // Listener per tasti di scelta rapida
+    document.addEventListener('keydown', function(evento) {
+        // ESC per chiudere modale
+        if (evento.key === 'Escape') {
+            const modale = bootstrap.Modal.getInstance(document.getElementById('modale-dettaglio-prodotto'));
+            if (modale) {
+                modale.hide();
+            }
+        }
+        
+        // Ctrl+F per focus su ricerca
+        if (evento.ctrlKey && evento.key === 'f') {
+            evento.preventDefault();
+            const inputRicerca = document.getElementById('input-ricerca-prodotti');
+            if (inputRicerca) {
+                inputRicerca.focus();
+            }
+        }
+    });
+    
+    // Gestione scroll infinito (opzionale)
+    let caricamentoInCorso = false;
+    window.addEventListener('scroll', function() {
+        if (caricamentoInCorso) return;
+        
+        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1000)) {
+            // Implementa caricamento di più prodotti se necessario
+            // caricaProdottiAggiuntivi();
+        }
+    });
+    
+    // Inizializzazione filtri da URL parameters (se presenti)
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoriaUrl = urlParams.get('categoria');
+    const ricercaUrl = urlParams.get('q');
+    
+    if (categoriaUrl) {
+        const selectCategoria = document.getElementById('filtro-categoria');
+        if (selectCategoria) {
+            selectCategoria.value = categoriaUrl;
+            window.pizzaMamaApp.catalogo.filtriAttivi.categoria = categoriaUrl;
+        }
+    }
+    
+    if (ricercaUrl) {
+        const inputRicerca = document.getElementById('input-ricerca-prodotti');
+        if (inputRicerca) {
+            inputRicerca.value = ricercaUrl;
+            window.pizzaMamaApp.catalogo.filtriAttivi.ricerca = ricercaUrl;
+        }
+    }
+});
+
+// Aggiorna card prodotto per includere bottone dettagli
+if (window.pizzaMamaApp && window.pizzaMamaApp.catalogo) {
+    const originalCreaCard = window.pizzaMamaApp.catalogo.creaCardProdotto;
+    
+    window.pizzaMamaApp.catalogo.creaCardProdotto = function(prodotto) {
+        const prezzoFormattato = new Intl.NumberFormat('it-IT', {
+            style: 'currency',
+            currency: 'EUR'
+        }).format(prodotto.prezzo);
+
+        return `
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card prodotto-card h-100 shadow-sm">
+                    <div class="posizione-relativa">
+                        <img src="${prodotto.immagine || '/static/images/pizza-default.jpg'}" 
+                             class="card-img-top" 
+                             alt="${prodotto.nome}"
+                             style="height: 200px; object-fit: cover; cursor: pointer;"
+                             onclick="mostraDettaglioProdotto(${prodotto.id})">
+                        ${prodotto.popolare ? '<span class="badge bg-warning posizione-assoluta top-0 start-0 m-2">🔥 Popolare</span>' : ''}
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${prodotto.nome}</h5>
+                        <p class="card-text text-muted piccolo mb-2">${prodotto.descrizione}</p>
+                        <div class="ingredienti mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-leaf me-1"></i>
+                                ${prodotto.ingredienti?.slice(0, 3).join(', ') || 'Ingredienti vari'}
+                                ${prodotto.ingredienti?.length > 3 ? '...' : ''}
+                            </small>
+                        </div>
+                        <div class="mb-2">
+                            <span class="categoria-badge">${prodotto.categoria || 'Classica'}</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="prezzo mb-0 text-primary">${prezzoFormattato}</h4>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-aggiungi-carrello" 
+                                        data-prodotto-id="${prodotto.id}">
+                                    <i class="fas fa-cart-plus me-1"></i>
+                                    Aggiungi al Carrello
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm btn-dettaglio" 
+                                        data-prodotto-id="${prodotto.id}">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Dettagli
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    };
+}
+</script>
+{% endblock %}

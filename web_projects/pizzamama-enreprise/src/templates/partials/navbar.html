@@ -1,5 +1,3 @@
-{% load static %}
-
 <!-- Navigation Bar - PizzaMama Enterprise -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container">
@@ -44,14 +42,8 @@
             </ul>
 
             <!-- Search Bar -->
-            <form class="d-flex me-3" role="search" id="search-form">
-                <div class="position-relative">
-                    <input class="form-control" type="search" placeholder="Cerca pizza..." 
-                           aria-label="Search" id="search-input" autocomplete="off">
-                    <div id="search-suggestions" class="position-absolute w-100 bg-white border rounded-bottom shadow-sm d-none" style="z-index: 1000; top: 100%;">
-                        <!-- Search suggestions will be populated by JavaScript -->
-                    </div>
-                </div>
+            <form class="d-flex me-3" role="search">
+                <input class="form-control" type="search" placeholder="Cerca pizza..." aria-label="Search">
                 <button class="btn btn-outline-light ms-2" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
@@ -62,10 +54,9 @@
                 <!-- Cart Button -->
                 <li class="nav-item">
                     <button class="btn btn-outline-light position-relative me-2" type="button" 
-                            data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" id="cart-button">
+                            data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
                         <i class="bi bi-cart3"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
-                              id="cart-count" style="display: none;">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                             0
                         </span>
                     </button>
@@ -94,19 +85,6 @@
                                     <i class="bi bi-clock-history"></i> I Miei Ordini
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="bi bi-geo-alt"></i> Indirizzi
-                                </a>
-                            </li>
-                            {% if user.profile %}
-                            <li>
-                                <span class="dropdown-item-text">
-                                    <i class="bi bi-star-fill text-warning"></i> 
-                                    {{ user.profile.loyalty_points }} punti
-                                </span>
-                            </li>
-                            {% endif %}
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item text-danger" href="#">
@@ -134,3 +112,5 @@
 
 <!-- Spacer for fixed navbar -->
 <div style="height: 76px;"></div>
+
+

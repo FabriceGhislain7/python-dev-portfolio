@@ -1,0 +1,884 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titolo_pagina %}Carrello - PizzaMama{% endblock %}
+
+{% block meta_descrizione %}Gestisci il tuo carrello e procedi all'ordine delle tue pizze preferite su PizzaMama.{% endblock %}
+
+{% block contenuto_extra_head %}
+<style>
+    .breadcrumb-carrello {
+        background: transparent;
+        padding: 1rem 0;
+    }
+    
+    .step-indicator {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+    }
+    
+    .step {
+        display: flex;
+        align-items: center;
+        color: #6c757d;
+        font-weight: 500;
+    }
+    
+    .step.active {
+        color: var(--colore-primario);
+    }
+    
+    .step.completed {
+        color: var(--colore-successo);
+    }
+    
+    .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .step.active .step-number {
+        background: var(--colore-primario);
+        color: white;
+    }
+    
+    .step.completed .step-number {
+        background: var(--colore-successo);
+        color: white;
+    }
+    
+    .step-divider {
+        width: 50px;
+        height: 2px;
+        background: #e9ecef;
+        margin: 0 1rem;
+        align-self: center;
+    }
+    
+    .step.completed + .step-divider {
+        background: var(--colore-successo);
+    }
+    
+    .carrello-vuoto {
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+    
+    .carrello-vuoto i {
+        font-size: 4rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+    
+    .riassunto-mobile {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        padding: 1rem;
+        z-index: 1000;
+    }
+    
+    @media (min-width: 768px) {
+        .riassunto-mobile {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .riepilogo-ordine {
+            display: none;
+        }
+        
+        .contenuto-carrello {
+            padding-bottom: 100px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block contenuto %}
+<!-- Breadcrumb -->
+<section class="breadcrumb-carrello">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/" class="text-decoration-none">
+                        <i class="fas fa-home me-1"></i>Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catalogo' %}" class="text-decoration-none">Catalogo</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Carrello</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<!-- Indicatore Steps -->
+<section class="py-3">
+    <div class="container">
+        <div class="step-indicator">
+            <div class="step active">
+                <div class="step-number">1</div>
+                <span>Carrello</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <span>Checkout</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <span>Pagamento</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <span>Conferma</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contenuto Principale Carrello -->
+<section class="py-4 contenuto-carrello" id="pagina-carrello">
+    <div class="container">
+        <div class="row">
+            <!-- Elementi Carrello -->
+            <div class="col-lg-8">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-shopping-cart me-2 text-primary"></i>
+                        Il Tuo Carrello
+                    </h2>
+                    <button class="btn btn-outline-danger btn-sm" id="btn-svuota-carrello">
+                        <i class="fas fa-trash me-1"></i>
+                        Svuota Carrello
+                    </button>
+                </div>
+                
+                <!-- Container dinamico elementi carrello -->
+                <div id="elementi-carrello">
+                    <!-- Gli elementi verranno caricati dinamicamente -->
+                    <div class="text-center py-5">
+                        <div class="spinner-pizzamama"></div>
+                        <p class="mt-3 text-muted">Caricamento carrello...</p>
+                    </div>
+                </div>
+                
+                <!-- Sezione Codici Sconto -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-ticket-alt me-2"></i>
+                            Codice Sconto
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="input-codice-sconto"
+                                       placeholder="Inserisci il codice sconto">
+                            </div>
+                            <div class="col-md-4 mt-2 mt-md-0">
+                                <button class="btn btn-outline-primary w-100" id="btn-applica-sconto">
+                                    Applica
+                                </button>
+                            </div>
+                        </div>
+                        <small class="text-muted mt-2 d-block">
+                            <i class="fas fa-info-circle me-1"></i>
+                            I codici sconto non sono cumulabili
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- Continua Shopping -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'catalogo' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Continua lo Shopping
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Riepilogo Ordine (Desktop) -->
+            <div class="col-lg-4">
+                <div class="riepilogo-ordine sticky-top" style="top: 100px;" id="totale-carrello">
+                    <!-- Il riepilogo verrà caricato dinamicamente -->
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0">
+                                <i class="fas fa-calculator me-2"></i>
+                                Riepilogo Ordine
+                            </h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="spinner-pizzamama"></div>
+                            <p class="mt-3 text-muted">Calcolo totale...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Riepilogo Mobile (Fixed Bottom) -->
+<div class="riassunto-mobile d-lg-none" id="riassunto-mobile">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <div class="fw-bold" id="totale-mobile">€0.00</div>
+            <small class="text-muted" id="elementi-mobile">0 elementi</small>
+        </div>
+        <button class="btn btn-primary" id="btn-checkout-mobile">
+            Checkout
+        </button>
+    </div>
+</div>
+
+<!-- Modale Conferma Svuotamento -->
+<div class="modal fade" id="modale-conferma-svuota" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                    Conferma Operazione
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler svuotare completamente il carrello?</p>
+                <p class="text-muted small">Questa operazione non può essere annullata.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Annulla
+                </button>
+                <button type="button" class="btn btn-danger" id="conferma-svuota-carrello">
+                    <i class="fas fa-trash me-1"></i>
+                    Svuota Carrello
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Checkout -->
+<div class="modal fade" id="modale-checkout" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-credit-card me-2"></i>
+                    Procedi al Checkout
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-checkout">
+                    {% csrf_token %}
+                    
+                    <!-- Dati Consegna -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Indirizzo di Consegna
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nome-consegna" class="form-label">Nome *</label>
+                                <input type="text" class="form-control" id="nome-consegna" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cognome-consegna" class="form-label">Cognome *</label>
+                                <input type="text" class="form-control" id="cognome-consegna" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="indirizzo-consegna" class="form-label">Indirizzo *</label>
+                                <input type="text" class="form-control" id="indirizzo-consegna" 
+                                       placeholder="Via, numero civico" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="citta-consegna" class="form-label">Città *</label>
+                                <input type="text" class="form-control" id="citta-consegna" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cap-consegna" class="form-label">CAP *</label>
+                                <input type="text" class="form-control" id="cap-consegna" 
+                                       pattern="[0-9]{5}" maxlength="5" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="telefono-consegna" class="form-label">Telefono *</label>
+                                <input type="tel" class="form-control" id="telefono-consegna" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="note-consegna" class="form-label">Note per la consegna</label>
+                                <textarea class="form-control" id="note-consegna" rows="2"
+                                          placeholder="Citofono, piano, note speciali..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modalità Consegna -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2">
+                            <i class="fas fa-truck me-2"></i>
+                            Modalità di Consegna
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <input type="radio" class="form-check-input" 
+                                               name="modalita-consegna" value="domicilio" 
+                                               id="radio-domicilio" checked>
+                                        <label for="radio-domicilio" class="form-check-label w-100 mt-2">
+                                            <i class="fas fa-home fa-2x text-primary d-block mb-2"></i>
+                                            <strong>Consegna a Domicilio</strong>
+                                            <br><small class="text-muted">€3.50 - 25-35 min</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <input type="radio" class="form-check-input" 
+                                               name="modalita-consegna" value="ritiro" 
+                                               id="radio-ritiro">
+                                        <label for="radio-ritiro" class="form-check-label w-100 mt-2">
+                                            <i class="fas fa-store fa-2x text-success d-block mb-2"></i>
+                                            <strong>Ritiro in Negozio</strong>
+                                            <br><small class="text-muted">Gratis - 15-20 min</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Metodo Pagamento -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Metodo di Pagamento
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="card">
+                                    <div class="card-body text-center py-2">
+                                        <input type="radio" class="form-check-input" 
+                                               name="metodo-pagamento" value="carta" 
+                                               id="radio-carta" checked>
+                                        <label for="radio-carta" class="form-check-label w-100">
+                                            <i class="fab fa-cc-visa fa-2x text-primary"></i>
+                                            <br><small>Carta di Credito</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="card">
+                                    <div class="card-body text-center py-2">
+                                        <input type="radio" class="form-check-input" 
+                                               name="metodo-pagamento" value="paypal" 
+                                               id="radio-paypal">
+                                        <label for="radio-paypal" class="form-check-label w-100">
+                                            <i class="fab fa-paypal fa-2x text-info"></i>
+                                            <br><small>PayPal</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="card">
+                                    <div class="card-body text-center py-2">
+                                        <input type="radio" class="form-check-input" 
+                                               name="metodo-pagamento" value="contrassegno" 
+                                               id="radio-contrassegno">
+                                        <label for="radio-contrassegno" class="form-check-label w-100">
+                                            <i class="fas fa-money-bill-wave fa-2x text-success"></i>
+                                            <br><small>Contrassegno</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Riepilogo Finale -->
+                    <div class="border rounded p-3 bg-light">
+                        <h6 class="mb-3">Riepilogo Ordine</h6>
+                        <div id="riepilogo-finale-checkout">
+                            <!-- Popolato dinamicamente -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Annulla
+                </button>
+                <button type="submit" form="form-checkout" class="btn btn-success btn-lg">
+                    <i class="fas fa-check me-2"></i>
+                    Conferma Ordine
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container per messaggi sistema -->
+<div id="messaggi-sistema" class="container mt-3"></div>
+{% endblock %}
+
+{% block script_extra %}
+<script src="{% static 'js/principale.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inizializza la pagina carrello
+    window.pizzaMamaApp.configuraCarrello();
+    
+    // Gestione svuotamento carrello
+    const btnSvuotaCarrello = document.getElementById('btn-svuota-carrello');
+    const modaleConfermaSvuota = new bootstrap.Modal(document.getElementById('modale-conferma-svuota'));
+    
+    btnSvuotaCarrello?.addEventListener('click', function() {
+        modaleConfermaSvuota.show();
+    });
+    
+    document.getElementById('conferma-svuota-carrello')?.addEventListener('click', function() {
+        window.pizzaMamaApp.carrello.svuotaCarrello();
+        modaleConfermaSvuota.hide();
+        window.pizzaMamaApp.api.mostraMessaggioSuccesso('Carrello svuotato con successo');
+    });
+    
+    // Gestione codice sconto
+    document.getElementById('btn-applica-sconto')?.addEventListener('click', applicaCodiceSconto);
+    document.getElementById('input-codice-sconto')?.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            applicaCodiceSconto();
+        }
+    });
+    
+    // Gestione checkout
+    const modaleCheckout = new bootstrap.Modal(document.getElementById('modale-checkout'));
+    
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'btn-procedi-checkout' || e.target.id === 'btn-checkout-mobile') {
+            if (window.pizzaMamaApp.carrello.elementi.length === 0) {
+                window.pizzaMamaApp.api.mostraMessaggioErrore('Il carrello è vuoto');
+                return;
+            }
+            aggiornaRiepilogoCheckout();
+            modaleCheckout.show();
+        }
+    });
+    
+    // Gestione form checkout
+    document.getElementById('form-checkout')?.addEventListener('submit', gestisciInvioOrdine);
+    
+    // Aggiorna riassunto mobile quando cambia il carrello
+    window.pizzaMamaApp.carrello.aggiungiListenerCambiamenti(function(elementi) {
+        aggiornaRiassuntoMobile();
+    });
+    
+    // Inizializza riassunto mobile
+    aggiornaRiassuntoMobile();
+    
+    // Gestione cambio modalità consegna
+    document.querySelectorAll('input[name="modalita-consegna"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            aggiornaRiepilogoCheckout();
+        });
+    });
+    
+    function applicaCodiceSconto() {
+        const codice = document.getElementById('input-codice-sconto').value.trim();
+        if (!codice) {
+            window.pizzaMamaApp.api.mostraMessaggioErrore('Inserisci un codice sconto valido');
+            return;
+        }
+        
+        // Simula validazione codice sconto
+        const codiciValidi = {
+            'BENVENUTO10': { tipo: 'percentuale', valore: 10, descrizione: '10% di sconto' },
+            'PIZZA5': { tipo: 'fisso', valore: 5, descrizione: '5€ di sconto' },
+            'STUDENT15': { tipo: 'percentuale', valore: 15, descrizione: '15% sconto studenti' }
+        };
+        
+        if (codiciValidi[codice.toUpperCase()]) {
+            const sconto = codiciValidi[codice.toUpperCase()];
+            window.pizzaMamaApp.carrello.scontoApplicato = sconto;
+            window.pizzaMamaApp.api.mostraMessaggioSuccesso(`Codice sconto applicato: ${sconto.descrizione}`);
+            
+            // Disabilita input e bottone
+            document.getElementById('input-codice-sconto').disabled = true;
+            document.getElementById('btn-applica-sconto').disabled = true;
+            document.getElementById('btn-applica-sconto').innerHTML = '<i class="fas fa-check me-1"></i>Applicato';
+            
+            // Aggiorna totali
+            window.pizzaMamaApp.carrello.notificaCambiamenti();
+        } else {
+            window.pizzaMamaApp.api.mostraMessaggioErrore('Codice sconto non valido o scaduto');
+        }
+    }
+    
+    function aggiornaRiassuntoMobile() {
+        const totaleElement = document.getElementById('totale-mobile');
+        const elementiElement = document.getElementById('elementi-mobile');
+        
+        if (totaleElement && elementiElement) {
+            const totale = window.pizzaMamaApp.carrello.ottieniTotale();
+            const quantita = window.pizzaMamaApp.carrello.ottieniQuantitaTotale();
+            
+            totaleElement.textContent = `€${totale.toFixed(2)}`;
+            elementiElement.textContent = `${quantita} ${quantita === 1 ? 'elemento' : 'elementi'}`;
+        }
+    }
+    
+    function aggiornaRiepilogoCheckout() {
+        const container = document.getElementById('riepilogo-finale-checkout');
+        if (!container) return;
+        
+        const elementi = window.pizzaMamaApp.carrello.elementi;
+        const subtotale = window.pizzaMamaApp.carrello.ottieniTotale();
+        
+        // Calcola costi aggiuntivi
+        const modalitaConsegna = document.querySelector('input[name="modalita-consegna"]:checked')?.value || 'domicilio';
+        const costoConsegna = modalitaConsegna === 'domicilio' ? 3.50 : 0;
+        
+        // Calcola sconto se applicato
+        let scontoImporto = 0;
+        if (window.pizzaMamaApp.carrello.scontoApplicato) {
+            const sconto = window.pizzaMamaApp.carrello.scontoApplicato;
+            if (sconto.tipo === 'percentuale') {
+                scontoImporto = subtotale * (sconto.valore / 100);
+            } else {
+                scontoImporto = sconto.valore;
+            }
+        }
+        
+        const totaleFinale = subtotale + costoConsegna - scontoImporto;
+        
+        container.innerHTML = `
+            <div class="row mb-2">
+                <div class="col">Subtotale (${elementi.length} elementi):</div>
+                <div class="col-auto">€${subtotale.toFixed(2)}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">${modalitaConsegna === 'domicilio' ? 'Consegna a domicilio' : 'Ritiro in negozio'}:</div>
+                <div class="col-auto">${costoConsegna > 0 ? '€' + costoConsegna.toFixed(2) : 'Gratis'}</div>
+            </div>
+            ${scontoImporto > 0 ? `
+            <div class="row mb-2 text-success">
+                <div class="col">Sconto applicato:</div>
+                <div class="col-auto">-€${scontoImporto.toFixed(2)}</div>
+            </div>
+            ` : ''}
+            <hr>
+            <div class="row">
+                <div class="col"><strong>Totale:</strong></div>
+                <div class="col-auto"><strong>€${totaleFinale.toFixed(2)}</strong></div>
+            </div>
+        `;
+    }
+    
+    async function gestisciInvioOrdine(evento) {
+        evento.preventDefault();
+        
+        // Validazione form
+        const form = evento.target;
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return;
+        }
+        
+        // Raccogli dati ordine
+        const datiOrdine = {
+            elementi: window.pizzaMamaApp.carrello.elementi,
+            indirizzoConsegna: {
+                nome: document.getElementById('nome-consegna').value,
+                cognome: document.getElementById('cognome-consegna').value,
+                indirizzo: document.getElementById('indirizzo-consegna').value,
+                citta: document.getElementById('citta-consegna').value,
+                cap: document.getElementById('cap-consegna').value,
+                telefono: document.getElementById('telefono-consegna').value,
+                note: document.getElementById('note-consegna').value
+            },
+            modalitaConsegna: document.querySelector('input[name="modalita-consegna"]:checked').value,
+            metodoPagamento: document.querySelector('input[name="metodo-pagamento"]:checked').value,
+            scontoApplicato: window.pizzaMamaApp.carrello.scontoApplicato || null
+        };
+        
+        // Mostra loading
+        const btnConferma = form.querySelector('button[type="submit"]');
+        const testoOriginale = btnConferma.innerHTML;
+        btnConferma.disabled = true;
+        btnConferma.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Elaborazione...';
+        
+        try {
+            // Simula invio ordine API
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Genera numero ordine
+            const numeroOrdine = 'PM' + Date.now().toString().slice(-6);
+            
+            // Svuota carrello
+            window.pizzaMamaApp.carrello.svuotaCarrello();
+            
+            // Chiudi modale
+            modaleCheckout.hide();
+            
+            // Mostra conferma
+            mostraConfermaOrdine(numeroOrdine, datiOrdine);
+            
+        } catch (errore) {
+            console.error('Errore invio ordine:', errore);
+            window.pizzaMamaApp.api.mostraMessaggioErrore('Errore nell\'elaborazione dell\'ordine. Riprova.');
+        } finally {
+            btnConferma.disabled = false;
+            btnConferma.innerHTML = testoOriginale;
+        }
+    }
+    
+    function mostraConfermaOrdine(numeroOrdine, datiOrdine) {
+        const modalitaConsegna = datiOrdine.modalitaConsegna === 'domicilio' ? 'consegna a domicilio' : 'ritiro in negozio';
+        const tempoStimato = datiOrdine.modalitaConsegna === 'domicilio' ? '25-35 minuti' : '15-20 minuti';
+        
+        // Sostituisci il contenuto della pagina con la conferma
+        document.querySelector('.contenuto-carrello').innerHTML = `
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="text-center mb-5">
+                            <div class="mb-4">
+                                <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                            </div>
+                            <h1 class="text-success mb-3">Ordine Confermato!</h1>
+                            <p class="lead text-muted">
+                                Il tuo ordine è stato ricevuto e verrà preparato a breve.
+                            </p>
+                        </div>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-receipt me-2"></i>
+                                    Dettagli Ordine #${numeroOrdine}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-sm-6">
+                                        <strong>Modalità:</strong> ${modalitaConsegna.charAt(0).toUpperCase() + modalitaConsegna.slice(1)}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <strong>Tempo stimato:</strong> ${tempoStimato}
+                                    </div>
+                                </div>
+                                
+                                ${datiOrdine.modalitaConsegna === 'domicilio' ? `
+                                <div class="mb-3">
+                                    <strong>Indirizzo di consegna:</strong><br>
+                                    ${datiOrdine.indirizzoConsegna.nome} ${datiOrdine.indirizzoConsegna.cognome}<br>
+                                    ${datiOrdine.indirizzoConsegna.indirizzo}<br>
+                                    ${datiOrdine.indirizzoConsegna.citta}, ${datiOrdine.indirizzoConsegna.cap}<br>
+                                    Tel: ${datiOrdine.indirizzoConsegna.telefono}
+                                </div>
+                                ` : `
+                                <div class="mb-3">
+                                    <strong>Ritiro presso:</strong><br>
+                                    PizzaMama - Via Roma 123<br>
+                                    Milano, 20121<br>
+                                    Tel: 02 1234567
+                                </div>
+                                `}
+                                
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Riceverai un SMS di conferma con i dettagli dell'ordine e il codice di tracciamento.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="{% url 'catalogo' %}" class="btn btn-primary me-3">
+                                <i class="fas fa-pizza-slice me-2"></i>
+                                Ordina Ancora
+                            </a>
+                            <a href="/" class="btn btn-outline-primary">
+                                <i class="fas fa-home me-2"></i>
+                                Torna alla Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Aggiorna step indicator
+        document.querySelectorAll('.step').forEach((step, index) => {
+            if (index < 4) {
+                step.classList.add('completed');
+                step.classList.remove('active');
+            }
+        });
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+});
+
+// Override del metodo renderizzaCarrello per includere gestione sconti
+if (window.pizzaMamaApp && window.pizzaMamaApp.renderizzaCarrello) {
+    const originalRenderizza = window.pizzaMamaApp.renderizzaCarrello;
+    
+    window.pizzaMamaApp.renderizzaCarrello = function() {
+        const containerCarrello = document.getElementById('elementi-carrello');
+        const containerTotale = document.getElementById('totale-carrello');
+        
+        if (!containerCarrello) return;
+
+        if (this.carrello.elementi.length === 0) {
+            containerCarrello.innerHTML = `
+                <div class="carrello-vuoto">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4 class="text-muted mt-3">Il tuo carrello è vuoto</h4>
+                    <p class="text-muted">Aggiungi qualche deliziosa pizza dal nostro catalogo!</p>
+                    <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg mt-3">
+                        <i class="fas fa-pizza-slice me-2"></i>
+                        Esplora il Catalogo
+                    </a>
+                </div>
+            `;
+            
+            if (containerTotale) {
+                containerTotale.innerHTML = `
+                    <div class="card">
+                        <div class="card-body text-center text-muted">
+                            <p>Nessun elemento nel carrello</p>
+                        </div>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        // Renderizza elementi carrello con design migliorato
+        containerCarrello.innerHTML = this.carrello.elementi.map(elemento => `
+            <div class="elemento-carrello mb-3" data-id="${elemento.id}">
+                <div class="row align-items-center">
+                    <div class="col-md-2 col-3">
+                        <img src="${elemento.immagine || '/static/images/pizza-default.jpg'}" 
+                             class="img-fluid rounded" alt="${elemento.nome}">
+                    </div>
+                    <div class="col-md-4 col-9">
+                        <h6 class="mb-1">${elemento.nome}</h6>
+                        <small class="text-muted">Pizza artigianale</small>
+                        <div class="d-block d-md-none mt-2">
+                            <span class="fw-bold text-primary">€${(elemento.prezzo * elemento.quantita).toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mt-2 mt-md-0">
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-outline-secondary btn-diminuisci" data-id="${elemento.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="form-control text-center input-quantita" 
+                                   value="${elemento.quantita}" min="1" data-id="${elemento.id}">
+                            <button class="btn btn-outline-secondary btn-aumenta" data-id="${elemento.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-end d-none d-md-block">
+                        <strong class="text-primary">€${(elemento.prezzo * elemento.quantita).toFixed(2)}</strong>
+                    </div>
+                    <div class="col-md-1 col-2 text-end mt-2 mt-md-0">
+                        <button class="btn btn-sm btn-outline-danger btn-rimuovi" data-id="${elemento.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Aggiorna totale con gestione sconti
+        if (containerTotale) {
+            const subtotale = this.carrello.ottieniTotale();
+            const costoConsegna = 3.50;
+            let scontoImporto = 0;
+            
+            if (this.carrello.scontoApplicato) {
+                const sconto = this.carrello.scontoApplicato;
+                if (sconto.tipo === 'percentuale') {
+                    scontoImporto = subtotale * (sconto.valore / 100);
+                } else {
+                    scontoImporto = sconto.valore;
+                }
+            }
+            
+            const totaleFinale = subtotale + costoConsegna - scontoImporto;
+            
+            containerTotale.innerHTML = `
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-calculator me-2"></i>
+                            Riepilogo Ordine
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotale:</span>
+                            <span>€${subtotale.toFixed(2)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Consegna:</span>
+                            <span>€${costoConsegna.toFixed(2)}</span>
+                        </div>
+                        ${scontoImporto > 0 ? `
+                        <div class="d-flex justify-content-between mb-2 text-success">
+                            <span>Sconto:</span>
+                            <span>-€${scontoImporto.toFixed(2)}</span>
+                        </div>
+                        ` : ''}
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Totale:</strong>
+                            <strong class="text-primary">€${totaleFinale.toFixed(2)}</strong>
+                        </div>
+                        <button class="btn btn-success w-100 btn-lg" id="btn-procedi-checkout">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Procedi al Checkout
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Associa eventi
+        this.associaEventiCarrello();
+    };
+}
+</script>
+{% endblock %}
