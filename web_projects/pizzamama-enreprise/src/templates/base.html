@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}{{ page_title|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Ordina la migliore pizza a domicilio. Ingredienti freschi, consegna veloce, prezzi imbattibili." }}{% endblock %}">
+    <meta name="keywords" content="pizza, domicilio, consegna, Genova, ingredienti freschi, pizzeria">
+    <meta name="author" content="PizzaMama Enterprise">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}{{ page_title|default:"PizzaMama - La Miglior Pizza a Domicilio" }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"Ordina la migliore pizza a domicilio." }}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'images/logo-og.png' %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
+    <!-- Extra CSS Block -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    
+    <!-- Navigation -->
+    {% include 'partials/navbar.html' %}
+    
+    <!-- Messages Framework -->
+    {% include 'partials/messages.html' %}
+    
+    <!-- Main Content -->
+    <main class="{% block main_class %}{% endblock %}">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+    
+    <!-- Cart Sidebar (sempre presente per AJAX updates) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="cartSidebarLabel">
+                <i class="bi bi-cart3"></i> Il Tuo Carrello
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" id="cart-content">
+            <!-- Cart content loaded via JavaScript -->
+            <div class="text-center text-muted">
+                <i class="bi bi-cart-x fs-1"></i>
+                <p>Il tuo carrello è vuoto</p>
+                <a href="{% url 'products:catalog' %}" class="btn btn-primary">
+                    Inizia a ordinare
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Spinner (global) -->
+    <div id="loading-spinner" class="d-none">
+        <div class="spinner-overlay">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Caricamento...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container per notifiche -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container">
+        <!-- Toasts will be inserted here -->
+    </div>
+    
+    <!-- Bootstrap 5 JavaScript CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- CSRF Token for AJAX -->
+    <script>
+        // Global CSRF token for all AJAX requests
+        const csrfToken = '{{ csrf_token }}';
+        
+        // Global API base URL
+        const apiBaseUrl = '/api/';
+        
+        // User authentication status
+        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+        
+        // User info if authenticated
+        {% if user.is_authenticated %}
+        const currentUser = {
+            id: {{ user.id }},
+            username: '{{ user.username }}',
+            email: '{{ user.email }}',
+            firstName: '{{ user.first_name }}',
+            lastName: '{{ user.last_name }}'
+        };
+        {% else %}
+        const currentUser = null;
+        {% endif %}
+    </script>
+    
+    <!-- Core JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+    
+    <!-- Page-specific JavaScript -->
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Google Analytics (placeholder) -->
+    {% comment %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    {% endcomment %}
+</body>
+</html>

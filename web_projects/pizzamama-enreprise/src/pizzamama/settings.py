@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,7 +90,8 @@ ROOT_URLCONF = 'pizzamama.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # Step 12: Aggiunta directory templates globale per frontend
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,6 +99,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Step 12: Aggiunto media context processor per templates
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -138,9 +142,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# Step 12: Modificato per italiano frontend
+LANGUAGE_CODE = 'it-it'
 
-TIME_ZONE = 'UTC'
+# Step 12: Modificato per timezone Italia
+TIME_ZONE = 'Europe/Rome'
 
 USE_I18N = True
 
@@ -151,6 +157,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Step 12: Aggiunta configurazione static files per frontend
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# Step 12: Directory per collectstatic in produzione
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -227,3 +241,39 @@ CORS_ALLOW_CREDENTIALS = True
 # ========================================
 # Per ora usiamo Token standard DRF (futuro: JWT per production)
 REST_USE_JWT = False
+
+# ========================================
+# MEDIA FILES - STEP 12 FRONTEND
+# ========================================
+# Configurazione per upload file utenti (immagini pizze, avatar, etc.)
+
+# Media files (uploads) - Step 12: Per gestire immagini caricate dagli utenti
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# ========================================
+# SECURITY SETTINGS - STEP 12 FRONTEND
+# ========================================
+# Impostazioni sicurezza per upload file
+
+# Step 12: Limite dimensione upload file (10MB)
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = FILE_UPLOAD_MAX_MEMORY_SIZE
+
+# Step 12: Formati immagine consentiti per upload
+ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+MAX_IMAGE_SIZE = 5 * 1024 * 1024  # 5MB
+
+# ========================================
+# LOGIN/LOGOUT URLS - STEP 12 AUTH
+# ========================================
+# URL redirect dopo login/logout per frontend
+
+# Step 12: URL per login form
+LOGIN_URL = '/accounts/login/'
+
+# Step 12: Redirect dopo login successful
+LOGIN_REDIRECT_URL = '/'
+
+# Step 12: Redirect dopo logout
+LOGOUT_REDIRECT_URL = '/'

@@ -1,0 +1,20 @@
+<!-- Django Messages Framework -->
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                {% if message.tags == 'error' %}
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="bi bi-exclamation-triangle"></i>
+                {% elif message.tags == 'success' %}
+                    <i class="bi bi-check-circle-fill"></i>
+                {% elif message.tags == 'info' %}
+                    <i class="bi bi-info-circle-fill"></i>
+                {% endif %}
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,171 @@
+{% load static %}
+
+<!-- Footer - PizzaMama Enterprise -->
+<footer class="bg-dark text-light mt-5">
+    <!-- Main Footer Content -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Company Info -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-pizza text-primary"></i>
+                    PizzaMama
+                </h5>
+                <p class="text-muted">
+                    La migliore pizza a domicilio con ingredienti freschi e ricette tradizionali. 
+                    Consegniamo felicità direttamente a casa tua!
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-light fs-4" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="#" class="text-light fs-4" title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="text-light fs-4" title="Twitter">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="#" class="text-light fs-4" title="WhatsApp">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Menu</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="{% url 'home' %}" class="text-muted text-decoration-none">
+                            <i class="bi bi-house-door"></i> Home
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-grid-3x3-gap"></i> Tutte le Pizze
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'about' %}" class="text-muted text-decoration-none">
+                            <i class="bi bi-info-circle"></i> Chi Siamo
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-envelope"></i> Contatti
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Servizio Clienti</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-headset"></i> Supporto
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-clock-history"></i> Tracking Ordini
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-arrow-clockwise"></i> Resi e Rimborsi
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-muted text-decoration-none">
+                            <i class="bi bi-question-circle"></i> FAQ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Contatti</h6>
+                <div class="text-muted">
+                    <div class="mb-2">
+                        <i class="bi bi-geo-alt text-primary"></i>
+                        Via Roma 123, 16121 Genova (GE)
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-telephone text-primary"></i>
+                        <a href="tel:+390101234567" class="text-muted text-decoration-none">
+                            +39 010 123 4567
+                        </a>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-envelope text-primary"></i>
+                        <a href="mailto:info@pizzamama.it" class="text-muted text-decoration-none">
+                            info@pizzamama.it
+                        </a>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-clock text-primary"></i>
+                        Lun-Dom: 11:00 - 23:00
+                    </div>
+                </div>
+
+                <!-- Delivery Info -->
+                <div class="mt-3 p-3 bg-primary bg-opacity-10 rounded">
+                    <div class="small text-primary fw-bold">
+                        <i class="bi bi-truck"></i> Consegna Gratuita
+                    </div>
+                    <div class="small text-muted">
+                        Per ordini superiori a €15
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="bg-primary bg-opacity-10">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <h6 class="fw-bold mb-1">
+                        <i class="bi bi-envelope-heart text-primary"></i>
+                        Resta aggiornato!
+                    </h6>
+                    <small class="text-muted">
+                        Iscriviti alla newsletter per offerte esclusive e novità
+                    </small>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="La tua email..." id="newsletter-email">
+                        <button class="btn btn-primary" type="button" id="newsletter-subscribe">
+                            <i class="bi bi-send"></i> Iscriviti
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Footer -->
+    <div class="bg-dark py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start mb-2 mb-lg-0">
+                    <small class="text-muted">
+                        © 2025 PizzaMama Enterprise. Tutti i diritti riservati.
+                    </small>
+                </div>
+                <div class="col-lg-6 text-center text-lg-end">
+                    <small>
+                        <a href="#" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                        <a href="#" class="text-muted text-decoration-none me-3">Termini di Servizio</a>
+                        <a href="#" class="text-muted text-decoration-none">Cookie Policy</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

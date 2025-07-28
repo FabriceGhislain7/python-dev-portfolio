@@ -1,14 +1,13 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, AllergenViewSet, IngredientViewSet, PizzaViewSet, PizzaSizeViewSet
+# apps/products/urls.py - Step 12 Frontend URLs
+from django.urls import path
+from . import views
 
-router = DefaultRouter()
-router.register(r'categories', CategoryViewSet)
-router.register(r'allergens', AllergenViewSet)
-router.register(r'ingredients', IngredientViewSet)
-router.register(r'pizzas', PizzaViewSet)
-router.register(r'sizes', PizzaSizeViewSet)
+app_name = 'products'
 
+# Temporary basic URLs - implementeremo le views nei prossimi files
 urlpatterns = [
-    path('', include(router.urls)),
+    # Placeholder per ora - implementeremo dopo
+    # path('', views.catalog, name='catalog'),
+    # path('category/<slug:slug>/', views.category, name='category'),
+    # path('<slug:slug>/', views.product_detail, name='detail'),
 ]
