@@ -1,362 +1,661 @@
-// Utility Functions
+/*
+===========================================
+UTILS MODULE - Portfolio
+===========================================
+Funzioni utility riutilizzabili per tutto il portfolio
+*/
 
-const Utils = {
-    // DOM manipulation utilities
-    dom: {
-        // Get element by selector
-        get: (selector) => document.querySelector(selector),
-        
-        // Get all elements by selector
-        getAll: (selector) => document.querySelectorAll(selector),
-        
-        // Create element
-        create: (tag, className = '', content = '') => {
-            const element = document.createElement(tag);
-            if (className) element.className = className;
-            if (content) element.textContent = content;
-            return element;
-        },
-        
-        // Add class to element
-        addClass: (element, className) => {
-            if (element) element.classList.add(className);
-        },
-        
-        // Remove class from element
-        removeClass: (element, className) => {
-            if (element) element.classList.remove(className);
-        },
-        
-        // Toggle class on element
-        toggleClass: (element, className) => {
-            if (element) element.classList.toggle(className);
-        },
-        
-        // Check if element has class
-        hasClass: (element, className) => {
-            return element ? element.classList.contains(className) : false;
-        },
-        
-        // Set multiple attributes
-        setAttributes: (element, attributes) => {
-            if (element) {
-                Object.keys(attributes).forEach(key => {
-                    element.setAttribute(key, attributes[key]);
-                });
-            }
-        },
-        
-        // Get element position
-        getPosition: (element) => {
-            if (!element) return { top: 0, left: 0 };
-            const rect = element.getBoundingClientRect();
-            return {
-                top: rect.top + window.pageYOffset,
-                left: rect.left + window.pageXOffset,
-                bottom: rect.bottom + window.pageYOffset,
-                right: rect.right + window.pageXOffset
-            };
-        },
-        
-        // Check if element is in viewport
-        isInViewport: (element, threshold = 0.1) => {
-            if (!element) return false;
-            const rect = element.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-            
-            const vertInView = (rect.top <= windowHeight * (1 - threshold)) && 
-                              ((rect.top + rect.height) >= windowHeight * threshold);
-            const horInView = (rect.left <= windowWidth * (1 - threshold)) && 
-                             ((rect.left + rect.width) >= windowWidth * threshold);
-            
-            return vertInView && horInView;
-        }
-    },
-    
-    // Animation utilities
-    animation: {
-        // Smooth scroll to element
-        scrollTo: (target, duration = 1000, offset = 0) => {
-            const targetElement = typeof target === 'string' ? Utils.dom.get(target) : target;
-            if (!targetElement) return;
-            
-            const targetPosition = Utils.dom.getPosition(targetElement).top - offset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            let startTime = null;
-            
-            const easeInOutCubic = (t) => {
-                return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-            };
-            
-            const animation = (currentTime) => {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                
-                window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animation);
-                }
-            };
-            
-            requestAnimationFrame(animation);
-        },
-        
-        // Animate number counting
-        countUp: (element, target, duration = 2000, suffix = '') => {
-            if (!element) return;
-            
-            const start = 0;
-            const startTime = performance.now();
-            
-            const animate = (currentTime) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const current = Math.floor(start + (target - start) * progress);
-                element.textContent = current + suffix;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                }
-            };
-            
-            requestAnimationFrame(animate);
-        },
-        
-        // Stagger animation for multiple elements
-        stagger: (elements, animationClass, delay = 100) => {
-            elements.forEach((element, index) => {
-                setTimeout(() => {
-                    Utils.dom.addClass(element, animationClass);
-                }, index * delay);
-            });
-        }
-    },
-    
-    // Event utilities
-    events: {
-        // Debounce function
-        debounce: (func, wait) => {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        },
-        
-        // Throttle function
-        throttle: (func, limit) => {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            };
-        },
-        
-        // Add event listener with automatic cleanup
-        on: (element, event, handler, options = {}) => {
-            if (element) {
-                element.addEventListener(event, handler, options);
-                return () => element.removeEventListener(event, handler, options);
-            }
-        },
-        
-        // Trigger custom event
-        trigger: (element, eventName, detail = {}) => {
-            if (element) {
-                const event = new CustomEvent(eventName, { detail });
-                element.dispatchEvent(event);
-            }
-        }
-    },
-    
-    // Storage utilities
-    storage: {
-        // Set localStorage item
-        set: (key, value) => {
-            try {
-                localStorage.setItem(key, JSON.stringify(value));
-                return true;
-            } catch (e) {
-                console.warn('LocalStorage not available:', e);
-                return false;
-            }
-        },
-        
-        // Get localStorage item
-        get: (key, defaultValue = null) => {
-            try {
-                const item = localStorage.getItem(key);
-                return item ? JSON.parse(item) : defaultValue;
-            } catch (e) {
-                console.warn('LocalStorage not available:', e);
-                return defaultValue;
-            }
-        },
-        
-        // Remove localStorage item
-        remove: (key) => {
-            try {
-                localStorage.removeItem(key);
-                return true;
-            } catch (e) {
-                console.warn('LocalStorage not available:', e);
-                return false;
-            }
-        }
-    },
-    
-    // API utilities
-    api: {
-        // Fetch JSON data
-        get: async (url) => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                throw error;
-            }
-        },
-        
-        // Post data
-        post: async (url, data) => {
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                throw error;
-            }
-        }
-    },
-    
-    // Form utilities
-    form: {
-        // Get form data as object
-        getData: (form) => {
-            const formData = new FormData(form);
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-            return data;
-        },
-        
-        // Validate email
-        isValidEmail: (email) => {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        },
-        
-        // Reset form
-        reset: (form) => {
-            if (form) {
-                form.reset();
-                // Remove any error classes
-                const inputs = form.querySelectorAll('.form-input');
-                inputs.forEach(input => {
-                    Utils.dom.removeClass(input, 'error');
-                    Utils.dom.removeClass(input, 'success');
-                });
-            }
-        }
-    },
-    
-    // Device detection
-    device: {
-        // Check if mobile
-        isMobile: () => {
-            return window.innerWidth <= CONFIG.navigation.mobileBreakpoint;
-        },
-        
-        // Check if tablet
-        isTablet: () => {
-            return window.innerWidth > CONFIG.navigation.mobileBreakpoint && 
-                   window.innerWidth <= CONFIG.breakpoints.lg;
-        },
-        
-        // Check if desktop
-        isDesktop: () => {
-            return window.innerWidth > CONFIG.breakpoints.lg;
-        },
-        
-        // Check if touch device
-        isTouchDevice: () => {
-            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        }
-    },
-    
-    // Performance utilities
-    performance: {
-        // Create intersection observer
-        createObserver: (callback, options = {}) => {
-            const defaultOptions = {
-                threshold: CONFIG.performance.intersectionThreshold,
-                rootMargin: '0px'
-            };
-            
-            const observerOptions = { ...defaultOptions, ...options };
-            
-            return new IntersectionObserver(callback, observerOptions);
-        },
-        
-        // Lazy load images
-        lazyLoadImage: (img) => {
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                Utils.dom.addClass(img, 'loaded');
-            }
-        }
-    },
-    
-    // Math utilities
-    math: {
-        // Clamp number between min and max
-        clamp: (num, min, max) => Math.min(Math.max(num, min), max),
-        
-        // Linear interpolation
-        lerp: (start, end, factor) => start + (end - start) * factor,
-        
-        // Map value from one range to another
-        map: (value, inMin, inMax, outMin, outMax) => {
-            return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-        },
-        
-        // Random number between min and max
-        random: (min, max) => Math.random() * (max - min) + min
+// ================================
+// DOM UTILITIES
+// ================================
+
+/**
+ * Selettore DOM migliorato con error handling
+ */
+const $ = (selector, context = document) => {
+    try {
+        return context.querySelector(selector);
+    } catch (error) {
+        console.error(`❌ Invalid selector: ${selector}`, error);
+        return null;
     }
 };
 
-// Initialize utilities on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Portfolio Utils loaded successfully');
-});
+/**
+ * Selettore multiplo DOM
+ */
+const $$ = (selector, context = document) => {
+    try {
+        return Array.from(context.querySelectorAll(selector));
+    } catch (error) {
+        console.error(`❌ Invalid selector: ${selector}`, error);
+        return [];
+    }
+};
+
+/**
+ * Crea un elemento DOM con attributi e contenuto
+ */
+const createElement = (tag, attributes = {}, content = '') => {
+    const element = document.createElement(tag);
+    
+    Object.entries(attributes).forEach(([key, value]) => {
+        if (key === 'className') {
+            element.className = value;
+        } else if (key === 'innerHTML') {
+            element.innerHTML = value;
+        } else if (key === 'textContent') {
+            element.textContent = value;
+        } else if (key.startsWith('data-')) {
+            element.setAttribute(key, value);
+        } else {
+            element[key] = value;
+        }
+    });
+    
+    if (content) {
+        element.innerHTML = content;
+    }
+    
+    return element;
+};
+
+/**
+ * Verifica se un elemento è visibile nel viewport
+ */
+const isElementInViewport = (element, threshold = 0) => {
+    if (!element) return false;
+    
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    
+    const verticalVisible = rect.top + (rect.height * threshold) < windowHeight && 
+                           rect.bottom - (rect.height * threshold) > 0;
+    const horizontalVisible = rect.left < windowWidth && rect.right > 0;
+    
+    return verticalVisible && horizontalVisible;
+};
+
+/**
+ * Ottiene la posizione di un elemento rispetto al documento
+ */
+const getElementPosition = (element) => {
+    if (!element) return { top: 0, left: 0 };
+    
+    const rect = element.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    
+    return {
+        top: rect.top + scrollTop,
+        left: rect.left + scrollLeft,
+        width: rect.width,
+        height: rect.height
+    };
+};
+
+// ================================
+// ANIMATION UTILITIES
+// ================================
+
+/**
+ * Easing functions per animazioni
+ */
+const Easing = {
+    linear: t => t,
+    easeInQuad: t => t * t,
+    easeOutQuad: t => t * (2 - t),
+    easeInOutQuad: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+    easeInCubic: t => t * t * t,
+    easeOutCubic: t => (--t) * t * t + 1,
+    easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+    easeInQuart: t => t * t * t * t,
+    easeOutQuart: t => 1 - (--t) * t * t * t,
+    easeInOutQuart: t => t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t,
+    easeInBack: t => 2.7 * t * t * t - 1.7 * t * t,
+    easeOutBack: t => 1 + (--t) * t * (2.7 * t + 1.7),
+    easeInOutBack: t => t < 0.5 
+        ? (t * t * (7 * t - 2.5) * 2)
+        : (1 + (--t) * t * 2 * (7 * t + 2.5))
+};
+
+/**
+ * Animazione personalizzata con requestAnimationFrame
+ */
+const animate = (options) => {
+    const {
+        duration = 1000,
+        easing = Easing.easeOutQuad,
+        from = 0,
+        to = 1,
+        onUpdate = () => {},
+        onComplete = () => {}
+    } = options;
+    
+    const startTime = performance.now();
+    const difference = to - from;
+    
+    const step = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easing(progress);
+        const currentValue = from + (difference * easedProgress);
+        
+        onUpdate(currentValue, progress);
+        
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            onComplete();
+        }
+    };
+    
+    requestAnimationFrame(step);
+};
+
+/**
+ * Fade in di un elemento
+ */
+const fadeIn = (element, duration = 300, callback = () => {}) => {
+    if (!element) return;
+    
+    element.style.opacity = '0';
+    element.style.display = 'block';
+    
+    animate({
+        duration,
+        from: 0,
+        to: 1,
+        onUpdate: (value) => {
+            element.style.opacity = value;
+        },
+        onComplete: callback
+    });
+};
+
+/**
+ * Fade out di un elemento
+ */
+const fadeOut = (element, duration = 300, callback = () => {}) => {
+    if (!element) return;
+    
+    animate({
+        duration,
+        from: 1,
+        to: 0,
+        onUpdate: (value) => {
+            element.style.opacity = value;
+        },
+        onComplete: () => {
+            element.style.display = 'none';
+            callback();
+        }
+    });
+};
+
+/**
+ * Slide up di un elemento
+ */
+const slideUp = (element, duration = 300, callback = () => {}) => {
+    if (!element) return;
+    
+    const height = element.offsetHeight;
+    element.style.overflow = 'hidden';
+    
+    animate({
+        duration,
+        from: height,
+        to: 0,
+        onUpdate: (value) => {
+            element.style.height = `${value}px`;
+        },
+        onComplete: () => {
+            element.style.display = 'none';
+            element.style.height = '';
+            element.style.overflow = '';
+            callback();
+        }
+    });
+};
+
+/**
+ * Slide down di un elemento
+ */
+const slideDown = (element, duration = 300, callback = () => {}) => {
+    if (!element) return;
+    
+    element.style.display = 'block';
+    element.style.overflow = 'hidden';
+    element.style.height = '0px';
+    
+    const height = element.scrollHeight;
+    
+    animate({
+        duration,
+        from: 0,
+        to: height,
+        onUpdate: (value) => {
+            element.style.height = `${value}px`;
+        },
+        onComplete: () => {
+            element.style.height = '';
+            element.style.overflow = '';
+            callback();
+        }
+    });
+};
+
+// ================================
+// UTILITY FUNCTIONS
+// ================================
+
+/**
+ * Debounce function per limitare chiamate frequenti
+ */
+const debounce = (func, wait, immediate = false) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            timeout = null;
+            if (!immediate) func(...args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func(...args);
+    };
+};
+
+/**
+ * Throttle function per limitare chiamate frequenti
+ */
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function executedFunction(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+};
+
+/**
+ * Genera un ID univoco
+ */
+const generateUniqueId = (prefix = 'id') => {
+    return `${prefix}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+};
+
+/**
+ * Formatta un numero con separatori delle migliaia
+ */
+const formatNumber = (number, locale = 'it-IT') => {
+    return new Intl.NumberFormat(locale).format(number);
+};
+
+/**
+ * Formatta una data
+ */
+const formatDate = (date, locale = 'it-IT', options = {}) => {
+    const defaultOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+    
+    return new Intl.DateTimeFormat(locale, { ...defaultOptions, ...options }).format(new Date(date));
+};
+
+/**
+ * Capitalizza la prima lettera di una stringa
+ */
+const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+/**
+ * Rimuove caratteri speciali da una stringa per creare slug
+ */
+const slugify = (str) => {
+    return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+};
+
+/**
+ * Verifica se una stringa è un email valido
+ */
+const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
+/**
+ * Verifica se una stringa è un URL valido
+ */
+const isValidUrl = (url) => {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+// ================================
+// STORAGE UTILITIES
+// ================================
+
+/**
+ * Gestione sicura del localStorage
+ */
+const storage = {
+    get(key, defaultValue = null) {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : defaultValue;
+        } catch (error) {
+            console.warn(`❌ Error reading from localStorage: ${key}`, error);
+            return defaultValue;
+        }
+    },
+    
+    set(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch (error) {
+            console.warn(`❌ Error writing to localStorage: ${key}`, error);
+            return false;
+        }
+    },
+    
+    remove(key) {
+        try {
+            localStorage.removeItem(key);
+            return true;
+        } catch (error) {
+            console.warn(`❌ Error removing from localStorage: ${key}`, error);
+            return false;
+        }
+    },
+    
+    clear() {
+        try {
+            localStorage.clear();
+            return true;
+        } catch (error) {
+            console.warn('❌ Error clearing localStorage', error);
+            return false;
+        }
+    }
+};
+
+// ================================
+// DEVICE DETECTION
+// ================================
+
+/**
+ * Rileva il tipo di dispositivo
+ */
+const device = {
+    isMobile() {
+        return window.innerWidth <= 768;
+    },
+    
+    isTablet() {
+        return window.innerWidth > 768 && window.innerWidth <= 1024;
+    },
+    
+    isDesktop() {
+        return window.innerWidth > 1024;
+    },
+    
+    isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    },
+    
+    isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent);
+    },
+    
+    isAndroid() {
+        return /Android/.test(navigator.userAgent);
+    },
+    
+    supportsWebP() {
+        const canvas = document.createElement('canvas');
+        return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    }
+};
+
+// ================================
+// FETCH UTILITIES
+// ================================
+
+/**
+ * Fetch wrapper con timeout e error handling
+ */
+const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
+    const { signal, ...otherOptions } = options;
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+        const response = await fetch(url, {
+            ...otherOptions,
+            signal: signal || controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        throw error;
+    }
+};
+
+/**
+ * Carica JSON con gestione errori
+ */
+const loadJSON = async (url, timeout = 10000) => {
+    try {
+        const response = await fetchWithTimeout(url, {}, timeout);
+        return await response.json();
+    } catch (error) {
+        console.error(`❌ Error loading JSON from ${url}:`, error);
+        throw error;
+    }
+};
+
+// ================================
+// MATH UTILITIES
+// ================================
+
+/**
+ * Clamp di un valore tra min e max
+ */
+const clamp = (value, min, max) => {
+    return Math.min(Math.max(value, min), max);
+};
+
+/**
+ * Mappa un valore da un range a un altro
+ */
+const mapRange = (value, inMin, inMax, outMin, outMax) => {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+};
+
+/**
+ * Interpolazione lineare
+ */
+const lerp = (start, end, factor) => {
+    return start + (end - start) * factor;
+};
+
+/**
+ * Genera un numero casuale tra min e max
+ */
+const random = (min, max) => {
+    return Math.random() * (max - min) + min;
+};
+
+/**
+ * Arrotonda un numero a un numero specifico di decimali
+ */
+const roundTo = (number, decimals = 2) => {
+    return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+};
+
+// ================================
+// COLOR UTILITIES
+// ================================
+
+/**
+ * Converte HEX a RGB
+ */
+const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+};
+
+/**
+ * Converte RGB a HEX
+ */
+const rgbToHex = (r, g, b) => {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+};
+
+// ================================
+// EVENT UTILITIES
+// ================================
+
+/**
+ * Event emitter semplice
+ */
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+    
+    on(event, callback) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(callback);
+    }
+    
+    off(event, callback) {
+        if (!this.events[event]) return;
+        
+        this.events[event] = this.events[event].filter(cb => cb !== callback);
+    }
+    
+    emit(event, ...args) {
+        if (!this.events[event]) return;
+        
+        this.events[event].forEach(callback => callback(...args));
+    }
+}
+
+// ================================
+// PERFORMANCE UTILITIES
+// ================================
+
+/**
+ * Misura le performance di una funzione
+ */
+const measurePerformance = (name, fn) => {
+    return (...args) => {
+        const start = performance.now();
+        const result = fn(...args);
+        const end = performance.now();
+        console.log(`⏱️ ${name} took ${end - start} milliseconds`);
+        return result;
+    };
+};
+
+/**
+ * Precarica immagini
+ */
+const preloadImages = (urls) => {
+    return Promise.all(
+        urls.map(url => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+                img.src = url;
+            });
+        })
+    );
+};
+
+// ================================
+// EXPORTS
+// ================================
+
+// Esporta tutte le utility
+const Utils = {
+    // DOM
+    $, $$, createElement, isElementInViewport, getElementPosition,
+    
+    // Animations
+    Easing, animate, fadeIn, fadeOut, slideUp, slideDown,
+    
+    // General utilities
+    debounce, throttle, generateUniqueId, formatNumber, formatDate,
+    capitalize, slugify, isValidEmail, isValidUrl,
+    
+    // Storage
+    storage,
+    
+    // Device
+    device,
+    
+    // Fetch
+    fetchWithTimeout, loadJSON,
+    
+    // Math
+    clamp, mapRange, lerp, random, roundTo,
+    
+    // Color
+    hexToRgb, rgbToHex,
+    
+    // Events
+    EventEmitter,
+    
+    // Performance
+    measurePerformance, preloadImages
+};
+
+// Export per moduli
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Utils;
+}
+
+// Rendi disponibile globalmente
+if (typeof window !== 'undefined') {
+    window.Utils = Utils;
+    
+    // Shortcut globali per le funzioni più usate
+    window.$ = $;
+    window.$$ = $$;
+    
+    console.log('🛠️ Utils Module: Loaded');
+}

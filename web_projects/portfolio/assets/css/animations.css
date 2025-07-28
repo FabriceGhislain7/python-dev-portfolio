@@ -1,6 +1,20 @@
-/* Animation Styles */
+/*
+===========================================
+ANIMATIONS CSS - Portfolio Statico
+===========================================
+Animazioni globali e effetti speciali - Versione corretta e commentata
+*/
 
-/* Keyframe Animations */
+/* ================================ */
+/* KEYFRAMES - ANIMAZIONI BASE      */
+/* ================================ */
+
+/* 
+FADE IN ANIMATIONS 
+Animazioni di apparizione graduale
+*/
+
+/* Fade in semplice - Solo opacità */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -10,6 +24,7 @@
     }
 }
 
+/* Fade in dal basso - Opacità + movimento verticale */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -21,6 +36,7 @@
     }
 }
 
+/* Fade in dall'alto - Opacità + movimento dall'alto */
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -32,6 +48,7 @@
     }
 }
 
+/* Fade in da sinistra - Opacità + movimento orizzontale */
 @keyframes fadeInLeft {
     from {
         opacity: 0;
@@ -43,6 +60,7 @@
     }
 }
 
+/* Fade in da destra - Opacità + movimento orizzontale */
 @keyframes fadeInRight {
     from {
         opacity: 0;
@@ -54,10 +72,16 @@
     }
 }
 
+/* 
+SCALE ANIMATIONS 
+Animazioni di ridimensionamento
+*/
+
+/* Scale in - Apparizione con ingrandimento */
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.8);
     }
     to {
         opacity: 1;
@@ -65,39 +89,22 @@
     }
 }
 
-@keyframes slideInUp {
+/* Scale up - Solo ingrandimento (per hover) */
+@keyframes scaleUp {
     from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    to {
-        opacity: 1;
         transform: scale(1);
     }
+    to {
+        transform: scale(1.05);
+    }
 }
 
+/* 
+BOUNCE ANIMATIONS 
+Animazioni di rimbalzo
+*/
+
+/* Bounce classico - Movimento verticale con rimbalzi */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -110,21 +117,84 @@
     }
 }
 
-@keyframes pulse {
+/* Bounce in - Apparizione con effetto elastico */
+@keyframes bounceIn {
     0% {
-        transform: scale(1);
-        opacity: 1;
+        opacity: 0;
+        transform: scale(0.3);
     }
     50% {
-        transform: scale(1.05);
-        opacity: 0.8;
+        opacity: 1;
+        transform: scale(1.1); /* Superamento intenzionale */
+    }
+    70% {
+        transform: scale(0.9); /* Rimbalzo verso il basso */
     }
     100% {
-        transform: scale(1);
         opacity: 1;
+        transform: scale(1); /* Ritorno alla dimensione normale */
     }
 }
 
+/* 
+SLIDE ANIMATIONS 
+Animazioni di scorrimento
+*/
+
+/* Slide in dal basso - Movimento completo dalla parte inferiore */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in dall'alto - Movimento completo dalla parte superiore */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in da sinistra - Movimento completo da sinistra */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in da destra - Movimento completo da destra */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 
+ROTATION ANIMATIONS 
+Animazioni di rotazione
+*/
+
+/* Rotazione completa - 360 gradi continui */
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -134,6 +204,61 @@
     }
 }
 
+/* Rotate in - Apparizione con rotazione */
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+/* 
+PULSE ANIMATIONS 
+Animazioni di pulsazione
+*/
+
+/* Pulse semplice - Ingrandimento e rimpicciolimento */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Heartbeat - Imitazione battito cardiaco */
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.1); /* Primo battito */
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.1); /* Secondo battito */
+    }
+    70% {
+        transform: scale(1); /* Pausa lunga */
+    }
+}
+
+/* 
+SHAKE ANIMATIONS 
+Animazioni di scuotimento
+*/
+
+/* Shake orizzontale - Movimento laterale rapido */
 @keyframes shake {
     0%, 100% {
         transform: translateX(0);
@@ -146,24 +271,187 @@
     }
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
+/* Wobble - Oscillazione con rotazione */
+@keyframes wobble {
+    0% {
+        transform: translateX(0%);
     }
-    50% {
-        transform: translateY(-10px);
+    15% {
+        transform: translateX(-25%) rotate(-5deg);
+    }
+    30% {
+        transform: translateX(20%) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-15%) rotate(-3deg);
+    }
+    60% {
+        transform: translateX(10%) rotate(2deg);
+    }
+    75% {
+        transform: translateX(-5%) rotate(-1deg);
+    }
+    100% {
+        transform: translateX(0%);
     }
 }
 
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 5px var(--accent-color);
+/* 
+FLIP ANIMATIONS 
+Animazioni di capovolgimento 3D
+*/
+
+/* Flip X - Capovolgimento sull'asse X (verticale) */
+@keyframes flipInX {
+    from {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
     }
-    50% {
-        box-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+    40% {
+        transform: perspective(400px) rotateX(-20deg); /* Superamento */
+    }
+    60% {
+        transform: perspective(400px) rotateX(10deg); /* Correzione */
+        opacity: 1;
+    }
+    80% {
+        transform: perspective(400px) rotateX(-5deg); /* Assestamento */
+    }
+    to {
+        transform: perspective(400px) rotateX(0deg); /* Posizione finale */
+        opacity: 1;
     }
 }
 
+/* Flip Y - Capovolgimento sull'asse Y (orizzontale) */
+@keyframes flipInY {
+    from {
+        transform: perspective(400px) rotateY(90deg);
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotateY(-20deg); /* Superamento */
+    }
+    60% {
+        transform: perspective(400px) rotateY(10deg); /* Correzione */
+        opacity: 1;
+    }
+    80% {
+        transform: perspective(400px) rotateY(-5deg); /* Assestamento */
+    }
+    to {
+        transform: perspective(400px) rotateY(0deg); /* Posizione finale */
+        opacity: 1;
+    }
+}
+
+/* 
+ZOOM ANIMATIONS 
+Animazioni di zoom 3D
+*/
+
+/* Zoom in semplice - Ingrandimento 3D */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% {
+        opacity: 1;
+    }
+    /* Il 'to' è implicito: opacity: 1, transform: scale3d(1, 1, 1) */
+}
+
+/* Zoom in up - Ingrandimento dal basso */
+@keyframes zoomInUp {
+    from {
+        opacity: 0;
+        transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    }
+    /* Il 'to' è implicito: opacity: 1, transform: none */
+}
+
+/* 
+LOADING ANIMATIONS 
+Animazioni per caricamento
+*/
+
+/* Spin - Rotazione continua (per loader) */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Spin reverse - Rotazione inversa */
+@keyframes spinReverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* Dots - Effetto punti di caricamento (...) */
+@keyframes dots {
+    0%, 20% {
+        color: transparent;
+        text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+    }
+    40% {
+        color: currentColor; /* Primo punto appare */
+        text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+    }
+    60% {
+        text-shadow: 0.25em 0 0 currentColor, 0.5em 0 0 transparent; /* Secondo punto */
+    }
+    80%, 100% {
+        text-shadow: 0.25em 0 0 currentColor, 0.5em 0 0 currentColor; /* Terzo punto */
+    }
+}
+
+/* 
+GRADIENT ANIMATIONS 
+Animazioni di gradiente
+*/
+
+/* Gradient shift - Movimento del gradiente */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Shimmer - Effetto luccicante */
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+/* 
+TYPEWRITER ANIMATIONS 
+Animazioni macchina da scrivere
+*/
+
+/* Typewriter - Testo che appare carattere per carattere */
 @keyframes typewriter {
     from {
         width: 0;
@@ -173,370 +461,458 @@
     }
 }
 
-@keyframes blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
-}
-
-@keyframes slideProgress {
-    from {
-        width: 0%;
-    }
-    to {
-        width: var(--progress-width, 100%);
-    }
-}
-
-@keyframes morphShape {
-    0%, 100% {
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-    25% {
-        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+/* Blink cursor - Cursore lampeggiante */
+@keyframes blinkCursor {
+    from, to {
+        border-color: transparent;
     }
     50% {
-        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
-    }
-    75% {
-        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+        border-color: currentColor;
     }
 }
 
-/* Animation Classes */
-.animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+/* ================================ */
+/* CLASSI UTILITY ANIMAZIONI       */
+/* ================================ */
+
+/* 
+ANIMAZIONI BASE - Applica le keyframe con durata standard
+Uso: <div class="animate-fadeIn">...</div>
+*/
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
 }
 
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
 }
 
-.animate-fade-in-down {
-    animation: fadeInDown 0.6s ease-out forwards;
+.animate-fadeInDown {
+    animation: fadeInDown 0.6s ease-out;
 }
 
-.animate-fade-in-left {
-    animation: fadeInLeft 0.6s ease-out forwards;
+.animate-fadeInLeft {
+    animation: fadeInLeft 0.6s ease-out;
 }
 
-.animate-fade-in-right {
-    animation: fadeInRight 0.6s ease-out forwards;
+.animate-fadeInRight {
+    animation: fadeInRight 0.6s ease-out;
 }
 
-.animate-scale-in {
-    animation: scaleIn 0.6s ease-out forwards;
+.animate-scaleIn {
+    animation: scaleIn 0.5s ease-out;
 }
 
-.animate-slide-in-up {
-    animation: slideInUp 0.6s ease-out forwards;
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease-out;
 }
 
-.animate-slide-in-down {
-    animation: slideInDown 0.6s ease-out forwards;
+.animate-slideInUp {
+    animation: slideInUp 0.6s ease-out;
 }
 
-.animate-zoom-in {
-    animation: zoomIn 0.6s ease-out forwards;
+.animate-slideInDown {
+    animation: slideInDown 0.6s ease-out;
 }
 
-.animate-bounce {
-    animation: bounce 2s ease-in-out infinite;
+.animate-slideInLeft {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.6s ease-out;
+}
+
+.animate-rotateIn {
+    animation: rotateIn 0.6s ease-out;
+}
+
+.animate-flipInX {
+    animation: flipInX 0.8s ease-out;
+}
+
+.animate-flipInY {
+    animation: flipInY 0.8s ease-out;
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.5s ease-out;
+}
+
+.animate-zoomInUp {
+    animation: zoomInUp 0.6s ease-out;
+}
+
+/* 
+ANIMAZIONI CONTINUE - Loop infinito per elementi persistenti
+Uso: <div class="animate-spin">...</div>
+*/
+
+.animate-spin {
+    animation: spin 1s linear infinite;
 }
 
 .animate-pulse {
     animation: pulse 2s ease-in-out infinite;
 }
 
-.animate-rotate {
-    animation: rotate 2s linear infinite;
+.animate-bounce {
+    animation: bounce 1s infinite;
 }
 
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-glow {
-    animation: glow 2s ease-in-out infinite;
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 .animate-shake {
     animation: shake 0.5s ease-in-out;
 }
 
-/* Hover Animations */
-.hover-scale {
-    transition: transform var(--transition-normal);
+.animate-wobble {
+    animation: wobble 1s ease-in-out;
 }
+
+/* 
+DELAY ANIMAZIONI - Ritarda l'inizio dell'animazione
+Uso: <div class="animate-fadeIn animate-delay-200">...</div>
+*/
+
+.animate-delay-100 {
+    animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+    animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+    animation-delay: 300ms;
+}
+
+.animate-delay-500 {
+    animation-delay: 500ms;
+}
+
+.animate-delay-700 {
+    animation-delay: 700ms;
+}
+
+.animate-delay-1000 {
+    animation-delay: 1000ms;
+}
+
+/* 
+DURATA ANIMAZIONI - Modifica la velocità
+Uso: <div class="animate-fadeIn animate-slow">...</div>
+*/
+
+.animate-fast {
+    animation-duration: 0.3s;
+}
+
+.animate-slow {
+    animation-duration: 1s;
+}
+
+.animate-slower {
+    animation-duration: 2s;
+}
+
+/* ================================ */
+/* ANIMAZIONI HOVER               */
+/* ================================ */
+
+/* 
+HOVER SCALE - Ingrandimento al passaggio del mouse
+Uso: <button class="hover-scale">Pulsante</button>
+*/
 
 .hover-scale:hover {
     transform: scale(1.05);
-}
-
-.hover-rotate {
     transition: transform var(--transition-normal);
 }
+
+.hover-scale-sm:hover {
+    transform: scale(1.02); /* Ingrandimento piccolo */
+    transition: transform var(--transition-normal);
+}
+
+.hover-scale-lg:hover {
+    transform: scale(1.1); /* Ingrandimento grande */
+    transition: transform var(--transition-normal);
+}
+
+/* 
+HOVER LIFT - Sollevamento al passaggio del mouse
+Uso: <div class="hover-lift">Card</div>
+*/
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    transition: transform var(--transition-normal);
+}
+
+.hover-lift-sm:hover {
+    transform: translateY(-2px); /* Sollevamento piccolo */
+    transition: transform var(--transition-normal);
+}
+
+.hover-lift-lg:hover {
+    transform: translateY(-8px); /* Sollevamento grande */
+    transition: transform var(--transition-normal);
+}
+
+/* 
+HOVER ROTATION - Rotazione al passaggio del mouse
+*/
 
 .hover-rotate:hover {
     transform: rotate(5deg);
+    transition: transform var(--transition-normal);
 }
 
-.hover-lift {
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+.hover-rotate-sm:hover {
+    transform: rotate(2deg); /* Rotazione piccola */
+    transition: transform var(--transition-normal);
 }
 
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+/* 
+HOVER SKEW - Inclinazione al passaggio del mouse
+*/
+
+.hover-skew:hover {
+    transform: skew(-2deg, -1deg);
+    transition: transform var(--transition-normal);
 }
 
-.hover-glow {
+/* 
+HOVER EFFECTS - Effetti luminosi
+*/
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
     transition: box-shadow var(--transition-normal);
 }
 
-.hover-glow:hover {
-    box-shadow: 0 0 20px var(--accent-color);
+.hover-shadow:hover {
+    box-shadow: var(--shadow-xl);
+    transition: box-shadow var(--transition-normal);
 }
 
-.hover-slide-right {
-    transition: transform var(--transition-normal);
-}
+/* ================================ */
+/* ANIMAZIONI SCAGLIONATE          */
+/* ================================ */
 
-.hover-slide-right:hover {
-    transform: translateX(10px);
-}
+/* 
+STAGGER CHILDREN - Anima i figli con delay crescente
+Uso: <div class="stagger-children"><div>1</div><div>2</div><div>3</div></div>
+Ogni figlio avrà un delay incrementale
+*/
 
-.hover-slide-left {
-    transition: transform var(--transition-normal);
-}
-
-.hover-slide-left:hover {
-    transform: translateX(-10px);
-}
-
-/* Loading Animations */
-.loading-dots {
-    display: inline-block;
-}
-
-.loading-dots::after {
-    content: '';
-    animation: dots 2s linear infinite;
-}
-
-@keyframes dots {
-    0%, 20% {
-        content: '';
-    }
-    40% {
-        content: '.';
-    }
-    60% {
-        content: '..';
-    }
-    80%, 100% {
-        content: '...';
-    }
-}
-
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--border-color);
-    border-top: 4px solid var(--accent-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.loading-wave {
-    display: inline-block;
-    width: 4px;
-    height: 20px;
-    background: var(--accent-color);
-    animation: wave 1s ease-in-out infinite;
-    margin: 0 2px;
-}
-
-.loading-wave:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.loading-wave:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.loading-wave:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
-@keyframes wave {
-    0%, 80%, 100% {
-        transform: scale(1);
-    }
-    40% {
-        transform: scale(1.5);
-    }
-}
-
-/* Progress Animations */
-.progress-animate {
-    animation: slideProgress 1.5s ease-out forwards;
-}
-
-/* Stagger Animations */
 .stagger-children > * {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both; /* Mantiene stati iniziale e finale */
+    opacity: 0; /* Inizialmente nascosto */
 }
 
+/* Delay incrementali per ogni figlio */
 .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
 .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
 .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
 .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
 .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
 .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
 
-/* Particle Animations */
-.particle {
-    position: absolute;
-    background: var(--accent-color);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: particleFloat 3s ease-in-out infinite;
+/* ================================ */
+/* ANIMAZIONI SCROLL               */
+/* ================================ */
+
+/* 
+ANIMATE ON SCROLL - Elementi che si animano quando entrano nel viewport
+Vengono attivate via JavaScript con Intersection Observer
+*/
+
+/* Base: movimento dal basso */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
 }
 
-@keyframes particleFloat {
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Variante: movimento da sinistra */
+.animate-on-scroll-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll-left.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Variante: movimento da destra */
+.animate-on-scroll-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Variante: ingrandimento */
+.animate-on-scroll-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll-scale.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ================================ */
+/* EFFETTI SPECIALI               */
+/* ================================ */
+
+/* 
+FLOATING - Movimento fluttuante continuo
+Uso: <div class="float">Elemento fluttuante</div>
+*/
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
     0%, 100% {
-        transform: translateY(0) scale(1);
-        opacity: 0.7;
+        transform: translateY(0px);
     }
     50% {
-        transform: translateY(-20px) scale(1.2);
-        opacity: 1;
+        transform: translateY(-10px);
     }
 }
 
-/* Text Animations */
+/* 
+TYPEWRITER - Effetto macchina da scrivere
+Uso: <span class="typewriter">Testo che appare</span>
+*/
+
 .typewriter {
     overflow: hidden;
-    border-right: 2px solid var(--accent-color);
-    white-space: nowrap;
-    animation: 
-        typewriter 3s steps(40, end),
-        blink 0.75s step-end infinite;
+    border-right: 2px solid; /* Cursore */
+    white-space: nowrap; /* Impedisce il wrap */
+    animation: typewriter 3s steps(30) 1s 1 normal both,
+               blinkCursor 1s steps(2) infinite;
 }
 
-.text-reveal {
+/* 
+GLITCH - Effetto glitch digitale
+Uso: <h1 class="glitch">Titolo glitchato</h1>
+*/
+
+.glitch {
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+/* 
+NEON GLOW - Effetto neon luminoso
+Uso: <span class="neon-glow">Testo neon</span>
+*/
+
+.neon-glow {
+    text-shadow: 0 0 5px currentColor,
+                 0 0 10px currentColor,
+                 0 0 15px currentColor,
+                 0 0 20px var(--color-primary),
+                 0 0 35px var(--color-primary),
+                 0 0 40px var(--color-primary);
+    animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8; /* Sfarfallio leggero */
+    }
+}
+
+/* 
+PARTICLES - Effetto particelle di sfondo
+Uso: <div class="particles">Container con particelle</div>
+*/
+
+.particles {
     position: relative;
     overflow: hidden;
 }
 
-.text-reveal::before {
+.particles::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 100%;
-    background: var(--accent-color);
-    animation: textReveal 1s ease-out forwards;
+    background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: particles-move 20s linear infinite;
+    pointer-events: none; /* Non interferisce con i click */
 }
 
-@keyframes textReveal {
+@keyframes particles-move {
     0% {
-        width: 0;
-    }
-    50% {
-        width: 100%;
+        transform: translateY(0) translateX(0);
     }
     100% {
-        width: 0;
-        left: 100%;
+        transform: translateY(-50px) translateX(-50px);
     }
 }
 
-/* Theme Transition */
-.theme-transition {
-    transition: 
-        background-color var(--transition-normal),
-        color var(--transition-normal),
-        border-color var(--transition-normal);
-}
+/* ================================ */
+/* ACCESSIBILITÀ - RIDUZIONE MOVIMENTO */
+/* ================================ */
 
-.theme-transition * {
-    transition: 
-        background-color var(--transition-normal),
-        color var(--transition-normal),
-        border-color var(--transition-normal);
-}
+/* 
+Rispetta la preferenza dell'utente per movimento ridotto
+Gli utenti sensibili al movimento possono disabilitare le animazioni
+*/
 
-/* Mobile Menu Animations */
-.mobile-menu-open {
-    animation: slideInDown 0.3s ease-out forwards;
-}
-
-.mobile-menu-open .nav-item {
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInUp 0.3s ease-out forwards;
-}
-
-.mobile-menu-open .nav-item:nth-child(1) { animation-delay: 0.1s; }
-.mobile-menu-open .nav-item:nth-child(2) { animation-delay: 0.2s; }
-.mobile-menu-open .nav-item:nth-child(3) { animation-delay: 0.3s; }
-.mobile-menu-open .nav-item:nth-child(4) { animation-delay: 0.4s; }
-.mobile-menu-open .nav-item:nth-child(5) { animation-delay: 0.5s; }
-
-/* Notification Animations */
-.notification {
-    transform: translateX(100%);
-    opacity: 0;
-    transition: all var(--transition-normal);
-}
-
-.notification.show {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-/* Morphing Shapes */
-.morph-shape {
-    animation: morphShape 8s ease-in-out infinite;
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
-    animation: bounce 2s ease-in-out infinite;
-}
-
-/* Performance Optimizations */
-.will-change-transform {
-    will-change: transform;
-}
-
-.will-change-opacity {
-    will-change: opacity;
-}
-
-.will-change-auto {
-    will-change: auto;
-}
-
-/* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
+    /* Disabilita tutte le animazioni e transizioni */
     *,
     *::before,
     *::after {
@@ -545,12 +921,142 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    
-    .animate-bounce,
+
+    /* Disabilita animazioni specifiche problematiche */
+    .animate-spin,
     .animate-pulse,
-    .animate-rotate,
-    .animate-float,
-    .animate-glow {
-        animation: none;
+    .animate-bounce,
+    .float,
+    .typewriter,
+    .glitch,
+    .neon-glow {
+        animation: none !important;
     }
+
+    /* Reset elementi scroll-based */
+    .animate-on-scroll,
+    .animate-on-scroll-left,
+    .animate-on-scroll-right,
+    .animate-on-scroll-scale {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ================================ */
+/* OTTIMIZZAZIONI PERFORMANCE      */
+/* ================================ */
+
+/* 
+GPU ACCELERATION - Forza l'uso della GPU per animazioni fluide
+Uso: <div class="gpu-layer">Elemento ottimizzato</div>
+*/
+
+.gpu-layer {
+    transform: translateZ(0); /* Crea un nuovo layer compositore */
+    backface-visibility: hidden; /* Nasconde il retro durante le rotazioni */
+    perspective: 1000px; /* Abilita il rendering 3D */
+}
+
+/* 
+WILL-CHANGE - Ottimizza le proprietà che cambieranno
+Informa il browser di preparare l'elemento per i cambiamenti
+*/
+
+.will-change-transform {
+    will-change: transform; /* Per elementi che si muoveranno/scaleranno */
+}
+
+.will-change-opacity {
+    will-change: opacity; /* Per elementi che cambieranno opacità */
+}
+
+.will-change-scroll {
+    will-change: scroll-position; /* Per elementi con scroll personalizzato */
+}
+
+/* Reset will-change dopo l'animazione per liberare risorse */
+.animation-finished {
+    will-change: auto;
+}
+
+/* ================================ */
+/* STATI COMBINATI                 */
+/* ================================ */
+
+/* 
+Combinazioni utili per stati complessi
+*/
+
+/* Elemento nascosto inizialmente (per JS animations) */
+.hidden-initial {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Elemento visibile con transizione */
+.visible-animated {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease-out;
+}
+
+/* Elemento in loading */
+.loading-state {
+    opacity: 0.7;
+    pointer-events: none;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Elemento completamente visibile */
+.fully-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+/* ================================ */
+/* DEBUG E SVILUPPO               */
+/* ================================ */
+
+/* 
+Classi utili per debug delle animazioni
+Rimuovere in produzione
+*/
+
+/* Evidenzia elementi con animazioni */
+.debug-animations * {
+    outline: 1px dashed rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Rallenta tutte le animazioni per debug */
+.debug-slow-motion * {
+    animation-duration: 5s !important;
+    transition-duration: 5s !important;
+}
+
+/* ================================ */
+/* FIX PROGETTI TREMOLANTI          */
+/* ================================ */
+
+/* Disabilita animazioni problematiche sui progetti */
+.project-card,
+.project-card *,
+.project-title,
+.projects-grid {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: flat;
+}
+
+/* Force GPU acceleration senza tremolii */
+.project-card {
+    transform: translateZ(0);
+    will-change: auto; /* Rimuovi will-change se era impostato */
+}
+
+/* Rimuovi transizioni su elementi problematici */
+.project-title {
+    transition: color var(--transition-fast) !important;
+    /* Rimuovi tutte le altre transizioni */
 }

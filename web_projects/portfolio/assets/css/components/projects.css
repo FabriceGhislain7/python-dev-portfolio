@@ -1,0 +1,977 @@
+/* PROJECTS SECTION                 */
+/* ================================ */
+.projects {
+    background: var(--color-bg-primary);
+    position: relative;
+    padding: var(--space-16) 0;
+}
+
+.projects .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ================================ */
+/* PROJECTS FILTER BUTTONS          */
+/* ================================ */
+.projects-filter {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+    flex-wrap: wrap;
+}
+
+/* Singolo bottone filtro */
+.projects-filter .filter-btn {
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Stato hover del filtro */
+.projects-filter .filter-btn:hover {
+    background: var(--color-primary-50);
+    color: var(--color-primary);
+    border-color: var(--color-primary-200);
+    transform: translateY(-1px);
+}
+
+/* Stato attivo del filtro */
+.projects-filter .filter-btn.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+/* ================================ */
+/* PROJECTS GRID LAYOUT             */
+/* ================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: var(--space-8);
+    align-items: start;
+}
+
+/* Layout mobile per la griglia */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+}
+
+/* ================================ */
+/* PROJECT CARD CONTAINER           */
+/* ================================ */
+.project-card {
+    /* Layout base */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+    /* Styling */
+    background: var(--color-bg-primary);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-md);
+    
+    /* Comportamento */
+    overflow: hidden;
+    position: relative;
+    isolation: isolate; /* Crea nuovo stacking context per prevenire conflitti */
+    
+    /* Transizioni */
+    transition: all var(--transition-normal);
+    
+    /* FIX: Prevenzione elementi fluttuanti */
+    contain: layout style paint;
+}
+
+/* Effetto hover sulla card */
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary-200);
+}
+
+/* Card evidenziata (featured) */
+.project-card.featured {
+    border: 2px solid var(--color-primary);
+    position: relative;
+}
+
+/* Indicatore top per progetti featured */
+.project-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+    z-index: 1;
+}
+
+/* ================================ */
+/* PROJECT IMAGE SECTION            */
+/* ================================ */
+.project-image {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    background: var(--color-gray-100);
+    flex-shrink: 0; /* Non si riduce mai */
+}
+
+/* Immagine del progetto */
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--transition-slow);
+}
+
+/* Effetto zoom immagine al hover */
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+/* ================================ */
+/* PROJECT OVERLAY (su immagine)    */
+/* ================================ */
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 3; /* Sopra l'immagine ma sotto i badge */
+}
+
+/* Mostra overlay al hover */
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+/* ================================ */
+/* PROJECT STATUS BADGE            */
+/* ================================ */
+.project-status {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    backdrop-filter: blur(10px);
+    z-index: 4; /* Sopra tutto */
+}
+
+/* Badge featured */
+.project-featured-badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: var(--space-1) var(--space-3);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--border-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 4; /* Sopra tutto */
+}
+
+/* ================================ */
+/* PROJECT CONTENT AREA             */
+/* ================================ */
+.project-content {
+    padding: var(--space-6);
+    flex: 1; /* Prende tutto lo spazio disponibile */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* Header del contenuto */
+.project-header {
+    margin-bottom: var(--space-2);
+}
+
+/* ================================ */
+/* PROJECT TITLE - FIX PRINCIPALE   */
+/* ================================ */
+.project-title {
+    /* Typography */
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-tight);
+    
+    /* Layout - IMPORTANTE: Reset completo */
+    position: static !important;
+    margin: 0 0 var(--space-2) 0 !important;
+    padding: 0 !important;
+    
+    /* FIX: Eliminazione tremolii */
+    transform: none !important;
+    animation: none !important;
+    transition: color var(--transition-fast) !important;
+    
+    /* FIX: Reset posizionamento assoluto */
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: auto !important;
+    
+    /* FIX: Stabilizzazione rendering */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: auto;
+}
+
+/* ================================ */
+/* PROJECT DESCRIPTION              */
+/* ================================ */
+.project-description {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    font-size: var(--font-size-sm);
+    flex: 1; /* Prende spazio disponibile */
+    margin-bottom: var(--space-4);
+}
+
+/* ================================ */
+/* PROJECT TECHNOLOGIES TAGS        */
+/* ================================ */
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+/* Singolo tag tecnologia */
+.tech-tag {
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-primary-100);
+    color: var(--color-primary-dark);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--border-radius-full);
+    transition: all var(--transition-fast);
+}
+
+/* Effetto hover sui tag (tramite card hover) */
+.project-card:hover .tech-tag {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Tag per indicare tecnologie aggiuntive */
+.tech-more {
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-gray-200);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--border-radius-full);
+}
+
+/* ================================ */
+/* PROJECT FOOTER - FIX LAYOUT      */
+/* ================================ */
+.project-footer {
+    /* Layout fix - posizionamento corretto */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Spinge verso il basso */
+    
+    /* Styling */
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-light);
+    
+    /* FIX: Posizionamento stabile */
+    position: relative;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* ================================ */
+/* PROJECT LINKS - SINISTRA         */
+/* ================================ */
+.project-links {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    order: 1; /* Prima posizione a sinistra */
+}
+
+/* Singolo link progetto */
+.project-link {
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    
+    /* Styling */
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    
+    /* FIX: Reset posizionamento problematico */
+    position: static !important;
+    float: none !important;
+    transform: none !important;
+    
+    /* Transizioni */
+    transition: all var(--transition-fast);
+}
+
+/* Hover sui link */
+.project-link:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px) !important; /* Solo questo transform è permesso */
+}
+
+/* Link nell'overlay (diverso stile) */
+.project-overlay .project-link {
+    width: 44px;
+    height: 44px;
+    background: var(--color-white);
+    color: var(--color-gray-800);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    padding: 0;
+}
+
+.project-overlay .project-link:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px) !important;
+}
+
+/* ================================ */
+/* PROJECT META - DESTRA            */
+/* ================================ */
+.project-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    order: 2; /* Seconda posizione a destra */
+}
+
+/* Elemento meta (durata, team size, etc.) */
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+/* ================================ */
+/* PROJECT STATS (footer completo)  */
+/* ================================ */
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* ================================ */
+/* PROJECT MODAL (popup dettagli)   */
+/* ================================ */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+/* Modal attivo */
+.project-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sfondo del modal */
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+/* Contenuto del modal */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: var(--color-bg-primary);
+    border-radius: var(--border-radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-2xl);
+    transition: transform var(--transition-normal);
+}
+
+/* Modal content quando attivo */
+.project-modal.active .modal-content {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Header del modal */
+.modal-header {
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-secondary);
+}
+
+.modal-header h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+/* Bottone chiusura modal */
+.modal-close {
+    width: 40px;
+    height: 40px;
+    background: var(--color-gray-200);
+    border: none;
+    border-radius: 50%;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: var(--color-error);
+    color: var(--color-white);
+}
+
+/* Body del modal */
+.modal-body {
+    padding: var(--space-6);
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
+/* ================================ */
+/* MODAL CONTENT DETAILS            */
+/* ================================ */
+.project-detail-image {
+    position: relative;
+    margin-bottom: var(--space-6);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.project-detail-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.project-status-large {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--border-radius-full);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    backdrop-filter: blur(10px);
+}
+
+.project-detail-info > div {
+    margin-bottom: var(--space-6);
+}
+
+.project-detail-info h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--space-2);
+    display: inline-block;
+}
+
+.project-detail-info ul {
+    list-style: none;
+}
+
+.project-detail-info li {
+    padding: var(--space-2) 0;
+    padding-left: var(--space-6);
+    position: relative;
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+.project-detail-info li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ================================ */
+/* MODAL TECHNOLOGIES SECTION       */
+/* ================================ */
+.project-technologies-full .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.project-technologies-full .tech-tag {
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+    border-radius: var(--border-radius-lg);
+}
+
+/* ================================ */
+/* MODAL META INFORMATION           */
+/* ================================ */
+.project-meta-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-lg);
+}
+
+.meta-item {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.meta-item strong {
+    color: var(--color-text-primary);
+}
+
+/* ================================ */
+/* MODAL LINKS SECTION              */
+/* ================================ */
+.project-links-full {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+/* Bottone dettagli progetto */
+.project-details-btn {
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.project-details-btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+/* ================================ */
+/* LOADING STATES                   */
+/* ================================ */
+.projects-loading {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: var(--space-8);
+}
+
+/* Skeleton card per caricamento */
+.project-skeleton {
+    background: var(--color-bg-primary);
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+    animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+.skeleton-image {
+    height: 240px;
+    background: var(--color-gray-200);
+}
+
+.skeleton-content {
+    padding: var(--space-6);
+}
+
+.skeleton-title {
+    height: 24px;
+    background: var(--color-gray-200);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-3);
+}
+
+.skeleton-description {
+    height: 60px;
+    background: var(--color-gray-200);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-4);
+}
+
+.skeleton-tags {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.skeleton-tags::before,
+.skeleton-tags::after {
+    content: '';
+    width: 60px;
+    height: 20px;
+    background: var(--color-gray-200);
+    border-radius: var(--border-radius-full);
+}
+
+/* ================================ */
+/* ERROR AND EMPTY STATES           */
+/* ================================ */
+.projects-error,
+.projects-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-xl);
+    border: 2px dashed var(--color-border-medium);
+}
+
+.projects-error .error-icon,
+.projects-empty .empty-icon {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-4);
+}
+
+.projects-error .error-icon {
+    color: var(--color-warning);
+}
+
+.projects-empty .empty-icon {
+    color: var(--color-text-tertiary);
+}
+
+.projects-error h3,
+.projects-empty h3 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.projects-error p,
+.projects-empty p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+/* ================================ */
+/* GITHUB SECTION                   */
+/* ================================ */
+.github-section {
+    text-align: center;
+    margin-top: var(--space-16);
+    padding: var(--space-12) var(--space-8);
+    background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+    border-radius: var(--border-radius-2xl);
+    border: 1px solid var(--color-border-light);
+}
+
+.github-section h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.github-section p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-lg);
+}
+
+/* ================================ */
+/* FIX ANTI-TREMOLII GLOBALI        */
+/* ================================ */
+
+/* Rimuovi qualsiasi elemento pseudo problematico */
+.projects-grid::before,
+.projects-grid::after,
+.project-card::before:not(.project-card.featured::before) {
+    display: none !important;
+}
+
+/* Force reset per titoli duplicati */
+.project-card > h3:not(.project-content .project-title),
+.project-card > .project-title:not(.project-content .project-title) {
+    display: none !important;
+}
+
+/* Stabilizzazione rendering per tutti gli elementi della card */
+.project-card * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ================================ */
+/* RESPONSIVE DESIGN                */
+/* ================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .projects-filter {
+        gap: var(--space-2);
+    }
+    
+    .projects-filter .filter-btn {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--font-size-xs);
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-content {
+        padding: var(--space-5);
+    }
+    
+    .project-footer {
+        flex-direction: column;
+        gap: var(--space-3);
+        align-items: flex-start;
+    }
+    
+    .project-links,
+    .project-meta {
+        order: 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: var(--space-4);
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--space-4);
+    }
+    
+    .project-links-full {
+        flex-direction: column;
+    }
+    
+    .project-meta-full {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================ */
+/* DARK THEME ADJUSTMENTS           */
+/* ================================ */
+[data-theme="dark"] .project-card {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border-light);
+}
+
+[data-theme="dark"] .project-card:hover {
+    border-color: var(--color-primary-400);
+}
+
+[data-theme="dark"] .modal-content {
+    background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .modal-header {
+    background: var(--color-bg-tertiary);
+    border-bottom-color: var(--color-border-light);
+}
+
+[data-theme="dark"] .projects-filter .filter-btn {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border-light);
+}
+
+[data-theme="dark"] .projects-filter .filter-btn:hover {
+    background: var(--color-primary-900);
+    border-color: var(--color-primary-600);
+}
+
+[data-theme="dark"] .tech-tag {
+    background: var(--color-primary-800);
+    color: var(--color-primary-200);
+}
+
+[data-theme="dark"] .project-card:hover .tech-tag {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* ================================ */
+/* ANIMATIONS                       */
+/* ================================ */
+
+/* Animazione pulse per skeleton */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Animazione entrata card */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Applica animazione entrata alle card */
+.project-card {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* ================================ */
+/* ACCESSIBILITY ENHANCEMENTS       */
+/* ================================ */
+
+/* Rispetta preferenze di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-card *,
+    .project-image img,
+    .project-link,
+    .modal-content {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+    
+    .project-card:hover {
+        transform: none !important;
+    }
+    
+    .project-card:hover .project-image img {
+        transform: none !important;
+    }
+}
+
+/* Focus states per accessibilità */
+.project-link:focus,
+.filter-btn:focus,
+.project-details-btn:focus,
+.modal-close:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ================================ */
+/* PRINT STYLES                     */
+/* ================================ */
+@media print {
+    .projects-filter {
+        display: none;
+    }
+    
+    .project-overlay,
+    .project-modal {
+        display: none;
+    }
+    
+    .project-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .project-link {
+        color: #000;
+        background: #fff;
+        border: 1px solid #000;
+    }
+}

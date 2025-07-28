@@ -1,575 +1,603 @@
-// Animation Manager Module
+/*
+===========================================
+ANIMATIONS MODULE
+===========================================
+Gestisce tutte le animazioni dinamiche del portfolio
+*/
 
-const AnimationManager = {
-    // Initialize animation system
-    init() {
-        this.observers = new Map();
-        this.animatedElements = new Set();
-        this.particleSystem = null;
+(function() {
+    'use strict';
+
+    // Stato del modulo animazioni
+    let animationsEnabled = true;
+    let observers = [];
+    let animatedElements = new Set();
+    let particles = [];
+    let animationFrameId = null;
+
+    /* ================================ */
+    /* INIZIALIZZAZIONE                 */
+    /* ================================ */
+    function init() {
+        // Controlla preferenze utente per reduced motion
+        checkMotionPreferences();
+
+        if (animationsEnabled) {
+            // Setup intersection observers per scroll animations
+            setupScrollAnimations();
+
+            // Setup animazioni speciali
+            setupParticleSystem();
+            setupCounterAnimations();
+            setupTypewriterEffects();
+            setupHoverAnimations();
+            setupLoadingAnimations();
+
+            // Setup animazioni periodiche
+            startPeriodicAnimations();
+        }
+
+        window.PortfolioConfig.utils.log('debug', 'Animations module initialized');
+    }
+
+    /* ================================ */
+    /* MOTION PREFERENCES               */
+    /* ================================ */
+    function checkMotionPreferences() {
+        // Controlla se l'utente preferisce reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
-        this.setupScrollAnimations();
-        this.setupTextAnimations();
-        this.setupParticleSystem();
-        this.setupHoverEffects();
-        this.setupLoadingAnimations();
-        
-        console.log('Animation Manager initialized');
-    },
-    
-    // Setup scroll-triggered animations
-    setupScrollAnimations() {
-        const animatedElements = Utils.dom.getAll('.scroll-animate');
-        
-        if (animatedElements.length === 0) return;
-        
-        const observer = Utils.performance.createObserver((entries) => {
+        if (prefersReducedMotion) {
+            animationsEnabled = false;
+            document.body.classList.add('reduced-motion');
+            window.PortfolioConfig.utils.log('info', 'Reduced motion enabled');
+        }
+
+        // Ascolta cambiamenti nelle preferenze
+        window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
+            animationsEnabled = !e.matches;
+            if (e.matches) {
+                document.body.classList.add('reduced-motion');
+                stopAllAnimations();
+            } else {
+                document.body.classList.remove('reduced-motion');
+                init();
+            }
+        });
+    }
+
+    /* ================================ */
+    /* SCROLL ANIMATIONS                */
+    /* ================================ */
+    function setupScrollAnimations() {
+        // Elementi che devono animarsi quando entrano in viewport
+        const animationTargets = [
+            { selector: '.hero-greeting', animation: 'fadeInUp', delay: 200 },
+            { selector: '.hero-name', animation: 'fadeInUp', delay: 400 },
+            { selector: '.hero-profession', animation: 'fadeInUp', delay: 600 },
+            { selector: '.hero-description', animation: 'fadeInUp', delay: 800 },
+            { selector: '.hero-buttons', animation: 'fadeInUp', delay: 1000 },
+            { selector: '.hero-avatar', animation: 'scaleIn', delay: 1200 },
+            { selector: '.about-paragraph', animation: 'fadeInLeft', delay: 0 },
+            { selector: '.stat', animation: 'bounceIn', delay: 0 },
+            { selector: '.skill-card', animation: 'slideInUp', delay: 0 },
+            { selector: '.project-card', animation: 'fadeInUp', delay: 0 },
+            { selector: '.timeline-item', animation: 'slideInLeft', delay: 0 },
+            { selector: '.contact-item', animation: 'fadeInUp', delay: 0 }
+        ];
+
+        animationTargets.forEach(target => {
+            const elements = document.querySelectorAll(target.selector);
+            elements.forEach((element, index) => {
+                setupIntersectionObserver(element, target.animation, target.delay + (index * 100));
+            });
+        });
+    }
+
+    function setupIntersectionObserver(element, animationType, delay) {
+        if (!element || animatedElements.has(element)) return;
+
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.triggerElementAnimation(entry.target);
+                if (entry.isIntersecting && !animatedElements.has(entry.target)) {
+                    setTimeout(() => {
+                        animateElement(entry.target, animationType);
+                        animatedElements.add(entry.target);
+                    }, delay);
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: CONFIG.animation.threshold,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         });
+
+        observer.observe(element);
+        observers.push(observer);
+    }
+
+    function animateElement(element, animationType) {
+        element.classList.add('animate-' + animationType);
         
-        animatedElements.forEach(element => {
-            observer.observe(element);
+        // Rimuovi la classe dopo l'animazione per permettere re-triggering
+        element.addEventListener('animationend', () => {
+            element.classList.remove('animate-' + animationType);
+        }, { once: true });
+    }
+
+    /* ================================ */
+    /* COUNTER ANIMATIONS               */
+    /* ================================ */
+    function setupCounterAnimations() {
+        const counters = document.querySelectorAll('[data-count]');
+        
+        counters.forEach(counter => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animatedElements.has(entry.target)) {
+                        animateCounter(entry.target);
+                        animatedElements.add(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(counter);
+            observers.push(observer);
         });
-        
-        this.observers.set('scroll', observer);
-    },
-    
-    // Trigger animation for specific element
-    triggerElementAnimation(element) {
-        if (this.animatedElements.has(element)) return;
-        
-        this.animatedElements.add(element);
-        
-        // Add base animation class
-        Utils.dom.addClass(element, 'in-view');
-        
-        // Handle specific element types
-        if (element.classList.contains('skill-card')) {
-            this.animateSkillCard(element);
-        } else if (element.classList.contains('project-card')) {
-            this.animateProjectCard(element);
-        } else if (element.classList.contains('stat')) {
-            this.animateStatCounter(element);
-        } else if (element.classList.contains('hero-text')) {
-            this.animateHeroText(element);
+    }
+
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-count'));
+        const duration = 2000; // 2 secondi
+        const startTime = performance.now();
+        const startValue = 0;
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (ease-out cubic)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(startValue + (target - startValue) * easeOut);
+            
+            element.textContent = current.toLocaleString();
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target.toLocaleString();
+            }
         }
         
-        // Trigger custom animation event
-        Utils.events.trigger(element, 'animated', { element });
-    },
-    
-    // Animate skill cards with progress bars
-    animateSkillCard(skillCard) {
-        const progressBar = skillCard.querySelector('.progress-fill');
-        const technologies = skillCard.querySelectorAll('.skill-tag');
+        requestAnimationFrame(updateCounter);
+    }
+
+    /* ================================ */
+    /* TYPEWRITER EFFECTS               */
+    /* ================================ */
+    function setupTypewriterEffects() {
+        const typewriterElements = document.querySelectorAll('[data-typewriter]');
         
-        // Animate progress bar
-        if (progressBar) {
-            const progress = progressBar.getAttribute('data-progress');
-            setTimeout(() => {
-                progressBar.style.width = `${progress}%`;
-                progressBar.style.opacity = '1';
-            }, 200);
-        }
-        
-        // Stagger animate technology tags
-        if (technologies.length > 0) {
-            Utils.animation.stagger(technologies, 'fade-in-up', 50);
-        }
-    },
-    
-    // Animate project cards
-    animateProjectCard(projectCard) {
-        const image = projectCard.querySelector('.project-image img');
-        const content = projectCard.querySelector('.project-content');
-        const techTags = projectCard.querySelectorAll('.tech-tag');
-        
-        // Animate image with scale effect
-        if (image) {
-            setTimeout(() => {
-                Utils.dom.addClass(image, 'animate-scale-in');
-            }, 100);
-        }
-        
-        // Animate content
-        if (content) {
-            setTimeout(() => {
-                Utils.dom.addClass(content, 'animate-fade-in-up');
-            }, 200);
-        }
-        
-        // Stagger animate tech tags
-        if (techTags.length > 0) {
-            setTimeout(() => {
-                Utils.animation.stagger(techTags, 'animate-fade-in', 30);
-            }, 400);
-        }
-    },
-    
-    // Animate statistics counters
-    animateStatCounter(statElement) {
-        const numberElement = statElement.querySelector('.stat-number');
-        if (!numberElement || numberElement.classList.contains('counted')) return;
-        
-        const targetValue = parseInt(numberElement.getAttribute('data-count')) || 0;
-        const suffix = numberElement.textContent.replace(/[0-9]/g, '');
-        
-        Utils.dom.addClass(numberElement, 'counted');
-        Utils.animation.countUp(numberElement, targetValue, CONFIG.skills.countUpDuration, suffix);
-    },
-    
-    // Animate hero text with typewriter effect
-    animateHeroText(heroText) {
-        const titleElements = heroText.querySelectorAll('.hero-greeting, .hero-name, .hero-profession');
-        const description = heroText.querySelector('.hero-description');
-        const buttons = heroText.querySelector('.hero-buttons');
-        
-        // Animate title elements with stagger
-        titleElements.forEach((element, index) => {
-            setTimeout(() => {
-                Utils.dom.addClass(element, 'animate-fade-in-up');
-            }, index * 200);
-        });
-        
-        // Animate description
-        if (description) {
-            setTimeout(() => {
-                Utils.dom.addClass(description, 'animate-fade-in');
-            }, titleElements.length * 200 + 200);
-        }
-        
-        // Animate buttons
-        if (buttons) {
-            setTimeout(() => {
-                Utils.dom.addClass(buttons, 'animate-fade-in-up');
-            }, titleElements.length * 200 + 400);
-        }
-    },
-    
-    // Setup text animations (typewriter, text reveal, etc.)
-    setupTextAnimations() {
-        // Typewriter effect for hero title
-        const typewriterElements = Utils.dom.getAll('.typewriter');
         typewriterElements.forEach(element => {
-            this.createTypewriterEffect(element);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animatedElements.has(entry.target)) {
+                        typewriterEffect(entry.target);
+                        animatedElements.add(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(element);
+            observers.push(observer);
         });
-        
-        // Text reveal effect
-        const textRevealElements = Utils.dom.getAll('.text-reveal');
-        textRevealElements.forEach(element => {
-            this.createTextRevealEffect(element);
-        });
-    },
-    
-    // Create typewriter effect
-    createTypewriterEffect(element) {
+    }
+
+    function typewriterEffect(element) {
         const text = element.textContent;
-        const speed = element.getAttribute('data-speed') || 50;
+        const speed = parseInt(element.getAttribute('data-speed')) || 50;
         
         element.textContent = '';
-        element.style.opacity = '1';
+        element.style.borderRight = '2px solid currentColor';
         
         let i = 0;
-        const typeWriter = () => {
+        function typeChar() {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                setTimeout(typeChar, speed);
             } else {
-                // Remove cursor after typing
-                setTimeout(() => {
-                    element.style.borderRight = 'none';
-                }, 1000);
+                // Animazione cursore lampeggiante
+                setInterval(() => {
+                    element.style.borderRight = element.style.borderRight === 'none' ? 
+                        '2px solid currentColor' : 'none';
+                }, 500);
             }
-        };
-        
-        // Start typing with a delay
-        setTimeout(typeWriter, 500);
-    },
-    
-    // Create text reveal effect
-    createTextRevealEffect(element) {
-        const observer = Utils.performance.createObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    Utils.dom.addClass(entry.target, 'animate-text-reveal');
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-        
-        observer.observe(element);
-    },
-    
-    // Setup particle system for hero background
-    setupParticleSystem() {
-        const heroParticles = Utils.dom.get('.hero-particles');
-        if (!heroParticles) return;
-        
-        this.particleSystem = {
-            container: heroParticles,
-            particles: [],
-            isActive: true
-        };
-        
-        // Create initial particles
-        this.createParticles(20);
-        
-        // Animate particles
-        this.animateParticles();
-        
-        // Handle mouse movement for interactive particles
-        this.setupInteractiveParticles();
-    },
-    
-    // Create floating particles
-    createParticles(count) {
-        if (!this.particleSystem) return;
-        
-        for (let i = 0; i < count; i++) {
-            const particle = Utils.dom.create('div', 'particle');
-            
-            // Random size and position
-            const size = Utils.math.random(2, 6);
-            const x = Utils.math.random(0, 100);
-            const y = Utils.math.random(0, 100);
-            
-            particle.style.cssText = `
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}%;
-                top: ${y}%;
-                animation-delay: ${Utils.math.random(0, 3)}s;
-                animation-duration: ${Utils.math.random(3, 6)}s;
-            `;
-            
-            this.particleSystem.container.appendChild(particle);
-            this.particleSystem.particles.push({
-                element: particle,
-                x: x,
-                y: y,
-                vx: Utils.math.random(-0.5, 0.5),
-                vy: Utils.math.random(-0.5, 0.5),
-                size: size
-            });
-        }
-    },
-    
-    // Animate particles with physics
-    animateParticles() {
-        if (!this.particleSystem || !this.particleSystem.isActive) return;
-        
-        this.particleSystem.particles.forEach(particle => {
-            // Update position
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            
-            // Wrap around screen
-            if (particle.x > 100) particle.x = -5;
-            if (particle.x < -5) particle.x = 100;
-            if (particle.y > 100) particle.y = -5;
-            if (particle.y < -5) particle.y = 100;
-            
-            // Apply position
-            particle.element.style.left = `${particle.x}%`;
-            particle.element.style.top = `${particle.y}%`;
-        });
-        
-        requestAnimationFrame(() => this.animateParticles());
-    },
-    
-    // Setup interactive particles that follow mouse
-    setupInteractiveParticles() {
-        if (!this.particleSystem) return;
-        
-        const hero = Utils.dom.get('.hero');
-        if (!hero) return;
-        
-        let mouseX = 0;
-        let mouseY = 0;
-        
-        hero.addEventListener('mousemove', (e) => {
-            const rect = hero.getBoundingClientRect();
-            mouseX = ((e.clientX - rect.left) / rect.width) * 100;
-            mouseY = ((e.clientY - rect.top) / rect.height) * 100;
-            
-            // Attract particles to mouse
-            this.particleSystem.particles.forEach(particle => {
-                const dx = mouseX - particle.x;
-                const dy = mouseY - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 20) {
-                    particle.vx += dx * 0.0001;
-                    particle.vy += dy * 0.0001;
-                    
-                    // Limit velocity
-                    particle.vx = Utils.math.clamp(particle.vx, -1, 1);
-                    particle.vy = Utils.math.clamp(particle.vy, -1, 1);
-                }
-            });
-        });
-    },
-    
-    // Setup hover effects for interactive elements
-    setupHoverEffects() {
-        // Magnetic buttons
-        const magneticButtons = Utils.dom.getAll('.btn');
-        magneticButtons.forEach(button => {
-            this.addMagneticEffect(button);
-        });
-        
-        // Tilt effect for cards
-        const tiltCards = Utils.dom.getAll('.skill-card, .project-card');
-        tiltCards.forEach(card => {
-            this.addTiltEffect(card);
-        });
-        
-        // Glow effect for icons
-        const glowIcons = Utils.dom.getAll('.skill-icon, .contact-icon');
-        glowIcons.forEach(icon => {
-            this.addGlowEffect(icon);
-        });
-    },
-    
-    // Add magnetic effect to buttons
-    addMagneticEffect(element) {
-        let isHovering = false;
-        
-        element.addEventListener('mouseenter', () => {
-            isHovering = true;
-            Utils.dom.addClass(element, 'magnetic-active');
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            isHovering = false;
-            Utils.dom.removeClass(element, 'magnetic-active');
-            element.style.transform = '';
-        });
-        
-        element.addEventListener('mousemove', (e) => {
-            if (!isHovering) return;
-            
-            const rect = element.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            const moveX = x * 0.1;
-            const moveY = y * 0.1;
-            
-            element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-    },
-    
-    // Add 3D tilt effect to cards
-    addTiltEffect(element) {
-        element.addEventListener('mousemove', (e) => {
-            const rect = element.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            element.style.transform = `
-                perspective(1000px) 
-                rotateX(${rotateX}deg) 
-                rotateY(${rotateY}deg) 
-                scale3d(1.02, 1.02, 1.02)
-            `;
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            element.style.transform = '';
-        });
-    },
-    
-    // Add glow effect to icons
-    addGlowEffect(element) {
-        element.addEventListener('mouseenter', () => {
-            Utils.dom.addClass(element, 'animate-glow');
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            Utils.dom.removeClass(element, 'animate-glow');
-        });
-    },
-    
-    // Setup loading animations
-    setupLoadingAnimations() {
-        // Shimmer effect for loading states
-        const shimmerElements = Utils.dom.getAll('.shimmer');
-        shimmerElements.forEach(element => {
-            this.addShimmerEffect(element);
-        });
-        
-        // Skeleton loading for cards
-        const skeletonElements = Utils.dom.getAll('.skeleton');
-        skeletonElements.forEach(element => {
-            this.addSkeletonEffect(element);
-        });
-    },
-    
-    // Add shimmer loading effect
-    addShimmerEffect(element) {
-        const shimmer = Utils.dom.create('div', 'shimmer-animation');
-        element.appendChild(shimmer);
-        
-        // Remove shimmer when content loads
-        const removeShimmer = () => {
-            if (shimmer.parentNode) {
-                shimmer.parentNode.removeChild(shimmer);
-            }
-        };
-        
-        // Auto remove after 3 seconds
-        setTimeout(removeShimmer, 3000);
-        
-        // Or remove when 'loaded' class is added
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && 
-                    mutation.attributeName === 'class' &&
-                    element.classList.contains('loaded')) {
-                    removeShimmer();
-                    observer.disconnect();
-                }
-            });
-        });
-        
-        observer.observe(element, { attributes: true });
-    },
-    
-    // Add skeleton loading effect
-    addSkeletonEffect(element) {
-        Utils.dom.addClass(element, 'skeleton-loading');
-        
-        // Remove skeleton when loaded
-        const removeEffect = () => {
-            Utils.dom.removeClass(element, 'skeleton-loading');
-            Utils.dom.addClass(element, 'skeleton-loaded');
-        };
-        
-        // Listen for loaded event
-        element.addEventListener('loaded', removeEffect);
-        
-        // Auto remove after 2 seconds
-        setTimeout(removeEffect, 2000);
-    },
-    
-    // Create custom animation sequences
-    animateSequence(elements, animationClass, delay = 100) {
-        return new Promise((resolve) => {
-            let completed = 0;
-            
-            elements.forEach((element, index) => {
-                setTimeout(() => {
-                    Utils.dom.addClass(element, animationClass);
-                    
-                    // Listen for animation end
-                    const handleAnimationEnd = () => {
-                        completed++;
-                        if (completed === elements.length) {
-                            resolve();
-                        }
-                        element.removeEventListener('animationend', handleAnimationEnd);
-                    };
-                    
-                    element.addEventListener('animationend', handleAnimationEnd);
-                }, index * delay);
-            });
-        });
-    },
-    
-    // Parallax scroll effect
-    setupParallaxScroll() {
-        const parallaxElements = Utils.dom.getAll('[data-parallax]');
-        
-        if (parallaxElements.length === 0) return;
-        
-        const handleScroll = Utils.events.throttle(() => {
-            const scrollY = window.pageYOffset;
-            
-            parallaxElements.forEach(element => {
-                const speed = parseFloat(element.getAttribute('data-parallax')) || 0.5;
-                const yPos = -(scrollY * speed);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
-        }, 16);
-        
-        window.addEventListener('scroll', handleScroll);
-    },
-    
-    // Cleanup animations
-    cleanup() {
-        // Stop particle system
-        if (this.particleSystem) {
-            this.particleSystem.isActive = false;
         }
         
-        // Disconnect observers
-        this.observers.forEach(observer => {
-            observer.disconnect();
+        typeChar();
+    }
+
+    /* ================================ */
+    /* PARTICLE SYSTEM                  */
+    /* ================================ */
+    function setupParticleSystem() {
+        const particleContainers = document.querySelectorAll('.particles, .hero-shapes');
+        
+        particleContainers.forEach(container => {
+            createParticles(container);
         });
-        
-        // Clear animated elements
-        this.animatedElements.clear();
-        
-        console.log('Animation Manager cleaned up');
-    },
-    
-    // Public method to trigger animation manually
-    trigger(element, animationType = 'fadeInUp') {
-        if (typeof element === 'string') {
-            element = Utils.dom.get(element);
-        }
-        
-        if (element) {
-            Utils.dom.addClass(element, `animate-${animationType}`);
-        }
-    },
-    
-    // Public method to reset animations
-    reset(element) {
-        if (typeof element === 'string') {
-            element = Utils.dom.get(element);
-        }
-        
-        if (element) {
-            // Remove all animation classes
-            const animationClasses = Array.from(element.classList).filter(cls => 
-                cls.startsWith('animate-') || cls === 'in-view'
-            );
-            
-            animationClasses.forEach(cls => {
-                Utils.dom.removeClass(element, cls);
-            });
-            
-            // Remove from animated elements set
-            this.animatedElements.delete(element);
+
+        if (particles.length > 0) {
+            startParticleAnimation();
         }
     }
-};
 
-// Auto-initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    AnimationManager.init();
-});
+    function createParticles(container) {
+        const particleCount = 20;
+        const rect = container.getBoundingClientRect();
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = {
+                element: createParticleElement(),
+                x: Math.random() * rect.width,
+                y: Math.random() * rect.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                size: Math.random() * 4 + 2,
+                opacity: Math.random() * 0.5 + 0.1,
+                container: container
+            };
+            
+            particle.element.style.left = particle.x + 'px';
+            particle.element.style.top = particle.y + 'px';
+            particle.element.style.width = particle.size + 'px';
+            particle.element.style.height = particle.size + 'px';
+            particle.element.style.opacity = particle.opacity;
+            
+            container.appendChild(particle.element);
+            particles.push(particle);
+        }
+    }
 
-// Cleanup on page unload
-window.addEventListener('beforeunload', () => {
-    AnimationManager.cleanup();
-});
+    function createParticleElement() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            position: absolute;
+            background: currentColor;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        return particle;
+    }
 
-// Export for other modules
-window.AnimationManager = AnimationManager;
+    function startParticleAnimation() {
+        function animateParticles() {
+            particles.forEach(particle => {
+                const rect = particle.container.getBoundingClientRect();
+                
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                
+                // Rimbalzo sui bordi
+                if (particle.x <= 0 || particle.x >= rect.width) {
+                    particle.vx *= -1;
+                }
+                if (particle.y <= 0 || particle.y >= rect.height) {
+                    particle.vy *= -1;
+                }
+                
+                // Mantieni all'interno del container
+                particle.x = Math.max(0, Math.min(rect.width, particle.x));
+                particle.y = Math.max(0, Math.min(rect.height, particle.y));
+                
+                particle.element.style.left = particle.x + 'px';
+                particle.element.style.top = particle.y + 'px';
+            });
+            
+            animationFrameId = requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+    }
+
+    /* ================================ */
+    /* HOVER ANIMATIONS                 */
+    /* ================================ */
+    function setupHoverAnimations() {
+        // Animazioni tilt per cards
+        const tiltElements = document.querySelectorAll('.skill-card, .project-card, .contact-item');
+        
+        tiltElements.forEach(element => {
+            element.addEventListener('mouseenter', (e) => {
+                startTiltAnimation(e.target);
+            });
+            
+            element.addEventListener('mouseleave', (e) => {
+                resetTilt(e.target);
+            });
+            
+            element.addEventListener('mousemove', (e) => {
+                updateTilt(e);
+            });
+        });
+
+        // Animazioni magnetiche per bottoni
+        const magneticElements = document.querySelectorAll('.btn, .hero-btn');
+        
+        magneticElements.forEach(element => {
+            element.addEventListener('mouseenter', startMagneticEffect);
+            element.addEventListener('mouseleave', resetMagneticEffect);
+            element.addEventListener('mousemove', updateMagneticEffect);
+        });
+    }
+
+    function startTiltAnimation(element) {
+        element.style.transition = 'transform 0.1s ease-out';
+    }
+
+    function resetTilt(element) {
+        element.style.transition = 'transform 0.3s ease-out';
+        element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    }
+
+    function updateTilt(e) {
+        const element = e.currentTarget;
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const rotateX = (e.clientY - centerY) / rect.height * -10;
+        const rotateY = (e.clientX - centerX) / rect.width * 10;
+        
+        element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    }
+
+    function startMagneticEffect(e) {
+        e.currentTarget.style.transition = 'transform 0.3s ease-out';
+    }
+
+    function resetMagneticEffect(e) {
+        e.currentTarget.style.transform = 'translate(0, 0) scale(1)';
+    }
+
+    function updateMagneticEffect(e) {
+        const element = e.currentTarget;
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = (e.clientX - centerX) * 0.1;
+        const deltaY = (e.clientY - centerY) * 0.1;
+        
+        element.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
+    }
+
+    /* ================================ */
+    /* LOADING ANIMATIONS               */
+    /* ================================ */
+    function setupLoadingAnimations() {
+        // Animazione progress bar del loading
+        const progressBar = document.querySelector('.loading-progress-bar');
+        const percentage = document.querySelector('.loading-percentage');
+        
+        if (progressBar && percentage) {
+            animateLoadingProgress(progressBar, percentage);
+        }
+
+        // Sequenza di animazioni loading
+        const loadingElements = [
+            { selector: '.loading-logo', delay: 0 },
+            { selector: '.loading-spinner', delay: 500 },
+            { selector: '.loading-text', delay: 1000 },
+            { selector: '.loading-progress', delay: 1500 }
+        ];
+
+        loadingElements.forEach(item => {
+            const element = document.querySelector(item.selector);
+            if (element) {
+                setTimeout(() => {
+                    element.classList.add('animate-fadeInUp');
+                }, item.delay);
+            }
+        });
+    }
+
+    function animateLoadingProgress(progressBar, percentage) {
+        let progress = 0;
+        const duration = 3000;
+        const startTime = performance.now();
+        
+        function updateProgress(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progressPercent = Math.min(elapsed / duration, 1);
+            
+            // Easing function con alcuni "salti" realistici
+            let eased = progressPercent;
+            if (progressPercent < 0.3) {
+                eased = progressPercent * 2;
+            } else if (progressPercent < 0.7) {
+                eased = 0.6 + (progressPercent - 0.3) * 0.5;
+            } else {
+                eased = 0.8 + (progressPercent - 0.7) * 0.67;
+            }
+            
+            progress = Math.floor(eased * 100);
+            
+            progressBar.style.width = progress + '%';
+            percentage.textContent = progress + '%';
+            
+            if (progressPercent < 1) {
+                requestAnimationFrame(updateProgress);
+            }
+        }
+        
+        requestAnimationFrame(updateProgress);
+    }
+
+    /* ================================ */
+    /* PERIODIC ANIMATIONS              */
+    /* ================================ */
+    function startPeriodicAnimations() {
+        // Floating animation per elementi hero
+        const floatingElements = document.querySelectorAll('.hero-avatar, .hero-shapes .hero-shape');
+        
+        floatingElements.forEach((element, index) => {
+            element.style.animation = `float ${3 + index * 0.5}s ease-in-out infinite`;
+            element.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Pulse animation per elementi attivi
+        const pulseElements = document.querySelectorAll('.status-indicator, .notification-dot');
+        
+        pulseElements.forEach(element => {
+            element.style.animation = 'pulse 2s ease-in-out infinite';
+        });
+
+        // Gradient shift per testi gradient
+        const gradientTexts = document.querySelectorAll('.hero-name, .gradient-text');
+        
+        gradientTexts.forEach(element => {
+            element.style.animation = 'gradientShift 4s ease-in-out infinite';
+        });
+    }
+
+    /* ================================ */
+    /* SCROLL PROGRESS                  */
+    /* ================================ */
+    function setupScrollProgress() {
+        const progressBar = document.getElementById('scroll-progress');
+        
+        if (progressBar) {
+            window.addEventListener('scroll', window.PortfolioConfig.utils.throttle(() => {
+                const scrolled = window.pageYOffset;
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrolled / maxScroll) * 100;
+                
+                progressBar.style.width = progress + '%';
+            }, 10));
+        }
+    }
+
+    /* ================================ */
+    /* SMOOTH SCROLLING                 */
+    /* ================================ */
+    function setupSmoothScrolling() {
+        // Intercetta tutti i link di navigazione
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    smoothScrollTo(targetElement);
+                }
+            });
+        });
+    }
+
+    function smoothScrollTo(target) {
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 1000;
+        let startTime = null;
+        
+        function animate(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (ease-in-out)
+            const easeInOutCubic = progress < 0.5 
+                ? 4 * progress * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            
+            window.scrollTo(0, startPosition + distance * easeInOutCubic);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+
+    /* ================================ */
+    /* UTILITY FUNCTIONS                */
+    /* ================================ */
+    function stopAllAnimations() {
+        // Ferma tutte le animazioni in corso
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+
+        // Disconnetti tutti gli observers
+        observers.forEach(observer => {
+            observer.disconnect();
+        });
+        observers = [];
+
+        // Rimuovi tutte le particelle
+        particles.forEach(particle => {
+            if (particle.element && particle.element.parentNode) {
+                particle.element.parentNode.removeChild(particle.element);
+            }
+        });
+        particles = [];
+
+        // Reset set di elementi animati
+        animatedElements.clear();
+    }
+
+    function pauseAnimations() {
+        document.body.style.animationPlayState = 'paused';
+    }
+
+    function resumeAnimations() {
+        document.body.style.animationPlayState = 'running';
+    }
+
+    /* ================================ */
+    /* API PUBBLICA                     */
+    /* ================================ */
+    window.AnimationsModule = {
+        init,
+        stopAllAnimations,
+        pauseAnimations,
+        resumeAnimations,
+        animateElement,
+        animateCounter,
+        typewriterEffect,
+        smoothScrollTo,
+        isEnabled: () => animationsEnabled,
+        setEnabled: (enabled) => {
+            animationsEnabled = enabled;
+            if (!enabled) {
+                stopAllAnimations();
+                document.body.classList.add('reduced-motion');
+            } else {
+                document.body.classList.remove('reduced-motion');
+                init();
+            }
+        }
+    };
+
+    /* ================================ */
+    /* AUTO-INIZIALIZZAZIONE            */
+    /* ================================ */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();

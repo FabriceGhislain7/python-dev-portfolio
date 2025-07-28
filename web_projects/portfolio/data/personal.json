@@ -1,0 +1,411 @@
+{
+  "personal_info": {
+    "first_name": "Fabrice",
+    "middle_name": "Ghislain",
+    "last_name": "Tebou",
+    "full_name": "Fabrice Ghislain Tebou",
+    "display_name": "Fabrice Tebou",
+    "title": "Python Developer | AI/ML Enthusiast",
+    "subtitle": "Trasformo idee in soluzioni tecnologiche innovative",
+    "tagline": "Codice elegante, soluzioni intelligenti",
+    "birth_date": "1995-03-15",
+    "age": 29,
+    "nationality": "Italiana",
+    "location": {
+      "city": "Genova",
+      "region": "Liguria",
+      "country": "Italia",
+      "country_code": "IT",
+      "timezone": "Europe/Rome",
+      "coordinates": {
+        "lat": 44.4056,
+        "lng": 8.9463
+      }
+    }
+  },
+
+  "contact_info": {
+    "email": {
+      "primary": "ghislaintebou@gmail.com",
+      "business": "fabrice.tebou@protonmail.com"
+    },
+    "phone": {
+      "primary": "+39 351 995 7025",
+      "whatsapp": "+39 351 995 7025"
+    },
+    "address": {
+      "street": "Via del Porto, 15",
+      "city": "Genova",
+      "postal_code": "16121",
+      "region": "Liguria",
+      "country": "Italia"
+    },
+    "availability": {
+      "status": "available",
+      "for_work": true,
+      "for_projects": true,
+      "for_collaboration": true,
+      "preferred_contact": "email",
+      "response_time": "24-48 ore"
+    }
+  },
+
+  "professional_summary": {
+    "headline": "Python Developer specializzato in AI/ML con passione per l'innovazione tecnologica",
+    "bio": "Sono un Python Developer con una solida formazione accademica in Informatica e una specializzazione in Machine Learning. La mia passione per la tecnologia mi spinge a creare soluzioni innovative che combinano eleganza del codice e intelligenza artificiale. Attraverso i miei progetti, dall'analisi di dataset complessi allo sviluppo di applicazioni web full-stack, dimostro la capacità di trasformare idee astratte in soluzioni concrete e scalabili.",
+    "elevator_pitch": "Sviluppatore Python con 3+ anni di esperienza, specializzato in AI/ML e sviluppo web. Laureato magistrale in Informatica con tesi su Machine Learning. Esperto in Django, data analysis e sistemi IoT. Appassionato di tecnologie innovative e sempre alla ricerca di nuove sfide per crescere professionalmente.",
+    "mission": "Utilizzare la tecnologia per risolvere problemi reali e creare valore attraverso soluzioni innovative e scalabili.",
+    "vision": "Diventare un leader tecnico nel campo dell'AI/ML, contribuendo allo sviluppo di tecnologie che migliorano la vita delle persone.",
+    "values": [
+      "Innovazione continua",
+      "Qualità del codice",
+      "Apprendimento costante",
+      "Collaborazione e condivisione",
+      "Impatto positivo attraverso la tecnologia"
+    ]
+  },
+
+  "career_objectives": {
+    "short_term": [
+      "Consolidare competenze in MLOps e deployment di modelli ML",
+      "Ottenere certificazioni AWS e Google Cloud Platform",
+      "Contribuire a progetti open source significativi",
+      "Sviluppare competenze in Deep Learning e Computer Vision"
+    ],
+    "medium_term": [
+      "Assumere ruolo di Senior Python Developer/ML Engineer",
+      "Guidare team di sviluppo in progetti AI/ML",
+      "Pubblicare ricerche in conferenze internazionali",
+      "Avviare progetti imprenditoriali nel tech"
+    ],
+    "long_term": [
+      "Diventare Technical Lead o CTO in azienda innovativa",
+      "Fondare startup nel settore AI/ML",
+      "Insegnare e mentorare la prossima generazione di sviluppatori",
+      "Contribuire significativamente all'avanzamento dell'AI etica"
+    ]
+  },
+
+  "personality_traits": {
+    "strengths": [
+      "Problem solving creativo",
+      "Attenzione ai dettagli",
+      "Capacità di apprendimento rapido",
+      "Mentalità analitica",
+      "Resilienza e perseveranza",
+      "Comunicazione tecnica efficace",
+      "Lavoro di squadra",
+      "Gestione dello stress"
+    ],
+    "work_style": {
+      "approach": "Metodico e orientato ai risultati",
+      "collaboration": "Team player con capacità di leadership",
+      "learning": "Autodidatta e sempre aggiornato sulle nuove tecnologie",
+      "communication": "Chiaro e diretto, con focus sulla documentazione",
+      "problem_solving": "Analitico e creativo, considera multiple soluzioni"
+    },
+    "personality_type": "INTJ - The Architect",
+    "mbti_traits": {
+      "introversion": 65,
+      "intuition": 80,
+      "thinking": 85,
+      "judging": 70
+    }
+  },
+
+  "interests_hobbies": {
+    "professional": [
+      {
+        "name": "Open Source Contributing",
+        "description": "Contribuisco a progetti open source Python e ML",
+        "level": "active"
+      },
+      {
+        "name": "Tech Blogging",
+        "description": "Scrivo articoli su Medium riguardo Python e Machine Learning",
+        "level": "occasional"
+      },
+      {
+        "name": "Hackathons",
+        "description": "Partecipo a hackathons locali e online",
+        "level": "active"
+      },
+      {
+        "name": "Tech Conferences",
+        "description": "Frequento conferenze su AI/ML e Python development",
+        "level": "regular"
+      }
+    ],
+    "personal": [
+      {
+        "name": "Fotografia",
+        "description": "Fotografo paesaggi e architettura, con interesse per la post-elaborazione digitale",
+        "level": "intermediate"
+      },
+      {
+        "name": "Lettura Tecnica",
+        "description": "Libri su computer science, AI ethics, e biografie di innovatori tech",
+        "level": "avid"
+      },
+      {
+        "name": "Gaming",
+        "description": "Giochi strategici e puzzle games che stimolano il problem solving",
+        "level": "casual"
+      },
+      {
+        "name": "Cucina Internazionale",
+        "description": "Sperimentare ricette da diverse culture mondiali",
+        "level": "enthusiast"
+      },
+      {
+        "name": "Escursionismo",
+        "description": "Trekking sui sentieri liguri e delle Alpi",
+        "level": "regular"
+      }
+    ],
+    "learning": [
+      "Lingue straniere (attualmente migliorando l'inglese tecnico)",
+      "Nuove tecnologie emergenti (Web3, Blockchain, Quantum Computing)",
+      "Design e UX principles per migliorare le interfacce utente",
+      "Business e entrepreneurship per progetti futuri"
+    ]
+  },
+
+  "soft_skills": [
+    {
+      "name": "Leadership",
+      "level": 75,
+      "description": "Capacità di guidare progetti e coordinare team di sviluppo"
+    },
+    {
+      "name": "Comunicazione",
+      "level": 85,
+      "description": "Eccellente comunicazione scritta e verbale, sia tecnica che non tecnica"
+    },
+    {
+      "name": "Problem Solving",
+      "level": 90,
+      "description": "Approccio analitico e creativo nella risoluzione di problemi complessi"
+    },
+    {
+      "name": "Adattabilità",
+      "level": 85,
+      "description": "Flessibilità nell'adattarsi a nuove tecnologie e ambienti di lavoro"
+    },
+    {
+      "name": "Gestione del Tempo",
+      "level": 80,
+      "description": "Organizzazione efficace di progetti multipli e rispetto delle scadenze"
+    },
+    {
+      "name": "Pensiero Critico",
+      "level": 88,
+      "description": "Analisi approfondita di problemi e valutazione di soluzioni alternative"
+    },
+    {
+      "name": "Collaborazione",
+      "level": 82,
+      "description": "Lavoro efficace in team multidisciplinari e cross-funzionali"
+    },
+    {
+      "name": "Innovazione",
+      "level": 87,
+      "description": "Capacità di proporre soluzioni creative e innovative"
+    }
+  ],
+
+  "languages": {
+    "native": [
+      {
+        "language": "Italiano",
+        "proficiency": "Madrelingua",
+        "certification": null,
+        "usage": "daily"
+      }
+    ],
+    "fluent": [
+      {
+        "language": "Inglese",
+        "proficiency": "C1 Advanced",
+        "certification": "Cambridge Certificate in Advanced English (2022)",
+        "usage": "technical_work",
+        "skills": {
+          "speaking": 85,
+          "writing": 90,
+          "reading": 95,
+          "listening": 88
+        }
+      }
+    ],
+    "intermediate": [
+      {
+        "language": "Francese",
+        "proficiency": "B2 Intermediate",
+        "certification": "DELF B2 (2021)",
+        "usage": "occasional",
+        "skills": {
+          "speaking": 70,
+          "writing": 75,
+          "reading": 80,
+          "listening": 72
+        }
+      }
+    ],
+    "learning": [
+      {
+        "language": "Spagnolo",
+        "proficiency": "A2 Elementary",
+        "certification": null,
+        "usage": "self_study",
+        "skills": {
+          "speaking": 40,
+          "writing": 45,
+          "reading": 55,
+          "listening": 42
+        }
+      }
+    ]
+  },
+
+  "work_preferences": {
+    "employment_type": ["full-time", "part-time", "contract", "freelance"],
+    "work_arrangement": ["remote", "hybrid", "on-site"],
+    "company_size": ["startup", "medium", "large"],
+    "industry_preferences": [
+      "Technology/Software",
+      "AI/Machine Learning",
+      "Data Science/Analytics",
+      "Healthcare Technology",
+      "FinTech",
+      "E-commerce",
+      "Education Technology"
+    ],
+    "role_preferences": [
+      "Python Developer",
+      "Backend Developer",
+      "ML Engineer",
+      "Data Scientist",
+      "Full Stack Developer",
+      "Technical Lead"
+    ],
+    "salary_expectations": {
+      "currency": "EUR",
+      "range": {
+        "min": 35000,
+        "max": 55000
+      },
+      "note": "Dipende dall'esperienza richiesta, benefits e opportunità di crescita"
+    },
+    "location_preferences": {
+      "preferred": ["Genova", "Milano", "Remote"],
+      "open_to_relocation": true,
+      "travel_willingness": "occasional"
+    }
+  },
+
+  "availability": {
+    "current_status": "available",
+    "start_date": "2025-02-01",
+    "notice_period": "1 mese",
+    "preferred_commitment": "long-term",
+    "working_hours": {
+      "preferred": "flexible",
+      "timezone": "Europe/Rome",
+      "availability": "Monday to Friday, 9:00-18:00 (flexible)"
+    }
+  },
+
+  "social_media": {
+    "professional": {
+      "github": {
+        "url": "https://github.com/FabriceGhislain7",
+        "username": "FabriceGhislain7",
+        "primary": true
+      },
+      "linkedin": {
+        "url": "#",
+        "username": "fabrice-tebou",
+        "primary": true
+      },
+      "stackoverflow": {
+        "url": "#",
+        "username": "fabrice-tebou",
+        "primary": false
+      }
+    },
+    "personal": {
+      "twitter": {
+        "url": "#",
+        "username": "@fabrice_dev",
+        "primary": false
+      },
+      "medium": {
+        "url": "#",
+        "username": "@fabrice.tebou",
+        "primary": false
+      }
+    }
+  },
+
+  "achievements_recognition": [
+    {
+      "title": "Laurea Magistrale con Lode",
+      "date": "2023-07",
+      "description": "110/110 con Lode in Informatica presso Università di Genova"
+    },
+    {
+      "title": "Borsa di Studio per Merito",
+      "date": "2021-09",
+      "description": "Riconoscimento per eccellenza accademica durante la Magistrale"
+    },
+    {
+      "title": "Best Student Project Award",
+      "date": "2022-06",
+      "description": "Miglior progetto di Machine Learning del corso"
+    },
+    {
+      "title": "Google AI Challenge Winner",
+      "date": "2022-11",
+      "description": "Primo posto nella competizione nazionale di progetti AI/ML"
+    }
+  ],
+
+  "references": {
+    "academic": [
+      {
+        "name": "Prof. Marco Rossi",
+        "title": "Professore di Machine Learning",
+        "institution": "Università di Genova",
+        "email": "marco.rossi@unige.it",
+        "relationship": "Supervisore tesi magistrale"
+      }
+    ],
+    "professional": [
+      {
+        "name": "Available upon request",
+        "note": "Referenze professionali disponibili su richiesta"
+      }
+    ]
+  },
+
+  "fun_facts": [
+    "Ho scritto la mia prima linea di codice Python a 22 anni e me ne sono innamorato immediatamente",
+    "Il mio progetto GitHub più popolare ha ricevuto oltre 50 stelle",
+    "Posso spiegare algoritmi di ML usando analogie culinarie",
+    "Ho visitato tutti i capoluoghi di regione d'Italia (obiettivo: Europa!)",
+    "Colleziono libri di computer science vintage degli anni '80-'90",
+    "Sono in grado di risolvere un cubo di Rubik in meno di 2 minuti"
+  ],
+
+  "metadata": {
+    "last_updated": "2025-01-25",
+    "version": "1.0",
+    "profile_completeness": 95,
+    "data_privacy": {
+      "consent_marketing": true,
+      "consent_analytics": true,
+      "data_retention": "indefinite",
+      "last_consent_date": "2025-01-25"
+    }
+  }
+}
