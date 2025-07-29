@@ -1,390 +1,358 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ titolo_hero|default:"La Miglior Pizza a Domicilio" }} - PizzaMama{% endblock %}
+{% block titolo_pagina %}{{ titolo_pagina }}{% endblock %}
 
-{% block body_class %}homepage{% endblock %}
+{% block meta_descrizione %}{{ descrizione_meta }}{% endblock %}
 
-{% block pagina_corrente %}home{% endblock %}
+{% block contenuto_extra_head %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+        color: white;
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+        background-size: 50px 50px;
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        color: #d32f2f;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+    
+    .stars {
+        color: #ffc107;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
 
-{% block content %}
-
-<!-- Sezione Hero Italiana -->
-<section class="hero-section bg-primary text-white py-5">
+{% block contenuto %}
+<!-- Hero Section -->
+<section class="hero-section">
     <div class="container">
-        <div class="row align-items-center" style="min-height: 60vh;">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h1 class="display-4 fw-bold mb-3">
-                    {{ titolo_hero|default:"La Pizza Perfetta, Consegnata a Casa Tua" }}
-                </h1>
-                <p class="lead mb-4">
-                    {{ sottotitolo_hero|default:"Ingredienti freschi, ricette tradizionali e consegna veloce in tutta la città" }}
-                </p>
-                <div class="d-flex flex-column flex-sm-row gap-3">
-                    <a href="{{ url_catalogo|default:'/catalogo/' }}" class="btn btn-light btn-lg" id="pulsanteOrdinaOra">
-                        <i class="bi bi-pizza"></i>
-                        {{ testo_cta|default:"Ordina Ora" }}
-                    </a>
-                    <a href="{% url 'chi_siamo' %}" class="btn btn-outline-light btn-lg">
-                        <i class="bi bi-info-circle"></i>
-                        Scopri di Più
-                    </a>
-                </div>
-                
-                <!-- Statistiche Veloci -->
-                <div class="row mt-4 text-center">
-                    <div class="col-4">
-                        <div class="fw-bold fs-4">
-                            {{ storia_azienda.pizze_consegnate|default:"50k+" }}
-                        </div>
-                        <small>Pizze Consegnate</small>
-                    </div>
-                    <div class="col-4">
-                        <div class="fw-bold fs-4">
-                            {{ storia_azienda.clienti_felici|default:"15k+" }}
-                        </div>
-                        <small>Clienti Felici</small>
-                    </div>
-                    <div class="col-4">
-                        <div class="fw-bold fs-4">⭐ 4.8</div>
-                        <small>Rating Medio</small>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="position-relative" style="z-index: 2;">
+                    <h1 class="display-4 fw-bold mb-4">
+                        {{ titolo_hero|default:"La Pizza Perfetta, Consegnata a Casa Tua" }}
+                    </h1>
+                    <p class="lead mb-4">
+                        {{ sottotitolo_hero|default:"Ingredienti freschi, ricette tradizionali e consegna veloce in tutta la città" }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{{ url_catalogo|default:'/catalogo/' }}" class="btn btn-light btn-lg">
+                            <i class="fas fa-pizza-slice me-2"></i>
+                            {{ testo_cta|default:"Ordina Ora" }}
+                        </a>
+                        <a href="tel:{{ numero_telefono|default:'+39 010 123 4567' }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i>
+                            Chiama Ora
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <div class="hero-image">
-                    {% if hero_image %}
-                        <img src="{{ hero_image }}" alt="Pizza PizzaMama" class="img-fluid rounded-circle shadow-lg" style="width: 300px; height: 300px; object-fit: cover;">
-                    {% else %}
-                    <div class="bg-white bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" 
-                         style="width: 300px; height: 300px;">
-                        <i class="bi bi-pizza display-1 text-white"></i>
-                    </div>
-                    {% endif %}
+                <div class="position-relative" style="z-index: 2;">
+                    <img src="{% static 'images/hero-pizza.jpg' %}" 
+                         alt="Pizza PizzaMama" 
+                         class="img-fluid rounded-circle shadow-lg"
+                         style="max-width: 400px; border: 8px solid rgba(255,255,255,0.2);">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Sezione Pizze in Evidenza -->
-<section id="pizze-in-evidenza" class="py-5">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-6">
-                <h2 class="fw-bold">Le Nostre Pizze Speciali</h2>
-                <p class="text-muted">Scopri le pizze più amate dai nostri clienti, preparate con ingredienti freschi</p>
-            </div>
-            <div class="col-lg-6 text-lg-end">
-                <a href="{{ url_catalogo|default:'/catalogo/' }}" class="btn btn-outline-primary">
-                    <i class="bi bi-grid-3x3-gap"></i>
-                    Vedi Tutto il Menu
-                </a>
-            </div>
-        </div>
-
-        <!-- Griglia Card Pizze -->
-        <div class="row" id="grigliaPizzeSpeciali">
-            <!-- Le pizze verranno caricate via JavaScript dall'API -->
-            <!-- Placeholder durante il caricamento -->
-            {% for i in "123" %}
-            <div class="col-lg-4 col-md-6 mb-4 pizza-card-placeholder">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="position-relative">
-                        <div class="bg-light d-flex align-items-center justify-content-center placeholder-glow" style="height: 200px;">
-                            <div class="placeholder" style="width: 150px; height: 150px; border-radius: 50%;"></div>
-                        </div>
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-success">
-                                <i class="bi bi-star-fill"></i> 4.{{ forloop.counter }}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h5 class="card-title mb-0 placeholder-glow">
-                                <span class="placeholder col-8"></span>
-                            </h5>
-                            <span class="fw-bold text-primary placeholder-glow">
-                                <span class="placeholder col-12">€12.50</span>
-                            </span>
-                        </div>
-                        <p class="card-text text-muted small placeholder-glow">
-                            <span class="placeholder col-12"></span>
-                            <span class="placeholder col-8"></span>
-                        </p>
-                        <div class="d-flex gap-1 mb-3">
-                            <span class="badge bg-light text-dark placeholder-glow">
-                                <span class="placeholder col-12">Caricamento...</span>
-                            </span>
-                        </div>
-                        <button class="btn btn-primary w-100 disabled" disabled>
-                            <div class="spinner-border spinner-border-sm me-2" role="status">
-                                <span class="visually-hidden">Caricamento...</span>
-                            </div>
-                            Caricamento...
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- Sezione Categorie -->
+<!-- Statistiche Azienda -->
 <section class="py-5 bg-light">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Esplora per Categoria</h2>
-            <p class="text-muted">Trova la pizza perfetta per i tuoi gusti e preferenze alimentari</p>
-        </div>
-        <div class="row" id="grigliaCategorie">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm text-center h-100 categoria-card" data-categoria="classiche">
-                    <div class="card-body p-4">
-                        <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="bi bi-award fs-1 text-danger"></i>
-                        </div>
-                        <h5 class="fw-bold">Pizze Classiche</h5>
-                        <p class="text-muted">Le tradizionali pizze italiane che tutti amano</p>
-                        <a href="/catalogo/categoria/classiche/" class="btn btn-outline-danger">
-                            <i class="bi bi-arrow-right"></i> Scopri
-                        </a>
+        <div class="row g-4">
+            {% if statistiche_azienda %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card">
+                        <h3 class="text-primary mb-2">{{ statistiche_azienda.pizze_consegnate|default:"50.000+" }}</h3>
+                        <p class="mb-0 text-muted">Pizze Consegnate</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm text-center h-100 categoria-card" data-categoria="vegetariane">
-                    <div class="card-body p-4">
-                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="bi bi-leaf fs-1 text-success"></i>
-                        </div>
-                        <h5 class="fw-bold">Pizze Vegetariane</h5>
-                        <p class="text-muted">Per chi ama i sapori genuini della natura</p>
-                        <a href="/catalogo/categoria/vegetariane/" class="btn btn-outline-success">
-                            <i class="bi bi-arrow-right"></i> Scopri
-                        </a>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card">
+                        <h3 class="text-primary mb-2">{{ statistiche_azienda.clienti_felici|default:"15.000+" }}</h3>
+                        <p class="mb-0 text-muted">Clienti Felici</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm text-center h-100 categoria-card" data-categoria="piccanti">
-                    <div class="card-body p-4">
-                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="bi bi-fire fs-1 text-warning"></i>
-                        </div>
-                        <h5 class="fw-bold">Pizze Piccanti</h5>
-                        <p class="text-muted">Per chi ama il brivido del piccante autentico</p>
-                        <a href="/catalogo/categoria/piccanti/" class="btn btn-outline-warning">
-                            <i class="bi bi-arrow-right"></i> Scopri
-                        </a>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card">
+                        <h3 class="text-primary mb-2">{{ statistiche_azienda.anni_esperienza|default:"5+" }}</h3>
+                        <p class="mb-0 text-muted">Anni di Esperienza</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card border-0 shadow-sm text-center h-100 categoria-card" data-categoria="gourmet">
-                    <div class="card-body p-4">
-                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="bi bi-stars fs-1 text-info"></i>
-                        </div>
-                        <h5 class="fw-bold">Pizze Gourmet</h5>
-                        <p class="text-muted">Creazioni uniche per palati raffinati</p>
-                        <a href="/catalogo/categoria/gourmet/" class="btn btn-outline-info">
-                            <i class="bi bi-arrow-right"></i> Scopri
-                        </a>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card">
+                        <h3 class="text-primary mb-2">{{ statistiche_azienda.citta_servite|default:"5" }}</h3>
+                        <p class="mb-0 text-muted">Città Servite</p>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Sezione Testimonianze -->
+<!-- Caratteristiche Principali -->
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Cosa Dicono i Nostri Clienti</h2>
-            <p class="text-muted">Le recensioni autentiche di chi ha già provato le nostre pizze</p>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center p-4">
-                        <div class="mb-3">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        <p class="text-muted mb-4">"La migliore pizza che abbia mai mangiato! Ingredienti freschi e consegna velocissima."</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                                <i class="bi bi-person-fill text-white"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Marco R.</div>
-                                <small class="text-muted">Cliente verificato</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center p-4">
-                        <div class="mb-3">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        <p class="text-muted mb-4">"Servizio eccellente e pizze deliziose. Ordino sempre da PizzaMama!"</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                                <i class="bi bi-person-fill text-white"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Laura S.</div>
-                                <small class="text-muted">Cliente verificato</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center p-4">
-                        <div class="mb-3">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        <p class="text-muted mb-4">"Qualità incredibile e prezzi onesti. Consiglio a tutti!"</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                                <i class="bi bi-person-fill text-white"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Giuseppe M.</div>
-                                <small class="text-muted">Cliente verificato</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Sezione Call-to-Action -->
-<section class="py-5 bg-primary text-white">
-    <div class="container text-center">
-        <h2 class="fw-bold mb-3">Pronto per Ordinare la Tua Pizza?</h2>
-        <p class="lead mb-4">Unisciti a migliaia di clienti soddisfatti che hanno già scelto PizzaMama</p>
-        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <a href="{{ url_catalogo|default:'/catalogo/' }}" class="btn btn-light btn-lg" id="pulsanteSfogliaMenu">
-                <i class="bi bi-grid-3x3-gap"></i>
-                Sfoglia il Menu
-            </a>
-            <a href="tel:{{ numero_telefono|default:'+39 010 123 4567' }}" class="btn btn-outline-light btn-lg">
-                <i class="bi bi-telephone"></i>
-                {{ numero_telefono|default:"Chiama Ora" }}
-            </a>
+            <h2 class="display-6 fw-bold text-primary">Perché Scegliere PizzaMama?</h2>
+            <p class="lead text-muted">La qualità che fa la differenza</p>
         </div>
         
-        <!-- Info Consegna -->
-        <div class="row mt-5 text-center">
-            <div class="col-md-4">
-                <div class="mb-3">
-                    <i class="bi bi-clock fs-1 text-white-50"></i>
+        <div class="row g-4">
+            {% if caratteristiche_principali %}
+                {% for caratteristica in caratteristiche_principali %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">{{ caratteristica.icona|default:"🍕" }}</div>
+                        <h5 class="fw-bold">{{ caratteristica.titolo }}</h5>
+                        <p class="text-muted">{{ caratteristica.descrizione }}</p>
+                    </div>
                 </div>
-                <h5>Consegna Veloce</h5>
-                <p class="mb-0">In soli 20-30 minuti</p>
+                {% endfor %}
+            {% else %}
+                <!-- Caratteristiche default -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">🍕</div>
+                        <h5 class="fw-bold">Ricette Autentiche</h5>
+                        <p class="text-muted">Ricette tradizionali della pizza napoletana</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">🚚</div>
+                        <h5 class="fw-bold">Consegna Veloce</h5>
+                        <p class="text-muted">Consegna garantita in 30 minuti</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">🍅</div>
+                        <h5 class="fw-bold">Ingredienti Freschi</h5>
+                        <p class="text-muted">Solo ingredienti di prima qualità</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">💰</div>
+                        <h5 class="fw-bold">Prezzi Onesti</h5>
+                        <p class="text-muted">Qualità alta a prezzi accessibili</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonianze -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold text-primary">Cosa Dicono i Nostri Clienti</h2>
+            <p class="lead text-muted">Le recensioni parlano da sole</p>
+        </div>
+        
+        <div class="row g-4">
+            {% if testimonianze %}
+                {% for testimonianza in testimonianze %}
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            {% for i in "12345"|slice:":"|slice:testimonianza.voto %}
+                                ⭐
+                            {% endfor %}
+                        </div>
+                        <p class="mb-3">"{{ testimonianza.commento }}"</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px;">
+                                {{ testimonianza.nome|first }}
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">{{ testimonianza.nome }}</h6>
+                                <small class="text-muted">{{ testimonianza.data }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Testimonianze default -->
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">"Pizza fantastica e consegna velocissima! La migliore di Genova."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px;">
+                                M
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Marco R.</h6>
+                                <small class="text-muted">Cliente verificato</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">"Ingredienti freschi e qualità eccellente. Super consigliata!"</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px;">
+                                L
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Laura M.</h6>
+                                <small class="text-muted">Cliente verificato</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="mb-3">"Servizio impeccabile e pizze deliziose. Ordino spesso qui."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px;">
+                                A
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Alessandro T.</h6>
+                                <small class="text-muted">Cliente verificato</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Finale -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-3">Pronto per la Tua Pizza Perfetta?</h2>
+                <p class="lead mb-0">Ordina ora e ricevila in 30 minuti. Consegna gratuita sopra i 20€!</p>
             </div>
-            <div class="col-md-4">
-                <div class="mb-3">
-                    <i class="bi bi-shield-check fs-1 text-white-50"></i>
-                </div>
-                <h5>Ingredienti Freschi</h5>
-                <p class="mb-0">Solo prodotti di qualità</p>
-            </div>
-            <div class="col-md-4">
-                <div class="mb-3">
-                    <i class="bi bi-heart fs-1 text-white-50"></i>
-                </div>
-                <h5>Soddisfazione Garantita</h5>
-                <p class="mb-0">O rimborsiamo la differenza</p>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ url_catalogo|default:'/catalogo/' }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-pizza-slice me-2"></i>
+                    Ordina Adesso
+                </a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Container per messaggi sistema -->
+<div id="messaggi-sistema" class="container mt-3"></div>
 {% endblock %}
 
-{% block extra_js %}
+{% block script_extra %}
 <script>
+// JavaScript per homepage
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🏠 Homepage - Inizializzazione...');
+    // Animazione contatori statistiche
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stats-card h3');
+        
+        counters.forEach(counter => {
+            const target = counter.textContent.replace(/[^\d]/g, '');
+            if (target) {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = counter.textContent.replace(/[\d,]+/, target.toLocaleString());
+                        clearInterval(timer);
+                    } else {
+                        const formatted = Math.floor(current).toLocaleString();
+                        counter.textContent = counter.textContent.replace(/[\d,]+/, formatted);
+                    }
+                }, 40);
+            }
+        });
+    };
     
-    // Smooth scroll per link ancore
-    document.querySelectorAll('a[href^="#"]').forEach(collegamento => {
-        collegamento.addEventListener('click', function (evento) {
-            evento.preventDefault();
-            const destinazione = document.querySelector(this.getAttribute('href'));
-            if (destinazione) {
-                destinazione.scrollIntoView({
+    // Osserva quando la sezione statistiche entra in vista
+    const statsSection = document.querySelector('.stats-card');
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        observer.observe(statsSection);
+    }
+    
+    // Smooth scroll per i link interni
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
             }
         });
     });
-    
-    // Carica pizze in evidenza dall'API
-    caricaPizzeInEvidenza();
-    
-    // Event listeners per categoria cards
-    document.querySelectorAll('.categoria-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const categoria = this.dataset.categoria;
-            window.location.href = `/catalogo/categoria/${categoria}/`;
-        });
-        
-        // Hover effect
-        card.addEventListener('mouseenter', function() {
-            this.classList.add('shadow-lg');
-            this.style.transform = 'translateY(-5px)';
-            this.style.transition = 'all 0.3s ease';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.classList.remove('shadow-lg');
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Tracking eventi per analytics
-    document.getElementById('pulsanteOrdinaOra')?.addEventListener('click', function() {
-        console.log('🎯 Click: Ordina Ora dalla Hero');
-        // Qui si può aggiungere tracking analytics
-    });
-    
-    document.getElementById('pulsanteSfogliaMenu')?.addEventListener('click', function() {
-        console.log('🎯 Click: Sfoglia Menu dalla CTA');
-        // Qui si può aggiungere tracking analytics
-    });
 });
 
-/**
- * Carica le pizze in evidenza dall'API
- */
-async function caricaPizzeInEvidenza() {
-    try {
-        console.log('🍕 Caricamento pizze in evidenza...');
-        
-        const risposta = await fetch('/api/prodotti/piz
+console.log('🍕 PizzaMama Homepage caricata con successo!');
+</script>
+{% endblock %}
